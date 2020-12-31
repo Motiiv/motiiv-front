@@ -10,6 +10,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer, { rootSaga } from './modules';
 import createSagaMiddleware from 'redux-saga';
 import { HelmetProvider } from 'react-helmet-async';
+import { ThemeProvider } from 'styled-components';
+import theme from './style/theme';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
@@ -21,13 +23,15 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <HelmetProvider>
-          <App />
-        </HelmetProvider>
-      </Provider>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Provider store={store}>
+          <HelmetProvider>
+            <App />
+          </HelmetProvider>
+        </Provider>
+      </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

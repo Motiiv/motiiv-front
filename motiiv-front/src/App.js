@@ -6,9 +6,13 @@ import Main from './pages/Main/Main';
 import Category from './pages/Category/Category';
 import MyMyotiiv from './pages/MyMotiiv/MyMyotiiv';
 import Admin from './pages/Admin/Admin';
+import styled from 'styled-components';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
+// 예제니까 지우쇼
+const MainText = styled.div`
+  color: ${props => props.theme.primary};
+`;
 function App() {
   return (
     <Switch>
@@ -57,7 +61,9 @@ function App() {
         path="/upload"
         render={props => <Upload props={props} />}
       ></Route>
-      <Route path="/*">404 NOT FOUND</Route>
+      <Route path="/*">
+        404 NOT FOUND<MainText>dddd</MainText>
+      </Route>
     </Switch>
   );
 }

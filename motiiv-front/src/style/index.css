@@ -106,4 +106,5 @@ code {
 
 * {
   transition : 1s;
+  box-sizing: border-box;
 }
