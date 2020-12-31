@@ -6,7 +6,6 @@ const ContentWrapper = styled.div`
     height: 100%;
     display: flex;
     justify-content: center;
-    padding-left:3.2rem;
     ${props =>
         css`
             transform: translate(-${(props.choice)*100}%,0px);
@@ -15,10 +14,17 @@ const ContentWrapper = styled.div`
     };
     ${props => 
             props.choice === props.idx?
-            css`z-index: 2`
+            css`background-color: black;`
             :null
     };
-    z-index:1;
+    ${props => 
+            props.idx === 0?
+            css`padding: 0 3.2rem;`
+            :
+            props.idx === 1?
+            css`padding-right: 3.2rem;`
+            : css`padding-right: 3.2rem`
+    };
 `;
 const TextCard = styled.div`
     width: 32.5rem;
@@ -30,6 +36,11 @@ const VideoCard = styled.div`
     width: 32.5rem;
     position: relative;
     margin-right: 3.2rem;
+    ${props => 
+            props.choice === props.idx?
+            css`color: rgba(0,0,0,0.8);`
+            :null
+    };
 `;
 const VideoRunningTime = styled.div`
     color: white;
@@ -72,7 +83,7 @@ function Content({obj, choice}) {
                 </HeaderInfo>
                 <VideoText>{`${obj.TextInfo.videoTxt}`}</VideoText>
             </TextCard>
-            <VideoCard>
+            <VideoCard choice={choice} idx={obj.idx}>
                 <iframe width="100%" style={{height: "100%", width: "100%"}} src={obj.VideoInfo.src} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <VideoRunningTime>{obj.VideoInfo.runningTime}</VideoRunningTime>
             </VideoCard>

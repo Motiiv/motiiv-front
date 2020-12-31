@@ -6,14 +6,14 @@ import Main from './pages/Main/Main';
 import Category from './pages/Category/Category';
 import MyMyotiiv from './pages/MyMotiiv/MyMyotiiv';
 import Admin from './pages/Admin/Admin';
-import Banner from './components/Banner/Banner';
+import SwiperBanner from './components/Banner/SwiperBanner';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
     <>
-      <Banner></Banner>
+      <SwiperBanner></SwiperBanner>
       <Switch>
         {/* Main & Category & MyMotiiv */}
         <Route

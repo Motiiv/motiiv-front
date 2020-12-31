@@ -22,6 +22,7 @@ const ContentContainer = styled.div`
     height: 100%;
     position :relative;
     display: flex;
+    //overflow: hidden;
 `;
 const LeftButton = styled.div`
     position: absolute;
@@ -45,7 +46,6 @@ const CoverSide = styled.div`
     display: flex;
     width: 100%;
     height: 100%;
-    z-index: 1;
     background-color: gray;
     display: flex;
     justify-content: center;
@@ -106,7 +106,7 @@ function Banner() {
     return (
         <BannerSection>
             <SliderContainer>
-                <CoverSide>
+                {/* <CoverSide> */}
                     <ContentContainer>
                         {
                             SliderObject.map((obj, idx)=>(
@@ -116,7 +116,7 @@ function Banner() {
                         <LeftButton onClick={LeftButtonHandler}>&#xE000;</LeftButton>
                         <RightButton onClick={RightButtonHandler}>&#xE001;</RightButton>
                     </ContentContainer>
-                </CoverSide>
+                {/* </CoverSide> */}
             </SliderContainer>
         </BannerSection>
     )
