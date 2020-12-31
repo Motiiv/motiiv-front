@@ -7,13 +7,15 @@ import Category from './pages/Category/Category';
 import MyMyotiiv from './pages/MyMotiiv/MyMyotiiv';
 import Admin from './pages/Admin/Admin';
 import SwiperBanner from './components/Banner/SwiperBanner';
+import UseSwiper from './components/Banner/UseSwiper';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-function App() {
+function App({props}) {
   return (
     <>
-      <SwiperBanner></SwiperBanner>
+      <SwiperBanner props={props} /> 
+      {/* <UseSwiper></UseSwiper> */}
       <Switch>
         {/* Main & Category & MyMotiiv */}
         <Route

@@ -28,25 +28,37 @@ const LeftButton = styled.div`
     position: absolute;
     left:0;
     bottom: 50%;
-    font-size: 2rem;
+    width: 3.3rem;
+    height: 3.3rem;
+    font-size: 1.5rem;
     color: white;
     cursor: pointer;
     z-index: 2;
+    border: solid ${({theme}) => theme.primary};;
+    border-radius: 50%;
+    color: ${({theme}) => theme.primary};
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 const RightButton = styled.div`
-    font-size: 2rem;
+    width: 3.3rem;
+    height: 3.3rem;
+    font-size: 1.5rem;
     position: absolute;
     right:0;
     bottom: 50%;
     color: white;
     cursor: pointer;
     z-index: 2;
-`;
-const CoverSide = styled.div`
+    border: solid ${({theme}) => theme.primary};;
+    border-radius: 50%;
+    color: ${({theme}) => theme.primary};
     display: flex;
-    width: 100%;
-    height: 100%;
-    background-color: gray;
+    justify-content: center;
+    align-items: center;
+`;
+const IndicatorBox = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,39 +69,39 @@ const SliderObject = [
         TextInfo : {
             category: "Hot Motiiv 0",
             categoryTxt: "어제 하루 조회수가 가장 높았던 모티브",
-            videoTxt : "브랜딩은 몰랐지만 브랜드가 되었습니다"
+            videoTxt : `"영화 "굿 윌 헌팅" 명장면"`
         },
         VideoInfo : {
             src : "https://www.youtube.com/embed/ZzTQFe5qX_0",
-            runningTime: "22:01"
+            runningTime: "02:09"
         }
     },
     {
         idx: 1,
         TextInfo : {
-            category: "Hot Motiiv 1",
-            categoryTxt: "어제 하루 조회수가 가장 높았던 모티브",
-            videoTxt : "브랜딩은 몰랐지만 브랜드가 되었습니다"
+            category: "Best Motiiv",
+            categoryTxt: "어제 하루 좋아요가 가장 많았던 모티브",
+            videoTxt : `"영화 "울프 오브 월스트리트" 명장면"`
         },
         VideoInfo : {
-            src : "https://www.youtube.com/embed/ZzTQFe5qX_0",
-            runningTime: "22:01"
+            src : "https://www.youtube.com/embed/GIoofmjN-8U",
+            runningTime: "03:32"
         }
     },
     {
         idx: 2,
         TextInfo : {
-            category: "Hot Motiiv 2",
-            categoryTxt: "어제 하루 조회수가 가장 높았던 모티브",
-            videoTxt : "브랜딩은 몰랐지만 브랜드가 되었습니다"
+            category: "Most motivated motiiv",
+            categoryTxt: "어제 워크스페이스로 가장 많이 이동한 모티브",
+            videoTxt : "The Devil Wears Prada final scene"
         },
         VideoInfo : {
-            src : "https://www.youtube.com/embed/ZzTQFe5qX_0",
+            src : "https://www.youtube.com/embed/8xCfGlYQiPI",
             runningTime: "22:01"
         }
     }
 ]
-function Banner() {
+function Banner({theme}) {
     const [choice, setChoice] = useState(0);
     const LeftButtonHandler = () =>{
         if(choice !== 0){
@@ -106,18 +118,20 @@ function Banner() {
     return (
         <BannerSection>
             <SliderContainer>
-                {/* <CoverSide> */}
                     <ContentContainer>
                         {
                             SliderObject.map((obj, idx)=>(
                                 <Content choice={choice} key={`content-${idx}`} obj={obj}></Content>
                             ))
                         }
-                        <LeftButton onClick={LeftButtonHandler}>&#xE000;</LeftButton>
+                        <LeftButton theme={theme} onClick={LeftButtonHandler}>&#xE000;</LeftButton>
                         <RightButton onClick={RightButtonHandler}>&#xE001;</RightButton>
                     </ContentContainer>
-                {/* </CoverSide> */}
+
             </SliderContainer>
+            <IndicatorBox>
+                
+            </IndicatorBox>
         </BannerSection>
     )
 }

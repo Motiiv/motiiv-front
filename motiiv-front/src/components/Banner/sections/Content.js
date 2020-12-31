@@ -2,45 +2,33 @@ import React from 'react'
 import styled,{ css } from 'styled-components';
 
 const ContentWrapper = styled.div`
-    width: 71.4rem;
-    height: 100%;
+    width: 78rem;
     display: flex;
     justify-content: center;
-    ${props =>
+    margin-top:3rem;
+    padding: 0 6.5rem;
+    ${props => 
+            props.choice%3 === props.idx?
+            css`opacity: 1;`
+            :css`opacity: 0.25;`
+    };
+     ${props =>
         css`
             transform: translate(-${(props.choice)*100}%,0px);
             transition: 0.5s;
         `
-    };
-    ${props => 
-            props.choice === props.idx?
-            css`background-color: black;`
-            :null
-    };
-    ${props => 
-            props.idx === 0?
-            css`padding: 0 3.2rem;`
-            :
-            props.idx === 1?
-            css`padding-right: 3.2rem;`
-            : css`padding-right: 3.2rem`
-    };
+    };  
 `;
 const TextCard = styled.div`
     width: 32.5rem;
     display: flex;
     flex-direction: column;
-    margin-left: 3.2rem;
+    padding-right: 6.4rem;
 `;
 const VideoCard = styled.div`
     width: 32.5rem;
+    height: 18.5rem;
     position: relative;
-    margin-right: 3.2rem;
-    ${props => 
-            props.choice === props.idx?
-            css`color: rgba(0,0,0,0.8);`
-            :null
-    };
 `;
 const VideoRunningTime = styled.div`
     color: white;
