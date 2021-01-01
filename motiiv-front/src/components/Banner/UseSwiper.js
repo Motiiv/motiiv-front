@@ -44,7 +44,7 @@ const LeftButton = styled.div`
     color: white;
     cursor: pointer;
     z-index: 2;
-    border: solid ${({theme}) => theme.primary};;
+    border: solid ${({theme}) => theme.primary} 2px;
     border-radius: 50%;
     color: ${({theme}) => theme.primary};
     display: flex;
@@ -64,7 +64,7 @@ const RightButton = styled.div`
     color: white;
     cursor: pointer;
     z-index: 2;
-    border: solid ${({theme}) => theme.primary};;
+    border: solid ${({theme}) => theme.primary} 2px;
     border-radius: 50%;
     color: ${({theme}) => theme.primary};
     display: flex;
@@ -80,7 +80,11 @@ const SliderObject = [
         TextInfo : {
             category: "Hot Motiiv",
             categoryTxt: "어제 하루 조회수가 가장 높았던 모티브",
-            videoTxt : `"영화 "굿 윌 헌팅" 명장면"`
+            videoTxt : `"영화 "굿 윌 헌팅" 명장면"`,
+            hashTag: [
+                "movie",
+                "예나의 motiiv1"
+            ]
         },
         VideoInfo : {
             src : "https://www.youtube.com/embed/ZzTQFe5qX_0",
@@ -92,7 +96,11 @@ const SliderObject = [
         TextInfo : {
             category: "Best Motiiv",
             categoryTxt: "어제 하루 좋아요가 가장 많았던 모티브",
-            videoTxt : `"영화 "울프 오브 월스트리트" 명장면"`
+            videoTxt : `"영화 "울프 오브 월스트리트" 명장면"`,
+            hashTag: [
+                "movie",
+                "예나의 motiiv2"
+            ]
         },
         VideoInfo : {
             src : "https://www.youtube.com/embed/GIoofmjN-8U",
@@ -104,7 +112,11 @@ const SliderObject = [
         TextInfo : {
             category: "Most motivated motiiv",
             categoryTxt: "어제 워크스페이스로 가장 많이 이동한 모티브",
-            videoTxt : "The Devil Wears Prada final scene"
+            videoTxt : "The Devil Wears Prada final scene",
+            hashTag: [
+                "movie",
+                "예나의 motiiv3"
+            ]
         },
         VideoInfo : {
             src : "https://www.youtube.com/embed/8xCfGlYQiPI",

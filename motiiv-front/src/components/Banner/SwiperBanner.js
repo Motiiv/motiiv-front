@@ -34,7 +34,7 @@ const LeftButton = styled.div`
     color: white;
     cursor: pointer;
     z-index: 2;
-    border: solid ${({theme}) => theme.primary};;
+    border: solid ${({theme}) => theme.primary} 1px;
     border-radius: 50%;
     color: ${({theme}) => theme.primary};
     display: flex;

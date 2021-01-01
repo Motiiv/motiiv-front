@@ -1,5 +1,6 @@
 import React from 'react'
-import styled,{ css } from 'styled-components';
+import styled, {css, ThemeConsumer, ThemeProvider} from 'styled-components';
+import Tag from '../../Tag/Tag';
 
 const TextCard = styled.div`
     width: 32.5rem;
@@ -51,14 +52,7 @@ const ContentWrapper = styled.div`
                 display:none;
             }`
                 :null
-    };
-/*     ${props => 
-            props.choice === 0 && props.idx === 2?
-            css`flex-direction: row-reverse`
-                :props.choice-1 === props.idx?
-                css`flex-direction: row-reverse;`
-                :null
-    };  */
+    }
 `;
 const VideoRunningTime = styled.div`
     color: white;
@@ -72,7 +66,7 @@ const VideoRunningTime = styled.div`
 `;
 const HeaderInfo = styled.div`
     font-size: 2rem;
-    color: #2CFF2C;
+    color: ${({theme}) => theme.primary};
     display: flex;
     flex-direction: column;
 `;
@@ -99,7 +93,11 @@ const VideoText = styled.div`
     max-height: 5.2rem;
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+        -webkit-box-orient: vertical;
+`;
+const TagBox = styled.div`
+    display: flex;
+    width: 100%;
 `;
 function Content({obj, choice}) {
     return (
@@ -110,6 +108,13 @@ function Content({obj, choice}) {
                     <HeaderSubText>{obj.TextInfo.categoryTxt}</HeaderSubText>
                 </HeaderInfo>
                 <VideoText>{`${obj.TextInfo.videoTxt}`}</VideoText>
+                <TagBox>
+                    {
+                        obj.TextInfo.hashTag.map((tag, idx)=>(
+                            <Tag hashTag={1} color={({theme})=> theme.primary} text={obj.TextInfo.hashTag[idx]} fontSize="1.2rem"></Tag>
+                        ))
+                    }
+                </TagBox>
             </TextCard>
             <VideoCard choice={choice} idx={obj.idx}>
                 <iframe width="100%" style={{height: "100%", width: "100%"}} src={obj.VideoInfo.src} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -118,5 +123,4 @@ function Content({obj, choice}) {
         </ContentWrapper>
     )    
 }
-
 export default Content

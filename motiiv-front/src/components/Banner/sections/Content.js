@@ -43,13 +43,13 @@ const VideoRunningTime = styled.div`
 `;
 const HeaderInfo = styled.div`
     font-size: 2rem;
-    color: #2CFF2C;
+    color: ${({theme}) => theme.primary};
     display: flex;
     flex-direction: column;
 `;
 const HeaderTitleText = styled.div`
     font-size: 2rem;
-    color: #2CFF2C;
+    color: ${({theme}) => theme.primary};
     font-weight: bold;
 `;
 const HeaderSubText = styled.div`
@@ -62,14 +62,6 @@ const VideoText = styled.div`
     color: white;
     margin-top:2.4rem;
 
-    overflow: hidden; 
-    text-overflow: ellipsis;
-    word-wrap: break-word;
-    line-height: 2.8rem;
-    max-height: 4.8rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
 `;
 function Content({obj, choice}) {
     return (
