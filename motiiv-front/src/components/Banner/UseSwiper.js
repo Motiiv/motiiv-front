@@ -1,15 +1,15 @@
-import React,{useState} from 'react'
+import React,{useState, useRef} from 'react'
 import styled from 'styled-components';
-import Content from './sections/Content';
+import ContentSwiper from './sections/ContentSwiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-//import SwiperCore, { Navigation, Pagination, Autoplay, Scrollbar } from 'swiper';
+import SwiperCore, { Navigation, Pagination, Autoplay} from 'swiper';
 import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
 import './UseSwiper.scss';
 
-//SwiperCore.use([Pagination, Navigation, Autoplay,  Scrollbar ]);
+SwiperCore.use([Pagination, Navigation, Autoplay ]);
 
 const BannerSection = styled.div`
     width: 100%;
@@ -30,13 +30,13 @@ const ContentContainer = styled.div`
     //width: 78rem;
     width: 100%;
     height: 100%;
-    position :relative;
+    //position :relative;
     display: flex;
     //overflow: hidden;
 `;
 const LeftButton = styled.div`
     position: absolute;
-    left:0;
+    left:20.82%;
     bottom: 50%;
     width: 3.3rem;
     height: 3.3rem;
@@ -59,8 +59,8 @@ const RightButton = styled.div`
     height: 3.3rem;
     font-size: 1.5rem;
     position: absolute;
-    right:0;
-    bottom: 50%;
+    right:20.82%;//79.18%;
+    bottom:50%;
     color: white;
     cursor: pointer;
     z-index: 2;
@@ -113,7 +113,11 @@ const SliderObject = [
     }
 ]
 function UseSwiper() {
+    const prevRef = useRef(null);
+    const nextRef = useRef(null);
+    const swiperRef = useRef();
     const [choice, setChoice] = useState(0);
+
     const LeftButtonHandler = () =>{
         if(choice !== 0){
             setChoice(choice-1);
@@ -129,24 +133,46 @@ function UseSwiper() {
         }
     }
     const params = {
-        navigation: {
+        navigation : {
+        prevEl: prevRef.current ? prevRef.current : null,
+        nextEl: nextRef.currnet ? nextRef.current : null,
+        },
+        onInit : (swiper) =>{
+        swiper.params.navigation.prevEl = prevRef.current;
+        swiper.params.navigation.nextEl = nextRef.current;
+        swiper.navigation.update();
+        },
+/*         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev'
-        },
+        }, */
         pagination: {
             el: '.swiper-pagination',
             type: 'bullets',
             clickable: true
         },
+/*         autoplay:{
+            //autoplayStart: true,
+            disableOnInteraction : false,
+        }, */
         loop:"true",
-        //spaceBetween:32, 
+        spaceBetween:127, 
         slidesPerView:3,
-        /* autoplay: true, */
         centeredSlides: true,
-        jusityContent: "center",
-        slidesPerGroup : 3,
+        //slidesPerGroup : 3,
         style:{
-            width: "90%",
+            width: "80%",
+            maxWidth: "128rem",
+            height: "100%",
+            position: "relative",
+        },
+        onSlideChangeStart: function(s){
+            console.log(s);
+/*             if (s.activeIndex === 3) {
+                // do something here, 4th slide is active now and so on
+                console.log('hi! Try to reach 4th slides');
+                s.startAutoplay(); // calling autoplay on 4th slides.
+            } */
         }
     }
     return (
@@ -154,8 +180,15 @@ function UseSwiper() {
             <SliderContainer>
                 <ContentContainer>
                 <Swiper
+                ref={swiperRef}
                 {...params}
-                //slidesPerGroup={3}
+                onAutoplay={RightButtonHandler}
+                //onTransitionEnd={RightButtonHandler}
+                //onSlideChangeTransitionEnd={RightButtonHandler}
+                //onSlideNextTransitionEnd={RightButtonHandler}
+                //onSliderMove={RightButtonHandler}
+                //onSlideChange={RightButtonHandler}
+                //slidesPerGroup={5}
                 //slidesPerGroupSkip={1}
                 //navigation
                 //spaceBetween={10}
@@ -182,12 +215,13 @@ function UseSwiper() {
                 
                 //loopFillGroupWithBlank={true}
                 >
-                    <LeftButton onClick={LeftButtonHandler}  className="swiper-button-prev" >{/* &#xE000; */}</LeftButton>
-                    <RightButton onClick={RightButtonHandler}   className="swiper-button-next" >{/* &#xE001; */}</RightButton>
+                    <div class="swiper-pagination">•</div>
+                    <LeftButton  onClick={LeftButtonHandler}  ref={prevRef}  /* className="swiper-button-prev" */ > &#xE000; </LeftButton>
+                    <RightButton  onClick={RightButtonHandler}   ref={nextRef}  /* className="swiper-button-next" */  > &#xE001; </RightButton>
                     {
                         SliderObject.map((obj, idx)=>(
                             <SwiperSlide>
-                                <Content choice={choice} key={`content-${idx}`} obj={obj}></Content>
+                                <ContentSwiper choice={choice} key={`content-${idx}`} obj={obj}></ContentSwiper>
                             </SwiperSlide>
                         ))
                     } 

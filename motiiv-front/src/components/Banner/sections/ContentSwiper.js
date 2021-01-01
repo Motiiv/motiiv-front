@@ -1,25 +1,6 @@
 import React from 'react'
 import styled,{ css } from 'styled-components';
 
-const ContentWrapper = styled.div`
-    width: 78rem;
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
-    margin-top:3rem;
-    padding: 0 6.5rem;
-    ${props => 
-            props.choice === props.idx?
-            css`opacity: 1;`
-            :css`opacity: 0.25;`
-    };
-     ${props =>
-        css`
-            transform: translate(-${(props.choice)*100}%,0px);
-            transition: 0.5s;
-        `
-    };  
-`;
 const TextCard = styled.div`
     width: 32.5rem;
     display: flex;
@@ -30,6 +11,54 @@ const VideoCard = styled.div`
     width: 32.5rem;
     height: 18.5rem;
     position: relative;
+`;
+const ContentWrapper = styled.div`
+    //width:100%;
+    width:62rem;
+    display: flex;
+    //overflow:hidden;
+    //margin-right: 12.7rem;
+    //justify-content: center;
+    margin-top:3rem;
+    ${props => 
+            props.choice === props.idx?
+            css`opacity: 1;`
+            :css`opacity: 0.25;`
+    }; 
+    ${props => 
+            props.choice === props.idx?
+            css`width:100%;`
+            :null
+    }; 
+    ${props => 
+            props.choice === 0 && props.idx === 2?
+            `${TextCard}{
+                display:none;
+            }`
+                :props.choice-1 === props.idx?
+                `${TextCard}{
+                display:none;
+            }`
+                :null
+    };
+        ${props => 
+            props.choice === 2 && props.idx === 0?
+            `${VideoCard}{
+                display:none;
+            }`
+                :props.choice+1 === props.idx?
+                `${VideoCard}{
+                display:none;
+            }`
+                :null
+    };
+/*     ${props => 
+            props.choice === 0 && props.idx === 2?
+            css`flex-direction: row-reverse`
+                :props.choice-1 === props.idx?
+                css`flex-direction: row-reverse;`
+                :null
+    };  */
 `;
 const VideoRunningTime = styled.div`
     color: white;
@@ -61,15 +90,6 @@ const VideoText = styled.div`
     font-size:2.8rem;
     color: white;
     margin-top:2.4rem;
-
-    overflow: hidden; 
-    text-overflow: ellipsis;
-    word-wrap: break-word;
-    line-height: 2.8rem;
-    max-height: 4.8rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
 `;
 function Content({obj, choice}) {
     return (

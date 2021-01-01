@@ -14,8 +14,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 function App({props}) {
   return (
     <>
-      <SwiperBanner props={props} /> 
-      {/* <UseSwiper></UseSwiper> */}
+      {/* <SwiperBanner props={props} /> */} 
+       <UseSwiper></UseSwiper> 
       <Switch>
         {/* Main & Category & MyMotiiv */}
         <Route
