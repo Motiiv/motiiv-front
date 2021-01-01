@@ -7,6 +7,8 @@ const TextCard = styled.div`
     display: flex;
     flex-direction: column;
     padding-right: 6.4rem;
+    font-family: 'Spoqa-Han-Sans';
+    font-weight: 700;
 `;
 const VideoCard = styled.div`
     width: 32.5rem;
@@ -90,10 +92,11 @@ const VideoText = styled.div`
     word-wrap: break-word;
     word-break: keep-all;
     line-height: 2.8rem;
-    max-height: 5.2rem;
+    max-height: 5.4rem;
     display: -webkit-box;
     -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
+    -webkit-box-orient: vertical;
+    padding-top:0.2rem;
 `;
 const TagBox = styled.div`
     display: flex;

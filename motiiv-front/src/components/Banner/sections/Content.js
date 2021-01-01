@@ -61,7 +61,6 @@ const VideoText = styled.div`
     font-size:2.8rem;
     color: white;
     margin-top:2.4rem;
-
 `;
 function Content({obj, choice}) {
     return (

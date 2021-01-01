@@ -27,12 +27,9 @@ const SliderContainer = styled.div`
     align-items: center;
 `;
 const ContentContainer = styled.div`
-    //width: 78rem;
     width: 100%;
     height: 100%;
-    //position :relative;
     display: flex;
-    //overflow: hidden;
 `;
 const LeftButton = styled.div`
     position: absolute;
@@ -40,19 +37,18 @@ const LeftButton = styled.div`
     bottom: 50%;
     width: 3.3rem;
     height: 3.3rem;
-    font-size: 1.5rem ;
+    font-size: 1.5rem;
     color: white;
     cursor: pointer;
     z-index: 2;
-    border: solid ${({theme}) => theme.primary} 2px;
+    border: solid ${({theme}) => theme.primary} 1.5px;
     border-radius: 50%;
     color: ${({theme}) => theme.primary};
     display: flex;
     justify-content: center;
     align-items: center;
-    &::after{
-        font-size: 1.5rem ;
-    } 
+    padding-right: 0.2rem;
+    padding-top: 0.2rem;
 `;
 const RightButton = styled.div`
     width: 3.3rem;
@@ -60,11 +56,13 @@ const RightButton = styled.div`
     font-size: 1.5rem;
     position: absolute;
     right:20.82%;//79.18%;
+    padding-left: 0.2rem;
+    padding-top: 0.2rem;
     bottom:50%;
     color: white;
     cursor: pointer;
     z-index: 2;
-    border: solid ${({theme}) => theme.primary} 2px;
+    border: solid ${({theme}) => theme.primary} 1.5px;
     border-radius: 50%;
     color: ${({theme}) => theme.primary};
     display: flex;
@@ -83,7 +81,7 @@ const SliderObject = [
             videoTxt : `"영화 "굿 윌 헌팅" 명장면"`,
             hashTag: [
                 "movie",
-                "예나의 motiiv1"
+                "pride"
             ]
         },
         VideoInfo : {
@@ -99,7 +97,7 @@ const SliderObject = [
             videoTxt : `"영화 "울프 오브 월스트리트" 명장면"`,
             hashTag: [
                 "movie",
-                "예나의 motiiv2"
+                "pride"
             ]
         },
         VideoInfo : {
@@ -115,7 +113,7 @@ const SliderObject = [
             videoTxt : "The Devil Wears Prada final scene",
             hashTag: [
                 "movie",
-                "예나의 motiiv3"
+                "pride"
             ]
         },
         VideoInfo : {
@@ -154,19 +152,11 @@ function UseSwiper() {
         swiper.params.navigation.nextEl = nextRef.current;
         swiper.navigation.update();
         },
-/*         navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
-        }, */
         pagination: {
             el: '.swiper-pagination',
             type: 'bullets',
             clickable: true
         },
-/*         autoplay:{
-            //autoplayStart: true,
-            disableOnInteraction : false,
-        }, */
         loop:"true",
         spaceBetween:127, 
         slidesPerView:3,
@@ -177,14 +167,6 @@ function UseSwiper() {
             maxWidth: "128rem",
             height: "100%",
             position: "relative",
-        },
-        onSlideChangeStart: function(s){
-            console.log(s);
-/*             if (s.activeIndex === 3) {
-                // do something here, 4th slide is active now and so on
-                console.log('hi! Try to reach 4th slides');
-                s.startAutoplay(); // calling autoplay on 4th slides.
-            } */
         }
     }
     return (
