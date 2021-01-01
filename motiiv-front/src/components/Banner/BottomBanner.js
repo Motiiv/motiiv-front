@@ -51,6 +51,7 @@ function BottomBanner() {
           <MoreBtn
             linkUrl="https://motiiv.herokuapp.com"
             type="blank"
+            text="더 알아보기"
           ></MoreBtn>
         </Wrapper>
       </Container>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Router } from 'react-router-dom';
 import styled from 'styled-components';
 
-function MoreBtn({ color, linkUrl, type }) {
+function MoreBtn({ color, linkUrl, type, text }) {
   const goPage = () => {
     type === 'blank' ? window.open(linkUrl) : Router.push(linkUrl);
   };
@@ -22,6 +22,6 @@ function MoreBtn({ color, linkUrl, type }) {
     cursor: pointer;
   `;
 
-  return <RoundBtn onClick={goPage}>더 알아보기 &nbsp; &#xE001;</RoundBtn>;
+  return <RoundBtn onClick={goPage}>{text} &nbsp; &#xE001;</RoundBtn>;
 }
 export default MoreBtn;
