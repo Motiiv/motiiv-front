@@ -90,6 +90,16 @@ const VideoText = styled.div`
     font-size:2.8rem;
     color: white;
     margin-top:2.4rem;
+
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    word-break: keep-all;
+    line-height: 2.8rem;
+    max-height: 5.2rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 `;
 function Content({obj, choice}) {
     return (
