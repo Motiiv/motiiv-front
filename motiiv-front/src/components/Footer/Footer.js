@@ -28,7 +28,7 @@ function Footer({ history }) {
     color: ${props => props.theme.gray};
     font-size: 1.6rem;
     text-decoration: underline;
-    cursor: pointer;
+    /* cursor: pointer; */
   `;
 
   return (
@@ -37,7 +37,7 @@ function Footer({ history }) {
       <Text>
         <b>Copyright</b> motiiv All right reserved
       </Text>
-      <GoPrivacy onClick={goToPrivacy}>개인정보처리방침</GoPrivacy>
+      <GoPrivacy>개인정보처리방침</GoPrivacy>
     </FooterWrapper>
   );
 }
