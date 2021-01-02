@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import SwiperContent from './sections/SwiperContent';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -7,7 +7,6 @@ import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
-//import './UseSwiper.scss';
 
 SwiperCore.use([Pagination, Navigation, Autoplay]);
 
@@ -30,10 +29,39 @@ const ContentContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  & .swiper-slide-active {
+    width: 48.43% !important;
+  }
+  & .swiper-slide-prev {
+    width: 15.89% !important;
+    overflow: hidden !important;
+  }
+  & .swiper-slide-next {
+    width: 15.89% !important;
+    overflow: hidden !important;
+  }
+  & .swiper-pagination-bullet {
+    border-radius: 50% !important;
+    width: 5px !important;
+    height: 5px !important;
+    background: #ffffff !important;
+    opacity: 0.4 !important;
+    /* margin-bottom: 2rem !important; */
+  }
+  & .swiper-pagination-bullets {
+    bottom: 2rem !important;
+  }
+  & .swiper-pagination-bullet-active {
+    background: #2cff2c !important;
+    border-radius: 3.5px !important;
+    width: 14px !important;
+    height: 5px !important;
+    opacity: 1 !important;
+  }
 `;
 const LeftButton = styled.div`
   position: absolute;
-  left: 20.82%;
+  left: calc(15.89% + 47px);
   bottom: 50%;
   width: 3.3rem;
   height: 3.3rem;
@@ -55,7 +83,7 @@ const RightButton = styled.div`
   height: 3.3rem;
   font-size: 1.5rem;
   position: absolute;
-  right: 20.82%; //79.18%;
+  left: calc(64.32% + 174px); //79.18%;
   padding-left: 0.2rem;
   padding-top: 0.2rem;
   bottom: 50%;
@@ -72,6 +100,7 @@ const RightButton = styled.div`
     font-size: 1.5rem;
   }
 `;
+
 const SliderObject = [
   {
     idx: 0,
@@ -113,57 +142,11 @@ const SliderObject = [
     },
   },
 ];
-/* const style = {
-  slide_active: {
-    width: '48.43% !important',
-  },
-  slide_prev: {
-    width: '15.89% !important',
-    overflow: 'hidden !important',
-  },
-  slide_next: {
-    width: '15.89% !important',
-    overflow: 'hidden !important',
-  },
-  pagination_bullet: {
-    borderRadius: '50%',
-    width: '5px',
-    height: '5px',
-    background: '#ffffff',
-    opacity: '0.4',
-    marginBottom: '2rem',
-  },
-  pagination_bullets: {
-    bottom: '2rem !important',
-  },
-  pagination_bullet_active: {
-    background: '#2cff2c',
-    borderRadius: '3.5px',
-    width: '14px',
-    height: '5px',
-    opacity: '1',
-  },
-}; */
-function UseSwiper() {
+function SwiperBanner() {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const swiperRef = useRef();
-  const [choice, setChoice] = useState(0);
 
-  const LeftButtonHandler = () => {
-    if (choice !== 0) {
-      setChoice(choice - 1);
-    } else {
-      setChoice(2);
-    }
-  };
-  const RightButtonHandler = () => {
-    if (choice !== 2) {
-      setChoice(choice + 1);
-    } else {
-      setChoice(0);
-    }
-  };
   const params = {
     navigation: {
       prevEl: prevRef.current ? prevRef.current : null,
@@ -198,13 +181,7 @@ function UseSwiper() {
           <Swiper
             ref={swiperRef}
             {...params}
-            onAutoplay={RightButtonHandler}
-            //autoplayandler}
-            //onSlideChangeTransitionEnd={R
-            //onTransitionEnd={RightButtonHightButtonHandler}
-            //onSlideNextTransitionEnd={RightButtonHandler}
-            //onSliderMove={RightButtonHandler}
-            //onSlideChange={RightButtonHandler}
+            autoplay
             //slidesPerGroup={5}
             //slidesPerGroupSkip={1}
             //navigation
@@ -226,34 +203,21 @@ function UseSwiper() {
                         }
                     }
                 }  */
-            //slidesPerColumnFill='column'
-            //loopedSlides={6}
-            //loop={true}
-
-            //loopFillGroupWithBlank={true}
           >
-            <div class="swiper-pagination">•</div>
-            <LeftButton
-              onClick={LeftButtonHandler}
-              ref={prevRef} /* className="swiper-button-prev" */
-            >
-              {' '}
-              &#xE000;{' '}
-            </LeftButton>
-            <RightButton
-              onClick={RightButtonHandler}
-              ref={nextRef} /* className="swiper-button-next" */
-            >
-              {' '}
-              &#xE001;{' '}
-            </RightButton>
+            <div className="swiper-pagination">•</div>
+            <LeftButton ref={prevRef}>&#xE000;</LeftButton>
+            <RightButton ref={nextRef}>&#xE001;</RightButton>
             {SliderObject.map((obj, idx) => (
-              <SwiperSlide>
-                <SwiperContent
-                  choice={choice}
-                  key={`content-${idx}`}
-                  obj={obj}
-                ></SwiperContent>
+              <SwiperSlide key={`content-${idx}`}>
+                {({ isActive, isPrev, isNext }) => (
+                  <SwiperContent
+                    choice={isActive}
+                    isPrev={isPrev}
+                    isNext={isNext}
+                    key={`content-${idx}`}
+                    obj={obj}
+                  ></SwiperContent>
+                )}
               </SwiperSlide>
             ))}
           </Swiper>
@@ -263,4 +227,4 @@ function UseSwiper() {
   );
 }
 
-export default UseSwiper;
+export default SwiperBanner;
