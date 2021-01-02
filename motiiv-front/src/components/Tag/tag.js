@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const TagContainer = styled.div `
+const TagContainer = styled.div`
     border: solid ${props => props.color} 1px;
     border-radius: 3rem;
     margin-top: 2.8rem;
@@ -12,7 +12,7 @@ const TagContainer = styled.div `
         margin-left:1.2rem;
     }
 `;
-const HashTag = styled.div `
+const HashTag = styled.div`
     font-size: ${props => props.fontSize};
     color: ${props=> props.color};
     padding: 0.6rem 0.8rem;
@@ -22,7 +22,7 @@ const HashTag = styled.div `
     font-weight: 700;
     text-align: center;
 `;
-const TagText = styled.div `
+const TagText = styled.div`
     font-size: ${props => props.fontSize};
     color: ${props=> props.color};
     padding: 0.6rem 0.8rem;
@@ -32,36 +32,16 @@ const TagText = styled.div `
     font-family: 'Campton';
     font-weight: 700;
 `;
+function Tag({hashTag, color, text, fontSize}) {
 
-function Tag({
-    hashTag,
-    color,
-    text,
-    fontSize
-}) {
-
-    return ( <
-        TagContainer color = {
-            color
-        } > {
-            hashTag === 1 &&
-            <
-            HashTag fontSize = {
-                fontSize
-            }
-            color = {
-                color
-            } > # < /HashTag>
-        } <
-        TagText fontSize = {
-            fontSize
-        }
-        color = {
-            color
-        } > {
-            text
-        } < /TagText> <
-        /TagContainer>
-    );
+return(
+      <TagContainer color={color}>
+          {
+             hashTag === 1 && 
+                <HashTag fontSize={fontSize} color={color}>#</HashTag>
+          }
+        <TagText fontSize={fontSize} color={color}>{text}</TagText>
+      </TagContainer>
+  );
 }
 export default Tag;

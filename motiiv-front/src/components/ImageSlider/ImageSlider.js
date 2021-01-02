@@ -9,14 +9,16 @@ import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
-const SliderContainer = styled.div`
+const SwiperContainer = styled.div`
     width: 100%;
+    position : relative;
+`
 
-`;
 const LeftButton = styled.div`
     position: absolute;
-    left: -1.82%;
+    left: 10rem;
     bottom: 50%;
+    font-weight : 2rem;
     width:  3rem;
     height: 3rem;
     font-size: 1.5rem;
@@ -35,7 +37,7 @@ const RightButton = styled.div`
     height: 3rem;
     font-size: 1.5rem;
     position: absolute;
-    right:20.82%;//79.18%;
+    right:10rem;//79.18%;
     padding-left: 0.2rem;
     padding-top: 0.2rem;
     bottom:50%;
@@ -45,6 +47,7 @@ const RightButton = styled.div`
     color: ${({theme}) => theme.darkGray};
     display: flex;
     justify-content: center;
+    font-weight : 2rem;
     align-items: center;
      &::after{
         font-size: 1.5rem ;
@@ -133,20 +136,35 @@ const SliderObject = [
     }
 ]
 
+
+
 function ImageSlider() {
     const prevRef = useRef(null);
     const nextRef = useRef(null);
     const swiperRef = useRef();
+
+    const params = {
+        navigation: {
+          prevEl: prevRef.current ? prevRef.current : null,
+          nextEl: nextRef.currnet ? nextRef.current : null,
+        },
+        onInit: swiper => {
+          swiper.params.navigation.prevEl = prevRef.current;
+          swiper.params.navigation.nextEl = nextRef.current;
+          swiper.navigation.update();
+        },
+        spaceBetween: 30,
+        slidesPerView: 4,
+        //slidesPerGroup : 3,
+      };
     return (
-        <SliderContainer>
+        <SwiperContainer
+        {...params}
+        ref={swiperRef}>
         <Swiper
-        spaceBetween = {30}
-        slidesPerView = {4}
+        {...params}
         ref={swiperRef}
-        navigation
-        >
-         <LeftButton ref={prevRef} > 1 </LeftButton>
-         <RightButton ref={nextRef} > 1 </RightButton>
+        style={{width:"80%"}}>
         {SliderObject.map((obj,idx) => ( 
             <SwiperSlide >
                 <Card color="white" key={`card-${idx}`} obj={obj}></Card>
@@ -156,7 +174,9 @@ function ImageSlider() {
 
         ))}
         </Swiper>
-        </SliderContainer>
+        <LeftButton ref={prevRef} > &#xE000; </LeftButton>
+        <RightButton ref={nextRef} > &#xE001;</RightButton>
+        </SwiperContainer>
     );
 }
 
