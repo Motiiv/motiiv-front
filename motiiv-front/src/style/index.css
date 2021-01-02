@@ -87,7 +87,6 @@ video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -136,14 +135,14 @@ table {
   font-family: 'Campton';
   src: url('./fonts/Campton-BoldDEMO\ 2.otf') format('opentype');
   font-style: normal;
-  font-weight: 100;
+  font-weight: 700;
 }
 
 @font-face {
   font-family: 'Campton';
   src: url('./fonts/Campton-LightDEMO\ 2.otf') format('opentype');
   font-style: normal;
-  font-weight: 700;
+  font-weight: 100;
 }
 
 @font-face {
