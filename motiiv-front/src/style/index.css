@@ -2,47 +2,128 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
 }
-ol, ul {
-	list-style: none;
+ol,
+ul {
+  list-style: none;
 }
-blockquote, q {
-	quotes: none;
+blockquote,
+q {
+  quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 /* 
@@ -65,39 +146,41 @@ table {
 }
 
 @font-face {
-	font-family: 'Spoqa-Han-Sans';
-	src: url('./fonts/Spoqa\ Han\ Sans\ Neo\ Light.otf') format('opentype');
-	font-style: normal;
-	font-weight: 100;
-  }
+  font-family: 'Spoqa-Han-Sans';
+  src: url('./fonts/Spoqa\ Han\ Sans\ Neo\ Light.otf') format('opentype');
+  font-style: normal;
+  font-weight: 100;
+}
 
-  @font-face {
-	font-family: 'Spoqa-Han-Sans';
-	src: url('./fonts/Spoqa\ Han\ Sans\ Neo\ Regular.otf') format('opentype');
-	font-style: normal;
-	font-weight: 400;
-  }
+@font-face {
+  font-family: 'Spoqa-Han-Sans';
+  src: url('./fonts/Spoqa\ Han\ Sans\ Neo\ Regular.otf') format('opentype');
+  font-style: normal;
+  font-weight: 400;
+}
 
-  @font-face {
-	font-family: 'Spoqa-Han-Sans';
-	src: url('./fonts/Spoqa\ Han\ Sans\ Neo\ Bold.otf') format('opentype');
-	font-style: normal;
-	font-weight: 700;
-  }
+@font-face {
+  font-family: 'Spoqa-Han-Sans';
+  src: url('./fonts/Spoqa\ Han\ Sans\ Neo\ Bold.otf') format('opentype');
+  font-style: normal;
+  font-weight: 700;
+}
 
-html{
+html {
   font-size: 10px;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, 'Spoqa-Han-Sans', 'Campton', 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, 'Spoqa-Han-Sans', 'Campton', 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+html {
+  font-size: 10px;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -105,4 +188,36 @@ code {
 
 * {
   box-sizing: border-box;
+}
+
+/* Swiper Banner CSS */
+.swiper-slide-active {
+  width: 48.43% !important;
+}
+.swiper-slide-prev {
+  width: 15.89% !important;
+  overflow: hidden !important;
+}
+.swiper-slide-next {
+  width: 15.89% !important;
+  overflow: hidden !important;
+}
+
+.swiper-pagination-bullet {
+  border-radius: 50% !important;
+  width: 5px !important;
+  height: 5px !important;
+  background: #ffffff !important;
+  opacity: 0.4 !important;
+  /* margin-bottom: 2rem !important; */
+}
+.swiper-pagination-bullets {
+  bottom: 2rem !important;
+}
+.swiper-pagination-bullet-active {
+  background: #2cff2c !important;
+  border-radius: 3.5px !important;
+  width: 14px !important;
+  height: 5px !important;
+  opacity: 1 !important;
 }
