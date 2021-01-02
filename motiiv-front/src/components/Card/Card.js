@@ -5,11 +5,14 @@ import Tag from '../Tag/Tag';
 const CardWrap = styled.div`
     display : flex;
     flex-direction: column;
+    width: 37.7rem;
+    height: 33.6rem;    
     box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.15);
     border-radius: 1rem;
 `;
 
 const VideoWrap = styled.div`
+    width: 100%;
     background : #C4C4C4;
     height : 21.2rem;
     position : relative;
@@ -38,8 +41,8 @@ const TimeContainer = styled.div`
     }
 `;
 const TextWrap = styled.div`
-    width : 100%;
     height: 11.4rem;
+    width: 100%;
     display : flex;
     flex-direction: column;
     background: ${props=>props.color ? "white" : "none"};
@@ -52,6 +55,8 @@ const Title = styled.div`
     font-size: 1.5rem;
     font-family: 'Spoqa-Han-Sans';
     overflow: hidden;
+    line-height: 1.5rem;
+    max-height: 3rem;
     text-overflow: ellipsis;
     word-break: keep-all;
     word-wrap: break-word;
@@ -66,10 +71,10 @@ const DescriptionContainer = styled.div`
     `;
 
 const Views = styled.div`
-font-size: 1.5rem;
-font-family: 'Spoqa-Han-Sans';
-color: ${({theme}) => theme.darkGray};
-overflow: hidden;
+    font-size: 1.5rem;
+    font-family: 'Spoqa-Han-Sans';
+    color: ${({theme}) => theme.darkGray};
+    overflow: hidden;
     text-overflow: ellipsis;
     word-break: keep-all;
     word-wrap: break-word;
@@ -79,13 +84,13 @@ overflow: hidden;
 `;
 
 const Channel = styled.div`
-font-size: 1.5rem;
-font-family: 'Spoqa-Han-Sans';
-border-left : 0.15rem solid;
-margin-left : 1rem;
-padding-left : 1rem;
-color: ${({theme}) => theme.darkGray};
-overflow: hidden;
+    font-size: 1.5rem;
+    font-family: 'Spoqa-Han-Sans';
+    border-left : 0.15rem solid;
+    margin-left : 1rem;
+    padding-left : 1rem;
+    color: ${({theme}) => theme.darkGray};
+    overflow: hidden;
     text-overflow: ellipsis;
     word-break: keep-all;
     word-wrap: break-word;

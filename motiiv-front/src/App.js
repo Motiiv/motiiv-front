@@ -10,6 +10,7 @@ import Navbar from './components/Navbar/Navbar'
 import SwiperBanner from './components/Banner/SwiperBanner';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import ImageSlider from './components/ImageSlider/ImageSlider';
 
 function App({ props }) {
   return (
@@ -17,6 +18,7 @@ function App({ props }) {
       <Navbar/>
       {/* <SwiperBanner props={props} /> */}
       <SwiperBanner></SwiperBanner>
+      <ImageSlider></ImageSlider>
       <Switch>
         {/* Main & Category & MyMotiiv */}
         <Route

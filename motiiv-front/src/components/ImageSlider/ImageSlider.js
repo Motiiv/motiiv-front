@@ -10,9 +10,8 @@ import 'swiper/components/scrollbar/scrollbar.scss';
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 const SwiperContainer = styled.div`
-    width: 100%;
-    position : relative;
-`
+    position: relative;
+`;
 
 const LeftButton = styled.div`
     position: absolute;
@@ -49,8 +48,6 @@ const RightButton = styled.div`
     justify-content: center;
     font-weight : 2rem;
     align-items: center;
-     &::after{
-        font-size: 1.5rem ;
     } 
 `;
 const SliderObject = [
@@ -154,28 +151,26 @@ function ImageSlider() {
           swiper.navigation.update();
         },
         spaceBetween: 30,
-        slidesPerView: 4,
+        slidesPerView: 3,
         //slidesPerGroup : 3,
       };
     return (
-        <SwiperContainer
-        {...params}
-        ref={swiperRef}>
+        <SwiperContainer>
         <Swiper
         {...params}
         ref={swiperRef}
-        style={{width:"80%"}}>
+        style={{width:"80%",
+               position : "static",
+               maxwidth: "108rem" }}>
+        <LeftButton ref={prevRef} > &#xE000; </LeftButton>
+        <RightButton ref={nextRef} > &#xE001;</RightButton>
         {SliderObject.map((obj,idx) => ( 
             <SwiperSlide >
                 <Card color="white" key={`card-${idx}`} obj={obj}></Card>
 
             </SwiperSlide>
-
-
         ))}
         </Swiper>
-        <LeftButton ref={prevRef} > &#xE000; </LeftButton>
-        <RightButton ref={nextRef} > &#xE001;</RightButton>
         </SwiperContainer>
     );
 }
