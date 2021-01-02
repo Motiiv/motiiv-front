@@ -13,7 +13,7 @@ const activeStyle = {
 };
 
 const Header = styled.header`
-    width: 100%;
+    width: 100vw;
     height: 5rem;
     background-color: black;
     display: flex;
