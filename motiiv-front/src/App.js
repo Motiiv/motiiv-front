@@ -6,6 +6,7 @@ import Main from './pages/Main/Main';
 import Category from './pages/Category/Category';
 import MyMyotiiv from './pages/MyMotiiv/MyMyotiiv';
 import Admin from './pages/Admin/Admin';
+import Navbar from './components/Navbar/Navbar'
 import SwiperBanner from './components/Banner/SwiperBanner';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -13,6 +14,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 function App({ props }) {
   return (
     <>
+      <Navbar/>
       {/* <SwiperBanner props={props} /> */}
       <SwiperBanner></SwiperBanner>
       <Switch>
