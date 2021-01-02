@@ -1,74 +1,140 @@
 import React from 'react'
-import styled, {css} from 'styled-components';
+import styled, {
+    css
+} from 'styled-components';
 import Tag from '../Tag/tag';
 
-const CardWrap = styled.div`
+const CardWrap = styled.div `
     display : flex;
     flex-direction: column;
-    width: 37.7rem;
-    height: 32.6rem;
-    background: white;
     box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
 `;
 
-const VideoWrap = styled.div`
+const VideoWrap = styled.div `
     background : #C4C4C4;
-    width :100%;
     height : 21.2rem;
-
-    
+    position : relative;
     `;
-const Video = styled.video``;
-const TextWrap = styled.div`
+// const Video = styled.div`
+//     position : absolute;
+//     width: 100%;
+// `;
+const TimeContainer = styled.div `
+    position : absolute;
+    right : 2.1rem;
+    bottom : 2rem;
+    width: 3.3rem;
+    height : 1.4rem;
+    background-color : ${props => props.theme.gray};
+    border: ${props => props.color} 2px;
+    border-radius: 3rem;
+    margin-top: 2.8rem;
+    display: flex;
+    color : white;
+    justify-content: center;
+    align-items: center;
+    & + &{
+        margin-left:1.2rem;
+    }
+`;
+const TextWrap = styled.div `
     width : 100%;
     height: 11.4rem;
     display : flex;
     flex-direction: column;
+    background: ${props=>props.color ? "white" : "none"};
     `;
 
-const Title = styled.div`
-    width: 4.1rem;
-    height : 2.2rem;
+const Title = styled.div `
+    margin-left : 2rem;
+    margin-top : 1.5rem;
     color : black;
+    font-size: 1.5rem;
     `;
-const DescriptionContainer = styled.div`
+const DescriptionContainer = styled.div `
     display: flex;
+    margin-left : 2rem;
+    margin-top : 1.4rem;
+    
     `;
-const Views = styled.div`
-    width: 9.4rem;
-    height : 1.3rem;
+const Views = styled.div `
+font-size: 1.5rem;
 `;
-const Devider = styled.div`
-    width: 0.1rem;
-    height : 1.5rem;
+const Devider = styled.div `
+    margin : 0 1rem;
 `;
-const Channel = styled.div`
-    width: 8.4rem;
-    height : 1.3rem;
-`;
-const TagContainer = styled.div``;
-// Tag 컴포넌트 만들어서 불러오기
+const Channel = styled.div `
+font-size: 1.5rem;
 
-function Card() {
-    return(
-        <>
-            <CardWrap>
-                <VideoWrap> <Video/></VideoWrap>
-                <TextWrap>
-                    <Title></Title>
-                    <DescriptionContainer>
-                        <Views></Views>
-                        <Devider>|</Devider>
-                        <Channel></Channel>
-                    </DescriptionContainer>
-                    <TagContainer>
-                    </TagContainer>
-                </TextWrap>
-    
-            </CardWrap>
-        </>
-    
+`;
+const TagContainer = styled.div `
+    display : flex;
+    width: 100%;
+    margin-left : 2rem;
+    `;
+// Tag 컴포넌트 만들어서 불러오기
+function Card({
+    obj,
+    color
+}) {
+    return ( <
+        >
+        <
+        CardWrap >
+        <
+        VideoWrap >
+        <
+        iframe width = "100%"
+        style = {
+            {
+                height: "100%",
+                width: "100%"
+            }
+        }
+        src = {
+            obj.VideoInfo.src
+        }
+        frameborder = "0"
+        allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen > < /iframe> <
+        TimeContainer > {
+            obj.VideoInfo.runningTime
+        } <
+        /TimeContainer></VideoWrap >
+        <
+        TextWrap color = {
+            color
+        } >
+        <
+        Title > {
+            obj.TextInfo.videoTxt
+        } < /Title> <
+        DescriptionContainer >
+        <
+        Views > 100 만회 < /Views> <
+        Devider > | < /Devider> <
+        Channel > dk - master < /Channel> <
+        /DescriptionContainer> <
+        TagContainer > {
+            obj.TextInfo.hashTag.map((tag, idx) => ( <
+                Tag hashTag = {
+                    1
+                }
+                color = "black"
+                text = {
+                    obj.TextInfo.hashTag[idx]
+                }
+                fontSize = "1.2rem" > < /Tag>
+            ))
+        } <
+        /TagContainer> <
+        /TextWrap>
+
+        <
+        /CardWrap> <
+        />
+
     )
 }
 

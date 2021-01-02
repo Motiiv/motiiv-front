@@ -1,10 +1,9 @@
 import React from 'react'
-import Tag from '../../components/Tag/tag';
-import Card from '../../components/Card/Card';
-function Main({object}) {
+import ImageSlider from '../../components/ImageSlider/ImageSlider'
+function Main() {
     return (
         <>
-            <Card object = {object}></Card>
+        <ImageSlider></ImageSlider>
         </>
     )
 }

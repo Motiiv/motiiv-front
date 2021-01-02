@@ -10,17 +10,19 @@ import styled from 'styled-components';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // 예제니까 지우쇼
-const MainText = styled.div`
-  color: ${props => props.theme.primary};
-`;
+// const MainText = styled.div`
+//   color: ${props => props.theme.primary};
+// `;
+
+
 function App() {
   return (
     <Switch>
       {/* Main & Category & MyMotiiv */}
-      <Route
-        exact
+          <Route
+          exact
         path="/main"
-        render={props => <Main props={props} />}
+        render={props => <Main props={props}/>}
       ></Route>
       <Route
         exact
@@ -62,7 +64,7 @@ function App() {
         render={props => <Upload props={props} />}
       ></Route>
       <Route path="/*">
-        404 NOT FOUND<MainText>dddd</MainText>
+        404 NOT FOUND
       </Route>
     </Switch>
   );
