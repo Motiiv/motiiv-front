@@ -7,6 +7,8 @@ import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
+import LeftButtonImage from '../../assets/global/btn_previous.png'
+import RightButtonImage from '../../assets/global/btn_next.png'
 
 SwiperCore.use([Pagination, Navigation, Autoplay]);
 
@@ -60,45 +62,24 @@ const ContentContainer = styled.div`
   }
 `;
 const LeftButton = styled.div`
+  background-image:url(${LeftButtonImage});
+  background-size:contain;
   position: absolute;
   left: calc(15.89% + 47px);
   bottom: 50%;
   width: 3.3rem;
   height: 3.3rem;
-  font-size: 1.5rem;
-  color: white;
   cursor: pointer;
-  z-index: 2;
-  border: solid ${({ theme }) => theme.primary} 1.5px;
-  border-radius: 50%;
-  color: ${({ theme }) => theme.primary};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-right: 0.2rem;
-  padding-top: 0.2rem;
 `;
 const RightButton = styled.div`
+  background-image:url(${RightButtonImage});
+  background-size:contain;
   width: 3.3rem;
   height: 3.3rem;
-  font-size: 1.5rem;
   position: absolute;
   left: calc(64.32% + 174px); //79.18%;
-  padding-left: 0.2rem;
-  padding-top: 0.2rem;
   bottom: 50%;
-  color: white;
   cursor: pointer;
-  z-index: 2;
-  border: solid ${({ theme }) => theme.primary} 1.5px;
-  border-radius: 50%;
-  color: ${({ theme }) => theme.primary};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  &::after {
-    font-size: 1.5rem;
-  }
 `;
 
 const SliderObject = [
@@ -205,8 +186,8 @@ function SwiperBanner() {
                 }  */
           >
             <div className="swiper-pagination">•</div>
-            <LeftButton ref={prevRef}>&#xE000;</LeftButton>
-            <RightButton ref={nextRef}>&#xE001;</RightButton>
+            <LeftButton ref={prevRef}></LeftButton>
+            <RightButton ref={nextRef}></RightButton>
             {SliderObject.map((obj, idx) => (
               <SwiperSlide key={`content-${idx}`}>
                 {({ isActive, isPrev, isNext }) => (
