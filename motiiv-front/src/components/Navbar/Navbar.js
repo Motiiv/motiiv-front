@@ -20,7 +20,6 @@ const Header = styled.header`
     flex-flow : row nowrap;
     align-items : center;
     justify-content: space-between;
-
     font-size: 1.6rem;
     font-family: 'Campton';
     font-weight: 700;
@@ -43,12 +42,18 @@ const TabElem = styled(NavLink)`
     color: white;
     text-decoration: none;
     padding: 1.6rem 0.8rem;
+    &:nth-child(7) {
+        display : ${ props => props.show === true ? "flex" : "none" };
+    }
 `;
 
 const Star = styled.img`
     height: 1.2rem;
     margin:1.6rem 1.7rem;
     z-index: 3;
+    &:nth-child(6) {
+        display : ${ props => props.show === true ? "flex" : "none" };
+    }
 `
 
 /*  우측 로그인 관련  */
@@ -67,12 +72,14 @@ const Search = styled.img`
 `
 
 const Login = styled(NavLink)`
+    display : ${ props => props.login === false ? "flex" : "none" };
     color: white;
     text-align: left;
     text-decoration: none;
 `;
 
 const Profile = styled.div`
+    display : ${ props => props.login === true ? "flex" : "none" };
     width:3rem;
     height:3rem;
     z-index:3;
@@ -82,7 +89,6 @@ const Profile = styled.div`
     border-radius:100%;
     background-image : ${props => 'url(' + props.src + ')'};
     cursor:pointer;
-    //border : "0.2rem solid #2cff2c";
 `
 
 function Navbar() {
@@ -92,80 +98,29 @@ function Navbar() {
         'admin' : false
     });
 
-    //이렇게 따로 랜더링하는 것 말고 저 두 요소만 체크할 수 있는 방법은 없을까?
-    //adminState === true ? display를 flex로 : display를 none으로 이렇게라던지!
+    return (
+        <Header>
+            <NavLink exact to = "/main">
+                <Logo src = {logo}/>
+            </NavLink>
 
-    if(loginState.isLoggined === true){
-        if(loginState.admin === true){
-            /*  admin 계정으로 로그인했을 경우  */
-            return (
-                <Header>
-                    <NavLink exact to = "/main">
-                        <Logo src = {logo}/>
-                    </NavLink>
-        
-                    <TabContainer>
-                        <TabElem exact to="/main" activeStyle={activeStyle}>main</TabElem>
-                        <Star src = {star}/>
-                        <TabElem exact to="/category" activeStyle={activeStyle}>category</TabElem>
-                        <Star src = {star}/>
-                        <TabElem exact to="/mymotiiv" activeStyle={activeStyle}>mymotiiv</TabElem>
-                        <Star src = {star}/>
-                        <TabElem exact to="/admin" activeStyle={activeStyle}>admin</TabElem>
-                    </TabContainer>
-        
-                    <LoginContainer>
-                        <Search src = {search}/>
-                        <Profile src = {profile}/>
-                    </LoginContainer>
-                </Header>
-            )
-        }else{
-            /*  일반 계정으로 로그인했을 경우  */
-            return (
-                <Header>
-                    <NavLink exact to = "/main">
-                        <Logo src = {logo}/>
-                    </NavLink>
-        
-                    <TabContainer>
-                        <TabElem exact to="/main" activeStyle={activeStyle}>main</TabElem>
-                        <Star src = {star}/>
-                        <TabElem exact to="/category" activeStyle={activeStyle}>category</TabElem>
-                        <Star src = {star}/>
-                        <TabElem exact to="/mymotiiv" activeStyle={activeStyle}>mymotiiv</TabElem>
-                    </TabContainer>
-        
-                    <LoginContainer>
-                        <Search src = {search}/>
-                        <Profile src = {profile}/>
-                    </LoginContainer>
-                </Header>
-            )
-        }
-    }else{
-        /*  로그인하지 않았을 경우  */
-        return (
-            <Header>
-                <NavLink exact to = "/main">
-                        <Logo src = {logo}/>
-                </NavLink>
-    
-                <TabContainer>
-                    <TabElem exact to="/main" activeStyle={activeStyle}>main</TabElem>
-                    <Star src = {star}/>
-                    <TabElem exact to="/category" activeStyle={activeStyle}>category</TabElem>
-                    <Star src = {star}/>
-                    <TabElem exact to="/mymotiiv" activeStyle={activeStyle}>mymotiiv</TabElem>
-                </TabContainer>
-    
-                <LoginContainer>
-                    <Search src = {search}/>
-                    <Login to="/signin">login</Login>
-                </LoginContainer>
-            </Header>
-        )
-    }
+            <TabContainer>
+                <TabElem exact to="/main" activeStyle={activeStyle}>main</TabElem>
+                <Star src = {star}/>
+                <TabElem exact to="/category" activeStyle={activeStyle}>category</TabElem>
+                <Star src = {star}/>
+                <TabElem exact to="/mymotiiv" activeStyle={activeStyle}>mymotiiv</TabElem>
+                <Star src = {star} show={loginState.admin}/>
+                <TabElem exact to="/admin" show={loginState.admin} activeStyle={activeStyle}>admin</TabElem>
+            </TabContainer>
+
+            <LoginContainer>
+                <Search src = {search}/>
+                <Login to="/signin" login={loginState.isLoggined}>login</Login>
+                <Profile src = {profile} login={loginState.isLoggined}/>
+            </LoginContainer>
+        </Header>
+    )
 }
 
 export default Navbar
