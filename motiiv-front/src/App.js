@@ -6,18 +6,17 @@ import Main from './pages/Main/Main';
 import Category from './pages/Category/Category';
 import MyMyotiiv from './pages/MyMotiiv/MyMyotiiv';
 import Admin from './pages/Admin/Admin';
-import styled from 'styled-components';
 import Navbar from './components/Navbar/Navbar'
+import SwiperBanner from './components/Banner/SwiperBanner';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// 예제니까 지우쇼
-const MainText = styled.div`
-  color: ${props => props.theme.primary};
-`;
-function App() {
+
+function App({ props }) {
   return (
     <>
       <Navbar/>
+      {/* <SwiperBanner props={props} /> */}
+      <SwiperBanner></SwiperBanner>
       <Switch>
         {/* Main & Category & MyMotiiv */}
         <Route
@@ -64,9 +63,7 @@ function App() {
           path="/upload"
           render={props => <Upload props={props} />}
         ></Route>
-        <Route path="/*">
-          404 NOT FOUND<MainText>dddd</MainText>
-        </Route>
+        <Route path="/*">404 NOT FOUND</Route>
       </Switch>
     </>
   );
