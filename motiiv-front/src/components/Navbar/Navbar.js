@@ -88,8 +88,8 @@ const Profile = styled.div`
 function Navbar() {
 
     const [loginState, setLoginState] = useState({
-        'isLoggined' : true,
-        'admin' : true
+        'isLoggined' : false,
+        'admin' : false
     });
 
     //이렇게 따로 랜더링하는 것 말고 저 두 요소만 체크할 수 있는 방법은 없을까?
