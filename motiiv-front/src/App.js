@@ -12,12 +12,18 @@ import BottomBanner from './components/Banner/BottomBanner';
 import Footer from './components/Footer/Footer';
 import Section from './components/Section/Section';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+
 function App({ props }) {
+  const param = {
+    type : "top" // type이 top이냐에 따라 3섹션 4섹션 나눠짐
+}
   return (
     <>
-      <Navbar/>
+      {/* <Navbar/> */}
       {/* <Section></Section> */}
       {/* <SwiperBanner props={props} /> */}
+      <Section param = {param}></Section>
       <Switch>
         {/* Main & Category & MyMotiiv */}
         <Route
@@ -65,8 +71,8 @@ function App({ props }) {
           render={props => <Upload props={props} />}
         ></Route>
       </Switch>
-      <BottomBanner/>
-      <Footer/>
+      {/* <BottomBanner/>
+      <Footer/> */}
     </>
   );
 }

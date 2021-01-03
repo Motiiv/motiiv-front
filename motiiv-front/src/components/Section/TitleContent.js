@@ -10,6 +10,7 @@ const Wrap = styled.div`
 const Title = styled.div`
     font-size: 3rem;
     font-weight: bold;
+    margin-bottom : 0.5rem;
     color: black;
 `;
 

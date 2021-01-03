@@ -5,9 +5,11 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
     width: 100%;
-    height : ${props=>props.type ==="top" ? "51rem" : "42rem" };
+    height : ${props=>props.type === "top" ? "51rem" : "42rem" };
     display : flex;
     flex-direction : column;
+    border : solid 2px;
+    padding : 2rem;
 
 `;
 const SliderObject = [
@@ -95,14 +97,11 @@ const SliderObject = [
 
 
 
-const Section = () => {
-    const param = {
-        type : "tops" // type이 top이냐에 따라 3섹션 4섹션 나눠짐
-    }
+const Section = ({param}) => {
     return(
         <>  
-        <Wrapper param = {param}>
-            <TitleContent param = {param}></TitleContent>
+        <Wrapper {...param}>
+            <TitleContent></TitleContent>
             <ImageSlider SliderObject = {SliderObject} param = {param}></ImageSlider>
         </Wrapper>
         </>

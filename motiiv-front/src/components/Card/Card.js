@@ -4,7 +4,7 @@ import Tag from '../Tag/Tag';
 
 const CardWrap = styled.div`
     display : flex;
-    height : ${props=>props.type ==="top" ? "32.6rem" : "28rem" };
+    height : ${props=>props.size ==="large" ? "32.6rem" : "28rem" };
     flex-direction: column;    
     box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.15);
     border-radius: 1rem;
@@ -17,7 +17,7 @@ const VideoWrap = styled.div`
     width: 100%;
     height: 67%;
     background : #C4C4C4;
-    border-radius: ${props=>props.type ==="top" ? "1rem 1rem 0 0" : "1rem"};
+    border-radius: ${props=>props.size ==="large"? "1rem 1rem 0 0" : "1rem"};
     position : relative;
     `;
 // const Video = styled.div`
@@ -47,7 +47,7 @@ const TextWrap = styled.div`
     width: 100%;
     display : flex;
     flex-direction: column;
-    background: ${props=>props.type ==="top" ? "white" : "transparent"};
+    background: ${props=>props.size ==="large"? "white" : "transparent"};
     border-radius: 0 0 1rem 1rem;
     `;
 
@@ -111,13 +111,13 @@ const TagContainer = styled.div`
 function Card({obj,type}) {
     return(
         <>
-                <CardWrap type ={type} >
-                    <VideoWrap type ={type}>
+                <CardWrap size ={type.size} >
+                    <VideoWrap size ={type.size}>
                 <iframe width="100%" style={{height: "100%", width: "100%", borderRadius : "1rem"}} src={obj.VideoInfo.src} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <TimeContainer>
                 {obj.VideoInfo.runningTime}
                     </TimeContainer></VideoWrap>
-                <TextWrap type = {type}>
+                <TextWrap size = {type.size}>
                     <Title>{obj.TextInfo.videoTxt}</Title>
                     <DescriptionContainer>
                         <Views>100만회</Views>

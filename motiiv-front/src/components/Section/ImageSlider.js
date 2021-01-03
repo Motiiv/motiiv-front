@@ -27,16 +27,16 @@ const SliderSection = styled.div`
     z-index: 2 !important;
   }
   & .swiper-button-next::after {
-    width: 3rem !important;
+    position: absolute !important;
+    left : 1rem !important;
+    bottom: 50% !important;
+    font-weight : 2rem !important;
+    width:  3rem !important;
     height: 3rem !important;
     font-size: 1.5rem !important;
-    position: absolute !important;
-    right: 0.01rem !important;
-    bottom:50% !important;
     color: ${({theme}) => theme.darkGray};
     cursor: pointer !important;
     z-index: 2 !important;
-    font-weight : 2rem !important;
  }
 `;
 // const SliderObject = [
@@ -127,6 +127,9 @@ const SliderSection = styled.div`
 function ImageSlider({SliderObject,param}) {
     const swiperRef = useRef();
     const num = param.type === "top" ? 3 : 4;
+    const type = {
+        size : "large"
+    }
     return (
         <SliderSection>
         <Swiper
@@ -135,10 +138,10 @@ function ImageSlider({SliderObject,param}) {
         ref={swiperRef}
         navigation
         style={{position : "static",
-                width: "93%", }}>
+                width: "92.5%", }}>
         {SliderObject.map((obj,idx) => ( 
             <SwiperSlide >
-                <Card {...param} key={`card-${idx}`} obj={obj}></Card>
+                <Card type = {type} key={`card-${idx}`} obj={obj}></Card>
 
             </SwiperSlide>
         ))}
