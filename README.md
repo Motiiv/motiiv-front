@@ -105,8 +105,8 @@
 | **🎩  [김정욱](https://github.com/neity16)** | **🐧  [엄서영](https://github.com/tjdud0123)** | **☀️  [장세영](https://github.com/Say-young)** | **📹  [김동관](https://github.com/dk-master)** |
 | :------------------------------------------: | :--------------------------------------------: | :---------------------------------------------: | :-------------------------------------------: |
 | ![jw](https://user-images.githubusercontent.com/55133871/103453540-80c9d280-4d1e-11eb-8f0d-552e910ab104.png) | ![sy](https://user-images.githubusercontent.com/55133871/103453538-7f98a580-4d1e-11eb-9279-5e5ed547315e.png) | ![say](https://user-images.githubusercontent.com/55133871/103453542-81626900-4d1e-11eb-9333-e8ae0f06fe3b.png) | ![dk](https://user-images.githubusercontent.com/55133871/103453539-80c9d280-4d1e-11eb-9e9f-0c386fe2ab2f.png)  |
-| Page | Page | Page | Page |
-| Banner,Tag | Sub Banner, Footer | GNB | Card |
+| category, detail, banner, tag | workspace, adbanner, footer | GNB, login, setting | card(grid), mymotiiv |
+
 <br>
 
 ## ✔깃 컨벤션
