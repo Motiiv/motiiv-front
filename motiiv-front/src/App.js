@@ -6,9 +6,9 @@ import Main from './pages/Main/Main';
 import Category from './pages/Category/Category';
 import MyMyotiiv from './pages/MyMotiiv/MyMyotiiv';
 import Admin from './pages/Admin/Admin';
-import Navbar from './components/Navbar/Navbar';
-import BottomBanner from './components/Banner/BottomBanner';
-import Footer from './components/Footer/Footer';
+import Navbar from './components/common/Navbar/Navbar';
+import BottomBanner from './components/common/Banner/BottomBanner';
+import Footer from './components/common/Footer/Footer';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 

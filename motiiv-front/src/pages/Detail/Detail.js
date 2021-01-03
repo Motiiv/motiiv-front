@@ -1,11 +1,8 @@
-import React from 'react'
+import React from 'react';
+import DetailComponent from '../../components/Detail/DetailComponent';
 
 function Detail() {
-    return (
-        <>
-            Detail Page   
-        </>
-    )
+  return <DetailComponent>Detail Page</DetailComponent>;
 }
 
-export default Detail
+export default Detail;

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css, ThemeConsumer, ThemeProvider } from 'styled-components';
-import Tag from '../../../components/Tag/Tag';
+import Tag from '../../../components/common/Tag/Tag';
 
 const TextCard = styled.div`
   width: 32.5rem;

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import logoImg from '../../assets/global/gray_logo.png';
+import logoImg from '../../../assets/global/gray_logo.png';
 import { withRouter } from 'react-router-dom';
 
 function Footer({ history }) {
