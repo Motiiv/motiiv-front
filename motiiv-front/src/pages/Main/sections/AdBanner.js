@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import MoreBtn from '../Button/MoreBtn';
+import MoreBtn from '../../../components/Button/MoreBtn';
+
 function AdBanner() {
   const BannerWrapper = styled.div`
     display: flex;

@@ -6,11 +6,9 @@ import Main from './pages/Main/Main';
 import Category from './pages/Category/Category';
 import MyMyotiiv from './pages/MyMotiiv/MyMyotiiv';
 import Admin from './pages/Admin/Admin';
-import Navbar from './components/Navbar/Navbar'
-import SwiperBanner from './components/Banner/SwiperBanner';
+import Navbar from './components/Navbar/Navbar';
 import BottomBanner from './components/Banner/BottomBanner';
 import Footer from './components/Footer/Footer';
-import Section from './components/Section/Section';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
@@ -20,10 +18,7 @@ function App({ props }) {
 }
   return (
     <>
-      {/* <Navbar/> */}
-      {/* <Section></Section> */}
-      {/* <SwiperBanner props={props} /> */}
-      <Section param = {param}></Section>
+      <Navbar />
       <Switch>
         {/* Main & Category & MyMotiiv */}
         <Route
@@ -71,8 +66,8 @@ function App({ props }) {
           render={props => <Upload props={props} />}
         ></Route>
       </Switch>
-      {/* <BottomBanner/>
-      <Footer/> */}
+      <BottomBanner />
+      <Footer />
     </>
   );
 }

@@ -1,14 +1,14 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import SwiperContent from './sections/SwiperContent';
+import SwiperContent from './SwiperContent';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination, Autoplay } from 'swiper';
 import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
-import LeftButtonImage from '../../assets/global/btn_previous.png'
-import RightButtonImage from '../../assets/global/btn_next.png'
+import LeftButtonImage from '../../../assets/global/btn_previous.png';
+import RightButtonImage from '../../../assets/global/btn_next.png';
 
 SwiperCore.use([Pagination, Navigation, Autoplay]);
 
@@ -62,8 +62,8 @@ const ContentContainer = styled.div`
   }
 `;
 const LeftButton = styled.div`
-  background-image:url(${LeftButtonImage});
-  background-size:contain;
+  background-image: url(${LeftButtonImage});
+  background-size: contain;
   position: absolute;
   left: calc(15.89% + 47px);
   bottom: 50%;
@@ -72,8 +72,8 @@ const LeftButton = styled.div`
   cursor: pointer;
 `;
 const RightButton = styled.div`
-  background-image:url(${RightButtonImage});
-  background-size:contain;
+  background-image: url(${RightButtonImage});
+  background-size: contain;
   width: 3.3rem;
   height: 3.3rem;
   position: absolute;
