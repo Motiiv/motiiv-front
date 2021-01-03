@@ -74,7 +74,7 @@ const HeaderTitleText = styled.div`
   font-weight: bold;
 `;
 const HeaderSubText = styled.div`
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   margin-top: 0.5rem;
   color: white;
 `;
@@ -88,7 +88,7 @@ const VideoText = styled.div`
   word-wrap: break-word;
   word-break: keep-all;
   line-height: 2.8rem;
-  max-height: 5.4rem;
+  max-height: 6rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
