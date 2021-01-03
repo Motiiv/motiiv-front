@@ -4,17 +4,20 @@ import Tag from '../Tag/Tag';
 
 const CardWrap = styled.div`
     display : flex;
-    flex-direction: column;
-    width: 37.7rem;
-    height: 33.6rem;    
+    height : ${props=>props.type ==="top" ? "32.6rem" : "28rem" };
+    flex-direction: column;    
     box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.15);
     border-radius: 1rem;
 `;
 
 const VideoWrap = styled.div`
+    display: flex;
+    align-items:center;
+    justify-content:center;
     width: 100%;
+    height: 67%;
     background : #C4C4C4;
-    height : 21.2rem;
+    border-radius: ${props=>props.type ==="top" ? "1rem 1rem 0 0" : "1rem"};
     position : relative;
     `;
 // const Video = styled.div`
@@ -24,10 +27,10 @@ const VideoWrap = styled.div`
 const TimeContainer = styled.div`
     position : absolute;
     right : 2.1rem;
-    bottom : 2rem;
+    bottom : 1.3rem;
     width: 3.3rem;
     height : 1.4rem;
-    padding : 0.8rem;
+    padding : 0.9rem;
     background: rgba(0, 0, 0, 0.6);
     border-radius : 1rem;
     margin-top: 2.8rem;
@@ -41,11 +44,11 @@ const TimeContainer = styled.div`
     }
 `;
 const TextWrap = styled.div`
-    height: 11.4rem;
     width: 100%;
     display : flex;
     flex-direction: column;
-    background: ${props=>props.color ? "white" : "none"};
+    background: ${props=>props.type ==="top" ? "white" : "transparent"};
+    border-radius: 0 0 1rem 1rem;
     `;
 
 const Title = styled.div`
@@ -105,16 +108,16 @@ const TagContainer = styled.div`
     margin-left : 2rem;
     `;
 // Tag 컴포넌트 만들어서 불러오기
-function Card({obj,color}) {
+function Card({obj,type}) {
     return(
         <>
-                <CardWrap>
-                    <VideoWrap>
-                <iframe width="100%" style={{height: "100%", width: "100%"}} src={obj.VideoInfo.src} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <CardWrap type ={type} >
+                    <VideoWrap type ={type}>
+                <iframe width="100%" style={{height: "100%", width: "100%", borderRadius : "1rem"}} src={obj.VideoInfo.src} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <TimeContainer>
                 {obj.VideoInfo.runningTime}
                     </TimeContainer></VideoWrap>
-                <TextWrap color = {color}>
+                <TextWrap type = {type}>
                     <Title>{obj.TextInfo.videoTxt}</Title>
                     <DescriptionContainer>
                         <Views>100만회</Views>
@@ -124,7 +127,7 @@ function Card({obj,color}) {
                     <TagContainer>
                     {
                         obj.TextInfo.hashTag.map((tag, idx)=>(
-                            <Tag hashTag={1} color="black" text={obj.TextInfo.hashTag[idx]} fontSize="1.2rem"></Tag>
+                            <Tag hashTag={1} type="black" text={obj.TextInfo.hashTag[idx]} fontSize="1.2rem"></Tag>
                         ))
                     }
                     </TagContainer>
