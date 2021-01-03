@@ -108,16 +108,16 @@ const TagContainer = styled.div`
     margin-left : 2rem;
     `;
 // Tag 컴포넌트 만들어서 불러오기
-function Card({obj,type}) {
+function Card({obj,size}) {
     return(
         <>
-                <CardWrap size ={type.size} >
-                    <VideoWrap size ={type.size}>
+                <CardWrap size = {size} >
+                    <VideoWrap size ={size}>
                 <iframe width="100%" style={{height: "100%", width: "100%", borderRadius : "1rem"}} src={obj.VideoInfo.src} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <TimeContainer>
                 {obj.VideoInfo.runningTime}
                     </TimeContainer></VideoWrap>
-                <TextWrap size = {type.size}>
+                <TextWrap size = {size}>
                     <Title>{obj.TextInfo.videoTxt}</Title>
                     <DescriptionContainer>
                         <Views>100만회</Views>

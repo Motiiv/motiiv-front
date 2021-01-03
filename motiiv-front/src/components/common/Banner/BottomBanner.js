@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import starImg from '../../assets/global/star.png';
-import logoImg from '../../assets/global/motiiv_logo.png';
+import starImg from '../../../assets/global/star.png';
+import logoImg from '../../../assets/global/motiiv_logo.png';
 import MoreBtn from '../Button/MoreBtn';
 function BottomBanner() {
   const BannerWrapper = styled.div`

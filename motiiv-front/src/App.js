@@ -6,16 +6,14 @@ import Main from './pages/Main/Main';
 import Category from './pages/Category/Category';
 import MyMyotiiv from './pages/MyMotiiv/MyMyotiiv';
 import Admin from './pages/Admin/Admin';
-import Navbar from './components/Navbar/Navbar';
-import BottomBanner from './components/Banner/BottomBanner';
-import Footer from './components/Footer/Footer';
+import Navbar from './components/common/Navbar/Navbar';
+import BottomBanner from './components/common/Banner/BottomBanner';
+import Footer from './components/common/Footer/Footer';
+import Section from './components/common/Section/Section';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
 function App({ props }) {
-  const param = {
-    type : "top" // type이 top이냐에 따라 3섹션 4섹션 나눠짐
-}
   return (
     <>
       <Navbar />

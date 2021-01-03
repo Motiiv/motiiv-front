@@ -97,12 +97,12 @@ const SliderObject = [
 
 
 
-const Section = ({param}) => {
+const Section = ({type,size}) => {
     return(
         <>  
-        <Wrapper {...param}>
+        <Wrapper type = {type}>
             <TitleContent></TitleContent>
-            <ImageSlider SliderObject = {SliderObject} param = {param}></ImageSlider>
+            <ImageSlider SliderObject = {SliderObject} type={type} size= {size}></ImageSlider>
         </Wrapper>
         </>
     );

@@ -2,10 +2,10 @@ import React from 'react'
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useState } from 'react';
-import logo from '../../assets/global/motiiv_logo.png'
-import star from '../../assets/global/star.png'
-import search from '../../assets/global/ic_search.png'
-import profile from '../../assets/global/sampleImage.PNG'
+import logo from '../../../assets/global/motiiv_logo.png'
+import star from '../../../assets/global/star.png'
+import search from '../../../assets/global/ic_search.png'
+import profile from '../../../assets/global/sampleImage.PNG'
 
 const activeStyle = {
     color: "#2cff2c",

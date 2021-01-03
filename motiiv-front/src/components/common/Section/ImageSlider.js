@@ -124,12 +124,9 @@ const SliderSection = styled.div`
 
 
 
-function ImageSlider({SliderObject,param}) {
+function ImageSlider({SliderObject,type,size}) {
     const swiperRef = useRef();
-    const num = param.type === "top" ? 3 : 4;
-    const type = {
-        size : "large"
-    }
+    const num = type=== "top" ? 3 : 4;
     return (
         <SliderSection>
         <Swiper
@@ -141,8 +138,7 @@ function ImageSlider({SliderObject,param}) {
                 width: "92.5%", }}>
         {SliderObject.map((obj,idx) => ( 
             <SwiperSlide >
-                <Card type = {type} key={`card-${idx}`} obj={obj}></Card>
-
+                <Card size = {size} key={`card-${idx}`} obj={obj}></Card>
             </SwiperSlide>
         ))}
         </Swiper>
