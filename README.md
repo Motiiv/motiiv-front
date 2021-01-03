@@ -10,7 +10,84 @@
 <br>
 
 ## ✔프로젝트 구조
-추후 추가 예정
+```
+├── App.js
+├── assets
+│   ├── global
+│   │   ├── btn_next.png
+│   │   ├── btn_previous.png
+│   │   ├── gray_logo.png
+│   │   ├── ic_editorpick_tag.png
+│   │   ├── ic_search.png
+│   │   ├── motiiv_logo.png
+│   │   ├── sampleImage.PNG
+│   │   └── star.png
+│   └── main
+├── components
+│   ├── Category
+│   │   └── CategoryComponent.js
+│   ├── Detail
+│   │   └── DetailComponent.js
+│   └── common
+│       ├── Banner
+│       │   └── BottomBanner.js
+│       ├── Button
+│       │   └── MoreBtn.js
+│       ├── Card
+│       │   └── Card.js
+│       ├── Footer
+│       │   └── Footer.js
+│       ├── Grid
+│       │   └── Grid.js
+│       ├── ImageSlider
+│       │   └── ImageSlider.js
+│       ├── Navbar
+│       │   └── Navbar.js
+│       └── Tag
+│           └── Tag.js
+├── index.js
+├── lib
+│   ├── api
+│   │   ├── client.js
+│   │   └── user.js
+│   └── createRequestSaga.js
+├── modules
+│   ├── index.js
+│   ├── loading.js
+│   └── user.js
+├── pages
+│   ├── Admin
+│   │   └── Admin.js
+│   ├── Category
+│   │   └── Category.js
+│   ├── Detail
+│   │   └── Detail.js
+│   ├── Main
+│   │   ├── Main.js
+│   │   └── sections
+│   │       ├── AdBanner.js
+│   │       ├── SwiperBanner.js
+│   │       └── SwiperContent.js
+│   ├── MyMotiiv
+│   │   └── MyMyotiiv.js
+│   ├── SignIn
+│   │   └── SignIn.js
+│   ├── SignUp
+│   │   └── SignUp.js
+│   └── Upload
+│       └── Upload.js
+├── reportWebVitals.js
+├── setupTests.js
+└── style
+    ├── fonts
+    │   ├── Campton-BoldDEMO\ 2.otf
+    │   ├── Campton-LightDEMO\ 2.otf
+    │   ├── Spoqa\ Han\ Sans\ Neo\ Bold.otf
+    │   ├── Spoqa\ Han\ Sans\ Neo\ Light.otf
+    │   └── Spoqa\ Han\ Sans\ Neo\ Regular.otf
+    ├── index.css
+    └── theme.js
+```
 
 <br>
 
