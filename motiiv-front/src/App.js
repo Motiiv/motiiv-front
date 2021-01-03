@@ -7,7 +7,6 @@ import Category from './pages/Category/Category';
 import MyMyotiiv from './pages/MyMotiiv/MyMyotiiv';
 import Admin from './pages/Admin/Admin';
 import Navbar from './components/Navbar/Navbar';
-import SwiperBanner from './components/Banner/SwiperBanner';
 import BottomBanner from './components/Banner/BottomBanner';
 import Footer from './components/Footer/Footer';
 
