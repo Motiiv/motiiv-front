@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 
 const Wrap = styled.div`
-    margin-left: 5.5rem;
+    margin-left: 8rem;
     display: flex;
     flex-direction: column;
     margin-bottom : 3.8rem;

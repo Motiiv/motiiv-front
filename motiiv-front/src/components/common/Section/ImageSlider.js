@@ -28,7 +28,7 @@ const SliderSection = styled.div`
   }
   & .swiper-button-next::after {
     position: absolute !important;
-    left : 1rem !important;
+    left : 0.9rem !important;
     bottom: 50% !important;
     font-weight : 2rem !important;
     width:  3rem !important;
@@ -39,103 +39,21 @@ const SliderSection = styled.div`
     z-index: 2 !important;
  }
 `;
-// const SliderObject = [
-//     {
-//         idx: 0,
-//         TextInfo : {
-//             category: "Hot Motiiv",
-//             categoryTxt: "어제 하루 조회수가 가장 높았던 모티브",
-//             videoTxt : `"영화 "굿 윌 헌팅" 명장면"`,
-//             hashTag: [
-//                 "movie",
-//                 "pride"
-//             ]
-//         },
-//         VideoInfo : {
-//             src : "https://www.youtube.com/embed/ZzTQFe5qX_0",
-//             runningTime: "02:09"
-//         }
-//     },
-//     {
-//         idx: 1,
-//         TextInfo : {
-//             category: "Best Motiiv",
-//             categoryTxt: "어제 하루 좋아요가 가장 많았던 모티브",
-//             videoTxt : `"영화 "울프 오브 월스트리트" 명장면"`,
-//             hashTag: [
-//                 "무무",
-//                 "프라"
-//             ]
-//         },
-//         VideoInfo : {
-//             src : "https://www.youtube.com/embed/GIoofmjN-8U",
-//             runningTime: "03:32"
-//         }
-//     },
-//     {
-//         idx: 2,
-//         TextInfo : {
-//             category: "Most motivated motiiv",
-//             categoryTxt: "어제 워크스페이스로 가장 많이 이동한 모티브",
-//             videoTxt : "The Devil Wears Prada final scene",
-//             hashTag: [
-//                 "movie",
-//                 "pride"
-//             ]
-//         },
-//         VideoInfo : {
-//             src : "https://www.youtube.com/embed/8xCfGlYQiPI",
-//             runningTime: "22:01"
-//         }
-//     },
-//     {
-//         idx: 3,
-//         TextInfo : {
-//             category: "Most motivated motiiv",
-//             categoryTxt: "어제 워크스페이스로 가장 많이 이동한 모티브",
-//             videoTxt : "The Devil Wears Prada final scene",
-//             hashTag: [
-//                 "movie",
-//                 "pride"
-//             ]
-//         },
-//         VideoInfo : {
-//             src : "https://www.youtube.com/embed/8xCfGlYQiPI",
-//             runningTime: "22:01"
-//         }
-//     },
-//     {
-//         idx: 4,
-//         TextInfo : {
-//             category: "Most motivated motiiv",
-//             categoryTxt: "어제 워크스페이스로 가장 많이 이동한 모티브",
-//             videoTxt : "The Devil Wears Prada final scene",
-//             hashTag: [
-//                 "movie",
-//                 "pride"
-//             ]
-//         },
-//         VideoInfo : {
-//             src : "https://www.youtube.com/embed/8xCfGlYQiPI",
-//             runningTime: "22:01"
-//         }
-//     }
-// ]
-
-
 
 function ImageSlider({SliderObject,type,size}) {
     const swiperRef = useRef();
     const num = type=== "top" ? 3 : 4;
+    const space = type === "top" ? 20 : 25;
     return (
         <SliderSection>
         <Swiper
-        spaceBetween = {30}
+        spaceBetween = {space}
         slidesPerView = {num}
         ref={swiperRef}
         navigation
         style={{position : "static",
-                width: "92.5%", }}>
+                width: '88.5%',
+                maxWidth: '128rem',}}>
         {SliderObject.map((obj,idx) => ( 
             <SwiperSlide >
                 <Card size = {size} key={`card-${idx}`} obj={obj}></Card>

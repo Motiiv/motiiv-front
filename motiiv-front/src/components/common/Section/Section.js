@@ -8,8 +8,8 @@ const Wrapper = styled.div`
     height : ${props=>props.type === "top" ? "51rem" : "42rem" };
     display : flex;
     flex-direction : column;
-    border : solid 2px;
-    padding : 2rem;
+    padding : 5rem 2.4rem 0 2.4rem;
+    background-color : ${props=>props.color === "gray" ? ({theme}) => theme.lightGray : "none" };
 
 `;
 const SliderObject = [
@@ -97,12 +97,12 @@ const SliderObject = [
 
 
 
-const Section = ({type,size}) => {
+const Section = ({type,size,color}) => {
     return(
         <>  
-        <Wrapper type = {type}>
+        <Wrapper type = {type} color = {color}>
             <TitleContent></TitleContent>
-            <ImageSlider SliderObject = {SliderObject} type={type} size= {size}></ImageSlider>
+            <ImageSlider SliderObject = {SliderObject} type={type} size= {size} color ={color}></ImageSlider>
         </Wrapper>
         </>
     );
