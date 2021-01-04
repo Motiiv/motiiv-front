@@ -77,6 +77,7 @@ const GridContainer = styled.div`
   grid-template-rows: auto;
   grid-gap: 2.5rem;
 `;
+/* 아직 정욱이가 작업중입니다~ */
 function CategoryComponent() {
   return (
     <CategoryContainer>
