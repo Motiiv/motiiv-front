@@ -1,6 +1,17 @@
-import React from 'react'
-import ImageSlider from '../../components/common/Section/ImageSlider';
+import React,{useRef} from 'react'
+import ImageSlider from './ImageSlider';
+import TitleContent from './TitleContent';
 import styled from 'styled-components';
+
+const Wrapper = styled.div`
+    width: 100%;
+    height : ${props=>props.type === "top" ? "51rem" : "42rem" };
+    display : flex;
+    flex-direction : column;
+    padding : 5rem 2.4rem 0 2.4rem;
+    background-color : ${props=>props.color === "gray" ? ({theme}) => theme.lightGray : "none" };
+
+`;
 const SliderObject = [
     {
         idx: 0,
@@ -84,51 +95,17 @@ const SliderObject = [
     }
 ]
 
-const MotiivWrapper = styled.div`
-    width: 100%;
-    display : flex;
-    justify-content : center;
-    align-content : center;
-    flex-direction: column;
-    
-    
-`;
-const SliderWrapper = styled.div`
-    width: 100%;
-    display: flex;
-    padding : 5rem 2.4rem 0 2.4rem;
-    align-content : center;
-    margin-bottom : 5rem;
-    flex-direction: column;
-    padding : 5rem 2.4rem 0 2.4rem;
-    
-`;
-const Title = styled.div`
-    font-size : 2.5rem;
-    margin-left : 7.5rem;
-    color : black;
-    font-weight: bold;
-    margin-bottom : 5.1rem;
-`;
 
-function MyMotiiv() {
-    return (
-        <> 
-       <MotiivWrapper>
-        <SliderWrapper>
-        <Title>내가 자주 본 모티브</Title>
-        <ImageSlider SliderObject = {SliderObject} type = "basic" size = "small"></ImageSlider>
-        </SliderWrapper>
-        <SliderWrapper>
-        <Title>내가 저장 한 모티브</Title>
-        <ImageSlider SliderObject = {SliderObject} type = "basic" size = "small"></ImageSlider>
-        </SliderWrapper>
-        <SliderWrapper>
-        <Title>최근 재생한 모티브</Title>
-        <ImageSlider SliderObject = {SliderObject} type = "basic" size = "small"></ImageSlider>
-        </SliderWrapper>
-        </MotiivWrapper>
+
+const Section = ({type,size,color}) => {
+    return(
+        <>  
+        <Wrapper type = {type} color = {color}>
+            <TitleContent></TitleContent>
+            <ImageSlider SliderObject = {SliderObject} type={type} size= {size} color ={color}></ImageSlider>
+        </Wrapper>
         </>
-    )
-    }
-export default MyMotiiv;
+    );
+}
+
+export default Section;

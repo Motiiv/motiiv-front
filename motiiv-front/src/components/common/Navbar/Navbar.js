@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import logo from '../../../assets/global/motiiv_logo.png';
 import star from '../../../assets/global/star.png';
-import search from '../../../assets/global/ic_search.png';
 import profile from '../../../assets/global/sampleImage.PNG';
 
 const activeStyle = {
@@ -66,11 +65,6 @@ const LoginContainer = styled.div`
   padding-right: 5rem;
 `;
 
-const Search = styled.img`
-  padding-right: 2rem;
-  cursor: pointer;
-`;
-
 const Login = styled(NavLink)`
   display: ${props => (props.login === false ? 'flex' : 'none')};
   color: white;
@@ -104,33 +98,17 @@ function Navbar() {
       </NavLink>
 
       <TabContainer>
-        <TabElem exact to="/main" activeStyle={activeStyle}>
-          main
-        </TabElem>
+        <TabElem exact to="/main" activeStyle={activeStyle}>main</TabElem>
         <Star src={star} />
-        <TabElem exact to="/category" activeStyle={activeStyle}>
-          category
-        </TabElem>
+        <TabElem exact to="/category" activeStyle={activeStyle}>category</TabElem>
         <Star src={star} />
-        <TabElem exact to="/mymotiiv" activeStyle={activeStyle}>
-          mymotiiv
-        </TabElem>
+        <TabElem exact to="/mymotiiv" activeStyle={activeStyle}>mymotiiv</TabElem>
         <Star src={star} show={loginState.admin} />
-        <TabElem
-          exact
-          to="/admin"
-          show={loginState.admin}
-          activeStyle={activeStyle}
-        >
-          admin
-        </TabElem>
+        <TabElem exact to="/admin" show={loginState.admin} activeStyle={activeStyle}>admin</TabElem>
       </TabContainer>
 
       <LoginContainer>
-        <Search src={search} />
-        <Login to="/signin" login={loginState.isLoggined}>
-          login
-        </Login>
+        <Login to="/signin" login={loginState.isLoggined}>login</Login>
         <Profile src={profile} login={loginState.isLoggined} />
       </LoginContainer>
     </Header>
