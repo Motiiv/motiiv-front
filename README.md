@@ -10,7 +10,84 @@
 <br>
 
 ## ✔프로젝트 구조
-추후 추가 예정
+```
+├── App.js
+├── assets
+│   ├── global
+│   │   ├── btn_next.png
+│   │   ├── btn_previous.png
+│   │   ├── gray_logo.png
+│   │   ├── ic_editorpick_tag.png
+│   │   ├── ic_search.png
+│   │   ├── motiiv_logo.png
+│   │   ├── sampleImage.PNG
+│   │   └── star.png
+│   └── main
+├── components
+│   ├── Category
+│   │   └── CategoryComponent.js
+│   ├── Detail
+│   │   └── DetailComponent.js
+│   └── common
+│       ├── Banner
+│       │   └── BottomBanner.js
+│       ├── Button
+│       │   └── MoreBtn.js
+│       ├── Card
+│       │   └── Card.js
+│       ├── Footer
+│       │   └── Footer.js
+│       ├── Grid
+│       │   └── Grid.js
+│       ├── ImageSlider
+│       │   └── ImageSlider.js
+│       ├── Navbar
+│       │   └── Navbar.js
+│       └── Tag
+│           └── Tag.js
+├── index.js
+├── lib
+│   ├── api
+│   │   ├── client.js
+│   │   └── user.js
+│   └── createRequestSaga.js
+├── modules
+│   ├── index.js
+│   ├── loading.js
+│   └── user.js
+├── pages
+│   ├── Admin
+│   │   └── Admin.js
+│   ├── Category
+│   │   └── Category.js
+│   ├── Detail
+│   │   └── Detail.js
+│   ├── Main
+│   │   ├── Main.js
+│   │   └── sections
+│   │       ├── AdBanner.js
+│   │       ├── SwiperBanner.js
+│   │       └── SwiperContent.js
+│   ├── MyMotiiv
+│   │   └── MyMyotiiv.js
+│   ├── SignIn
+│   │   └── SignIn.js
+│   ├── SignUp
+│   │   └── SignUp.js
+│   └── Upload
+│       └── Upload.js
+├── reportWebVitals.js
+├── setupTests.js
+└── style
+    ├── fonts
+    │   ├── Campton-BoldDEMO\ 2.otf
+    │   ├── Campton-LightDEMO\ 2.otf
+    │   ├── Spoqa\ Han\ Sans\ Neo\ Bold.otf
+    │   ├── Spoqa\ Han\ Sans\ Neo\ Light.otf
+    │   └── Spoqa\ Han\ Sans\ Neo\ Regular.otf
+    ├── index.css
+    └── theme.js
+```
 
 <br>
 
@@ -28,8 +105,8 @@
 | **🎩  [김정욱](https://github.com/neity16)** | **🐧  [엄서영](https://github.com/tjdud0123)** | **☀️  [장세영](https://github.com/Say-young)** | **📹  [김동관](https://github.com/dk-master)** |
 | :------------------------------------------: | :--------------------------------------------: | :---------------------------------------------: | :-------------------------------------------: |
 | ![jw](https://user-images.githubusercontent.com/55133871/103453540-80c9d280-4d1e-11eb-8f0d-552e910ab104.png) | ![sy](https://user-images.githubusercontent.com/55133871/103453538-7f98a580-4d1e-11eb-9279-5e5ed547315e.png) | ![say](https://user-images.githubusercontent.com/55133871/103453542-81626900-4d1e-11eb-9333-e8ae0f06fe3b.png) | ![dk](https://user-images.githubusercontent.com/55133871/103453539-80c9d280-4d1e-11eb-9e9f-0c386fe2ab2f.png)  |
-| Page | Page | Page | Page |
-| Banner,Tag | Sub Banner, Footer | GNB | Card |
+| category, detail, banner, tag | workspace, adbanner, footer | GNB, login, setting | card(grid), mymotiiv |
+
 <br>
 
 ## ✔깃 컨벤션

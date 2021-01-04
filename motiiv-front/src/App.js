@@ -9,8 +9,7 @@ import Admin from './pages/Admin/Admin';
 import Navbar from './components/common/Navbar/Navbar';
 import BottomBanner from './components/common/Banner/BottomBanner';
 import Footer from './components/common/Footer/Footer';
-import Section from './components/common/Section/Section';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-rout er-dom';
 
 
 function App({ props }) {

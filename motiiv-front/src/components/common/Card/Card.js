@@ -142,5 +142,4 @@ function Card({obj,size}) {
     )
 }
 
-
 export default Card;
