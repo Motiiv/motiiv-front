@@ -1,11 +1,8 @@
-import React from 'react'
+import React from 'react';
+import CategoryComponent from '../../components/Category/CategoryComponent';
 
 function Category() {
-    return (
-        <>
-
-        </>
-    )
+  return <CategoryComponent></CategoryComponent>;
 }
 
-export default Category
+export default Category;
