@@ -97,7 +97,7 @@ const SliderWrapper = styled.div`
     width: 100%;
     display: flex;
     padding : 5rem 2.4rem 0 2.4rem;
-    align-content : center;
+    justify-content : center;
     margin-bottom : 5rem;
     flex-direction: column;
     padding : 5rem 2.4rem 0 2.4rem;

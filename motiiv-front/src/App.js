@@ -4,12 +4,12 @@ import SignIn from './pages/SignIn/SignIn';
 import Upload from './pages/Upload/Upload';
 import Main from './pages/Main/Main';
 import Category from './pages/Category/Category';
-import MyMyotiiv from './pages/MyMotiiv/MyMyotiiv';
+import Mymotiiv from './pages/MyMotiiv/Mymotiiv';
 import Admin from './pages/Admin/Admin';
 import Navbar from './components/common/Navbar/Navbar';
 import BottomBanner from './components/common/Banner/BottomBanner';
 import Footer from './components/common/Footer/Footer';
-import { BrowserRouter as Router, Route, Switch } from 'react-rout er-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
 function App({ props }) {
@@ -31,7 +31,7 @@ function App({ props }) {
         <Route
           exact
           path="/mymotiiv"
-          render={props => <MyMyotiiv props={props} />}
+          render={props => <Mymotiiv props={props} />}
         ></Route>
         {/* SignUp & SignIn */}
         <Route

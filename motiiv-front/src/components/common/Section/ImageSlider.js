@@ -14,6 +14,7 @@ const SliderSection = styled.div`
   position : relative;
   width: 100%;
   justify-content: center;
+  align-items: center;
   & .swiper-button-prev::after {
     position: absolute !important;
     left: 0.6rem !important;

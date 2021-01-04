@@ -7,6 +7,7 @@ const Wrapper = styled.div`
     width: 100%;
     height : ${props=>props.type === "top" ? "51rem" : "42rem" };
     display : flex;
+    justify-content : center;
     flex-direction : column;
     padding : 5rem 2.4rem 0 2.4rem;
     background-color : ${props=>props.color === "gray" ? ({theme}) => theme.lightGray : "none" };
