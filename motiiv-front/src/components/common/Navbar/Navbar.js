@@ -5,6 +5,7 @@ import { useState } from 'react';
 import logo from '../../../assets/global/motiiv_logo.png';
 import star from '../../../assets/global/star.png';
 import profile from '../../../assets/global/sampleImage.PNG';
+import ProfileModal from './ProfileModal'
 
 const activeStyle = {
   color: '#2cff2c',
@@ -85,11 +86,26 @@ const Profile = styled.div`
   cursor: pointer;
 `;
 
+const ProfileModal = styled.div`
+  display: ${props => (props.showModal === true ? 'flex' : 'none')};
+`
+
 function Navbar() {
   const [loginState, setLoginState] = useState({
     isLoggined: false,
     admin: false,
+    showModal : false
   });
+
+  const onClickProfileImage = () => {
+    (async () => {
+      try {
+        setLoginState(!showModal);
+      } catch (e) {
+        "모달 클릭 시 showModal이 제대로 변경되지 않았습니다."
+      }
+    })();
+  }
 
   return (
     <Header>
@@ -109,7 +125,8 @@ function Navbar() {
 
       <LoginContainer>
         <Login to="/signin" login={loginState.isLoggined}>login</Login>
-        <Profile src={profile} login={loginState.isLoggined} />
+        <Profile src={profile} login={loginState.isLoggined} onClick={onClickProfileImage}/>
+        <ProfileModal show = {loginState.showModal}/>
       </LoginContainer>
     </Header>
   );
