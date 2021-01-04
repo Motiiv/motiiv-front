@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import logo from '../../../assets/global/motiiv_logo.png';
 import star from '../../../assets/global/star.png';
-import profile from '../../../assets/global/sampleImage.PNG';
+import profile from '../../../assets/profile/sampleImage.png';
 import ProfileModal from './ProfileModal'
 
 const activeStyle = {
@@ -82,27 +82,26 @@ const Profile = styled.div`
   background-position: center;
   background-size: cover;
   border-radius: 100%;
+  border : ${props => (props.onclick === true ? '2px solid #2CFF2C' : 'none')};
   background-image: ${props => 'url(' + props.src + ')'};
   cursor: pointer;
 `;
 
-const ProfileModal = styled.div`
-  display: ${props => (props.showModal === true ? 'flex' : 'none')};
-`
-
 function Navbar() {
+  
   const [loginState, setLoginState] = useState({
-    isLoggined: false,
-    admin: false,
-    showModal : false
+    isLoggined: true,
+    admin: true,
   });
+
+  const [profileModalState, setProfileModalState] = useState(false);
 
   const onClickProfileImage = () => {
     (async () => {
       try {
-        setLoginState(!showModal);
+        setProfileModalState(prev => !prev);
       } catch (e) {
-        "모달 클릭 시 showModal이 제대로 변경되지 않았습니다."
+        
       }
     })();
   }
@@ -125,8 +124,8 @@ function Navbar() {
 
       <LoginContainer>
         <Login to="/signin" login={loginState.isLoggined}>login</Login>
-        <Profile src={profile} login={loginState.isLoggined} onClick={onClickProfileImage}/>
-        <ProfileModal show = {loginState.showModal}/>
+        <Profile src={profile} login={loginState.isLoggined} onClick={onClickProfileImage} onclick = {profileModalState}/>
+        <ProfileModal showModal = {profileModalState}/>
       </LoginContainer>
     </Header>
   );
