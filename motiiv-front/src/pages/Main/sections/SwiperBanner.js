@@ -70,6 +70,7 @@ const LeftButton = styled.div`
   width: 3.3rem;
   height: 3.3rem;
   cursor: pointer;
+  z-index: 2;
 `;
 const RightButton = styled.div`
   background-image: url(${RightButtonImage});
@@ -80,6 +81,7 @@ const RightButton = styled.div`
   left: calc(64.32% + 174px); //79.18%;
   bottom: 50%;
   cursor: pointer;
+  z-index: 2;
 `;
 
 const SliderObject = [

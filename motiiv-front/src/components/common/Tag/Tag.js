@@ -11,6 +11,7 @@ const TagContainer = styled.div`
   & + & {
     margin-left: 1.2rem;
   }
+  cursor: pointer;
 `;
 const HashTag = styled.div`
   font-size: ${props => props.fontSize};
@@ -18,8 +19,8 @@ const HashTag = styled.div`
   padding: 0.6rem 0.8rem;
   padding-top: 0.8rem;
   padding-right: 0;
-  font-family: 'Spoqa-Han-Sans';
-  font-weight: 700;
+  font-family: 'Spoqa-Han-Sans' !important;
+  font-weight: 700 !important;
   text-align: center;
 `;
 const TagText = styled.div`
@@ -29,8 +30,8 @@ const TagText = styled.div`
   padding-top: 0.8rem;
   padding-left: 0.2rem;
   text-align: center;
-  font-family: 'Campton';
-  font-weight: 700;
+  font-family: 'Campton' !important;
+  font-weight: 700 !important; ;
 `;
 function Tag({ hashTag, color, text, fontSize }) {
   return (
