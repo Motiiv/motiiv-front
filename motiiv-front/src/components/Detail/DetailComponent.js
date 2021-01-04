@@ -144,6 +144,7 @@ const SaveImg = styled.img`
 const TagBox = styled.div`
   display: flex;
   align-items: center;
+
   padding-top: 1rem;
   & div {
     margin-top: 0;
