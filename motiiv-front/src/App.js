@@ -5,7 +5,6 @@ import Upload from './pages/Upload/Upload';
 import Main from './pages/Main/Main';
 import Category from './pages/Category/Category';
 import MyMyotiiv from './pages/MyMotiiv/MyMyotiiv';
-import Setting from './pages/Setting/Setting'
 import Admin from './pages/Admin/Admin';
 import Navbar from './components/common/Navbar/Navbar';
 import BottomBanner from './components/common/Banner/BottomBanner';
@@ -14,10 +13,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
 function App({ props }) {
-
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <Switch>
         {/* Main & Category & MyMotiiv */}
         <Route
@@ -45,12 +43,6 @@ function App({ props }) {
           exact
           path="/signin"
           render={props => <SignIn props={props} />}
-        ></Route>
-        {/* Setting */}
-        <Route
-          exact
-          path="/setting"
-          render={props => <Setting props={props} />}
         ></Route>
         {/* Admin */}
         <Route
