@@ -1,4 +1,4 @@
-import React,{useRef} from 'react'
+import React, { useRef } from 'react';
 import ImageSlider from './ImageSlider';
 import TitleContent from './TitleContent';
 import styled from 'styled-components';

@@ -1,7 +1,7 @@
-import React,{useRef} from 'react'
+import React, { useRef } from 'react';
 import Card from '../Card/Card';
-import {Swiper, SwiperSlide} from 'swiper/react';
-import styled, {css} from 'styled-components';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import styled, { css } from 'styled-components';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
@@ -80,9 +80,9 @@ function ImageSlider({object,type,size}) {
                 <Card size = {size} key={`card-${idx}`} obj={obj}></Card>
             </SwiperSlide>
         ))}
-        </Swiper>
-        </SliderSection>
-    );
+      </Swiper>
+    </SliderSection>
+  );
 }
 
-export default ImageSlider
+export default ImageSlider;

@@ -9,9 +9,7 @@ import Admin from './pages/Admin/Admin';
 import Navbar from './components/common/Navbar/Navbar';
 import BottomBanner from './components/common/Banner/BottomBanner';
 import Footer from './components/common/Footer/Footer';
-import MyModal from './pages/MyMotiiv/MyModal/MyModal';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
 
 function App({ props }) {
   return (
@@ -26,8 +24,7 @@ function App({ props }) {
           render={props => <Main props={props} />}
         ></Route>
         <Route
-          exact
-          path="/category"
+          path="/category/:hashTag"
           render={props => <Category props={props} />}
         ></Route>
         <Route

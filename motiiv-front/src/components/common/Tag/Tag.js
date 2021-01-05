@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 const TagContainer = styled.div`
   border: solid ${props => props.color} 1px;
@@ -11,6 +12,7 @@ const TagContainer = styled.div`
   & + & {
     margin-left: 1.2rem;
   }
+  cursor: pointer;
 `;
 const HashTag = styled.div`
   font-size: ${props => props.fontSize};
@@ -18,8 +20,8 @@ const HashTag = styled.div`
   padding: 0.6rem 0.8rem;
   padding-top: 0.8rem;
   padding-right: 0;
-  font-family: 'Spoqa-Han-Sans';
-  font-weight: 700;
+  font-family: 'Spoqa-Han-Sans' !important;
+  font-weight: 700 !important;
   text-align: center;
 `;
 const TagText = styled.div`
@@ -29,12 +31,12 @@ const TagText = styled.div`
   padding-top: 0.8rem;
   padding-left: 0.2rem;
   text-align: center;
-  font-family: 'Campton';
-  font-weight: 700;
+  font-family: 'Campton' !important;
+  font-weight: 700 !important; ;
 `;
-function Tag({ hashTag, color, text, fontSize }) {
+function Tag({ hashTag, color, text, fontSize, history }) {
   return (
-    <TagContainer color={color}>
+    <TagContainer color={color} onClick={() => history.push('/category/1')}>
       {hashTag === 1 && (
         <HashTag fontSize={fontSize} color={color}>
           &#x00023;
@@ -46,4 +48,4 @@ function Tag({ hashTag, color, text, fontSize }) {
     </TagContainer>
   );
 }
-export default Tag;
+export default withRouter(Tag);

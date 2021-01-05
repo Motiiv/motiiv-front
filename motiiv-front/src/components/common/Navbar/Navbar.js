@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import logo from '../../../assets/global/motiiv_logo.png';
 import star from '../../../assets/global/star.png';
-import search from '../../../assets/global/ic_search.png';
 import profile from '../../../assets/global/sampleImage.PNG';
 
 const activeStyle = {
@@ -68,11 +67,6 @@ const LoginContainer = styled.div`
   padding-right: 5rem;
 `;
 
-const Search = styled.img`
-  padding-right: 2rem;
-  cursor: pointer;
-`;
-
 const Login = styled(NavLink)`
   display: ${props => (props.login === false ? 'flex' : 'none')};
   color: white;
@@ -112,7 +106,7 @@ function Navbar() {
           main
         </TabElem>
         <Star src={star} />
-        <TabElem exact to="/category" activeStyle={activeStyle}>
+        <TabElem exact to="/category/0" activeStyle={activeStyle}>
           category
         </TabElem>
         <Star src={star} />
@@ -131,7 +125,6 @@ function Navbar() {
       </TabContainer>
 
       <LoginContainer>
-        <Search src={search} />
         <Login to="/signin" login={loginState.isLoggined}>
           login
         </Login>

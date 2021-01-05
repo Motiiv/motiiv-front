@@ -1,6 +1,7 @@
-import React from 'react'
-import styled, {css} from 'styled-components';
+import React from 'react';
+import styled, { css } from 'styled-components';
 import Tag from '../Tag/Tag';
+import { withRouter } from 'react-router-dom';
 
 const CardWrap = styled.div`
     display : flex;
@@ -53,42 +54,41 @@ const TimeContainer = styled.div`
 `;
 
 const Views = styled.div`
-    font-size: 1.5rem;
-    font-family: 'Spoqa-Han-Sans';
-    color: ${({theme}) => theme.darkGray};
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-break: keep-all;
-    word-wrap: break-word;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+  font-size: 1.5rem;
+  font-family: 'Spoqa-Han-Sans';
+  color: ${({ theme }) => theme.darkGray};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 
 const Channel = styled.div`
-    font-size: 1.5rem;
-    font-family: 'Spoqa-Han-Sans';
-    border-left : 0.15rem solid;
-    margin-left : 1rem;
-    padding-left : 1rem;
-    color: ${({theme}) => theme.darkGray};
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-break: keep-all;
-    word-wrap: break-word;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-
+  font-size: 1.5rem;
+  font-family: 'Spoqa-Han-Sans';
+  border-left: 0.15rem solid;
+  margin-left: 1rem;
+  padding-left: 1rem;
+  color: ${({ theme }) => theme.darkGray};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 const TextWrap = styled.div`
-    width: 100%;
-    height: 11.4rem;
-    display : flex;
-    flex-direction: column;
-    background: ${props=>props.size ==="large"? "white" : "transparent"};
-    border-radius: 0 0 1rem 1rem;
-    `;
+  width: 100%;
+  height: 11.4rem;
+  display: flex;
+  flex-direction: column;
+  background: ${props => (props.size === 'large' ? 'white' : 'transparent')};
+  border-radius: 0 0 1rem 1rem;
+`;
 const Title = styled.div`
     margin-left : ${props => (props.size === 'large' ? '2rem' : '0')};
     color : black;
@@ -150,4 +150,4 @@ function Card({obj,size}) {
     )
 }
 
-export default Card;
+export default withRouter(Card);

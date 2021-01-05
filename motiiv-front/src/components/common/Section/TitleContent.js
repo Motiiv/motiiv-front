@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 const Wrap = styled.div`
     margin-left: 5.5rem;
     display: flex;
@@ -15,8 +14,8 @@ const Title = styled.div`
 `;
 
 const SubTitle = styled.div`
-    font-size: 1.6rem;
-    color: black;
+  font-size: 1.6rem;
+  color: black;
 `;
 
 const TitleText = styled.div`
