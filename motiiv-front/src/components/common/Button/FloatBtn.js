@@ -3,7 +3,39 @@ import styled from 'styled-components';
 import starIcon from '../../../assets/global/star.png';
 import SpaceBtn from './SpaceBtn';
 
-function FloatBtn() {
+const FloatBtnWrapper = styled.div`
+  position: fixed;
+  bottom: 3.5rem;
+  left: 50%;
+  width: ${props => (props.isActive || props.isHover ? '4rem' : '14.5rem')};
+  height: 4rem;
+  transform: translateX(-50%);
+  transform-origin: center center;
+  z-index: 2147483647;
+`;
+const FloatButton = styled.button`
+  width: ${props => (props.isActive || props.isHover ? '4rem' : '14.5rem')};
+  height: 4rem;
+  border-radius: ${props => (props.isActive || props.isHover ? '50%' : '3rem')};
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 2rem 2rem;
+  background-color: black;
+  background-image: ${props =>
+    props.isActive || props.isHover ? `url(${starIcon})` : `none`};
+  position: absolute;
+  transform-origin: center center;
+  color: ${({ theme }) => theme.primary};
+  font-weight: 700;
+  font-family: 'Campton';
+  font-size: 1.6rem;
+`;
+
+function FloatBtn({ isShow }) {
+  console.log(isShow);
   const [isActive, setIsActive] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const onTransfrom = () => {
@@ -46,70 +78,38 @@ function FloatBtn() {
   const mySpaces = [
     {
       iconSrc: 'https://cdn.worldvectorlogo.com/logos/notion-logo-1.svg',
-      text: '웹파트 노션',
+      text: '웹파트 노션웹파트 노션',
       url: 'https://www.notion.so/WEB-7ea63413a235451198c3e770cceb8044',
     },
 
     {
       iconSrc: 'https://image.flaticon.com/icons/png/512/2111/2111615.png',
-      text: '슬랙',
+      text: '슬랙슬랙슬랙슬랙슬랙슬랙',
       url: 'https://www.notion.so/WEB-7ea63413a235451198c3e770cceb8044',
     },
     {
       iconSrc: 'https://cdn.worldvectorlogo.com/logos/notion-logo-1.svg',
-      text: '웹파트 노션',
+      text: '웹파트 노션웹파트 노션',
       url: 'https://www.notion.so/WEB-7ea63413a235451198c3e770cceb8044',
     },
 
     {
       iconSrc: 'https://image.flaticon.com/icons/png/512/2111/2111615.png',
-      text: '슬랙',
+      text: '슬랙슬랙슬랙슬랙슬랙슬랙',
       url: 'https://www.notion.so/WEB-7ea63413a235451198c3e770cceb8044',
     },
     {
       iconSrc: 'https://cdn.worldvectorlogo.com/logos/notion-logo-1.svg',
-      text: '웹파트 노션',
+      text: '웹파트 노션웹파트 노션',
       url: 'https://www.notion.so/WEB-7ea63413a235451198c3e770cceb8044',
     },
 
     {
       iconSrc: 'https://image.flaticon.com/icons/png/512/2111/2111615.png',
-      text: '슬랙',
+      text: '슬랙슬랙슬랙슬랙슬랙슬랙',
       url: 'https://www.notion.so/WEB-7ea63413a235451198c3e770cceb8044',
     },
   ];
-
-  const FloatBtnWrapper = styled.div`
-    position: fixed;
-    bottom: 3.5rem;
-    left: 50%;
-    width: ${props => (props.isActive || props.isHover ? '4rem' : '14.5rem')};
-    height: 4rem;
-    transform: translateX(-50%);
-    transform-origin: center center;
-  `;
-  const FloatBtn = styled.button`
-    width: ${props => (props.isActive || props.isHover ? '4rem' : '14.5rem')};
-    height: 4rem;
-    border-radius: ${props =>
-      props.isActive || props.isHover ? '50%' : '3rem'};
-    border: none;
-    outline: none;
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 2rem 2rem;
-    background-color: black;
-    background-image: ${props =>
-      props.isActive || props.isHover ? `url(${starIcon})` : `none`};
-    position: absolute;
-    transform-origin: center center;
-    color: ${({ theme }) => theme.primary};
-    font-weight: 700;
-    font-family: 'Campton';
-    font-size: 1.6rem;
-    z-index: 4;
-  `;
 
   const onHandleMouseOver = () => {
     !isActive && setIsHover(true);
@@ -120,26 +120,28 @@ function FloatBtn() {
   };
 
   return (
-    <FloatBtnWrapper isActive={isActive} isHover={isHover}>
-      {positionTable[spaceNum - 1].map((pos, idx) => (
-        <SpaceBtn
+    isShow && (
+      <FloatBtnWrapper isActive={isActive} isHover={isHover}>
+        {positionTable[spaceNum - 1].map((pos, idx) => (
+          <SpaceBtn
+            isActive={isActive}
+            key={'content-' + idx}
+            delay={`${idx / 10}s`}
+            transPosition={pos}
+            space={mySpaces[idx]}
+          />
+        ))}
+        <FloatButton
           isActive={isActive}
-          key={'content-' + idx}
-          delay={`${idx / 10}s`}
-          transPosition={pos}
-          space={mySpaces[idx]}
-        />
-      ))}
-      <FloatBtn
-        isActive={isActive}
-        isHover={isHover}
-        onClick={onTransfrom}
-        onMouseOver={onHandleMouseOver}
-        onMouseLeave={onHandleMouseLeave}
-      >
-        {isActive || isHover ? '' : 'my workspace'}
-      </FloatBtn>
-    </FloatBtnWrapper>
+          isHover={isHover}
+          onClick={onTransfrom}
+          onMouseOver={onHandleMouseOver}
+          onMouseLeave={onHandleMouseLeave}
+        >
+          {isActive || isHover ? '' : 'my workspace'}
+        </FloatButton>
+      </FloatBtnWrapper>
+    )
   );
 }
 export default FloatBtn;

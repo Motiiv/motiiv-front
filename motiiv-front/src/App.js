@@ -9,10 +9,16 @@ import Admin from './pages/Admin/Admin';
 import Navbar from './components/common/Navbar/Navbar';
 import BottomBanner from './components/common/Banner/BottomBanner';
 import Footer from './components/common/Footer/Footer';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
+import {
+  useLocation,
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
+import FloatBtn from './components/common/Button/FloatBtn';
 
 function App({ props }) {
+  const location = useLocation();
   return (
     <>
       <Navbar />
@@ -63,6 +69,7 @@ function App({ props }) {
           render={props => <Upload props={props} />}
         ></Route>
       </Switch>
+      <FloatBtn isShow={location.pathname !== '/mymotiiv'} />
       <BottomBanner />
       <Footer />
     </>
