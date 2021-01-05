@@ -35,7 +35,6 @@ const FloatButton = styled.button`
 `;
 
 function FloatBtn({ isShow }) {
-  console.log(isShow);
   const [isActive, setIsActive] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const onTransfrom = () => {
