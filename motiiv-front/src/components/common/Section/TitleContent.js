@@ -2,15 +2,15 @@ import styled from 'styled-components';
 
 
 const Wrap = styled.div`
-    margin-left: 8rem;
+    margin-left: 5.5rem;
     display: flex;
     flex-direction: column;
-    margin-bottom : 3.8rem;
+    margin-bottom : ${props => props.text ? '5.1rem': '3.8rem'};
 `;
 const Title = styled.div`
     font-size: 3rem;
     font-weight: bold;
-    margin-bottom : 0.5rem;
+    margin-bottom : 0.4rem;
     color: black;
 `;
 
@@ -19,16 +19,26 @@ const SubTitle = styled.div`
     color: black;
 `;
 
+const TitleText = styled.div`
+    font-size: 3rem;
+    font-weight: bold; // 여기 props처리
+    color: black;
+`
 
 
-const TitleContent = () => {
+
+const TitleContent = ({object, text}) => {
+    console.log(object)
     return(
-        <>  
             <Wrap>
-                <Title>motiiv top 10</Title>
-                <SubTitle>이 영상을 본 80%가 바로 일을 시작했어요!</SubTitle>  
+                {object[0].TextInfo.category ? ( 
+                <>
+                <Title>{object[0].TextInfo.category}</Title>
+                <SubTitle>{object[0].TextInfo.categoryTxt}</SubTitle>
+                </>) :
+                <TitleText>{text}</TitleText>}
             </Wrap>
-        </>
+        
     );
 }
 

@@ -12,6 +12,7 @@ const activeStyle = {
   borderBottom: '0.2rem solid #2cff2c',
 };
 
+
 const Header = styled.header`
   width: 100%;
   height: 5rem;
@@ -23,6 +24,7 @@ const Header = styled.header`
   font-size: 1.6rem;
   font-family: 'Campton';
   font-weight: 700;
+  /* z-index: 1001; */
 `;
 
 const Logo = styled.img`
@@ -91,13 +93,15 @@ const Profile = styled.div`
   cursor: pointer;
 `;
 
+
 function Navbar() {
   const [loginState, setLoginState] = useState({
     isLoggined: false,
     admin: false,
   });
-
+  
   return (
+    <>
     <Header>
       <NavLink exact to="/main">
         <Logo src={logo} />
@@ -134,6 +138,7 @@ function Navbar() {
         <Profile src={profile} login={loginState.isLoggined} />
       </LoginContainer>
     </Header>
+    </>
   );
 }
 

@@ -9,13 +9,15 @@ import Admin from './pages/Admin/Admin';
 import Navbar from './components/common/Navbar/Navbar';
 import BottomBanner from './components/common/Banner/BottomBanner';
 import Footer from './components/common/Footer/Footer';
+import MyModal from './pages/MyMotiiv/MyModal/MyModal';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
 function App({ props }) {
   return (
     <>
-      <Navbar />
+      <Navbar/>
+      {/* <MyModal/> */}
       <Switch>
         {/* Main & Category & MyMotiiv */}
         <Route

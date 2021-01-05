@@ -11,52 +11,72 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 const SliderSection = styled.div`
   display: flex;
-  position : relative;
+  position: relative;
   width: 100%;
+  max-width: 1280px;
+  padding: 0 5.5rem;
   justify-content: center;
-  align-items: center;
   & .swiper-button-prev::after {
     position: absolute !important;
-    left: 0.6rem !important;
-    bottom: 50% !important;
-    font-weight : 2rem !important;
-    width:  3rem !important;
+    right: 0 !important;
+    ${props =>
+      props.size === 'large'
+        ? css`
+            top: -4rem !important;
+          `
+        : css`
+            top: -4.5rem !important;
+          `}
+    font-weight: 2rem !important;
+    width: 3rem !important;
     height: 3rem !important;
     font-size: 1.5rem !important;
-    color: ${({theme}) => theme.darkGray};
+    color: ${({ theme }) => theme.darkGray};
     cursor: pointer !important;
     z-index: 2 !important;
   }
   & .swiper-button-next::after {
     position: absolute !important;
-    left : 0.9rem !important;
-    bottom: 50% !important;
-    font-weight : 2rem !important;
-    width:  3rem !important;
+    left: 2.5rem !important;
+    ${props =>
+      props.size === 'large'
+        ? css`
+            top: -4rem !important;
+          `
+        : css`
+            top: -4.5rem !important;
+          `}
+    font-weight: 2rem !important;
+    width: 3rem !important;
     height: 3rem !important;
     font-size: 1.5rem !important;
-    color: ${({theme}) => theme.darkGray};
+    color: ${({ theme }) => theme.darkGray};
     cursor: pointer !important;
     z-index: 2 !important;
- }
+  }
+  & .swiper-slide {
+    flex: 1 !important;
+  }
 `;
 
-function ImageSlider({SliderObject,type,size}) {
+
+function ImageSlider({object,type,size}) {
     const swiperRef = useRef();
     const num = type=== "top" ? 3 : 4;
     const space = type === "top" ? 20 : 25;
     return (
-        <SliderSection>
+        <SliderSection size = {size}>
         <Swiper
         spaceBetween = {space}
         slidesPerView = {num}
+        loop={true}
         ref={swiperRef}
         navigation
         style={{position : "static",
-                width: '88.5%',
-                maxWidth: '128rem',}}>
-        {SliderObject.map((obj,idx) => ( 
-            <SwiperSlide >
+                width: '100%',
+                }}>
+        {object.map((obj,idx) => (
+            <SwiperSlide>
                 <Card size = {size} key={`card-${idx}`} obj={obj}></Card>
             </SwiperSlide>
         ))}
