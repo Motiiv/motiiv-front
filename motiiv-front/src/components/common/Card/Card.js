@@ -120,8 +120,8 @@ const TagContainer = styled.div`
 function Card({ obj, size, history }) {
   return (
     <>
-      <CardWrap size={size} onClick={() => history.push('/detail/1')}>
-        <VideoWrap size={size}>
+      <CardWrap size={size}>
+        <VideoWrap size={size} onClick={() => history.push('/detail/1')}>
           <iframe
             style={{
               height: '100%',
@@ -136,8 +136,13 @@ function Card({ obj, size, history }) {
           <TimeContainer>{obj.VideoInfo.runningTime}</TimeContainer>
         </VideoWrap>
         <TextWrap size={size}>
-          <Title size={size}>{obj.TextInfo.videoTxt}</Title>
-          <DescriptionContainer size={size}>
+          <Title onClick={() => history.push('/detail/1')} size={size}>
+            {obj.TextInfo.videoTxt}
+          </Title>
+          <DescriptionContainer
+            size={size}
+            onClick={() => history.push('/detail/1')}
+          >
             <Views>100만회</Views>
             <Channel>dk-master</Channel>
           </DescriptionContainer>

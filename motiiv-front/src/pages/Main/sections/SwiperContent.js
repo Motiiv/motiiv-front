@@ -9,11 +9,17 @@ const TextCard = styled.div`
   padding-right: 6.4rem;
   font-family: 'Spoqa-Han-Sans';
   font-weight: 700;
+  @media ${props => props.theme.tablet} {
+    padding-right: 2.5rem;
+  }
 `;
 const VideoCard = styled.div`
   width: 32.5rem;
   height: 18.5rem;
   position: relative;
+  @media ${props => props.theme.mobile} {
+    display: none;
+  }
 `;
 const ContentWrapper = styled.div`
   //width:100%;
@@ -51,6 +57,19 @@ const ContentWrapper = styled.div`
                 display:none;
             }`
       : null}
+  @media ${props => props.theme.mobile} {
+    width: 100%;
+    height: 75%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-image: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(196, 196, 196, 0) 50%
+      ),
+      ${props => 'url(' + props.src + ')'};
+  }
 `;
 const VideoRunningTime = styled.div`
   color: white;
@@ -67,6 +86,10 @@ const HeaderInfo = styled.div`
   color: ${({ theme }) => theme.primary};
   display: flex;
   flex-direction: column;
+  @media ${props => props.theme.mobile} {
+    padding-left: 2rem;
+    padding-top: 2rem;
+  }
 `;
 const HeaderTitleText = styled.div`
   font-size: 2rem;
@@ -88,19 +111,31 @@ const VideoText = styled.div`
   word-wrap: break-word;
   word-break: keep-all;
   line-height: 2.8rem;
-  max-height: 6rem;
+  max-height: 5.6rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   padding-top: 0.2rem;
+  @media ${props => props.theme.tablet} {
+    font-size: 2.5rem;
+  }
+  @media ${props => props.theme.mobile} {
+    display: none;
+  }
 `;
 const TagBox = styled.div`
   display: flex;
   width: 100%;
+  margin-top: auto;
+  @media ${props => props.theme.mobile} {
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+  }
 `;
 function SwiperContent({ obj, choice, isNext, isPrev }) {
   return (
     <ContentWrapper
+      src="https://i.ytimg.com/vi/XeOfUbLL-7Q/hq720_live.jpg?sqp=CLTkx_8F-oaymwEZCNAFEJQDSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLA65nbGSn5uuIqanAAfgR8uEl9-uA"
       choice={choice}
       idx={obj.idx}
       isNext={isNext}

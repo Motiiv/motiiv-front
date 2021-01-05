@@ -10,6 +10,7 @@ import Navbar from './components/common/Navbar/Navbar';
 import BottomBanner from './components/common/Banner/BottomBanner';
 import Footer from './components/common/Footer/Footer';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import SwiperBanner from './pages/Main/sections/SwiperBanner';
 
 function App({ props }) {
   return (
