@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 const TagContainer = styled.div`
   border: solid ${props => props.color} 1px;
@@ -33,9 +34,9 @@ const TagText = styled.div`
   font-family: 'Campton' !important;
   font-weight: 700 !important; ;
 `;
-function Tag({ hashTag, color, text, fontSize }) {
+function Tag({ hashTag, color, text, fontSize, history }) {
   return (
-    <TagContainer color={color}>
+    <TagContainer color={color} onClick={() => history.push('/category/1')}>
       {hashTag === 1 && (
         <HashTag fontSize={fontSize} color={color}>
           &#x00023;
@@ -47,4 +48,4 @@ function Tag({ hashTag, color, text, fontSize }) {
     </TagContainer>
   );
 }
-export default Tag;
+export default withRouter(Tag);

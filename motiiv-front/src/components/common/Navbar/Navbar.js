@@ -98,17 +98,32 @@ function Navbar() {
       </NavLink>
 
       <TabContainer>
-        <TabElem exact to="/main" activeStyle={activeStyle}>main</TabElem>
+        <TabElem exact to="/main" activeStyle={activeStyle}>
+          main
+        </TabElem>
         <Star src={star} />
-        <TabElem exact to="/category" activeStyle={activeStyle}>category</TabElem>
+        <TabElem exact to="/category/0" activeStyle={activeStyle}>
+          category
+        </TabElem>
         <Star src={star} />
-        <TabElem exact to="/mymotiiv" activeStyle={activeStyle}>mymotiiv</TabElem>
+        <TabElem exact to="/mymotiiv" activeStyle={activeStyle}>
+          mymotiiv
+        </TabElem>
         <Star src={star} show={loginState.admin} />
-        <TabElem exact to="/admin" show={loginState.admin} activeStyle={activeStyle}>admin</TabElem>
+        <TabElem
+          exact
+          to="/admin"
+          show={loginState.admin}
+          activeStyle={activeStyle}
+        >
+          admin
+        </TabElem>
       </TabContainer>
 
       <LoginContainer>
-        <Login to="/signin" login={loginState.isLoggined}>login</Login>
+        <Login to="/signin" login={loginState.isLoggined}>
+          login
+        </Login>
         <Profile src={profile} login={loginState.isLoggined} />
       </LoginContainer>
     </Header>

@@ -55,7 +55,7 @@ const DetailContainer = styled.div`
   height: 100%;
   padding: 4.5rem 5.5rem;
   display: flex;
-  margin-bottom: 20rem;
+  margin-bottom: 15rem;
 `;
 const VideoWrapper = styled.div`
   width: 81%;
