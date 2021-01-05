@@ -42,19 +42,19 @@ const TitleIconImg = styled.img`
 const DropDownBox = styled.div`
   display: flex;
   flex-direction: column;
-  transition: 0.5s;
+  transition: all 0.5s;
+  overflow: hidden;
   ${props =>
     props.active
       ? css`
           visibility: visible;
           opacity: 1;
-          height: auto;
+          height: 7rem;
         `
       : css`
           visibility: hidden;
           opacity: 0;
           height: 0;
-          transition: height 0.5s;
         `};
 `;
 const TitleIconBoxAll = styled.img`
