@@ -1,19 +1,32 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
-function SpaceBtn({ isActive, transPosition, space }) {
+function SpaceBtn({ isActive, transPosition, space, delay }) {
   const goSpace = () => {
     window.open(space.url);
   };
+  const popUp = keyframes`
+  0% {
+    transform: scale(0);
+    transform: translate(0, 0);
+    opacity:0;
+  }
+
+  100% {
+    transform: scale(1);
+    transform: translate(${transPosition.x}, ${transPosition.y});
+    opacity:1;
+  }
+`;
   const SpaceBtn = styled.button`
     // 포지션 관련
-    display: ${isActive ? 'block' : 'none'};
+    visibility: hidden;
     position: absolute;
     top: -0.7rem;
     left: -0.7rem;
     width: 5.4rem;
     height: 5.4rem;
-    transform: translate(${transPosition.x}, ${transPosition.y});
+    transform: translate(0, 0);
     // 형태 관련
     border-radius: 50%;
     border: none;
@@ -26,10 +39,20 @@ function SpaceBtn({ isActive, transPosition, space }) {
     box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
     background-image: url(${space.iconSrc});
     &:hover {
-      background-color: #efefef;
+      background-color: ${isActive ? '#efefef' : '#ffffff'};
+    }
+    &.active {
+      transform: translate(${transPosition.x}, ${transPosition.y});
+      z-index: 2;
+      animation: ${popUp} 0.3s both ease-in;
+      animation-delay: ${delay};
+      visibility: visible;
+      opacity: 1;
     }
   `;
 
-  return <SpaceBtn onClick={goSpace}></SpaceBtn>;
+  return (
+    <SpaceBtn className={isActive ? 'active' : ''} onClick={goSpace}></SpaceBtn>
+  );
 }
 export default SpaceBtn;

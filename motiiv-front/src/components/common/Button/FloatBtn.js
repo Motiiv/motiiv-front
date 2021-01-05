@@ -79,6 +79,15 @@ function FloatBtn() {
     },
   ];
 
+  const FloatBtnWrapper = styled.div`
+    position: fixed;
+    bottom: 3.5rem;
+    left: 50%;
+    width: ${props => (props.isActive || props.isHover ? '4rem' : '14.5rem')};
+    height: 4rem;
+    transform: translateX(-50%);
+    transform-origin: center center;
+  `;
   const FloatBtn = styled.button`
     width: ${props => (props.isActive || props.isHover ? '4rem' : '14.5rem')};
     height: 4rem;
@@ -93,15 +102,13 @@ function FloatBtn() {
     background-color: black;
     background-image: ${props =>
       props.isActive || props.isHover ? `url(${starIcon})` : `none`};
-    position: fixed;
-    bottom: 3.5rem;
-    left: 50%;
-    transform: translateX(-50%);
+    position: absolute;
     transform-origin: center center;
     color: ${({ theme }) => theme.primary};
     font-weight: 700;
     font-family: 'Campton';
     font-size: 1.6rem;
+    z-index: 4;
   `;
 
   const onHandleMouseOver = () => {
@@ -113,23 +120,26 @@ function FloatBtn() {
   };
 
   return (
-    <FloatBtn
-      isActive={isActive}
-      isHover={isHover}
-      onClick={onTransfrom}
-      onMouseOver={onHandleMouseOver}
-      onMouseLeave={onHandleMouseLeave}
-    >
-      {isActive || isHover ? '' : 'my workspace'}
+    <FloatBtnWrapper isActive={isActive} isHover={isHover}>
       {positionTable[spaceNum - 1].map((pos, idx) => (
         <SpaceBtn
           isActive={isActive}
           key={'content-' + idx}
+          delay={`${idx / 10}s`}
           transPosition={pos}
           space={mySpaces[idx]}
         />
       ))}
-    </FloatBtn>
+      <FloatBtn
+        isActive={isActive}
+        isHover={isHover}
+        onClick={onTransfrom}
+        onMouseOver={onHandleMouseOver}
+        onMouseLeave={onHandleMouseLeave}
+      >
+        {isActive || isHover ? '' : 'my workspace'}
+      </FloatBtn>
+    </FloatBtnWrapper>
   );
 }
 export default FloatBtn;
