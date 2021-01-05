@@ -1,6 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
 import Card from '../common/Card/Card';
+import DropDownMenu from '../../pages/Category/sections/DropDownMenu';
+import SortModal from '../../pages/Category/sections/SortModal';
+import DownArrow from '../../assets/global/downArrow.svg';
+import UpperArrow from '../../assets/global/upperArrow.svg';
+
 const SliderObject = [
   {
     idx: 0,
@@ -41,6 +46,19 @@ const SliderObject = [
       runningTime: '22:01',
     },
   },
+  {
+    idx: 3,
+    TextInfo: {
+      category: 'Most motivated motiiv',
+      categoryTxt: '어제 워크스페이스로 가장 많이 이동한 모티브',
+      videoTxt: 'The Devil Wears Prada final scene',
+      hashTag: ['movie', 'pride'],
+    },
+    VideoInfo: {
+      src: 'https://www.youtube.com/embed/8xCfGlYQiPI',
+      runningTime: '22:01',
+    },
+  },
 ];
 const CategoryContainer = styled.div`
   padding: 5rem 5.5rem;
@@ -49,47 +67,142 @@ const CategoryContainer = styled.div`
   max-width: 1280px;
   display: flex;
   justify-content: center;
+  margin-bottom: 15rem;
 `;
 const Aside = styled.div`
-  width: 18.2rem;
-  display: flex;
+  min-width: 18.2rem;
+  ${props =>
+    props.hashTag !== '0'
+      ? css`
+          display: none !important;
+        `
+      : css`
+          display: flex !important;
+        `}
   flex-direction: column;
+  margin-right: 11.7rem;
 `;
 const BodyContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 11.7rem;
   width: 100%;
+  margin-left: 0;
+`;
+const TitleTextAndButton = styled.div`
+  display: flex;
+  cursor: pointer;
+  align-items: center;
 `;
 const TitleAndSort = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 const TitleText = styled.div`
-  font-size: 1.6rem;
+  ${props =>
+    props.hashTag !== '0'
+      ? css`
+          font-size: 2.5rem;
+        `
+      : css`
+          font-size: 1.6rem;
+        `}
   font-weight: 700;
 `;
-const SortButtonWrapper = styled.div``;
+const SortButtonWrapper = styled.div`
+  position: relative;
+`;
+const SortTitleText = styled.div`
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  font-weight: 700;
+`;
+const SortButtonImg = styled.img`
+  width: 1.5rem;
+  height: 0.75rem;
+`;
 const GridContainer = styled.div`
   margin-top: 2.4rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(27.4rem, 1fr));
+  ${props =>
+    props.hashTag !== '0'
+      ? css`
+          grid-template-columns: repeat(4, minmax(27.4rem, 1fr));
+        `
+      : css`
+          grid-template-columns: repeat(3, minmax(27.4rem, 1fr));
+        `}
   grid-template-rows: auto;
   grid-gap: 2.5rem;
 `;
-/* 아직 정욱이가 작업중입니다~ */
-function CategoryComponent() {
+function CategoryComponent({ hashTag }) {
+  const [activeStatus, setActiveStatus] = useState({
+    all: true,
+    job: false,
+    interest: false,
+  });
+  const [sortStatus, setSortStatus] = useState({
+    text: '최신순',
+    status: false,
+  });
+  const onChangeActiveStatus = name => {
+    //console.log('CategoryComponents');
+    setActiveStatus({
+      ...activeStatus,
+      [name]: !activeStatus[name],
+    });
+  };
+  const onHandleSortModalStatus = () => {
+    setSortStatus({
+      ...sortStatus,
+      status: !sortStatus.status,
+    });
+  };
+  const onHandleSortText = name => {
+    setSortStatus({
+      status: !sortStatus.status,
+      text: name,
+    });
+  };
   return (
     <CategoryContainer>
-      <Aside></Aside>
+      <Aside hashTag={hashTag}>
+        <DropDownMenu
+          all={true}
+          text="전체"
+          name="all"
+          onChangeActiveStatus={onChangeActiveStatus}
+          active={activeStatus.all}
+        />
+        <DropDownMenu
+          text="직군"
+          name="job"
+          onChangeActiveStatus={onChangeActiveStatus}
+          active={activeStatus.job}
+        />
+        <DropDownMenu
+          text="관심사"
+          name="interest"
+          onChangeActiveStatus={onChangeActiveStatus}
+          active={activeStatus.interest}
+        />
+      </Aside>
       <BodyContainer>
         <TitleAndSort>
-          <TitleText>총 1997개의 모티브가 있어요!</TitleText>
-          <SortButtonWrapper>최신순</SortButtonWrapper>
+          <TitleText hashTag={hashTag}>총 1997개의 모티브가 있어요!</TitleText>
+          <SortButtonWrapper>
+            <TitleTextAndButton onClick={onHandleSortModalStatus}>
+              <SortTitleText>{sortStatus.text}</SortTitleText>
+              <SortButtonImg src={sortStatus.active ? UpperArrow : DownArrow} />
+            </TitleTextAndButton>
+            <SortModal
+              sortModal={sortStatus.status}
+              onHandleSortText={onHandleSortText}
+            ></SortModal>
+          </SortButtonWrapper>
         </TitleAndSort>
-        <GridContainer>
+        <GridContainer hashTag={hashTag}>
           {SliderObject.map((obj, idx) => (
-            <Card obj={obj} />
+            <Card key={`Card-${idx}`} obj={obj} />
           ))}
         </GridContainer>
       </BodyContainer>

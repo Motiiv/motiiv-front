@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Tag from '../Tag/Tag';
+import { withRouter } from 'react-router-dom';
 
 const CardWrap = styled.div`
   display: flex;
@@ -12,6 +13,7 @@ const CardWrap = styled.div`
   box-shadow: ${props =>
     props.size === 'large' ? '2px 2px 7px rgba(0, 0, 0, 0.15)' : 'none'};
   border-radius: 1rem;
+  cursor: pointer;
 `;
 const VideoWrap = styled.div`
   width: 100%;
@@ -115,10 +117,10 @@ const TagContainer = styled.div`
   margin-left: ${props => (props.size === 'large' ? '2rem' : '1px')};
 `;
 // Tag 컴포넌트 만들어서 불러오기
-function Card({ obj, size }) {
+function Card({ obj, size, history }) {
   return (
     <>
-      <CardWrap size={size}>
+      <CardWrap size={size} onClick={() => history.push('/detail/1')}>
         <VideoWrap size={size}>
           <iframe
             style={{
@@ -128,8 +130,8 @@ function Card({ obj, size }) {
             }}
             src={obj.VideoInfo.src}
             frameborder="0"
-            //allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullscreen
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
           ></iframe>
           <TimeContainer>{obj.VideoInfo.runningTime}</TimeContainer>
         </VideoWrap>
@@ -157,4 +159,4 @@ function Card({ obj, size }) {
   );
 }
 
-export default Card;
+export default withRouter(Card);

@@ -55,7 +55,7 @@ const DetailContainer = styled.div`
   height: 100%;
   padding: 4.5rem 5.5rem;
   display: flex;
-  margin-bottom: 20rem;
+  margin-bottom: 15rem;
 `;
 const VideoWrapper = styled.div`
   width: 81%;
@@ -202,13 +202,12 @@ const VideoDescriptionWrapper = styled.div`
 `;
 const VideoDescription = styled.div`
   margin-top: 2rem;
-  width: 30%;
+  width: 50%;
   font-size: 1.8rem;
   margin-bottom: 3rem;
-  //letter-spacing: 0.2rem;
   line-height: 2.2rem;
 
-  ${props =>
+  /*   ${props =>
     props.toggleExist
       ? css`
           overflow: hidden;
@@ -224,9 +223,9 @@ const VideoDescription = styled.div`
     props.toggle
       ? css`
           overflow: visible;
-          -webkit-line-clamp: 10; /* 표시하고자 하는 라인 수 */
+          -webkit-line-clamp: 10;
         `
-      : null}
+      : null}*/
 `;
 const MoreToggleButton = styled.div`
   font-size: 1.5rem;
@@ -353,13 +352,12 @@ function DetailComponent({ location }) {
               시작하는 것의 즐거움, 어떻게 시작하는 것이 좋을까? 작은 시작을
               시작하는 것의 즐거움, 어떻게 시작하는 것이 좋을까? 작은 시작을
               시작하는 것의 즐거움, 어떻게 시작하는 것이 좋을까? 작은 시작을
-              {/* 시작하는 것의 즐거움, 어떻게 시작하는 것이 좋을까? 작은 시작을 */}
             </VideoDescription>
-            <MoreToggleButton
+            {/*             <MoreToggleButton
               onClick={onHandleToggleButton}
               toggleExist={toggleExist}
               toggle={toggle}
-            ></MoreToggleButton>
+            ></MoreToggleButton> */}
           </VideoDescriptionWrapper>
         </VideoInfoWrapper>
       </VideoWrapper>

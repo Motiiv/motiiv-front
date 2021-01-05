@@ -5,12 +5,12 @@ import Upload from './pages/Upload/Upload';
 import Main from './pages/Main/Main';
 import Category from './pages/Category/Category';
 import MyMyotiiv from './pages/MyMotiiv/MyMyotiiv';
+import Setting from './pages/Setting/Setting';
 import Admin from './pages/Admin/Admin';
 import Navbar from './components/common/Navbar/Navbar';
 import BottomBanner from './components/common/Banner/BottomBanner';
 import Footer from './components/common/Footer/Footer';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
+import { BrowserRouter as Route, Switch } from 'react-router-dom';
 
 function App({ props }) {
   return (
@@ -24,8 +24,7 @@ function App({ props }) {
           render={props => <Main props={props} />}
         ></Route>
         <Route
-          exact
-          path="/category"
+          path="/category/:hashTag"
           render={props => <Category props={props} />}
         ></Route>
         <Route
@@ -43,6 +42,12 @@ function App({ props }) {
           exact
           path="/signin"
           render={props => <SignIn props={props} />}
+        ></Route>
+        {/* Setting */}
+        <Route
+          exact
+          path="/setting"
+          render={props => <Setting props={props} />}
         ></Route>
         {/* Admin */}
         <Route
