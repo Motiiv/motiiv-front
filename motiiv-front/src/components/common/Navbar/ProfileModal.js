@@ -66,6 +66,7 @@ const PhotoInput = styled.input`
 `
 
 const CameraIcon = styled.img`
+    width:1.6rem;
 `
 
 const ProfileImage = styled.img`
