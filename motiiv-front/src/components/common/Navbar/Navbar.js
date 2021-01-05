@@ -42,7 +42,7 @@ const TabElem = styled(NavLink)`
   text-decoration: none;
   padding: 1.6rem 0.8rem;
   &:nth-child(7) {
-    display: ${props => (props.show === true ? 'flex' : 'none')};
+    display: ${props => (props.show === 'true' ? 'flex' : 'none')};
   }
 `;
 
@@ -51,7 +51,7 @@ const Star = styled.img`
   margin: 1.6rem 1.7rem;
   z-index: 3;
   &:nth-child(6) {
-    display: ${props => (props.show === true ? 'flex' : 'none')};
+    display: ${props => (props.show === 'true' ? 'flex' : 'none')};
   }
 `;
 
@@ -66,14 +66,14 @@ const LoginContainer = styled.div`
 `;
 
 const Login = styled(NavLink)`
-  display: ${props => (props.login === false ? 'flex' : 'none')};
+  display: ${props => (props.login === 'false' ? 'flex' : 'none')};
   color: white;
   text-align: left;
   text-decoration: none;
 `;
 
 const Profile = styled.div`
-  display: ${props => (props.login === true ? 'flex' : 'none')};
+  display: ${props => (props.login === 'true' ? 'flex' : 'none')};
   width: 3rem;
   height: 3rem;
   z-index: 3;
@@ -87,8 +87,8 @@ const Profile = styled.div`
 
 function Navbar() {
   const [loginState, setLoginState] = useState({
-    isLoggined: false,
-    admin: false,
+    isLoggined: true,
+    admin: true,
   });
 
   return (
@@ -109,11 +109,11 @@ function Navbar() {
         <TabElem exact to="/mymotiiv" activeStyle={activeStyle}>
           mymotiiv
         </TabElem>
-        <Star src={star} show={loginState.admin} />
+        <Star src={star} show={loginState.admin.toString()} />
         <TabElem
           exact
           to="/admin"
-          show={loginState.admin}
+          show={loginState.admin.toString()}
           activeStyle={activeStyle}
         >
           admin
@@ -121,10 +121,10 @@ function Navbar() {
       </TabContainer>
 
       <LoginContainer>
-        <Login to="/signin" login={loginState.isLoggined}>
+        <Login to="/signin" login={loginState.isLoggined.toString()}>
           login
         </Login>
-        <Profile src={profile} login={loginState.isLoggined} />
+        <Profile src={profile} login={loginState.isLoggined.toString()} />
       </LoginContainer>
     </Header>
   );

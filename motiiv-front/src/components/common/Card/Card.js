@@ -131,7 +131,7 @@ function Card({ obj, size, history }) {
             src={obj.VideoInfo.src}
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullscreen
+            allowFullScreen
           ></iframe>
           <TimeContainer>{obj.VideoInfo.runningTime}</TimeContainer>
         </VideoWrap>
