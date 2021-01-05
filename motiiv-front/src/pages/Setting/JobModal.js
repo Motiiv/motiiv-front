@@ -40,6 +40,7 @@ const JobButton = styled.button`
 
 function JobModal({show}) {
 
+  //함수랑 state 하나로 줄이고 싶은데 끙
   const [planerState, setPlanerState] = useState('unselected');
   const [designerState, setDesignerState] = useState('unselected');
   const [developerState, setDeveloperState] = useState('unselected');
