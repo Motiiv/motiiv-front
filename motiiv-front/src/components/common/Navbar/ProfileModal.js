@@ -41,10 +41,7 @@ const ProfileImageContainer = styled.div`
     position:relative;
 `
 
-const CameraIcon = styled.img`
-`
-
-const CameraCircle = styled.div`
+const InputContainer = styled.label`
     position:absolute;
     bottom:0;
     right:0;
@@ -59,6 +56,16 @@ const CameraCircle = styled.div`
     border-radius: 100%;
     background-color:white;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+
+    cursor: pointer;
+`
+
+const PhotoInput = styled.input`
+    position: absolute;
+    clip:rect(0,0,0,0);
+`
+
+const CameraIcon = styled.img`
 `
 
 const ProfileImage = styled.img`
@@ -125,7 +132,7 @@ function ProfileModal({showModal}) {
         <ModalWrap show = {showModal}>
             <ProfileImageContainer>
                 <ProfileImage src = {profile}/>
-                <CameraCircle><CameraIcon src = {camera}/></CameraCircle>
+                    <InputContainer for="upload"><CameraIcon src = {camera}/><PhotoInput type="file" id="upload"/></InputContainer>
             </ProfileImageContainer>
 
             <FirstDiv>
