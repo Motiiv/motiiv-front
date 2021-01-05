@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import Tag from '../../../components/common/Tag/ProfileTag'
+import DarkToggle from './DarkToggle'
 import profile from '../../../assets/profile/sampleImage.png';
 import naver from '../../../assets/profile/naverlink_btn_small.png';
 import kakao from '../../../assets/profile/kakaolink_btn_small.png';
@@ -77,6 +78,7 @@ const FirstDiv = styled.div`
 const SocialImage = styled.img`
   height: 1.6rem;
   margin-left:0.5rem;
+  margin-top: 0.2rem;
 `
 
 const ProfileName = styled.div`
@@ -104,23 +106,20 @@ const DarkToggleContainer = styled.div`
     border-bottom : 1px solid #A7A7A7;
     margin-top : 2rem;
     margin-bottom: 1.7rem;
-`
 
+    padding : 0 2.5rem;
+`
 const ToggleText = styled.div`
-    margin-left:2.5rem;
     font-weight:'Spoqa-Han-Sans';
     font-size:1.4rem;
     font-weight:700;
 `
 
-const DarkToggle = styled.div`
-    margin-right:2.5rem;
-`
-
-
 function ProfileModal({showModal}) {
 
+    //추후 서버 연결시 kakao/naver 구분해서 state 관리
     const [socialState, setSocialState] = useState(true);
+    const [isToggled, setIsToggled] = useState(false);  //추후 isToggled 여부로 다크모드 설정
 
     return (
         <ModalWrap show = {showModal}>
@@ -146,7 +145,7 @@ function ProfileModal({showModal}) {
 
             <DarkToggleContainer>
                 <ToggleText>다크 모드</ToggleText>
-                <DarkToggle/>
+                <DarkToggle id="profile-toggle" toggled={isToggled} onChange={(e) => setIsToggled(e.target.checked)}/>
             </DarkToggleContainer>
             
             <div style={{marginBottom : "1.7rem"}}>
@@ -157,4 +156,3 @@ function ProfileModal({showModal}) {
   }
   
 export default ProfileModal;
-  
