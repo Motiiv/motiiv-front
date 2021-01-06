@@ -22,7 +22,7 @@ function App({ props }) {
   const location = useLocation();
   return (
     <>
-      <Navbar/>
+      <Navbar />
       {/* <MyModal/> */}
       <Switch>
         {/* Main & Category & MyMotiiv */}
@@ -35,13 +35,14 @@ function App({ props }) {
           path="/category/:hashTag"
           render={props => <Category props={props} />}
         ></Route>
-        <Route
-          exact
-          path="/mymotiiv"
-          render={props => <MyMotiiv props={props} />}
-        ></Route>
+        {
+          <Route
+            exact
+            path="/mymotiiv"
+            render={props => <MyMotiiv props={props} />}
+          ></Route>
+        }
 
-        {/* SignUp & SignIn */}
         <Route
           exact
           path="/signup"
