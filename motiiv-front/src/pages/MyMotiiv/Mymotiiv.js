@@ -101,7 +101,7 @@ const SliderObject = [
 function MyMotiiv() {
 
     const [loginState, setLoginState] = useState({
-        isLogin: false,
+        isLogin: true,
     });
     return (loginState.isLogin ? 
         <> 

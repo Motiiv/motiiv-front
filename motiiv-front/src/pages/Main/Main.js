@@ -16,7 +16,7 @@ const SliderObject = [
           ]
       },
       VideoInfo : {
-          src : "https://www.youtube.com/embed/ZzTQFe5qX_0",
+          src : "https://user-images.githubusercontent.com/61861809/103744800-bbdf4500-5041-11eb-92b0-5ba27fcdd976.png",
           runningTime: "02:09"
       }
   },
@@ -32,7 +32,7 @@ const SliderObject = [
           ]
       },
       VideoInfo : {
-          src : "https://www.youtube.com/embed/GIoofmjN-8U",
+          src : "https://user-images.githubusercontent.com/61861809/103744805-bd107200-5041-11eb-8cd2-f5f626827b7b.png",
           runningTime: "03:32"
       }
   },
@@ -48,7 +48,7 @@ const SliderObject = [
           ]
       },
       VideoInfo : {
-          src : "https://www.youtube.com/embed/8xCfGlYQiPI",
+          src : "https://user-images.githubusercontent.com/61861809/103744809-beda3580-5041-11eb-83c9-fb3005a13832.png",
           runningTime: "22:01"
       }
   },
@@ -64,7 +64,7 @@ const SliderObject = [
           ]
       },
       VideoInfo : {
-          src : "https://www.youtube.com/embed/8xCfGlYQiPI",
+          src : "https://user-images.githubusercontent.com/61861809/103744796-b97ceb00-5041-11eb-8e2f-4d950f90ae4c.png",
           runningTime: "22:01"
       }
   },

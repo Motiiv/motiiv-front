@@ -12,6 +12,12 @@ const CardWrap = styled.div`
     flex-direction: column;
     box-shadow: ${props=>props.size ==="large" ? "2px 2px 7px rgba(0, 0, 0, 0.15)" : "none" };
     border-radius: 1rem;
+    @media ${props => props.theme.mobile}{
+      min-width: 30rem;
+      min-height: 24.2rem;
+    
+
+    }
     /* height : ${props=>props.size ==="large" ? "32.6rem" : "28rem" };
     flex-direction: column;    
     box-shadow: ${props=>props.size ==="large" ? "2px 2px 7px rgba(0, 0, 0, 0.15)" : "none" };
@@ -27,11 +33,15 @@ const VideoWrap = styled.div`
     background : #C4C4C4;
     border-radius: ${props=>props.size ==="large"? "1rem 1rem 0 0" : "1rem"};
     position : relative;
+    @media ${props => props.theme.mobile}{
+      height: 16.8rem;
+    }
     `;
 // const Video = styled.div`
 //     position : absolute;
 //     width: 100%;
 // `;
+
 const TimeContainer = styled.div`
     position: absolute;
     right: 1.5rem;
@@ -64,6 +74,9 @@ const Views = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  @media ${props => props.theme.mobile}{
+      font-size : 1.2rem;
+    }
 `;
 
 const Channel = styled.div`
@@ -80,6 +93,15 @@ const Channel = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  @media ${props => props.theme.mobile}{
+      font-size : 1.2rem;
+    }
+`;
+const Video = styled.img`
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+
 `;
 const TextWrap = styled.div`
   width: 100%;
@@ -88,6 +110,9 @@ const TextWrap = styled.div`
   flex-direction: column;
   background: ${props => (props.size === 'large' ? 'white' : 'transparent')};
   border-radius: 0 0 1rem 1rem;
+  @media ${props => props.theme.mobile}{
+      height: 7.4rem;
+    }
 `;
 const Title = styled.div`
     margin-left : ${props => (props.size === 'large' ? '2rem' : '0')};
@@ -104,17 +129,28 @@ const Title = styled.div`
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    @media ${props => props.theme.mobile}{
+      margin-left : 0;
+    }
+    
     `;
 const DescriptionContainer = styled.div`
     display: flex;
     margin-left: ${props => (props.size === 'large' ? '2rem' : '0')};
     margin-top : ${props=>props.size ==="large"? "0.7rem" : "1.2rem"};
+    @media ${props => props.theme.mobile}{
+      margin-left : 0;
+      margin-top : 0.5rem;
+    }
     `;
 const TagContainer = styled.div`
     display : flex;
     width: 100%;
     margin-top :${props=>props.size ==="large"? "1.8rem" : "2rem"};
     margin-left: ${props => (props.size === 'large' ? '2rem' : '1px')};
+    @media ${props => props.theme.mobile}{
+      display : none;
+    }
     `;
 // Tag 컴포넌트 만들어서 불러오기
 function Card({obj,size}) {
@@ -122,7 +158,8 @@ function Card({obj,size}) {
         <>
                 <CardWrap size = {size} >
                 <VideoWrap size ={size}>
-                <iframe width="100%" style={{height: "100%", width: "100%", borderRadius : "1rem"}} src={obj.VideoInfo.src} frameborder="0" allowfullscreen></iframe>
+                <Video src={obj.VideoInfo.src}></Video>
+                {/* <iframe width="100%" style={{height: "100%", width: "100%", borderRadius : "1rem"}} src={obj.VideoInfo.src} frameborder="0" allowfullscreen></iframe> */}
                 <TimeContainer>
                 {obj.VideoInfo.runningTime}
                     </TimeContainer>

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, {css} from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import ModalCoverImage from '../../../assets/global/mymotiiv_login_mockup_web_1.png'
 const ModalContainer = styled.div`
 
     width: 100%;

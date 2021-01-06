@@ -57,6 +57,22 @@ const SliderSection = styled.div`
   & .swiper-slide {
     flex: 1 !important;
   }
+  & .swiper-scrollbar {
+    display : none !important;
+  }
+
+  @media ${props => props.theme.mobile}{
+      padding: 0 2rem;
+
+      & .swiper-button-prev::after {
+        display: none !important;
+        }
+      & .swiper-button-next::after {
+        display : none !important;
+        }
+      
+      
+      }
 `;
 
 
@@ -65,16 +81,34 @@ function ImageSlider({object,type,size}) {
     const num = type=== "top" ? 3 : 4;
     const space = type === "top" ? 20 : 25;
     return (
+        <>
         <SliderSection size = {size}>
         <Swiper
         spaceBetween = {space}
         slidesPerView = {num}
-        loop={true}
         ref={swiperRef}
         navigation
+        scrollbar
+        breakpointsInverse = {true}
+        breakpoints ={{
+          768: {
+            spaceBetween: 20,
+            slidesPerView: 3 
+          }, 
+          468: {
+            spaceBetween: 16,
+            slidesPerView: 1
+          },
+          300: {
+            spaceBetween: 16,
+            slidesPerView: 1
+          }
+
+        }}
         style={{position : "static",
                 width: '100%',
-                }}>
+                }}
+              >
         {object.map((obj,idx) => (
             <SwiperSlide>
                 <Card size = {size} key={`card-${idx}`} obj={obj}></Card>
@@ -82,6 +116,7 @@ function ImageSlider({object,type,size}) {
         ))}
       </Swiper>
     </SliderSection>
+    </>
   );
 }
 

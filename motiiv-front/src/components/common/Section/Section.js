@@ -11,6 +11,9 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    @media ${props => props.theme.mobile}{
+    height: 30rem;
+    }
 `;
 const Wrapper = styled.div`
     width: 100%;
