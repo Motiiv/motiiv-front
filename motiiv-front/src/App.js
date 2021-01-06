@@ -4,7 +4,7 @@ import SignIn from './pages/SignIn/SignIn';
 import Upload from './pages/Upload/Upload';
 import Main from './pages/Main/Main';
 import Category from './pages/Category/Category';
-import MyMyotiiv from './pages/MyMotiiv/MyMyotiiv';
+import MyMotiiv from './pages/MyMotiiv/MyMotiiv';
 import Setting from './pages/Setting/Setting';
 import Admin from './pages/Admin/Admin';
 import Navbar from './components/common/Navbar/Navbar';
@@ -37,8 +37,8 @@ function App({ props }) {
         ></Route>
         <Route
           exact
-          path="/mymotiiv"
-          render={props => <Mymotiiv props={props} />}
+          path="/MyMotiiv"
+          render={props => <MyMotiiv props={props} />}
         ></Route>
 
         {/* SignUp & SignIn */}
@@ -77,7 +77,7 @@ function App({ props }) {
           render={props => <Upload props={props} />}
         ></Route>
       </Switch>
-      <FloatBtn isShow={location.pathname !== '/mymotiiv'} />
+      <FloatBtn isShow={location.pathname !== '/MyMotiiv'} />
       <BottomBanner />
       <Footer />
     </>

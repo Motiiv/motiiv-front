@@ -1,19 +1,26 @@
 import React from 'react'
 import styled, {css} from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import ModalCoverImage from '../../../assets/global/mymotiiv_login_mockup_web_1.png'
+import ModalCoverImage from '../../../assets/global/0106_mymotiiv_login_mockup.png'
 const ModalContainer = styled.div`
-
     width: 100%;
     height:100%;
     position : fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index :998;
+    background-color: rgba(0, 0, 0, 0.7);
 `;
 const ModalOverlay = styled.div`
     position: absolute;
     z-index: 999;
     width: 100%; 
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    max-width: 1280px;
+    background-size: cover;
+    border : none;
+    background-image: url(${ModalCoverImage});
 
 `
 const ModalWrapper = styled.div`

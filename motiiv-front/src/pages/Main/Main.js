@@ -9,14 +9,14 @@ const SliderObject = [
       TextInfo : {
           category: "Hot Motiiv",
           categoryTxt: "어제 하루 조회수가 가장 높았던 모티브",
-          videoTxt : `"영화 "굿 윌 헌팅" 명장면"`,
+          videoTxt : "유재석이 꿈도 없이 성공할 수 있었던 자기관리.목표나 계획을 세우지 않는 유느님 명언 모음",
           hashTag: [
               "movie",
               "pride"
           ]
       },
       VideoInfo : {
-          src : "https://user-images.githubusercontent.com/61861809/103744800-bbdf4500-5041-11eb-92b0-5ba27fcdd976.png",
+          src : "https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4",
           runningTime: "02:09"
       }
   },
@@ -25,14 +25,14 @@ const SliderObject = [
       TextInfo : {
           category: "Best Motiiv",
           categoryTxt: "어제 하루 좋아요가 가장 많았던 모티브",
-          videoTxt : `"영화 "울프 오브 월스트리트" 명장면"`,
+          videoTxt : "일론머스크의 기묘한 비전 (Vision) I 그의 지치지 않는 원동력의 5가지 비밀",
           hashTag: [
               "무무",
               "프라"
           ]
       },
       VideoInfo : {
-          src : "https://user-images.githubusercontent.com/61861809/103744805-bd107200-5041-11eb-8cd2-f5f626827b7b.png",
+          src : "https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4",
           runningTime: "03:32"
       }
   },
@@ -41,14 +41,14 @@ const SliderObject = [
       TextInfo : {
           category: "Most motivated motiiv",
           categoryTxt: "어제 워크스페이스로 가장 많이 이동한 모티브",
-          videoTxt : "The Devil Wears Prada final scene",
+          videoTxt : "일론머스크의 기묘한 비전 (Vision) I 그의 지치지 않는 원동력의 5가지 비밀",
           hashTag: [
               "movie",
               "pride"
           ]
       },
       VideoInfo : {
-          src : "https://user-images.githubusercontent.com/61861809/103744809-beda3580-5041-11eb-83c9-fb3005a13832.png",
+          src : "https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4",
           runningTime: "22:01"
       }
   },
@@ -64,7 +64,7 @@ const SliderObject = [
           ]
       },
       VideoInfo : {
-          src : "https://user-images.githubusercontent.com/61861809/103744796-b97ceb00-5041-11eb-8e2f-4d950f90ae4c.png",
+          src : "https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4",
           runningTime: "22:01"
       }
   },
