@@ -4,7 +4,8 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import logo from '../../../assets/global/motiiv_logo.png';
 import star from '../../../assets/global/star.png';
-import profile from '../../../assets/global/sampleImage.PNG';
+import profile from '../../../assets/profile/sampleImage.png';
+import ProfileModal from './ProfileModal'
 
 const activeStyle = {
   color: '#2cff2c',
@@ -81,15 +82,31 @@ const Profile = styled.div`
   background-position: center;
   background-size: cover;
   border-radius: 100%;
+  border : ${props => (props.onclick === true ? '2px solid #2CFF2C' : 'none')};
   background-image: ${props => 'url(' + props.src + ')'};
   cursor: pointer;
 `;
 
 function Navbar() {
+  
+  //로그인 여부 판단 + 어드민 여부 판단
   const [loginState, setLoginState] = useState({
     isLoggined: true,
-    admin: true,
+    admin: false
   });
+
+  //프로필 드롭다운 나타나고 없애기
+  const [profileModalState, setProfileModalState] = useState(false);
+
+  const onClickProfileImage = () => {
+    (async () => {
+      try {
+        setProfileModalState(prev => !prev);
+      } catch (e) {
+        
+      }
+    })();
+  }
 
   return (
     <Header>
@@ -121,10 +138,10 @@ function Navbar() {
       </TabContainer>
 
       <LoginContainer>
-        <Login to="/signin" login={loginState.isLoggined.toString()}>
-          login
-        </Login>
-        <Profile src={profile} login={loginState.isLoggined.toString()} />
+        <Login to="/signin" login={loginState.isLoggined.toString()}>login</Login>
+        <Profile src={profile} login={loginState.isLoggined.toString()} onClick={onClickProfileImage} onclick = {profileModalState}/>
+        <ProfileModal showModal = {profileModalState}/>
+
       </LoginContainer>
     </Header>
   );

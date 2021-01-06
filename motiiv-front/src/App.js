@@ -5,13 +5,21 @@ import Upload from './pages/Upload/Upload';
 import Main from './pages/Main/Main';
 import Category from './pages/Category/Category';
 import MyMyotiiv from './pages/MyMotiiv/MyMyotiiv';
+import Setting from './pages/Setting/Setting';
 import Admin from './pages/Admin/Admin';
 import Navbar from './components/common/Navbar/Navbar';
 import BottomBanner from './components/common/Banner/BottomBanner';
 import Footer from './components/common/Footer/Footer';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  useLocation,
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
+import FloatBtn from './components/common/Button/FloatBtn';
 
 function App({ props }) {
+  const location = useLocation();
   return (
     <>
       <Navbar />
@@ -43,6 +51,12 @@ function App({ props }) {
           path="/signin"
           render={props => <SignIn props={props} />}
         ></Route>
+        {/* Setting */}
+        <Route
+          exact
+          path="/setting"
+          render={props => <Setting props={props} />}
+        ></Route>
         {/* Admin */}
         <Route
           exact
@@ -62,6 +76,7 @@ function App({ props }) {
           render={props => <Upload props={props} />}
         ></Route>
       </Switch>
+      <FloatBtn isShow={location.pathname !== '/mymotiiv'} />
       <BottomBanner />
       <Footer />
     </>
