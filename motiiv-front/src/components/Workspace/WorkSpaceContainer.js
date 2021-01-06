@@ -18,6 +18,7 @@ function WorkSpaceContainer() {
   return (
     <CenterWrapper>
       <WorkSpaceBox></WorkSpaceBox>
+      <WorkSpaceBox></WorkSpaceBox>
       <PlusBtn></PlusBtn>
     </CenterWrapper>
   );

@@ -11,6 +11,7 @@
     "eslint-config-prettier": "^7.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-hover-video-player": "^6.7.0",
     "react-scripts": "4.0.1",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4"

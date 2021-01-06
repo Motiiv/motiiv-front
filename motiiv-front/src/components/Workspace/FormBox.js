@@ -88,8 +88,10 @@ const RoundBtn = styled.button`
   &:nth-child(2) {
     color: white;
     background: ${({ theme }) => theme.gray};
+    cursor: auto;
     border: none;
     &.active {
+      cursor: pointer;
       color: white;
       background: black;
       color: ${({ theme }) => theme.primary};
@@ -129,14 +131,19 @@ const WarningText = styled.p`
 
 function FormBox({ hideForm, isShow, isCreate = false }) {
   const [inValidateUrl, SetInValidateUrl] = useState(false);
-  const [hasData, SetHasData] = useState(false);
   const [spaceName, SetSpaceName] = useState('');
   const [urlInput, SetUrlInput] = useState('');
   // 아웃 사이드 클릭
   const myRef = useRef();
+  const reSetForm = () => {
+    hideForm();
+    SetSpaceName();
+    SetUrlInput();
+    SetInValidateUrl(false);
+  };
   const handleClickOutside = e => {
     if (hideForm && !myRef?.current?.contains(e.target)) {
-      hideForm();
+      reSetForm();
     }
   };
   useEffect(() => {
@@ -184,7 +191,7 @@ function FormBox({ hideForm, isShow, isCreate = false }) {
             올바른 URL형식을 입력해 주세요
           </WarningText>
           <EndWrapper>
-            <RoundBtn onClick={hideForm}>취소</RoundBtn>
+            <RoundBtn onClick={reSetForm}>취소</RoundBtn>
             <RoundBtn
               className={
                 spaceName && urlInput && !inValidateUrl ? 'active' : ''

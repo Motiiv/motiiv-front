@@ -66,6 +66,7 @@ const InfoIcon = styled.div`
   height: 1.5rem;
   background-size: contain;
   background-image: url(${information});
+  background-repeat: no-repeat;
   margin-bottom: 0.4rem;
   cursor: pointer;
   margin-right: 2rem;
