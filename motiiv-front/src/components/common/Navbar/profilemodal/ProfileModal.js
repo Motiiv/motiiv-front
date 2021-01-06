@@ -4,10 +4,9 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import Tag from '../../Tag/ProfileTag'
 import DarkToggle from './DarkToggle'
-import profile from '../../../assets/profile/sampleImage.png';
-import naver from '../../../assets/profile/naverlink_btn_small.png';
-import kakao from '../../../assets/profile/kakaolink_btn_small.png';
-import camera from '../../../assets/profile/ic_camera.png';
+import profile from '../../../../assets/profile/sampleImage.png';
+import naver from '../../../../assets/profile/naverlink_btn_small.png';
+import kakao from '../../../../assets/profile/kakaolink_btn_small.png';
 
 /* 전체 모달 창 */
 const ModalWrap = styled.div`
@@ -39,34 +38,6 @@ const ProfileImageContainer = styled.div`
     margin-top: 2.5rem;
     margin-bottom: 2rem;
     position:relative;
-`
-
-const InputContainer = styled.label`
-    position:absolute;
-    bottom:0;
-    right:0;
-
-    width:2.8rem;
-    height:2.8rem;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    border-radius: 100%;
-    background-color:white;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
-
-    cursor: pointer;
-`
-
-const PhotoInput = styled.input`
-    position: absolute;
-    clip:rect(0,0,0,0);
-`
-
-const CameraIcon = styled.img`
-    width:1.6rem;
 `
 
 const ProfileImage = styled.img`
@@ -133,8 +104,7 @@ function ProfileModal({showModal}) {
         <ModalWrap show = {showModal}>
             <ProfileImageContainer>
                 <ProfileImage src = {profile}/>
-                    <InputContainer for="upload"><CameraIcon src = {camera}/><PhotoInput type="file" id="upload"/></InputContainer>
-            </ProfileImageContainer>
+                </ProfileImageContainer>
 
             <FirstDiv>
                 <ProfileName>모디부</ProfileName>

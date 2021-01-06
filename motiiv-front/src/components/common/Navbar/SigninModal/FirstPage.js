@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import btnNaver from '../../../../assets/global/btn_naver.png';
 import btnKakao from '../../../../assets/global/btn_kakao.png';
 
@@ -38,6 +38,8 @@ const LinkText = styled.div`
   margin-top:4rem;
   margin-bottom:2.9rem;
   color: #A7A7A7;
+
+  text-decoration:none;
 `
 
 function FirstPage({page}) {
@@ -49,8 +51,8 @@ function FirstPage({page}) {
           <LoginBtn style = {{marginBottom:"1.6rem"}}><img src = {btnNaver}/></LoginBtn>
           <LoginBtn src = {btnKakao}><img src = {btnKakao}/></LoginBtn>
           <LinkText>
-            <NavLink exact to="/main">개인정보처리방침</NavLink>
-            을 확인하였으며 이에 동의합니다
+            <Link exact to="/main" style={{color:'#A7A7A7'}}>개인정보처리방침</Link>
+            을 확인하였으며 이에 동의합니다.
           </LinkText>
       </Container>
     );
