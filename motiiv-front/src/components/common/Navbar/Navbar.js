@@ -13,6 +13,7 @@ const activeStyle = {
   borderBottom: '0.2rem solid #2cff2c',
 };
 
+
 const Header = styled.header`
   width: 100%;
   height: 5rem;
@@ -24,6 +25,7 @@ const Header = styled.header`
   font-size: 1.6rem;
   font-family: 'Campton';
   font-weight: 700;
+  /* z-index: 1001; */
 `;
 
 const Logo = styled.img`
@@ -88,6 +90,7 @@ const Profile = styled.div`
   background-image: ${props => 'url(' + props.src + ')'};
   cursor: pointer;
 `;
+
 
 function Navbar() {
   
@@ -157,7 +160,6 @@ function Navbar() {
 
       </LoginContainer>
     </Header>
-
     <SigninModal showModal={loginModalState}/>
     </>
   );

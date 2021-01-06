@@ -5,9 +5,14 @@ import { useState } from 'react';
 const InterstComponent = styled.button`
     border: none;
     outline: none;
-    text-align:center;
     border-radius: 3rem;
     font-family:'Spoqa-Han-Sans';
+
+    @media (max-width: 480px) {
+            width: 5.3rem;
+            height: 2rem;
+            font-size: 1.2rem;
+    }
 
 ${props =>
     props.type === "selected" ?

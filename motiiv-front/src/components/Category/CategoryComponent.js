@@ -67,7 +67,7 @@ const CategoryContainer = styled.div`
   max-width: 1280px;
   display: flex;
   justify-content: center;
-  margin-bottom: 15rem;
+  margin-bottom: 10rem;
 `;
 const Aside = styled.div`
   min-width: 18.2rem;

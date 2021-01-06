@@ -22,14 +22,33 @@ const ModalWrap = styled.div`
   align-items:left;
 
   font-family : 'Spoqa-Han-Sans';
+
+  @media ${props => props.theme.laptop} {
+    width: 43.6rem;
+    height: 23.4rem;
+
+  }
+  @media ${props => props.theme.mobile} {
+    width: 22.4rem;
+    height: 21rem;
+  }
 `;
 
 const InterestGrid = styled.div`
   max-width:60.4rem;
-  height:8.4rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(8.4rem, 1fr));
   gap: 1rem;
+
+  @media ${props => props.theme.laptop} {
+    gap: 2rem;
+
+  }
+  @media ${props => props.theme.mobile} {
+    grid-template-columns: repeat(auto-fill, minmax(5.3rem, 1fr));
+    column-gap: 0.5rem;
+    row-gap:1.2rem;
+  }
 `
 
 const BottomContianer = styled.div`
@@ -41,6 +60,13 @@ const BottomContianer = styled.div`
   border:none;
 
   cursor:pointer;
+
+  @media ${props => props.theme.laptop} {
+    margin-top:3rem;
+  }
+  @media ${props => props.theme.mobile} {
+    margin-top:2.5rem;
+  }
 `
 
 function InterestModal({show}) {

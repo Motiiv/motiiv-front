@@ -13,6 +13,12 @@ const Border = styled.div`
     background-color: #2CFF2C;
     width: 11.4rem;
     height:1.3rem;
+    @media ${props => props.theme.laptop} {
+    
+    }
+    @media ${props => props.theme.mobile} {
+    
+    }
 `
 
 const Title = styled.div`
@@ -22,19 +28,30 @@ const Title = styled.div`
     margin : 5rem 5.5rem;
     position:relative;
 
-    ${Border}{
+    @media ${props => props.theme.laptop} {
+        font-size : 2rem;
+        margin : 5rem 4rem;
+    }
+    @media ${props => props.theme.mobile} {
+        font-size : 1.6rem;
+        margin : 3rem 3.6rem;
+    }
+
+/*
+    {Border}{
         position:absolute;
         z-index:-1;
         top:1rem;
         left: 0.2rem;
     }
+*/
 `
 
 
 /*  전체 마진  */
 const Container = styled.div`
     width:100%;
-    padding-bottom : 7.5rem;
+    padding-bottom : 7.3rem;
 
     display:flex;
     justify-content: center;
@@ -43,6 +60,13 @@ const Container = styled.div`
 
     font-family:'Spoqa-Han-Sans';
     font-weight:700;
+
+    @media ${props => props.theme.laptop} {
+        //얘는 하단 패딩이 있을랑가?
+    }
+    @media ${props => props.theme.mobile} {
+        padding-bottom : 15rem;
+    }
 `
 
 /* 프로필 이미지 */
@@ -51,6 +75,14 @@ const ProfileImageContainer = styled.div`
     height:20rem;
     position:relative;
     margin-bottom: 3rem;
+    @media ${props => props.theme.laptop} {
+        width:18rem;
+        height:18rem;
+    }
+    @media ${props => props.theme.mobile} {
+        width:18rem;
+        height:18rem;
+    }
 `
 
 const InputContainer = styled.label`
@@ -70,6 +102,15 @@ const InputContainer = styled.label`
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
 
     cursor: pointer;
+
+    @media ${props => props.theme.laptop} {
+        width:5rem;
+        height:5rem;
+    }
+    @media ${props => props.theme.mobile} {
+        width:5rem;
+        height:5rem;
+    }
 `
 
 const PhotoInput = styled.input`
@@ -85,6 +126,26 @@ const ProfileImage = styled.img`
   height: 20rem;
   z-index: 11;
   border-radius: 100%;
+  @media ${props => props.theme.laptop} {
+    width:18rem;
+    height:18rem;
+  }
+  @media ${props => props.theme.mobile} {
+    width:18rem;
+    height:18rem;
+  }
+`
+
+const InfoText = styled.div`
+    font-size : 1.6rem;
+    font-weight:100;
+    color:#A7A7A7;
+    @media ${props => props.theme.laptop} {
+        font-size : 1.4rem;
+    }
+    @media ${props => props.theme.mobile} {
+        font-size : 1.2rem;
+    }
 `
 
 /* 정보 입력 컨테이너 */
@@ -93,6 +154,12 @@ const ProfileImage = styled.img`
 const InfoContainer = styled.div`
     margin-top:8rem;
     margin-bottom:17rem;
+    @media ${props => props.theme.laptop} {
+        margin-bottom:16rem;
+    }
+    @media ${props => props.theme.mobile} {
+        margin-bottom:14.8rem;
+    }
 `
 
 //한줄씩 묶음
@@ -100,10 +167,22 @@ const InfoWrapper = styled.div`
     display:flex;
     margin-bottom:5.5rem;
     align-items: center;
+    @media ${props => props.theme.laptop} {
+        margin-bottom:4rem;
+    }
+    @media ${props => props.theme.mobile} {
+        margin-bottom:6.8rem;
+    }
 `
 //왼쪽 타이틀
 const Text = styled.div`
     font-size:2rem;
+    @media ${props => props.theme.laptop} {
+        font-size:1.8rem;
+    }
+    @media ${props => props.theme.mobile} {
+        font-size:1.6rem;
+    }
 `
 //이름 입력
 const NameInput = styled.input`
@@ -120,6 +199,17 @@ const NameInput = styled.input`
     color:#4E4E4E;
     font-family:'Spoqa-Han-Sans';
     font-weight:700;
+
+    @media ${props => props.theme.laptop} {
+        width: 29.6rem;
+        height: 3.6rem;
+        margin-left: 9.2rem;
+    }
+    @media ${props => props.theme.mobile} {
+        width: 20rem;
+        height: 4rem;
+        margin-left: 6.6rem;
+    }
 `
 
 //직군 선택
@@ -128,6 +218,12 @@ const ChooseJob = styled.div`
     font-size: 1.6rem;
     color:#4E4E4E;
     position:relative;
+    @media ${props => props.theme.laptop} {
+        margin-left: 9.2rem;
+    }
+    @media ${props => props.theme.mobile} {
+        margin-left: 6.6rem;
+    }
 `
 
 const PolygonBtn = styled.img`
@@ -140,11 +236,18 @@ const PolygonBtn = styled.img`
 
 //관심사 선택
 const ChooseInterst = styled.div`
-    margin-left: 4.7rem;
+    margin-left: 5rem;
     margin-top: 0.1rem;
     display:flex;
     align-items:center;
     position:relative;
+    @media ${props => props.theme.laptop} {
+        margin-left: 4rem;
+
+    }
+    @media ${props => props.theme.mobile} {
+        margin-left: 2rem;
+    }
 `
 
 /* 하단 버튼 */
@@ -166,6 +269,17 @@ const Button = styled.button`
     font-weight: 700;
     font-family: 'Spoqa-Han-Sans';
     font-size: 1.6rem;
+
+    @media ${props => props.theme.laptop} {
+        width: 20rem;
+        height: 5rem;
+        margin : 0 1.5rem;
+    }
+    @media ${props => props.theme.mobile} {
+        width: 14.2rem;
+        height: 3.2rem;
+        margin : 0 0.75rem;
+    }
 `
 
 function Setting() {
@@ -198,7 +312,7 @@ function Setting() {
 
     return (
         <>
-            <Title><Border/>계정 관리</Title>
+            <Title>계정 관리</Title>
 
             <Container>
                 <ProfileImageContainer>
@@ -209,9 +323,7 @@ function Setting() {
                         </InputContainer>
                 </ProfileImageContainer>
 
-                <div style={{fontSize : "1.6rem", color:"#A7A7A7", fontWeight:"100"}}>
-                    300X300 이상의 이미지 사용을 권장합니다
-                </div>
+                <InfoText>300X300 이상의 이미지 사용을 권장합니다</InfoText>
 
                 <InfoContainer>
                     <InfoWrapper>

@@ -3,7 +3,7 @@ import SignUp from './pages/SignUp/SignUp';
 import Upload from './pages/Upload/Upload';
 import Main from './pages/Main/Main';
 import Category from './pages/Category/Category';
-import MyMyotiiv from './pages/MyMotiiv/MyMyotiiv';
+import MyMotiiv from './pages/MyMotiiv/MyMotiiv';
 import Setting from './pages/Setting/Setting';
 import Admin from './pages/Admin/Admin';
 import Navbar from './components/common/Navbar/Navbar';
@@ -22,6 +22,7 @@ function App({ props }) {
   return (
     <>
       <Navbar />
+      {/* <MyModal/> */}
       <Switch>
         {/* Main & Category & MyMotiiv */}
         <Route
@@ -33,13 +34,14 @@ function App({ props }) {
           path="/category/:hashTag"
           render={props => <Category props={props} />}
         ></Route>
-        <Route
-          exact
-          path="/mymotiiv"
-          render={props => <MyMyotiiv props={props} />}
-        ></Route>
+        {
+          <Route
+            exact
+            path="/mymotiiv"
+            render={props => <MyMotiiv props={props} />}
+          ></Route>
+        }
 
-        {/* SignUp & SignIn */}
         <Route
           exact
           path="/signup"
