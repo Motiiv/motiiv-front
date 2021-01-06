@@ -33,14 +33,43 @@ const ContentContainer = styled.div`
   display: flex;
   & .swiper-slide-active {
     width: 48.43% !important;
+    @media ${props => props.theme.tablet} {
+      width: 65% !important;
+      margin-right: 8rem !important;
+    }
+    @media ${props => props.theme.mobile} {
+      width: 100% !important;
+    }
   }
   & .swiper-slide-prev {
     width: 15.89% !important;
     overflow: hidden !important;
+    @media ${props => props.theme.tablet} {
+      width: 7% !important;
+      margin-right: 8rem !important;
+    }
+    @media ${props => props.theme.mobile} {
+      display: none !important;
+    }
+  }
+  /*   & .swiper-slide {
+    @media ${props => props.theme.tablet} {
+      margin-right: 8rem !important;
+    }
+  } */
+  & .swiper-slide-duplicate-next {
+    @media ${props => props.theme.mobile} {
+      & div {
+        display: none;
+      }
+    }
   }
   & .swiper-slide-next {
     width: 15.89% !important;
     overflow: hidden !important;
+    @media ${props => props.theme.mobile} {
+      display: none !important;
+    }
   }
   & .swiper-pagination-bullet {
     border-radius: 50% !important;
@@ -66,6 +95,12 @@ const LeftButton = styled.div`
   background-size: contain;
   position: absolute;
   left: calc(15.89% + 47px);
+  @media ${props => props.theme.tablet} {
+    left: calc(15.89% - 47px);
+  }
+  @media ${props => props.theme.mobile} {
+    display: none;
+  }
   bottom: 50%;
   width: 3.3rem;
   height: 3.3rem;
@@ -78,7 +113,13 @@ const RightButton = styled.div`
   width: 3.3rem;
   height: 3.3rem;
   position: absolute;
-  left: calc(64.32% + 174px); //79.18%;
+  left: calc(64.32% + 174px);
+  @media ${props => props.theme.tablet} {
+    left: calc(64.32% + 167px);
+  }
+  @media ${props => props.theme.mobile} {
+    display: none;
+  }
   bottom: 50%;
   cursor: pointer;
   z-index: 2;
@@ -149,9 +190,26 @@ function SwiperBanner() {
     spaceBetween: 127,
     slidesPerView: 3,
     centeredSlides: true,
-    //slidesPerGroup : 3,
+    breakpoints: {
+      772: {
+        spaceBetween: 127,
+        slidesPerView: 3,
+      },
+      769: {
+        spaceBetween: 80,
+        slidesPerView: 3,
+      },
+      768: {
+        spaceBetween: 80,
+        slidesPerView: 3,
+      },
+      468: {
+        spaceBetween: 40,
+        slidesPerView: 3,
+      },
+    },
     style: {
-      width: '80%',
+      width: '100%',
       maxWidth: '128rem',
       height: '100%',
       position: 'relative',

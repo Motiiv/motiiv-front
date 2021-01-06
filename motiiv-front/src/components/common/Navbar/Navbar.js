@@ -113,13 +113,12 @@ function Navbar() {
       <NavLink exact to="/main">
         <Logo src={logo} />
       </NavLink>
-
       <TabContainer>
         <TabElem exact to="/main" activeStyle={activeStyle}>
           main
         </TabElem>
         <Star src={star} />
-        <TabElem exact to="/category/0" activeStyle={activeStyle}>
+        <TabElem to="/category/0" activeStyle={activeStyle}>
           category
         </TabElem>
         <Star src={star} />

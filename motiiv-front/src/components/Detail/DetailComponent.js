@@ -258,6 +258,11 @@ const ShareBox = styled.div`
   flex-direction: column;
   position: relative;
 `;
+const RecommendTitleText = styled.div`
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+`;
 function DetailComponent({ location }) {
   const [toggle, setToggle] = useState(false);
   const [toggleExist, setToggleExist] = useState(false);
@@ -362,6 +367,7 @@ function DetailComponent({ location }) {
         </VideoInfoWrapper>
       </VideoWrapper>
       <RecommendWrapper>
+        <RecommendTitleText>추천 모티브</RecommendTitleText>
         <RecommendCard />
         <RecommendCard />
         <RecommendCard />
