@@ -22,7 +22,8 @@ function App({ props }) {
   const location = useLocation();
   return (
     <>
-      <Navbar />
+      <Navbar/>
+      {/* <MyModal/> */}
       <Switch>
         {/* Main & Category & MyMotiiv */}
         <Route
@@ -37,7 +38,7 @@ function App({ props }) {
         <Route
           exact
           path="/mymotiiv"
-          render={props => <MyMyotiiv props={props} />}
+          render={props => <Mymotiiv props={props} />}
         ></Route>
 
         {/* SignUp & SignIn */}
