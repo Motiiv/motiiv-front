@@ -25,7 +25,7 @@ const SliderObject = [
       TextInfo : {
           category: "Best Motiiv",
           categoryTxt: "어제 하루 좋아요가 가장 많았던 모티브",
-          videoTxt : "일론머스크의 기묘한 비전 (Vision) I 그의 지치지 않는 원동력의 5가지 비밀",
+          videoTxt : "특별하지 않아도 특별한 콘텐츠를 만들 수 있습니다",
           hashTag: [
               "무무",
               "프라"

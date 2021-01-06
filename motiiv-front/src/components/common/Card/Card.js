@@ -28,7 +28,7 @@ const VideoWrap = styled.div`
     height: auto;
     height: ${props => (props.size === 'large' ? '21.2rem' : '15.4rem')};
     display: flex;
-    align-items:center;
+    align-items:center; 
     justify-content:center;
     background : #C4C4C4;
     border-radius: ${props=>props.size ==="large"? "1rem 1rem 0 0" : "1rem"};
@@ -121,9 +121,10 @@ const Title = styled.div`
     font-size: 1.5rem;
     font-family: 'Spoqa-Han-Sans';
     overflow: hidden;
-    line-height: 1.5rem;
+    line-height: 1.7rem;
     max-height: 4.2rem;
-    margin-top : 1.5rem;
+    height: 3.4rem;
+    margin-top : ${props => (props.size === 'large' ? '1rem' : '0.8rem')};
     text-overflow: ellipsis;
     word-break: keep-all;
     word-wrap: break-word;

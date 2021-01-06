@@ -37,7 +37,7 @@ function App({ props }) {
         ></Route>
         <Route
           exact
-          path="/MyMotiiv"
+          path="/mymotiiv"
           render={props => <MyMotiiv props={props} />}
         ></Route>
 
@@ -77,7 +77,7 @@ function App({ props }) {
           render={props => <Upload props={props} />}
         ></Route>
       </Switch>
-      <FloatBtn isShow={location.pathname !== '/MyMotiiv'} />
+      <FloatBtn isShow={location.pathname !== '/mymotiiv'} />
       <BottomBanner />
       <Footer />
     </>
