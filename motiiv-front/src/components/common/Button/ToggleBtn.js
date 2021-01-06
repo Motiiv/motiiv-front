@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const SwitchLabel = styled.label`
   display: flex;
@@ -13,10 +13,14 @@ const SwitchLabel = styled.label`
 `;
 
 const SwitchInput = styled.input`
-  height: 0;
-  width: 0;
-  visibility: hidden;
-  :checked + ${SwitchLabel}{
+  opacity: 0;
+  position: absolute;
+  width: 4.5rem;
+  height: auto;
+  right: 0;
+  z-index: 1;
+  cursor: pointer;
+  :checked + ${SwitchLabel} {
     background-color: #2cff2c;
   }
 `;
@@ -36,20 +40,20 @@ const SwitchButton = styled.span`
   }
 `;
 
-const DarkToggle = ({ id, toggled, onChange }) => {
-    return (
-      <>
-        <SwitchInput
-          id={id}
-          type="checkbox"
-          checked={toggled}
-          onChange={onChange}
-        />
-        <SwitchLabel htmlFor={id}>
-          <SwitchButton />
-        </SwitchLabel>
-      </>
-    );
-  };
+const ToggleBtn = ({ id, toggled, onChange }) => {
+  return (
+    <>
+      <SwitchInput
+        id={id}
+        type="checkbox"
+        checked={toggled}
+        onChange={onChange}
+      />
+      <SwitchLabel htmlFor={id}>
+        <SwitchButton />
+      </SwitchLabel>
+    </>
+  );
+};
 
-export default DarkToggle;
+export default ToggleBtn;
