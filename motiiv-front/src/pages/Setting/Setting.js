@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import profile from '../../assets/profile/sampleImage.png';
 import camera from '../../assets/profile/ic_camera.png';
 import polygon from '../../assets/profile/ic_polygon.png'
-import JobModal from './JobModal'
-import InterestModal from './InterestModal'
-import InterestComponent from './InterstComponent'
+import JobModal from './sections/JobModal'
+import InterestModal from './sections/InterestModal'
+import InterestComponent from './sections/InterstComponent'
 
 /* 타이틀 */
 const Border = styled.div`

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import InterestComponent from '../../../../pages/Setting/InterstComponent';
+import InterestComponent from '../../../../pages/Setting/sections/InterstComponent';
 
 const Container = styled.div`
   display: ${props => props.page === 3 ? 'flex' : 'none' };
