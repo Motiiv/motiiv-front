@@ -9,7 +9,7 @@ import Admin from './pages/Admin/Admin';
 import Navbar from './components/common/Navbar/Navbar';
 import BottomBanner from './components/common/Banner/BottomBanner';
 import Footer from './components/common/Footer/Footer';
-import { BrowserRouter as Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App({ props }) {
   return (
@@ -31,6 +31,7 @@ function App({ props }) {
           path="/mymotiiv"
           render={props => <MyMyotiiv props={props} />}
         ></Route>
+
         {/* SignUp & SignIn */}
         <Route
           exact
