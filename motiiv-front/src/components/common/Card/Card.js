@@ -2,13 +2,13 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import Tag from '../Tag/Tag';
 import { withRouter } from 'react-router-dom';
-
+import HoverVideoPlayer from 'react-hover-video-player' ; 
 const CardWrap = styled.div`
     display : flex;
     width: 100%;
     min-width: ${props => (props.size === "large" ? '37.7rem' : '27.4rem')};
     height : auto;
-    min-height:  ${props=>props.size ==="large" ? "32.6rem" : "28rem" };
+    min-height:  ${props=>props.size ==="large" ? "33.5 rem" : "26.7rem" };
     flex-direction: column;
     box-shadow: ${props=>props.size ==="large" ? "2px 2px 7px rgba(0, 0, 0, 0.15)" : "none" };
     border-radius: 1rem;
@@ -28,11 +28,11 @@ const VideoWrap = styled.div`
     height: auto;
     height: ${props => (props.size === 'large' ? '21.2rem' : '15.4rem')};
     display: flex;
-    align-items:center;
+    align-items:center; 
     justify-content:center;
     background : #C4C4C4;
     border-radius: ${props=>props.size ==="large"? "1rem 1rem 0 0" : "1rem"};
-    position : relative;
+    position : relative; 
     @media ${props => props.theme.mobile}{
       height: 16.8rem;
     }
@@ -47,6 +47,7 @@ const TimeContainer = styled.div`
     right: 1.5rem;
     bottom: 1.4rem;
     width: 4.5rem;
+    z-index : 1000;
     height: 1.8rem;
     font-size: 1.2rem;
     padding: 0.3rem 0.5rem;
@@ -76,7 +77,7 @@ const Views = styled.div`
   -webkit-box-orient: vertical;
   @media ${props => props.theme.mobile}{
       font-size : 1.2rem;
-    }
+    }     
 `;
 
 const Channel = styled.div`
@@ -105,7 +106,7 @@ const Video = styled.img`
 `;
 const TextWrap = styled.div`
   width: 100%;
-  height: 11.4rem;
+  height: ${props => (props.size === 'large' ? '12.3rem' : '11.3rem')};
   display: flex;
   flex-direction: column;
   background: ${props => (props.size === 'large' ? 'white' : 'transparent')};
@@ -120,9 +121,10 @@ const Title = styled.div`
     font-size: 1.5rem;
     font-family: 'Spoqa-Han-Sans';
     overflow: hidden;
-    line-height: 1.5rem;
-    max-height: 3rem;
-    margin-top : 1.5rem;
+    line-height: 1.7rem;
+    max-height: 4.2rem;
+    height: 3.4rem;
+    margin-top : ${props => (props.size === 'large' ? '1rem' : '0.8rem')};
     text-overflow: ellipsis;
     word-break: keep-all;
     word-wrap: break-word;
@@ -137,7 +139,7 @@ const Title = styled.div`
 const DescriptionContainer = styled.div`
     display: flex;
     margin-left: ${props => (props.size === 'large' ? '2rem' : '0')};
-    margin-top : ${props=>props.size ==="large"? "0.7rem" : "1.2rem"};
+    margin-top : ${props=>props.size ==="large"? "0.9rem" : "0.8 rem"};
     @media ${props => props.theme.mobile}{
       margin-left : 0;
       margin-top : 0.5rem;
@@ -146,7 +148,7 @@ const DescriptionContainer = styled.div`
 const TagContainer = styled.div`
     display : flex;
     width: 100%;
-    margin-top :${props=>props.size ==="large"? "1.8rem" : "2rem"};
+    margin-top :${props=>props.size ==="large"? "1.5rem" : "0.8rem"};
     margin-left: ${props => (props.size === 'large' ? '2rem' : '1px')};
     @media ${props => props.theme.mobile}{
       display : none;
@@ -158,7 +160,20 @@ function Card({ obj, size, history }) {
     <>
       <CardWrap size={size}>
         <VideoWrap size={size} onClick={() => history.push('/detail/1')}>
-        <Video src={obj.VideoInfo.src}></Video>
+            <HoverVideoPlayer style={{ width: "100%",
+                                        height: "100%",
+                                        borderRadius : "1rem"}}
+                videoSrc={obj.VideoInfo.src}
+                pausedOverlay={
+                    <img width= "100%"
+                    height= "100%"
+                    src="https://user-images.githubusercontent.com/61861809/103748463-82a9d380-5047-11eb-9720-697a1f2de7cd.jpg"/>
+                }
+                loadingOverlay={
+                    <div className="loading-spinner-overlay" />
+                }
+            />
+        {/* <Video src={obj.VideoInfo.src}></Video> */}
           {/* <iframe
             style={{
               height: '100%',

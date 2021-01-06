@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import MyModal from './MyModal/MyModal';
+import MyModal from './sections/MyModal';
 import Section from '../../components/common/Section/Section';
 
 const MotiivWrapper = styled.div`
