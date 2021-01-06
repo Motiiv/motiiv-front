@@ -55,20 +55,38 @@ const DetailContainer = styled.div`
   height: 100%;
   padding: 4.5rem 5.5rem;
   display: flex;
-  margin-bottom: 15rem;
+  margin-bottom: 10rem;
+  @media ${props => props.theme.mobile} {
+    flex-direction: column;
+    padding: 0;
+  }
 `;
 const VideoWrapper = styled.div`
   width: 81%;
   display: flex;
   flex-direction: column;
+  @media ${props => props.theme.mobile} {
+    width: 100%;
+  }
 `;
 const RecommendWrapper = styled.div`
   width: 19%;
   margin-left: 2.5rem;
+  @media ${props => props.theme.mobile} {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 `;
 const VideoInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  @media ${props => props.theme.mobile} {
+    width: 100%;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 `;
 const InfoHeaderBox = styled.div`
   display: flex;
@@ -83,6 +101,11 @@ const TitleAndButtonBox = styled.div`
   align-items: center;
   justify-content: space-between;
   font-weight: bold;
+  @media ${props => props.theme.mobile} {
+    & :nth-child(2) {
+      display: none !important;
+    }
+  }
 `;
 const TitleText = styled.div`
   font-size: 2.3rem;
@@ -90,6 +113,11 @@ const TitleText = styled.div`
 const ButtonBox = styled.div`
   display: flex;
   align-items: center;
+  /*   @media ${props => props.theme.mobile} {
+    &:nth-child(2) {
+      display: none !important;
+    }
+  } */
 `;
 const LikeBox = styled.div`
   display: flex;
@@ -149,6 +177,12 @@ const TagBox = styled.div`
   & div {
     margin-top: 0;
   }
+  @media ${props => props.theme.mobile} {
+    & div {
+      font-size: 1.2rem;
+    }
+    padding-top: 1.5rem;
+  }
 `;
 const TextBox = styled.div`
   display: flex;
@@ -160,6 +194,13 @@ const TextBox = styled.div`
   & div {
     font-size: 1.5rem;
     color: #686868;
+  }
+  @media ${props => props.theme.mobile} {
+    margin-top: 1.5rem;
+    border-bottom: none;
+    & :nth-child(2):nth-last-child(1) {
+      display: none !important;
+    }
   }
 `;
 const ViewCount = styled.div`
@@ -206,6 +247,12 @@ const VideoDescription = styled.div`
   font-size: 1.8rem;
   margin-bottom: 3rem;
   line-height: 2.2rem;
+  @media ${props => props.theme.mobile} {
+    width: 100%;
+    border-bottom: 1px #c4c4c4 solid;
+    padding-bottom: 3rem;
+    margin-top: 3rem;
+  }
 
   /*   ${props =>
     props.toggleExist
@@ -262,6 +309,15 @@ const RecommendTitleText = styled.div`
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 2rem;
+`;
+const MobileButtonBox = styled.div`
+  display: none;
+  @media ${props => props.theme.mobile} {
+    display: flex;
+  }
+  justify-content: space-between;
+  padding-bottom: 2rem;
+  border-bottom: 1px #c4c4c4 solid;
 `;
 function DetailComponent({ location }) {
   const [toggle, setToggle] = useState(false);
@@ -347,6 +403,27 @@ function DetailComponent({ location }) {
                 ></ShareModal>
               </ShareBox>
             </TextBox>
+            <MobileButtonBox>
+              <ButtonBox>
+                <LikeBox onClick={() => setLike(!like)}>
+                  <LikeText like={like}>좋아요</LikeText>
+                  <LikeImg src={like ? LikeClickImage : LikeImage} />
+                </LikeBox>
+                <SaveBox onClick={() => setSave(!save)}>
+                  <SaveText save={save}>저장</SaveText>{' '}
+                  <SaveImg src={save ? SaveClickImage : SaveImage} />
+                </SaveBox>
+              </ButtonBox>
+              <ShareBox>
+                <ShareButton onClick={() => setShareModal(!shareModal)}>
+                  공유하기
+                </ShareButton>
+                <ShareModal
+                  pageURL={window.location.href}
+                  shareModal={shareModal}
+                ></ShareModal>
+              </ShareBox>
+            </MobileButtonBox>
           </InfoHeaderBox>
           <VideoDescriptionWrapper>
             <VideoDescription
