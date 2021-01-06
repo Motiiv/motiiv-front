@@ -153,38 +153,52 @@ const TagContainer = styled.div`
     }
     `;
 // Tag 컴포넌트 만들어서 불러오기
-function Card({obj,size}) {
-    return(
-        <>
-                <CardWrap size = {size} >
-                <VideoWrap size ={size}>
-                <Video src={obj.VideoInfo.src}></Video>
-                {/* <iframe width="100%" style={{height: "100%", width: "100%", borderRadius : "1rem"}} src={obj.VideoInfo.src} frameborder="0" allowfullscreen></iframe> */}
-                <TimeContainer>
-                {obj.VideoInfo.runningTime}
-                    </TimeContainer>
-                </VideoWrap>
-                <TextWrap size = {size}>
-                    <Title size={size}>{obj.TextInfo.videoTxt}</Title>
-                    <DescriptionContainer size={size}>
-                        <Views>100만회</Views>
-                        <Channel>dk-master</Channel>
-                    </DescriptionContainer >
-                    <TagContainer size={size}>
-                    {
-                        obj.TextInfo.hashTag.map((tag, idx)=>(
-                            <div style ={{marginRight : "1.2rem" ,marginTop : "-2.8rem"}}>
-                            <Tag hashTag={1} color="black" text={obj.TextInfo.hashTag[idx]} fontSize="1.2rem"></Tag>
-                            </div>
-                        ))
-                    }
-                    </TagContainer>
-                </TextWrap>
-    
-            </CardWrap>
-        </>
-    
-    )
+function Card({ obj, size, history }) {
+  return (
+    <>
+      <CardWrap size={size}>
+        <VideoWrap size={size} onClick={() => history.push('/detail/1')}>
+        <Video src={obj.VideoInfo.src}></Video>
+          {/* <iframe
+            style={{
+              height: '100%',
+              width: '100%',
+              borderRadius: '1rem',
+            }}
+            src={obj.VideoInfo.src}
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe> */}
+          <TimeContainer>{obj.VideoInfo.runningTime}</TimeContainer>
+        </VideoWrap>
+        <TextWrap size={size}>
+          <Title onClick={() => history.push('/detail/1')} size={size}>
+            {obj.TextInfo.videoTxt}
+          </Title>
+          <DescriptionContainer
+            size={size}
+            onClick={() => history.push('/detail/1')}
+          >
+            <Views>100만회</Views>
+            <Channel>dk-master</Channel>
+          </DescriptionContainer>
+          <TagContainer size={size}>
+            {obj.TextInfo.hashTag.map((tag, idx) => (
+              <div style={{ marginRight: '1.2rem', marginTop: '-2.8rem' }}>
+                <Tag
+                  hashTag={1}
+                  color="black"
+                  text={obj.TextInfo.hashTag[idx]}
+                  fontSize="1.2rem"
+                ></Tag>
+              </div>
+            ))}
+          </TagContainer>
+        </TextWrap>
+      </CardWrap>
+    </>
+  );
 }
 
 export default withRouter(Card);

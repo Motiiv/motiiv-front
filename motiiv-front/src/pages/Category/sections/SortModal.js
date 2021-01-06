@@ -21,17 +21,20 @@ const ModalWrapper = styled.div`
   right: 0;
   justify-content: center;
   box-shadow: 2px 2px 2px 2px gray;
+  padding: 1.4rem;
 `;
 const SortText = styled.div`
   font-size: 1.4rem;
   width: 100%;
-  margin-left: 1.4rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.5rem;
   cursor: pointer;
   & + & {
-    margin-top: 1.6rem;
+    margin-top: 0.5rem;
   }
   &:hover {
     font-weight: 700;
+    background-color: ${({ theme }) => theme.lightGray};
   }
 `;
 function SortModal({ sortModal, onHandleSortText }) {

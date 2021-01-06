@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import Card from '../common/Card/Card';
 import DropDownMenu from '../../pages/Category/sections/DropDownMenu';

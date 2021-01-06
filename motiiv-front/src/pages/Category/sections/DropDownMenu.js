@@ -21,6 +21,10 @@ const TitleBox = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 3.4rem;
+  border-radius: 0.7rem;
+  &:hover {
+    background-color: ${({ theme }) => theme.lightGray};
+  }
 `;
 const TitleText = styled.div`
   font-size: 1.6rem;
@@ -34,6 +38,7 @@ const TitleIconBox = styled.div`
   display: flex;
   align-items: center;
   padding: 1.5rem 0.5rem;
+  padding-right: 2.5rem;
 `;
 const TitleIconImg = styled.img`
   width: 1.5rem;
@@ -42,29 +47,29 @@ const TitleIconImg = styled.img`
 const DropDownBox = styled.div`
   display: flex;
   flex-direction: column;
-  transition: 0.5s;
+  transition: all 0.5s;
+  overflow: hidden;
   ${props =>
     props.active
       ? css`
           visibility: visible;
           opacity: 1;
-          height: auto;
+          height: 7rem;
         `
       : css`
           visibility: hidden;
           opacity: 0;
           height: 0;
-          transition: height 0.5s;
         `};
 `;
 const TitleIconBoxAll = styled.img`
-  width: 2rem;
+  width: 3.1rem;
   height: 2rem;
   display: flex;
   align-items: center;
   margin: 0.7rem 0;
-  //border: solid ${({ theme }) => theme.gray} 1px;
   border-radius: 0.5rem;
+  margin-right: 0.4rem;
 `;
 function DropDownMenu({ text, active, name, all, onChangeActiveStatus }) {
   const [choice, setChoice] = useState(null);

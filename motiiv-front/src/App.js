@@ -4,14 +4,22 @@ import SignIn from './pages/SignIn/SignIn';
 import Upload from './pages/Upload/Upload';
 import Main from './pages/Main/Main';
 import Category from './pages/Category/Category';
-import Mymotiiv from './pages/MyMotiiv/Mymotiiv';
+import MyMyotiiv from './pages/MyMotiiv/MyMyotiiv';
+import Setting from './pages/Setting/Setting';
 import Admin from './pages/Admin/Admin';
 import Navbar from './components/common/Navbar/Navbar';
 import BottomBanner from './components/common/Banner/BottomBanner';
 import Footer from './components/common/Footer/Footer';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Card from './components/common/Card/Card';
+import {
+  useLocation,
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
+import FloatBtn from './components/common/Button/FloatBtn';
+
 function App({ props }) {
+  const location = useLocation();
   return (
     <>
       <Navbar/>
@@ -32,6 +40,7 @@ function App({ props }) {
           path="/mymotiiv"
           render={props => <Mymotiiv props={props} />}
         ></Route>
+
         {/* SignUp & SignIn */}
         <Route
           exact
@@ -42,6 +51,12 @@ function App({ props }) {
           exact
           path="/signin"
           render={props => <SignIn props={props} />}
+        ></Route>
+        {/* Setting */}
+        <Route
+          exact
+          path="/setting"
+          render={props => <Setting props={props} />}
         ></Route>
         {/* Admin */}
         <Route
@@ -62,6 +77,7 @@ function App({ props }) {
           render={props => <Upload props={props} />}
         ></Route>
       </Switch>
+      <FloatBtn isShow={location.pathname !== '/mymotiiv'} />
       <BottomBanner />
       <Footer />
     </>

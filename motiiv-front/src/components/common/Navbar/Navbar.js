@@ -4,7 +4,8 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import logo from '../../../assets/global/motiiv_logo.png';
 import star from '../../../assets/global/star.png';
-import profile from '../../../assets/global/sampleImage.PNG';
+import profile from '../../../assets/profile/sampleImage.png';
+import ProfileModal from './ProfileModal'
 
 const activeStyle = {
   color: '#2cff2c',
@@ -44,7 +45,7 @@ const TabElem = styled(NavLink)`
   text-decoration: none;
   padding: 1.6rem 0.8rem;
   &:nth-child(7) {
-    display: ${props => (props.show === true ? 'flex' : 'none')};
+    display: ${props => (props.show === 'true' ? 'flex' : 'none')};
   }
 `;
 
@@ -53,7 +54,7 @@ const Star = styled.img`
   margin: 1.6rem 1.7rem;
   z-index: 3;
   &:nth-child(6) {
-    display: ${props => (props.show === true ? 'flex' : 'none')};
+    display: ${props => (props.show === 'true' ? 'flex' : 'none')};
   }
 `;
 
@@ -68,14 +69,14 @@ const LoginContainer = styled.div`
 `;
 
 const Login = styled(NavLink)`
-  display: ${props => (props.login === false ? 'flex' : 'none')};
+  display: ${props => (props.login === 'false' ? 'flex' : 'none')};
   color: white;
   text-align: left;
   text-decoration: none;
 `;
 
 const Profile = styled.div`
-  display: ${props => (props.login === true ? 'flex' : 'none')};
+  display: ${props => (props.login === 'true' ? 'flex' : 'none')};
   width: 3rem;
   height: 3rem;
   z-index: 3;
@@ -83,41 +84,56 @@ const Profile = styled.div`
   background-position: center;
   background-size: cover;
   border-radius: 100%;
+  border : ${props => (props.onclick === true ? '2px solid #2CFF2C' : 'none')};
   background-image: ${props => 'url(' + props.src + ')'};
   cursor: pointer;
 `;
 
 
 function Navbar() {
-  const [loginState, setLoginState] = useState({
-    isLoggined: false,
-    admin: false,
-  });
   
+  //로그인 여부 판단 + 어드민 여부 판단
+  const [loginState, setLoginState] = useState({
+    isLoggined: true,
+    admin: false
+  });
+
+  //프로필 드롭다운 나타나고 없애기
+  const [profileModalState, setProfileModalState] = useState(false);
+
+  const onClickProfileImage = () => {
+    (async () => {
+      try {
+        setProfileModalState(prev => !prev);
+      } catch (e) {
+        
+      }
+    })();
+  }
+
   return (
     <>
     <Header>
       <NavLink exact to="/main">
         <Logo src={logo} />
       </NavLink>
-
       <TabContainer>
         <TabElem exact to="/main" activeStyle={activeStyle}>
           main
         </TabElem>
         <Star src={star} />
-        <TabElem exact to="/category/0" activeStyle={activeStyle}>
+        <TabElem to="/category/0" activeStyle={activeStyle}>
           category
         </TabElem>
         <Star src={star} />
         <TabElem exact to="/mymotiiv" activeStyle={activeStyle}>
           mymotiiv
         </TabElem>
-        <Star src={star} show={loginState.admin} />
+        <Star src={star} show={loginState.admin.toString()} />
         <TabElem
           exact
           to="/admin"
-          show={loginState.admin}
+          show={loginState.admin.toString()}
           activeStyle={activeStyle}
         >
           admin
@@ -125,10 +141,10 @@ function Navbar() {
       </TabContainer>
 
       <LoginContainer>
-        <Login to="/signin" login={loginState.isLoggined}>
-          login
-        </Login>
-        <Profile src={profile} login={loginState.isLoggined} />
+        <Login to="/signin" login={loginState.isLoggined.toString()}>login</Login>
+        <Profile src={profile} login={loginState.isLoggined.toString()} onClick={onClickProfileImage} onclick = {profileModalState}/>
+        <ProfileModal showModal = {profileModalState}/>
+
       </LoginContainer>
     </Header>
     </>
