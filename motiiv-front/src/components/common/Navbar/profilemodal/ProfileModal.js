@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import Tag from '../../../components/common/Tag/ProfileTag'
+import Tag from '../../Tag/ProfileTag'
 import DarkToggle from './DarkToggle'
 import profile from '../../../assets/profile/sampleImage.png';
 import naver from '../../../assets/profile/naverlink_btn_small.png';

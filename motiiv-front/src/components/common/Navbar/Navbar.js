@@ -5,7 +5,7 @@ import { useState } from 'react';
 import logo from '../../../assets/global/motiiv_logo.png';
 import star from '../../../assets/global/star.png';
 import profile from '../../../assets/profile/sampleImage.png';
-import ProfileModal from './ProfileModal'
+import ProfileModal from './ProfileModal/ProfileModal'
 import SigninModal from './SigninModal/SignInModal';
 
 const activeStyle = {
