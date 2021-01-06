@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import styled from 'styled-components';
-import MyModal from '../../pages/MyMotiiv/MyModal/MyModal';
+import MyModal from './section/MyModal';
 import Section from '../../components/common/Section/Section';
 
 const MotiivWrapper = styled.div`
@@ -101,7 +101,7 @@ const SliderObject = [
 function MyMotiiv() {
 
     const [loginState, setLoginState] = useState({
-        isLogin: true,
+        isLogin: true
     });
     return (loginState.isLogin ? 
         <> 
