@@ -22,12 +22,22 @@ const ModalWrap = styled.div`
   border-radius: 1rem;
   background: white;
   box-shadow: 0.2rem 0.3rem 0.7rem rgba(0, 0, 0, 0.15);
+  padding-bottom:1.7rem;
 
   justify-content: center;
   align-items:center;
   flex-direction: column;
 
   font-family : 'Spoqa-Han-Sans';
+
+  @media ${props => props.theme.laptop} {
+  }
+  @media ${props => props.theme.mobile} {
+        width: 17rem;
+        height: 28.5rem;
+        padding-top:2rem;
+        padding-bottom:1.5rem;
+  }
 `;
 
 /* 프로필 이미지 */
@@ -38,6 +48,13 @@ const ProfileImageContainer = styled.div`
     margin-top: 2.5rem;
     margin-bottom: 2rem;
     position:relative;
+    @media ${props => props.theme.laptop} {
+    }
+    @media ${props => props.theme.mobile} {
+        width: 5rem;
+        height: 5rem;
+        margin-bottom: 1.9rem;
+    }
 `
 
 const ProfileImage = styled.img`
@@ -45,6 +62,12 @@ const ProfileImage = styled.img`
   height: 10rem;
   z-index: 11;
   border-radius: 100%;
+  @media ${props => props.theme.laptop} {
+  }
+  @media ${props => props.theme.mobile} {
+        width: 5rem;
+        height: 5rem;
+  }
 `
 
 /* 닉네임 + 소셜 로그인 아이콘 */
@@ -52,23 +75,45 @@ const FirstDiv = styled.div`
     display: flex;
     align-items: center;
     margin-bottom: 1.8rem;
+    @media ${props => props.theme.laptop} {
+    }
+    @media ${props => props.theme.mobile} {
+        margin-bottom: 1.2rem;
+    }
 `
 
 const SocialImage = styled.img`
   height: 1.6rem;
   margin-left:0.5rem;
   margin-top: 0.2rem;
+  @media ${props => props.theme.laptop} {
+  }
+  @media ${props => props.theme.mobile} {
+    margin-left:0.5rem;
+    margin-top: 0rem;
+    margin-bottom: 1rem;
+  }
 `
 
 const ProfileName = styled.div`
     font-weight: 700;
     font-size:2rem;
+    @media ${props => props.theme.laptop} {
+    }
+    @media ${props => props.theme.mobile} {
+      margin-bottom: 1.2rem;
+    }
 `
 
 /* 관심사 태그 컨테이너 */
 const TagBox = styled.div`
     display:flex;
     margin-bottom: 3.6rem;
+    @media ${props => props.theme.laptop} {
+    }
+    @media ${props => props.theme.mobile} {
+        margin-bottom: 2rem;
+    }
 `
 
 /* 다크 모드 버튼 영역 */
@@ -87,11 +132,30 @@ const DarkToggleContainer = styled.div`
     margin-bottom: 1.7rem;
 
     padding : 0 2.5rem;
+    @media ${props => props.theme.laptop} {
+    }
+    @media ${props => props.theme.mobile} {
+        width:17rem;
+        height:3.9rem;
+        padding:1.5rem;
+    }
 `
 const ToggleText = styled.div`
     font-weight:'Spoqa-Han-Sans';
     font-size:1.4rem;
     font-weight:700;
+    @media ${props => props.theme.laptop} {
+    }
+    @media ${props => props.theme.mobile} {
+        font-size:1rem;
+    }
+`
+
+const ForMargin = styled.div`
+    @media ${props => props.theme.mobile} {
+        margin-bottom: 2rem;
+        margin-top: -0.7rem;
+    }
 `
 
 function ProfileModal({showModal}) {
@@ -112,9 +176,9 @@ function ProfileModal({showModal}) {
             </FirstDiv>
 
             <TagBox>
-                    <Tag text={"여기는"} padding="0.4rem 0.8rem"/>
-                    <Tag text={"카테고리"} padding="0.4rem 0.8rem"/>
-                    <Tag text={"들어감"} padding="0.4rem 0.8rem"/>
+                    <Tag text={"키워드"} padding="0.4rem 0.8rem"/>
+                    <Tag text={"키워드"} padding="0.4rem 0.8rem"/>
+                    <Tag text={"키워드"} padding="0.4rem 0.8rem"/>
             </TagBox>
 
             <NavLink exact to="/setting" style={{ textDecoration: 'none' }}>
@@ -126,9 +190,7 @@ function ProfileModal({showModal}) {
                 <DarkToggle id="profile-toggle" toggled={isToggled} onChange={(e) => setIsToggled(e.target.checked)}/>
             </DarkToggleContainer>
             
-            <div style={{marginBottom : "1.7rem"}}>
-                <Tag text={"logout"} fontSize="1.6rem" fontFamily="Campton" padding="0.7rem 1.5rem"/>
-            </div>
+            <ForMargin><Tag text={"logout"} fontSize="1.6rem" fontFamily="Campton" padding="0.7rem 1.5rem"/></ForMargin>
         </ModalWrap>
     );
   }
