@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
-import FirstPage from '../../components/common/Navbar/loginmodal/FirstPage';
-import SecondPage from '../../components/common/Navbar/loginmodal/SecondPage';
+import FirstPage from './FirstPage';
+import SecondPage from './SecondPage';
 import LastPage from './LastPage';
 
 const ModalBackgorundWrap = styled.div`
@@ -15,6 +15,7 @@ const ModalBackgorundWrap = styled.div`
   right: 0;
   left: 0;
   bottom: 0;
+  z-index:30;
 
   width: auto;
   height: auto;
@@ -55,7 +56,7 @@ const ModalWrap = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index:10;
+  z-index:30;
 
   padding : 5rem 2.6rem 2.6rem 3rem;
   width: 65rem;
@@ -133,7 +134,6 @@ const IndicatorContainer = styled.div`
 function SigninModal({showModal}) {
 
   const [pageState, setPageState] = useState(1);
-
   const pageDown = () => {
     (async () => {
       try {
@@ -158,21 +158,24 @@ function SigninModal({showModal}) {
     })();
   }
 
+  /*
+  const [showState, setShowState] = useState(showModal);
   //나중에 여기서 api 연결?
   const finSignUp = () => {
     (async () => {
       try {
-        showModal = false;
+        setShowState(false);
       } catch (e) {
         
       }
     })();
   }
+  */
 
     return (
       <>
         <ModalBackgorundWrap show = {showModal}/>
-        <ModalWrap>
+        <ModalWrap show = {showModal}>
 
           <FirstPage page = {pageState}/>
           <SecondPage page = {pageState}/>
@@ -187,7 +190,7 @@ function SigninModal({showModal}) {
             </IndicatorContainer>
             
             <NextBtn page = {pageState} onClick={pageUp}>다음 &nbsp; &#xE001;</NextBtn>
-            <FinBtn page = {pageState} onClick={finSignUp}>완료</FinBtn>
+            <FinBtn page = {pageState}>완료</FinBtn>
         </ModalWrap>
       </>
     );

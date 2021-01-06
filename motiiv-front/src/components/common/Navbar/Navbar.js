@@ -6,6 +6,7 @@ import logo from '../../../assets/global/motiiv_logo.png';
 import star from '../../../assets/global/star.png';
 import profile from '../../../assets/profile/sampleImage.png';
 import ProfileModal from './ProfileModal'
+import SigninModal from './SigninModal/SignInModal';
 
 const activeStyle = {
   color: '#2cff2c',
@@ -66,11 +67,12 @@ const LoginContainer = styled.div`
   padding-right: 5rem;
 `;
 
-const Login = styled(NavLink)`
+const Login = styled.div`
   display: ${props => (props.login === 'false' ? 'flex' : 'none')};
   color: white;
   text-align: left;
   text-decoration: none;
+  cursor:pointer;
 `;
 
 const Profile = styled.div`
@@ -97,7 +99,6 @@ function Navbar() {
 
   //프로필 드롭다운 나타나고 없애기
   const [profileModalState, setProfileModalState] = useState(false);
-
   const onClickProfileImage = () => {
     (async () => {
       try {
@@ -108,7 +109,20 @@ function Navbar() {
     })();
   }
 
+  //로그인 모달 나타나고 없애기
+  const [loginModalState, setLoginModalState] = useState(false);
+  const onClickLoginBtn = () => {
+    (async () => {
+      try {
+        setLoginModalState(prev => !prev);
+      } catch (e) {
+        
+      }
+    })();
+  }
+
   return (
+    <>
     <Header>
       <NavLink exact to="/main">
         <Logo src={logo} />
@@ -137,12 +151,15 @@ function Navbar() {
       </TabContainer>
 
       <LoginContainer>
-        <Login to="/signin" login={loginState.isLoggined.toString()}>login</Login>
+        <Login login={loginState.isLoggined.toString()} onClick={onClickLoginBtn}>login</Login>
         <Profile src={profile} login={loginState.isLoggined.toString()} onClick={onClickProfileImage} onclick = {profileModalState}/>
         <ProfileModal showModal = {profileModalState}/>
 
       </LoginContainer>
     </Header>
+
+    <SigninModal showModal={loginModalState}/>
+    </>
   );
 }
 

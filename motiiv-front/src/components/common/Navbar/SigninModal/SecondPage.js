@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
-import btnNaver from '../../assets/global/btn_naver.png';
-import btnKakao from '../../assets/global/btn_kakao.png';
-import img from '../../assets/profile/sampleImage.png';
+import img from '../../../../assets/profile/sampleImage.png';
 
 const Container = styled.div`
   display: ${props => props.page === 2 ? 'flex' : 'none' };
