@@ -1,6 +1,5 @@
 import Detail from './pages/Detail/Detail';
 import SignUp from './pages/SignUp/SignUp';
-import SignIn from './pages/SignIn/SignIn';
 import Upload from './pages/Upload/Upload';
 import Main from './pages/Main/Main';
 import Category from './pages/Category/Category';
@@ -45,11 +44,6 @@ function App({ props }) {
           exact
           path="/signup"
           render={props => <SignUp props={props} />}
-        ></Route>
-        <Route
-          exact
-          path="/signin"
-          render={props => <SignIn props={props} />}
         ></Route>
         {/* Setting */}
         <Route

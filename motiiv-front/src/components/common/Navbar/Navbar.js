@@ -91,7 +91,7 @@ function Navbar() {
   
   //로그인 여부 판단 + 어드민 여부 판단
   const [loginState, setLoginState] = useState({
-    isLoggined: true,
+    isLoggined: false,
     admin: false
   });
 

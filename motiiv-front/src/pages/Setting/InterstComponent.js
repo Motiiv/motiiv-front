@@ -21,6 +21,17 @@ ${props =>
           font-weight: 700;
           cursor:pointer;
       `
+    :  props.type === "selected-login" ?
+      `
+          width: 8.4rem;
+          height: 3.2rem;
+          background-color : #2CFF2C;
+          margin-right: 1rem;
+          color: #4E4E4E;
+          font-size: 1.6rem;
+          font-weight: 700;
+          cursor:pointer;
+      `
     : props.type === "unselected" ?
       `
           width: 8.4rem;
@@ -28,6 +39,17 @@ ${props =>
           background-color : #6C6C6C;
           margin-right: 1rem;
           color: #F3F3F3;
+          font-size: 1.6rem;
+          font-weight: 100;
+          cursor:pointer;
+      `
+      : props.type === "unselected-login" ?
+      `
+          width: 8.4rem;
+          height: 3.2rem;
+          background-color : #F3F3F3;
+          margin-right: 1rem;
+          color: #A7A7A7;
           font-size: 1.6rem;
           font-weight: 100;
           cursor:pointer;
@@ -78,6 +100,10 @@ function InterestComponent({ type, text }) {
           setBtnState("unselected");
         }else if(btnState === "unselected"){
           setBtnState("selected");
+        }else if(btnState === "selected-login"){
+          setBtnState("unselected-login");
+        }else if(btnState === "unselected-login"){
+          setBtnState("selected-login");
         }
       } catch (e) {
         
