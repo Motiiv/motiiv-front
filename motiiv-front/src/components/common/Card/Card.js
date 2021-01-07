@@ -7,7 +7,7 @@ const CardWrap = styled.div`
     display : flex;
     width: 100%;
     min-width: ${props => (props.size === "large" ? '37.7rem' : '27.4rem')};
-    height : auto;
+    height : auto; 
     min-height:  ${props=>props.size ==="large" ? "33.5 rem" : "26.7rem" };
     flex-direction: column;
     box-shadow: ${props=>props.size ==="large" ? "2px 2px 7px rgba(0, 0, 0, 0.15)" : "none" };
@@ -32,7 +32,10 @@ const VideoWrap = styled.div`
     justify-content:center;
     background : #C4C4C4;
     border-radius: ${props=>props.size ==="large"? "1rem 1rem 0 0" : "1rem"};
-    position : relative; 
+    position : relative;
+    &:hover {
+
+    }
     @media ${props => props.theme.mobile}{
       height: 16.8rem;
     }
@@ -133,45 +136,54 @@ const Title = styled.div`
     -webkit-box-orient: vertical;
     @media ${props => props.theme.mobile}{
       margin-left : 0;
+      margin-top :  ${props => (props.text ? '1.5rem' : '1rem')};
     }
     
     `;
 const DescriptionContainer = styled.div`
     display: flex;
     margin-left: ${props => (props.size === 'large' ? '2rem' : '0')};
-    margin-top : ${props=>props.size ==="large"? "0.9rem" : "0.8 rem"};
+    margin-top : 1rem;
     @media ${props => props.theme.mobile}{
       margin-left : 0;
-      margin-top : 0.5rem;
+      margin-top :  ${props => (props.text ? '1.3rem' : '1rem')};
     }
     `;
 const TagContainer = styled.div`
     display : flex;
     width: 100%;
-    margin-top :${props=>props.size ==="large"? "1.5rem" : "0.8rem"};
+    margin-top : 1.5rem;  
     margin-left: ${props => (props.size === 'large' ? '2rem' : '1px')};
     @media ${props => props.theme.mobile}{
       display : none;
     }
     `;
 // Tag 컴포넌트 만들어서 불러오기
-function Card({ obj, size, history }) {
+function Card({ obj, size, text,history }) {
   return (
     <>
-      <CardWrap size={size}>
+      <CardWrap size={size} >
         <VideoWrap size={size} onClick={() => history.push('/detail/1')}>
             <HoverVideoPlayer style={{ width: "100%",
                                         height: "100%",
                                         borderRadius : "1rem"}}
                 videoSrc={obj.VideoInfo.src}
+                pausedOverlayWrapperStyle={{
+                  borderRadius : "1rem",
+                  overflow : "hidden",
+                }}
                 pausedOverlay={
                     <img width= "100%"
                     height= "100%"
+                    borderRadius= "1rem"
                     src="https://user-images.githubusercontent.com/61861809/103748463-82a9d380-5047-11eb-9720-697a1f2de7cd.jpg"/>
                 }
                 loadingOverlay={
                     <div className="loading-spinner-overlay" />
                 }
+                videoStyle={{
+                  borderRadius : "1rem"
+                }}
             />
         {/* <Video src={obj.VideoInfo.src}></Video> */}
           {/* <iframe
@@ -188,11 +200,12 @@ function Card({ obj, size, history }) {
           <TimeContainer>{obj.VideoInfo.runningTime}</TimeContainer>
         </VideoWrap>
         <TextWrap size={size}>
-          <Title onClick={() => history.push('/detail/1')} size={size}>
+          <Title onClick={() => history.push('/detail/1')} size={size} text={text}>
             {obj.TextInfo.videoTxt}
           </Title>
           <DescriptionContainer
             size={size}
+            text={text}
             onClick={() => history.push('/detail/1')}
           >
             <Views>100만회</Views>
@@ -206,7 +219,7 @@ function Card({ obj, size, history }) {
                   color="black"
                   text={obj.TextInfo.hashTag[idx]}
                   fontSize="1.2rem"
-                ></Tag>
+                ></Tag> 
               </div>
             ))}
           </TagContainer>
@@ -217,3 +230,4 @@ function Card({ obj, size, history }) {
 }
 
 export default withRouter(Card);
+

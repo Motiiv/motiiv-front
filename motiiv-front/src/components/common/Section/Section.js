@@ -13,6 +13,7 @@ const Container = styled.div`
     align-items: center;
     @media ${props => props.theme.mobile}{
     height: 30rem;
+    margin-top : 2rem;
     }
 `;
 const Wrapper = styled.div`
@@ -112,7 +113,7 @@ const Section = ({type,size,color,object,text}) => {
     <Container type={type} color={color}>
         <Wrapper type = {type} color = {color}>
             <TitleContent object={object} text={text}></TitleContent>
-            <ImageSlider object = {object} type={type} size= {size} color ={color}></ImageSlider>
+            <ImageSlider object = {object} type={type} size= {size} color ={color} text={text}></ImageSlider>
         </Wrapper>
     </Container> 
         </>
