@@ -2,7 +2,7 @@ const size = {
   mobile: '480px',
   tablet: '768px',
   laptop: '1024px',
-  desktop: '1280px',
+  desktop: '128z0px',
 };
 
 const theme = {

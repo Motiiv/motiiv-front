@@ -5,14 +5,13 @@ import { useState } from 'react';
 import logo from '../../../assets/global/motiiv_logo.png';
 import star from '../../../assets/global/star.png';
 import profile from '../../../assets/profile/sampleImage.png';
-import ProfileModal from './profilemodal/ProfileModal';
 import SigninModal from './signinmodal/SignInModal';
+import ProfileModal from './ProfileModal';
 
 const activeStyle = {
   color: '#2cff2c',
   borderBottom: '0.2rem solid #2cff2c',
 };
-
 
 const Header = styled.header`
   width: 100%;
@@ -38,9 +37,6 @@ const Logo = styled.img`
 const TabContainer = styled.div`
   display: flex;
   width: auto;
-  @media ${props => props.theme.tablet} {
-    display: none;
-  }
 
 `;
 
@@ -90,18 +86,16 @@ const Profile = styled.div`
   background-position: center;
   background-size: cover;
   border-radius: 100%;
-  border : ${props => (props.onclick === true ? '2px solid #2CFF2C' : 'none')};
+  border: ${props => (props.onclick === true ? '2px solid #2CFF2C' : 'none')};
   background-image: ${props => 'url(' + props.src + ')'};
   cursor: pointer;
 `;
 
-
 function Navbar() {
-  
   //로그인 여부 판단 + 어드민 여부 판단
   const [loginState, setLoginState] = useState({
     isLoggined: true,
-    admin: false
+    admin: false,
   });
 
   //프로필 드롭다운 나타나고 없애기
@@ -110,11 +104,9 @@ function Navbar() {
     (async () => {
       try {
         setProfileModalState(prev => !prev);
-      } catch (e) {
-        
-      }
+      } catch (e) {}
     })();
-  }
+  };
 
   //로그인 모달 나타나고 없애기
   const [loginModalState, setLoginModalState] = useState(false);
