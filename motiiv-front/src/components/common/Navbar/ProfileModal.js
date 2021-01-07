@@ -9,6 +9,9 @@ import naver from '../../../assets/profile/naverlink_btn_small.png';
 import kakao from '../../../assets/profile/kakaolink_btn_small.png';
 import camera from '../../../assets/profile/ic_camera.png';
 
+import { useSelector } from 'react-redux';
+import Loading from '../Loading/Loading';
+
 /* 전체 모달 창 */
 const ModalWrap = styled.div`
   display: ${props => (props.show === true ? 'flex' : 'none')};
@@ -128,10 +131,19 @@ function ProfileModal({ showModal }) {
   const [socialState, setSocialState] = useState(true);
   const [isToggled, setIsToggled] = useState(false); //추후 isToggled 여부로 다크모드 설정
 
+  const { userInfo, loading } = useSelector(({ user, loading }) => ({
+    userInfo: user.userInfo,
+    loading: loading['user/GET_PROFILE'],
+  }));
+
   return (
     <ModalWrap show={showModal}>
       <ProfileImageContainer>
-        <ProfileImage src={profile} />
+        {!loading ? (
+          <ProfileImage src={userInfo.profileImageUrl} />
+        ) : (
+          <Loading></Loading>
+        )}
         <InputContainer for="upload">
           <CameraIcon src={camera} />
           <PhotoInput type="file" id="upload" />
