@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import MyModal from './sections/MyModal';
 import Section from '../../components/common/Section/Section';
+import WorkSpace from '../../components/Workspace/WorkSpace';
 
 const MotiivWrapper = styled.div`
   width: 100%;
@@ -88,6 +89,7 @@ function MyMotiiv() {
   return loginState.isLogin ? (
     <>
       <MotiivWrapper isLoggined={loginState.isLogin}>
+        <WorkSpace></WorkSpace>
         <Section object={SliderObject} text="내가 자주 본 모티브"></Section>
         <Section object={SliderObject} text="내가 저장한 모티브"></Section>
         <Section object={SliderObject} text="최근 재생한 모티브"></Section>

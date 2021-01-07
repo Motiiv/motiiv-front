@@ -13,21 +13,20 @@ const ModalWrap = styled.div`
   display: ${props => (props.show === true ? 'flex' : 'none')};
 
   position: absolute;
-  top:5rem;
-  right:3.5rem;
-  z-index:10;
+  top: 5rem;
+  right: 3.5rem;
+  z-index: 10;
 
   width: 28rem;
-  height:41.3rem;
+  height: 41.3rem;
   border-radius: 1rem;
   background: white;
   box-shadow: 0.2rem 0.3rem 0.7rem rgba(0, 0, 0, 0.15);
   padding-bottom:1.7rem;
 
   justify-content: center;
-  align-items:center;
+  align-items: center;
   flex-direction: column;
-
   font-family : 'Spoqa-Han-Sans';
 
   @media ${props => props.theme.laptop} {
@@ -84,7 +83,7 @@ const FirstDiv = styled.div`
 
 const SocialImage = styled.img`
   height: 1.6rem;
-  margin-left:0.5rem;
+  margin-left: 0.5rem;
   margin-top: 0.2rem;
   @media ${props => props.theme.laptop} {
   }
@@ -118,27 +117,28 @@ const TagBox = styled.div`
 
 /* 다크 모드 버튼 영역 */
 const DarkToggleContainer = styled.div`
-    display: flex;
-    width:28rem;
-    height:6.1rem;
+  display: flex;
+  width: 28rem;
+  height: 6.1rem;
 
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: space-between;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
 
-    border-top : 1px solid #A7A7A7;
-    border-bottom : 1px solid #A7A7A7;
-    margin-top : 2rem;
-    margin-bottom: 1.7rem;
+  border-top: 1px solid #a7a7a7;
+  border-bottom: 1px solid #a7a7a7;
+  margin-top: 2rem;
+  margin-bottom: 1.7rem;
 
-    padding : 0 2.5rem;
-    @media ${props => props.theme.laptop} {
-    }
-    @media ${props => props.theme.mobile} {
-        width:17rem;
-        height:3.9rem;
-        padding:1.5rem;
-    }
+  padding : 0 2.5rem;
+  
+  @media ${props => props.theme.laptop} {
+  }
+  @media ${props => props.theme.mobile} {
+    width:17rem;
+    height:3.9rem;
+    padding:1.5rem;
+  }
 `
 const ToggleText = styled.div`
     font-weight:'Spoqa-Han-Sans';
@@ -193,6 +193,6 @@ function ProfileModal({showModal}) {
             <ForMargin><Tag text={"logout"} fontSize="1.6rem" fontFamily="Campton" padding="0.7rem 1.5rem"/></ForMargin>
         </ModalWrap>
     );
-  }
+}
   
 export default ProfileModal;

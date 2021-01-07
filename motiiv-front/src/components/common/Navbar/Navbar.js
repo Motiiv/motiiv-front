@@ -38,6 +38,10 @@ const Logo = styled.img`
 const TabContainer = styled.div`
   display: flex;
   width: auto;
+  @media ${props => props.theme.tablet} {
+    display: none;
+  }
+
 `;
 
 const TabElem = styled(NavLink)`
