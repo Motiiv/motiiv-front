@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SwiperBanner from './sections/SwiperBanner';
 import AdBanner from './sections/AdBanner';
 import Section from '../../components/common/Section/Section';
+import { getProfile } from '../../modules/user';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SliderObject = [
   {
@@ -14,7 +16,7 @@ const SliderObject = [
       hashTag: ['movie', 'pride'],
     },
     VideoInfo: {
-      src: 'https://www.youtube.com/embed/ohihzV6Z85k',
+      src: 'https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4',
       runningTime: '02:09',
     },
   },
@@ -67,15 +69,24 @@ const SliderObject = [
       hashTag: ['movie', 'pride'],
     },
     VideoInfo: {
-      src: 'https://www.youtube.com/embed/8xCfGlYQiPI',
+      src: 'https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4',
       runningTime: '22:01',
     },
   },
 ];
 
 function Main({ object }) {
+  const dispatch = useDispatch();
+  const { userInfo, loading } = useSelector(({ user, loading }) => ({
+    userInfo: user.userInfo,
+    loading: loading['user/GET_PROFILE'],
+  }));
+  useEffect(() => {
+    dispatch(getProfile());
+  }, []);
   return (
     <>
+      <h1>{userInfo.name}</h1>
       <SwiperBanner />
       <Section
         object={SliderObject}

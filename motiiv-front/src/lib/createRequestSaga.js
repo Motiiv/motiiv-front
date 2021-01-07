@@ -1,7 +1,7 @@
-import { put, call } from "redux-saga/effects";
-import { startLoading, finishLoading } from "../modules/loading";
+import { put, call } from 'redux-saga/effects';
+import { startLoading, finishLoading } from '../modules/loading';
 
-export const createRequestActionTypes = (type) => {
+export const createRequestActionTypes = type => {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
   return [type, SUCCESS, FAILURE];
@@ -19,12 +19,14 @@ export default function createRequestSage(type, request) {
         payload: response.data,
         meta: response,
       });
+      console.log(response.data);
     } catch (error) {
       yield put({
         type: FAILURE,
         payload: error,
         error: true,
       });
+      console.log('error!!');
     }
     yield put(finishLoading(type));
   };
