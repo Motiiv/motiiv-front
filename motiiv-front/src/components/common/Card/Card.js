@@ -1,8 +1,10 @@
-import React from 'react';
+import React ,{useState}from 'react';
 import styled, { css } from 'styled-components';
 import Tag from '../Tag/Tag';
 import { withRouter } from 'react-router-dom';
 import HoverVideoPlayer from 'react-hover-video-player';
+import SaveImage from '../../../assets/global/save_icon.svg';
+import SaveClickImage from '../../../assets/global/saveclick_icon.svg';
 const CardWrap = styled.div`
   display: flex;
   width: 100%;
@@ -45,6 +47,20 @@ const VideoWrap = styled.div`
 //     width: 100%;
 // `;
 
+const SaveBox = styled.div`
+  display: flex;
+  align-items: center;
+  line-height: 0 !important;
+  position : absolute;
+  z-index : 10001;
+  right : 1.5rem;
+  top : 1.417rem;
+  cursor: pointer;
+`;
+const SaveImg = styled.img`
+  width: ${props => (props.size === 'large' ? '3.5rem' : '3rem')};
+  height: ${props => (props.size === 'large' ? '3.542rem' : '3rem')};
+`;
 const TimeContainer = styled.div`
   position: absolute;
   right: 1.5rem;
@@ -158,10 +174,11 @@ const TagContainer = styled.div`
 `;
 // Tag 컴포넌트 만들어서 불러오기
 function Card({ obj, size, text, history }) {
+  const [save, setSave] = useState(false);
   return (
     <>
       <CardWrap size={size}>
-        <VideoWrap size={size} onClick={() => history.push('/detail/1')}>
+        <VideoWrap size={size}>
           <HoverVideoPlayer
             style={{ width: '100%', height: '100%', borderRadius: '1rem' }}
             videoSrc={obj.VideoInfo.src}
@@ -182,21 +199,12 @@ function Card({ obj, size, text, history }) {
               borderRadius: '1rem',
             }}
           />
-          {/* <Video src={obj.VideoInfo.src}></Video> */}
-          {/* <iframe
-            style={{
-              height: '100%',
-              width: '100%',
-              borderRadius: '1rem',
-            }}
-            src={obj.VideoInfo.src}
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe> */}
+          <SaveBox onClick={() => setSave(!save)}>
+                  <SaveImg size={size} src={save ? SaveClickImage : SaveImage} />
+          </SaveBox>
           <TimeContainer>{obj.VideoInfo.runningTime}</TimeContainer>
         </VideoWrap>
-        <TextWrap size={size}>
+        <TextWrap size={size} onClick={() => history.push('/detail/1')}>
           <Title
             onClick={() => history.push('/detail/1')}
             size={size}
