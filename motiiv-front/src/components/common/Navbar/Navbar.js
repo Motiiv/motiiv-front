@@ -5,13 +5,12 @@ import { useState } from 'react';
 import logo from '../../../assets/global/motiiv_logo.png';
 import star from '../../../assets/global/star.png';
 import profile from '../../../assets/profile/sampleImage.png';
-import ProfileModal from './ProfileModal'
+import ProfileModal from './ProfileModal';
 
 const activeStyle = {
   color: '#2cff2c',
   borderBottom: '0.2rem solid #2cff2c',
 };
-
 
 const Header = styled.header`
   width: 100%;
@@ -84,18 +83,16 @@ const Profile = styled.div`
   background-position: center;
   background-size: cover;
   border-radius: 100%;
-  border : ${props => (props.onclick === true ? '2px solid #2CFF2C' : 'none')};
+  border: ${props => (props.onclick === true ? '2px solid #2CFF2C' : 'none')};
   background-image: ${props => 'url(' + props.src + ')'};
   cursor: pointer;
 `;
 
-
 function Navbar() {
-  
   //로그인 여부 판단 + 어드민 여부 판단
   const [loginState, setLoginState] = useState({
     isLoggined: true,
-    admin: false
+    admin: false,
   });
 
   //프로필 드롭다운 나타나고 없애기
@@ -105,48 +102,52 @@ function Navbar() {
     (async () => {
       try {
         setProfileModalState(prev => !prev);
-      } catch (e) {
-        
-      }
+      } catch (e) {}
     })();
-  }
+  };
 
   return (
     <>
-    <Header>
-      <NavLink exact to="/main">
-        <Logo src={logo} />
-      </NavLink>
-      <TabContainer>
-        <TabElem exact to="/main" activeStyle={activeStyle}>
-          main
-        </TabElem>
-        <Star src={star} />
-        <TabElem to="/category/0" activeStyle={activeStyle}>
-          category
-        </TabElem>
-        <Star src={star} />
-        <TabElem exact to="/mymotiiv" activeStyle={activeStyle}>
-          mymotiiv
-        </TabElem>
-        <Star src={star} show={loginState.admin.toString()} />
-        <TabElem
-          exact
-          to="/admin"
-          show={loginState.admin.toString()}
-          activeStyle={activeStyle}
-        >
-          admin
-        </TabElem>
-      </TabContainer>
+      <Header>
+        <NavLink exact to="/main">
+          <Logo src={logo} />
+        </NavLink>
+        <TabContainer>
+          <TabElem exact to="/main" activeStyle={activeStyle}>
+            main
+          </TabElem>
+          <Star src={star} />
+          <TabElem to="/category/0" activeStyle={activeStyle}>
+            category
+          </TabElem>
+          <Star src={star} />
+          <TabElem exact to="/mymotiiv" activeStyle={activeStyle}>
+            mymotiiv
+          </TabElem>
+          <Star src={star} show={loginState.admin.toString()} />
+          <TabElem
+            exact
+            to="/admin"
+            show={loginState.admin.toString()}
+            activeStyle={activeStyle}
+          >
+            admin
+          </TabElem>
+        </TabContainer>
 
-      <LoginContainer>
-        <Login to="/signin" login={loginState.isLoggined.toString()}>login</Login>
-        <Profile src={profile} login={loginState.isLoggined.toString()} onClick={onClickProfileImage} onclick = {profileModalState}/>
-        <ProfileModal showModal = {profileModalState}/>
-
-      </LoginContainer>
-    </Header>
+        <LoginContainer>
+          <Login to="/signin" login={loginState.isLoggined.toString()}>
+            login
+          </Login>
+          <Profile
+            src={profile}
+            login={loginState.isLoggined.toString()}
+            onClick={onClickProfileImage}
+            onclick={profileModalState}
+          />
+          <ProfileModal showModal={profileModalState} />
+        </LoginContainer>
+      </Header>
     </>
   );
 }
