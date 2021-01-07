@@ -75,7 +75,7 @@ const Views = styled.div`
   text-overflow: ellipsis;
   word-break: keep-all;
   word-wrap: break-word;
-  display: -webkit-box;
+  display: -webkit-box;--
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   @media ${props => props.theme.mobile}{

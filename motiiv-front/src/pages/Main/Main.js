@@ -16,7 +16,7 @@ const SliderObject = [
           ]
       },
       VideoInfo : {
-          src : "https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4",
+          src : "https://i.ytimg.com/an_webp/ohihzV6Z85k/mqdefault_6s.webp?du=3000&sqp=CKe22v8F&rs=AOn4CLAKxzo0EN-jCwRML2DN48OpOhRlfw",
           runningTime: "02:09"
       }
   },
