@@ -4,9 +4,9 @@ import styled from 'styled-components';
 const VideoWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  & + & {
+  /*   & + & {
     margin-top: 2rem;
-  }
+  } */
 `;
 const VideoContent = styled.img`
   border-radius: 0.7rem;

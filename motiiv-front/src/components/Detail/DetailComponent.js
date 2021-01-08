@@ -59,6 +59,14 @@ const DetailContainer = styled.div`
   @media ${props => props.theme.mobile} {
     flex-direction: column;
     padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media ${props => props.theme.tablet} {
+    flex-direction: column;
+  }
+  @media ${props => props.theme.desktop} {
+    flex-direction: row;
   }
 `;
 const VideoWrapper = styled.div`
@@ -68,15 +76,50 @@ const VideoWrapper = styled.div`
   @media ${props => props.theme.mobile} {
     width: 100%;
   }
+  @media ${props => props.theme.tablet} {
+    width: 100%;
+  }
+  @media ${props => props.theme.desktop} {
+    width: 81%;
+  }
 `;
 const RecommendWrapper = styled.div`
-  width: 19%;
-  margin-left: 2.5rem;
   @media ${props => props.theme.mobile} {
     width: 100%;
     margin-left: 0;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+    //max-width: 50rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media ${props => props.theme.tablet} {
+    width: 100%;
+    margin-left: 0;
+    /*     padding-left: 4rem;
+    padding-right: 4rem; */
+  }
+  @media ${props => props.theme.desktop} {
+    width: 19%;
+    margin-left: 2.5rem;
+  }
+`;
+const RecommendCardBox = styled.div`
+  display: grid;
+  width: 100%;
+  @media ${props => props.theme.mobile} {
+    //flex-direction: column;
+  }
+  @media ${props => props.theme.tablet} {
+    //flex-direction: row;
+    grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+    grid-gap: 2rem;
+  }
+  @media ${props => props.theme.desktop} {
+    grid-template-columns: auto;
+    & :nth-child(1) {
+      margin-top: 0;
+    }
   }
 `;
 const VideoInfoWrapper = styled.div`
@@ -243,7 +286,6 @@ const VideoDescriptionWrapper = styled.div`
 `;
 const VideoDescription = styled.div`
   margin-top: 2rem;
-  width: 50%;
   font-size: 1.8rem;
   margin-bottom: 3rem;
   line-height: 2.2rem;
@@ -252,6 +294,12 @@ const VideoDescription = styled.div`
     border-bottom: 1px #c4c4c4 solid;
     padding-bottom: 3rem;
     margin-top: 3rem;
+  }
+  @media ${props => props.theme.tablet} {
+    width: 70%;
+  }
+  @media ${props => props.theme.laptop} {
+    width: 60%;
   }
 
   /*   ${props =>
@@ -445,10 +493,14 @@ function DetailComponent({ location }) {
       </VideoWrapper>
       <RecommendWrapper>
         <RecommendTitleText>추천 모티브</RecommendTitleText>
-        <RecommendCard />
-        <RecommendCard />
-        <RecommendCard />
-        <RecommendCard />
+        <RecommendCardBox>
+          <RecommendCard />
+          <RecommendCard />
+          <RecommendCard />
+          <RecommendCard />
+          <RecommendCard />
+          <RecommendCard />
+        </RecommendCardBox>
       </RecommendWrapper>
     </DetailContainer>
   );

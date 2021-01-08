@@ -1,10 +1,8 @@
-import React ,{useState}from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import Tag from '../Tag/Tag';
 import { withRouter } from 'react-router-dom';
 import HoverVideoPlayer from 'react-hover-video-player';
-import SaveImage from '../../../assets/global/save_icon.svg';
-import SaveClickImage from '../../../assets/global/saveclick_icon.svg';
 const CardWrap = styled.div`
   display: flex;
   width: 100%;
@@ -19,6 +17,7 @@ const CardWrap = styled.div`
     min-width: 30rem;
     min-height: 24.2rem;
   }
+
   /* height : ${props => (props.size === 'large' ? '32.6rem' : '28rem')};
     flex-direction: column;    
     box-shadow: ${props =>
@@ -47,20 +46,6 @@ const VideoWrap = styled.div`
 //     width: 100%;
 // `;
 
-const SaveBox = styled.div`
-  display: flex;
-  align-items: center;
-  line-height: 0 !important;
-  position : absolute;
-  z-index : 10001;
-  right : 1.5rem;
-  top : 1.417rem;
-  cursor: pointer;
-`;
-const SaveImg = styled.img`
-  width: ${props => (props.size === 'large' ? '3.5rem' : '3rem')};
-  height: ${props => (props.size === 'large' ? '3.542rem' : '3rem')};
-`;
 const TimeContainer = styled.div`
   position: absolute;
   right: 1.5rem;
@@ -91,7 +76,7 @@ const Views = styled.div`
   text-overflow: ellipsis;
   word-break: keep-all;
   word-wrap: break-word;
-  display: -webkit-box;--
+  display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   @media ${props => props.theme.mobile} {
@@ -132,6 +117,9 @@ const TextWrap = styled.div`
   @media ${props => props.theme.mobile} {
     height: 7.4rem;
   }
+  @media ${props => props.theme.tablet} {
+    height: auto;
+  }
 `;
 const Title = styled.div`
   margin-left: ${props => (props.size === 'large' ? '2rem' : '0')};
@@ -171,14 +159,16 @@ const TagContainer = styled.div`
   @media ${props => props.theme.mobile} {
     display: none;
   }
+  @media ${props => props.theme.tablet} {
+    display: flex;
+  }
 `;
 // Tag 컴포넌트 만들어서 불러오기
 function Card({ obj, size, text, history }) {
-  const [save, setSave] = useState(false);
   return (
     <>
       <CardWrap size={size}>
-        <VideoWrap size={size}>
+        <VideoWrap size={size} onClick={() => history.push('/detail/1')}>
           <HoverVideoPlayer
             style={{ width: '100%', height: '100%', borderRadius: '1rem' }}
             videoSrc={obj.VideoInfo.src}
@@ -199,12 +189,21 @@ function Card({ obj, size, text, history }) {
               borderRadius: '1rem',
             }}
           />
-          <SaveBox onClick={() => setSave(!save)}>
-                  <SaveImg size={size} src={save ? SaveClickImage : SaveImage} />
-          </SaveBox>
+          {/* <Video src={obj.VideoInfo.src}></Video> */}
+          {/* <iframe
+            style={{
+              height: '100%',
+              width: '100%',
+              borderRadius: '1rem',
+            }}
+            src={obj.VideoInfo.src}
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe> */}
           <TimeContainer>{obj.VideoInfo.runningTime}</TimeContainer>
         </VideoWrap>
-        <TextWrap size={size} onClick={() => history.push('/detail/1')}>
+        <TextWrap size={size}>
           <Title
             onClick={() => history.push('/detail/1')}
             size={size}

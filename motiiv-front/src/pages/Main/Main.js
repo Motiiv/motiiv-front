@@ -16,7 +16,7 @@ const SliderObject = [
       hashTag: ['movie', 'pride'],
     },
     VideoInfo: {
-      src: 'https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4',
+      src: 'https://www.youtube.com/embed/8xCfGlYQiPI',
       runningTime: '02:09',
     },
   },
