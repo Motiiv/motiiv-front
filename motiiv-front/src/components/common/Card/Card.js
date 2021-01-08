@@ -17,6 +17,7 @@ const CardWrap = styled.div`
     min-width: 30rem;
     min-height: 24.2rem;
   }
+
   /* height : ${props => (props.size === 'large' ? '32.6rem' : '28rem')};
     flex-direction: column;    
     box-shadow: ${props =>
@@ -116,6 +117,9 @@ const TextWrap = styled.div`
   @media ${props => props.theme.mobile} {
     height: 7.4rem;
   }
+  @media ${props => props.theme.tablet} {
+    height: auto;
+  }
 `;
 const Title = styled.div`
   margin-left: ${props => (props.size === 'large' ? '2rem' : '0')};
@@ -154,6 +158,9 @@ const TagContainer = styled.div`
   margin-left: ${props => (props.size === 'large' ? '2rem' : '1px')};
   @media ${props => props.theme.mobile} {
     display: none;
+  }
+  @media ${props => props.theme.tablet} {
+    display: flex;
   }
 `;
 // Tag 컴포넌트 만들어서 불러오기

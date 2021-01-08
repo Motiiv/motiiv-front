@@ -91,6 +91,8 @@ function ImageSlider({object,type,size,text}) {
         scrollbar
         breakpointsInverse = {true}
         breakpoints ={{
+          
+
           768: {
             spaceBetween: 20,
             slidesPerView: 3 

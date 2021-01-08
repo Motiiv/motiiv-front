@@ -22,6 +22,15 @@ const ModalWrap = styled.div`
   flex-direction: column;
 
   font-family : 'Spoqa-Han-Sans';
+  @media ${props => props.theme.laptop} {
+    width: 23rem;
+    height:13.8rem;
+
+  }
+  @media ${props => props.theme.mobile} {
+    width: 22.4rem;
+    height:13.8rem;
+  }
 `;
 
 const JobButton = styled.button`
