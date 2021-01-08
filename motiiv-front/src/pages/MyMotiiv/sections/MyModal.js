@@ -1,14 +1,16 @@
 import React from 'react'
 import styled, {css} from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import ModalCoverImage from '../../../assets/global/0106_mymotiiv_login_mockup.png'
+import ModalCoverImage from '../../../assets/global/0106_mymotiiv_login_mockup.png';
+import ModalMobileImage from '../../../assets/global/mobile_mymotiiv_mockup_mobile_3.png';
+import MyNavBar from '../sections/MyNavbar';
 const ModalContainer = styled.div`
     width: 100%;
     height:100%;
     position : fixed;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
     z-index :998;
     background-color: rgba(0, 0, 0, 0.7);
 `;
@@ -17,10 +19,15 @@ const ModalOverlay = styled.div`
     z-index: 999;
     width: 100%; 
     height: 100%;
-    max-width: 1280px;
+    max-width: 128rem;
     background-size: cover;
     border : none;
     background-image: url(${ModalCoverImage});
+    @media ${props => props.theme.mobile}{
+    background-image : url(${ModalMobileImage});
+    max-width : 76.8rem;
+    max-height : 81.2rem;
+  }
 
 `
 const ModalWrapper = styled.div`
@@ -30,10 +37,15 @@ const ModalWrapper = styled.div`
     height: 43.6rem;
     border-radius: 1.5rem;
     position: absolute;
-    top: 45%;
+    top: 43%;
     left: 50%;
     transform: translate(-50%, -50%);
+    @media ${props => props.theme.mobile}{
+    width : 27.5rem;
+    height : 35.3rem;
+    left : 37%; 
 
+  }
 `;
 
 const ModalInner = styled.div`
@@ -49,6 +61,11 @@ const ToggleGif = styled.div`
     height : 3.7rem;
     border-radius: 3rem;
     margin-top : 5rem;
+    @media ${props => props.theme.mobile}{
+    width: 8rem;
+    hegiht : 3.7rem; 
+    
+  }
 `;
 
 const Title = styled.div`
@@ -57,6 +74,10 @@ const Title = styled.div`
     font-size : 2rem;
     color : ${({theme}) => theme.primary};
     margin-top : 6rem;
+    @media ${props => props.theme.mobile}{
+    margin-top : 3.5rem;
+    font-size : 1.6rem;
+  }
 `;
 
 const Subtitle = styled.div`
@@ -66,7 +87,10 @@ const Subtitle = styled.div`
     line-height: 150%;
     margin-top : 4.5rem;
     text-align: center;
-    
+    @media ${props => props.theme.mobile}{
+    margin-top : 3rem;
+    font-size : 1.4rem;
+  }
     
 `;
 
@@ -80,6 +104,10 @@ const TagWrapper = styled.div`
     justify-content: center;
     align-items: center;
     margin-top : 7rem;
+    @media ${props => props.theme.mobile}{
+    margin-top : 4rem;
+  }
+    
     
 `;
 const ContentWrapper = styled.div`

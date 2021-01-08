@@ -9,11 +9,12 @@ import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
+// imageslider따로 쓰이니까 max-width : 1280으로 잡아놨습니다.
 const SliderSection = styled.div`
   display: flex;
   position: relative;
-  width: 100%;
   max-width: 1280px;
+  width: 100%;
   padding: 0 5.5rem;
   justify-content: center;
   & .swiper-button-prev::after {
@@ -60,10 +61,11 @@ const SliderSection = styled.div`
   & .swiper-scrollbar {
     display : none !important;
   }
-
+  /* @media ${props => props.theme.tablet}{
+    padding : 0 4rem;
+  } */
   @media ${props => props.theme.mobile}{
       padding: 0 2rem;
-
       & .swiper-button-prev::after {
         display: none !important;
         }
@@ -92,11 +94,27 @@ function ImageSlider({object,type,size,text}) {
         breakpointsInverse = {true}
         breakpoints ={{
           
-
+          // 1024 : {
+          //   spaceBetween: {space},
+          //   slidesPerView: {num} 
+          // },
+          // 769 : {
+          //   spaceBetween: 20,
+          //   slidesPerView: 3 
+          // },
+          1280 : {
+            spaceBetween : space,
+            slidesPerView : num
+          },
+          
           768: {
             spaceBetween: 20,
-            slidesPerView: 3 
-          }, 
+            slidesPerView: 3
+          },
+          600: {
+            spaceBetween: 18,
+            slidesPerView: 1 
+          },
           468: {
             spaceBetween: 16,
             slidesPerView: 1

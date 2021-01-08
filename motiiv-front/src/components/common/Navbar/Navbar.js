@@ -37,7 +37,6 @@ const Logo = styled.img`
 const TabContainer = styled.div`
   display: flex;
   width: auto;
-
 `;
 
 const TabElem = styled(NavLink)`

@@ -4,7 +4,7 @@ import AdBanner from './sections/AdBanner';
 import Section from '../../components/common/Section/Section';
 import { getProfile } from '../../modules/user';
 import { useDispatch, useSelector } from 'react-redux';
-
+import MyNavBar from '../MyMotiiv/sections/MyNavbar';
 const SliderObject = [
   {
     idx: 0,
@@ -86,7 +86,6 @@ function Main({ object }) {
   }, []);
   return (
     <>
-      <h1>{userInfo.name}</h1>
       <SwiperBanner />
       <Section
         object={SliderObject}
