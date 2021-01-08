@@ -5,7 +5,7 @@ import { useState } from 'react';
 import logo from '../../../assets/global/motiiv_logo.png';
 import star from '../../../assets/global/star.png';
 import profile from '../../../assets/profile/sampleImage.png';
-import SigninModal from './SigninModal/SignInModal';
+import SigninModal from './signinmodal/SignInModal';
 import ProfileModal from './ProfileModal';
 
 const activeStyle = {
@@ -37,7 +37,9 @@ const Logo = styled.img`
 const TabContainer = styled.div`
   display: flex;
   width: auto;
-
+  @media ${props => props.theme.mobile} {
+    display:none;
+  }
 `;
 
 const TabElem = styled(NavLink)`
