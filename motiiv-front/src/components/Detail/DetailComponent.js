@@ -286,7 +286,6 @@ const VideoDescriptionWrapper = styled.div`
 `;
 const VideoDescription = styled.div`
   margin-top: 2rem;
-  width: 50%;
   font-size: 1.8rem;
   margin-bottom: 3rem;
   line-height: 2.2rem;
@@ -295,6 +294,12 @@ const VideoDescription = styled.div`
     border-bottom: 1px #c4c4c4 solid;
     padding-bottom: 3rem;
     margin-top: 3rem;
+  }
+  @media ${props => props.theme.tablet} {
+    width: 70%;
+  }
+  @media ${props => props.theme.laptop} {
+    width: 60%;
   }
 
   /*   ${props =>
