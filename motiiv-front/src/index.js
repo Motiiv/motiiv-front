@@ -12,6 +12,7 @@ import createSagaMiddleware from 'redux-saga';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from 'styled-components';
 import theme from './style/theme';
+import { CookiesProvider } from 'react-cookie';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
@@ -26,7 +27,9 @@ ReactDOM.render(
       <BrowserRouter>
         <Provider store={store}>
           <HelmetProvider>
-            <App />
+            <CookiesProvider>
+              <App />
+            </CookiesProvider>
           </HelmetProvider>
         </Provider>
       </BrowserRouter>
