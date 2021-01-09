@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components';
 import DownArrow from '../../../assets/global/downArrow.svg';
 import UpperArrow from '../../../assets/global/upperArrow.svg';
 import Menu from './Menu';
-import MenuActive from '../../../assets/global/menu_active.svg';
-import MenuDefault from '../../../assets/global/menu_default.svg';
+/* import MenuActive from '../../../assets/global/menu_active.svg';
+import MenuDefault from '../../../assets/global/menu_default.svg'; */
 
 const DropDownContainer = styled.div`
   width: 100%;
@@ -54,7 +54,7 @@ const DropDownBox = styled.div`
       ? css`
           visibility: visible;
           opacity: 1;
-          height: 7rem;
+          height: 100%;
         `
       : css`
           visibility: hidden;
@@ -71,44 +71,46 @@ const TitleIconBoxAll = styled.img`
   border-radius: 0.5rem;
   margin-right: 0.4rem;
 `;
-function DropDownMenu({ text, active, name, all, onChangeActiveStatus }) {
-  const [choice, setChoice] = useState(null);
-
+function DropDownMenu({
+  text,
+  active,
+  choice,
+  onChangeActiveStatus,
+  onHandleMenuChoice,
+}) {
   const onHandleActive = evt => {
-    //console.log(evt.currentTarget.attributes.name.value);
-    onChangeActiveStatus(evt.currentTarget.attributes.name.value);
-  };
-  const onHandleMenuChoice = idx => {
-    if (choice === idx) setChoice(null);
-    else setChoice(idx);
+    onChangeActiveStatus();
   };
   return (
     <DropDownContainer>
-      {!all ? (
-        <>
-          <TitleBox name={name} onClick={onHandleActive}>
-            <TitleText>{text}</TitleText>
-            <TitleIconBox>
-              <TitleIconImg src={active ? UpperArrow : DownArrow} />
-            </TitleIconBox>
-          </TitleBox>
-          <DropDownBox active={active}>
-            {/* 이부분은 map 예정 */}
-            <Menu
-              word="word1"
-              choice={choice}
-              idx={0}
-              onHandleMenuChoice={onHandleMenuChoice}
-            />
-            <Menu
-              word="word2"
-              choice={choice}
-              idx={1}
-              onHandleMenuChoice={onHandleMenuChoice}
-            />
-          </DropDownBox>
-        </>
-      ) : (
+      <TitleBox onClick={onHandleActive}>
+        <TitleText>{text}</TitleText>
+        <TitleIconBox>
+          <TitleIconImg src={active ? UpperArrow : DownArrow} />
+        </TitleIconBox>
+      </TitleBox>
+      <DropDownBox active={active}>
+        {/* 이부분은 map 예정 */}
+        <Menu
+          word="전체"
+          choice={choice}
+          idx={0}
+          onHandleMenuChoice={onHandleMenuChoice}
+        />
+        <Menu
+          word="word1"
+          choice={choice}
+          idx={1}
+          onHandleMenuChoice={onHandleMenuChoice}
+        />
+        <Menu
+          word="word2"
+          choice={choice}
+          idx={2}
+          onHandleMenuChoice={onHandleMenuChoice}
+        />
+      </DropDownBox>
+      {/* (
         <TitleBox name={name} onClick={onHandleActive}>
           <TitleText>{text}</TitleText>
           <TitleIconBoxAll
@@ -116,7 +118,7 @@ function DropDownMenu({ text, active, name, all, onChangeActiveStatus }) {
             src={active ? MenuActive : MenuDefault}
           ></TitleIconBoxAll>
         </TitleBox>
-      )}
+                 )} */}
     </DropDownContainer>
   );
 }

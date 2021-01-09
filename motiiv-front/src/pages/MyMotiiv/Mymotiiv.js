@@ -5,6 +5,7 @@ import Section from '../../components/common/Section/Section';
 import WorkSpace from '../../components/Workspace/WorkSpace';
 import MyNavBar from './sections/MyNavbar';
 import ImageSlider from '../../components/common/Section/ImageSlider';
+import BlackModal from '../../components/common/Modal/BlackModal';
 const MotiivWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -101,10 +102,9 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     @media ${props => props.theme.mobile}{
-    height: 30rem;
+    height: 33rem;
     margin-bottom : 1.6rem;  
     }
-
     @media ${props => props.theme.tablet}{
     height: 37.2rem
   }  
@@ -156,7 +156,7 @@ const Title = styled.h2`
 function MyMotiiv() {
   const saveButton = false;
   const [loginState, setLoginState] = useState({
-    isLogin: false,
+    isLogin: true,
   });
   return loginState.isLogin ? (
     <>
@@ -190,6 +190,7 @@ function MyMotiiv() {
   ) : (
     <>
     <MyModal />
+    {/* <BlackModal/> */}
     </>
   );
 }

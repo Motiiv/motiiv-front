@@ -1,20 +1,25 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-
 const ModalWrapper = styled.div`
   width: 10rem;
-  height: 13.2rem;
   border-radius: 1rem;
+  display: flex;
+  transition: 0.5s;
+  overflow: hidden;
   ${props =>
     props.sortModal
       ? css`
-          display: flex;
+          height: 13.2rem;
+          visibility: visible;
+          opacity: 1;
         `
       : css`
-          display: none;
+          height: 0;
+          visibility: hidden;
+          opacity: 0;
         `}
   flex-direction: column;
-  z-index: 2;
+  z-index: 3;
   position: absolute;
   background-color: white;
   top: 2.5rem;
@@ -36,6 +41,14 @@ const SortText = styled.div`
     font-weight: 700;
     background-color: ${({ theme }) => theme.lightGray};
   }
+  ${props =>
+    props.sortModal
+      ? css`
+          //height: fit-content;
+        `
+      : css`
+          //height: 0;
+        `}
 `;
 function SortModal({ sortModal, onHandleSortText }) {
   const onHandleSortButton = evt => {
@@ -43,16 +56,32 @@ function SortModal({ sortModal, onHandleSortText }) {
   };
   return (
     <ModalWrapper sortModal={sortModal}>
-      <SortText name="최신순" onClick={onHandleSortButton}>
+      <SortText
+        sortModal={sortModal}
+        name="최신순"
+        onClick={onHandleSortButton}
+      >
         최신순
       </SortText>
-      <SortText name="좋아요순" onClick={onHandleSortButton}>
+      <SortText
+        sortModal={sortModal}
+        name="좋아요순"
+        onClick={onHandleSortButton}
+      >
         좋아요순
       </SortText>
-      <SortText name="저장순" onClick={onHandleSortButton}>
+      <SortText
+        sortModal={sortModal}
+        name="저장순"
+        onClick={onHandleSortButton}
+      >
         저장순
       </SortText>
-      <SortText name="조회순" onClick={onHandleSortButton}>
+      <SortText
+        sortModal={sortModal}
+        name="조회순"
+        onClick={onHandleSortButton}
+      >
         조회순
       </SortText>
     </ModalWrapper>

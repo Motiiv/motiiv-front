@@ -5,6 +5,8 @@ import DropDownMenu from '../../pages/Category/sections/DropDownMenu';
 import SortModal from '../../pages/Category/sections/SortModal';
 import DownArrow from '../../assets/global/downArrow.svg';
 import UpperArrow from '../../assets/global/upperArrow.svg';
+import AsideModal from '../../pages/Category/sections/AsideModal';
+import AsideMenu from '../../pages/Category/sections/AsideMenu';
 
 const SliderObject = [
   {
@@ -68,9 +70,14 @@ const CategoryContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 10rem;
+
   @media ${props => props.theme.mobile} {
+    flex-direction: column;
+    max-width: 38rem;
+    padding: 1.6rem;
   }
   @media ${props => props.theme.tablet} {
+    flex-direction: row;
     max-width: 768px;
     padding: 5rem 4rem;
   }
@@ -89,16 +96,20 @@ const Aside = styled.div`
     props.hashTag !== '0'
       ? css`
           display: none !important;
+          @media ${props => props.theme.mobile} {
+            display: flex !important;
+          }
         `
       : css`
           display: flex !important;
         `}
   flex-direction: column;
   @media ${props => props.theme.mobile} {
-    margin-right: 4rem;
+    width: 100%;
   }
   @media ${props => props.theme.tablet} {
     margin-right: 4rem;
+    width: 18.2rem;
   }
   @media ${props => props.theme.laptop} {
     margin-right: 11.7rem;
@@ -135,9 +146,15 @@ const TitleText = styled.div`
     props.hashTag !== '0'
       ? css`
           font-size: 2.5rem;
+          @media ${props => props.theme.mobile} {
+            font-size: 2rem;
+          }
         `
       : css`
           font-size: 1.6rem;
+          @media ${props => props.theme.mobile} {
+            //font-size: 2rem;
+          }
         `}
   font-weight: 700;
 `;
@@ -156,11 +173,12 @@ const SortButtonImg = styled.img`
 const GridContainer = styled.div`
   margin-top: 2.4rem;
   display: grid;
+  grid-template-rows: auto;
   ${props =>
     props.hashTag !== '0'
       ? css`
           @media ${props => props.theme.mobile} {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(1, 1fr);
           }
           @media ${props => props.theme.tablet} {
             grid-template-columns: repeat(3, 1fr);
@@ -200,21 +218,28 @@ const GridContainer = styled.div`
 `;
 function CategoryComponent({ hashTag }) {
   const [activeStatus, setActiveStatus] = useState({
-    all: true,
-    job: false,
-    interest: false,
+    status: false,
+    choice: 0,
+    text: '전체',
   });
   const [sortStatus, setSortStatus] = useState({
     text: '최신순',
     status: false,
   });
-  const onChangeActiveStatus = name => {
-    //console.log('CategoryComponents');
+  const onChangeActiveStatus = () => {
     setActiveStatus({
       ...activeStatus,
-      [name]: !activeStatus[name],
+      status: !activeStatus.status,
     });
   };
+  const onHandleMenuChoice = (idx, text) => {
+    setActiveStatus({
+      status: false,
+      choice: idx,
+      text: text,
+    });
+  };
+  /* 최신순, 인기순 정렬  */
   const onHandleSortModalStatus = () => {
     setSortStatus({
       ...sortStatus,
@@ -227,17 +252,30 @@ function CategoryComponent({ hashTag }) {
       text: name,
     });
   };
+
   return (
     <CategoryContainer>
       <Aside hashTag={hashTag}>
-        <DropDownMenu
-          all={true}
-          text="전체"
-          name="all"
+        <AsideModal
+          text={activeStatus.text}
+          choice={activeStatus.choice}
           onChangeActiveStatus={onChangeActiveStatus}
-          active={activeStatus.all}
+          active={activeStatus.status}
+          onHandleMenuChoice={onHandleMenuChoice}
         />
-        <DropDownMenu
+        <AsideMenu
+          text={activeStatus.text}
+          choice={activeStatus.choice}
+          onHandleMenuChoice={onHandleMenuChoice}
+        ></AsideMenu>
+        {/* <DropDownMenu
+          text={activeStatus.text}
+          choice={activeStatus.choice}
+          onChangeActiveStatus={onChangeActiveStatus}
+          active={activeStatus.status}
+          onHandleMenuChoice={onHandleMenuChoice}
+        /> */}
+        {/*         <DropDownMenu
           text="직군"
           name="job"
           onChangeActiveStatus={onChangeActiveStatus}
@@ -248,7 +286,7 @@ function CategoryComponent({ hashTag }) {
           name="interest"
           onChangeActiveStatus={onChangeActiveStatus}
           active={activeStatus.interest}
-        />
+        /> */}
       </Aside>
       <BodyContainer>
         <TitleAndSort>
@@ -256,7 +294,7 @@ function CategoryComponent({ hashTag }) {
           <SortButtonWrapper>
             <TitleTextAndButton onClick={onHandleSortModalStatus}>
               <SortTitleText>{sortStatus.text}</SortTitleText>
-              <SortButtonImg src={sortStatus.active ? UpperArrow : DownArrow} />
+              <SortButtonImg src={sortStatus.status ? UpperArrow : DownArrow} />
             </TitleTextAndButton>
             <SortModal
               sortModal={sortStatus.status}

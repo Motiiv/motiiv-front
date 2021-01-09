@@ -13,7 +13,7 @@ const CardWrap = styled.div`
   min-height: ${props => (props.size === 'large' ? '33.5 rem' : '26.7rem')};
   flex-direction: column;
   box-shadow: ${props =>
-  props.size === 'large' ? '2px 2px 7px rgba(0, 0, 0, 0.15)' : 'none'};
+    props.size === 'large' ? '2px 2px 7px rgba(0, 0, 0, 0.15)' : 'none'};
   border-radius: 1rem;
   @media ${props => props.theme.mobile} {
     min-width: 30rem;
@@ -29,8 +29,6 @@ const CardWrap = styled.div`
     height: auto;
     min-height: ${props => (props.size === 'large' ? '33.5 rem' : '26.7rem')};
   }
-
-
 `;
 const VideoWrap = styled.div`
   width: 100%;
@@ -51,12 +49,12 @@ const VideoWrap = styled.div`
   @media ${props => props.theme.tablet} {
     height: ${props => (props.size === 'large' ? '12.3rem' : '12.2rem')};
   }
-  @media ${props => props.theme.desktop} {
- 
+  @media ${props => props.theme.laptop} {
     height: ${props => (props.size === 'large' ? '21.2rem' : '15.4rem')};
-   
   }
-
+  @media ${props => props.theme.desktop} {
+    height: ${props => (props.size === 'large' ? '21.2rem' : '15.4rem')};
+  }
 `;
 // const Video = styled.div`
 //     position : absolute;
@@ -109,11 +107,11 @@ const TimeContainer = styled.div`
     margin-left: 1.2rem;
   }
   @media ${props => props.theme.tablet} {
-    right : 1.4rem;
+    right: 1.4rem;
     bottom: 1.2rem;
     width: 3.9rem;
     height: 1.5rem;
-    font-size : 1rem;
+    font-size: 1rem;
   }
   @media ${props => props.theme.desktop} {
     right: 1.5rem;
@@ -139,7 +137,7 @@ const Views = styled.div`
     font-size: 1.2rem;
   }
   @media ${props => props.theme.tablet} {
-    font-size : 1.2rem;
+    font-size: 1.2rem;
   }
   @media ${props => props.theme.desktop} {
     font-size: 1.5rem;
@@ -164,7 +162,7 @@ const Channel = styled.div`
     font-size: 1.2rem;
   }
   @media ${props => props.theme.tablet} {
-    font-size : 1.2rem;
+    font-size: 1.2rem;
     margin-left: 0.5rem;
     padding-left: 0.5 rem;
   }
@@ -181,13 +179,15 @@ const Video = styled.img`
 `;
 const TextWrap = styled.div`
   width: 100%;
-  height: ${props => (props.size === 'large' ? '12.3rem' : '11.3rem')};
+  height: ${props =>
+    props.size === 'large' ? '12.3rem' : '11.3rem'}; //11.3rem
   display: flex;
   flex-direction: column;
   background: ${props => (props.size === 'large' ? 'white' : 'transparent')};
   border-radius: 0 0 1rem 1rem;
   @media ${props => props.theme.mobile} {
-    height: 7.4rem;
+    height : auto;
+   
   }
   @media ${props => props.theme.tablet} {
     height: auto;
@@ -216,6 +216,7 @@ const Title = styled.div`
   @media ${props => props.theme.mobile} {
     margin-left: 0;
     margin-top: ${props => (props.text ? '1.5rem' : '1rem')};
+    //overflow: visible;
   }
   @media ${props => props.theme.tablet} {
     margin-top: 1rem;

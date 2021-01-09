@@ -188,14 +188,14 @@ function Main({ object }) {
   return (
     <>
       <SwiperBanner />
-      {/* <Section
+      <Section
         object={SliderObject}
         type="top"
         size="large"
         color="gray"
         text="motiiv top10"
-      ></Section> */}
-        <Container>
+      ></Section>
+        {/* <Container>
           <Wrapper>
             <Wrap>
           <Title>motiiv<HighLight>top 10</HighLight></Title>
@@ -205,7 +205,7 @@ function Main({ object }) {
         size="large"
         color="gray"></ImageSlider>
           </Wrapper>
-        </Container>
+        </Container> */}
       <Section object={SliderObject}></Section>
       <Section object={SliderObject}></Section>
       <Section object={SliderObject}></Section>

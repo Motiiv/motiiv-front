@@ -23,14 +23,14 @@ const ModalWrap = styled.div`
 
   font-family : 'Spoqa-Han-Sans';
 
-  @media ${props => props.theme.laptop} {
+  @media ${props => props.theme.maxdesktop} {
     width: 43.6rem;
     height: 23.4rem;
-
   }
   @media ${props => props.theme.mobile} {
     width: 22.4rem;
     height: 21rem;
+    top:3rem;
   }
 `;
 
@@ -40,7 +40,7 @@ const InterestGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(8.4rem, 1fr));
   gap: 1rem;
 
-  @media ${props => props.theme.laptop} {
+  @media ${props => props.theme.maxdesktop} {
     gap: 2rem;
 
   }
@@ -61,7 +61,7 @@ const BottomContianer = styled.div`
 
   cursor:pointer;
 
-  @media ${props => props.theme.laptop} {
+  @media ${props => props.theme.maxdesktop} {
     margin-top:3rem;
   }
   @media ${props => props.theme.mobile} {
@@ -70,26 +70,47 @@ const BottomContianer = styled.div`
 `
 
 function InterestModal({show}) {
+
+  const [selectedBtnCountState, setSelectedBtnCountState] = useState(1);
+  const [okBtnState, setOkBtnState] = useState("ok-disabled");
+
+  //카운트로 활성화/비활성화 하는 로직 필요
+  const onClickInterestBtn = () => {
+    (async () => {
+      try {
+        if(selectedBtnCountState != 0){
+          setOkBtnState("ok");
+          console.log(okBtnState);
+        }else{
+          setOkBtnState("ok-disabled");
+          console.log(okBtnState);
+        }
+      } catch (e) {
+        
+      }
+    })();
+  }
+
     return(
         <ModalWrap show = {show}>
           <InterestGrid>
-            <InterestComponent type="selected" text={"키워드"}></InterestComponent>
-            <InterestComponent type="selected" text={"키워드"}></InterestComponent>
-            <InterestComponent type="selected" text={"키워드"}></InterestComponent>
-            <InterestComponent type="unselected" text={"키워드"}></InterestComponent>
-            <InterestComponent type="unselected" text={"키워드"}></InterestComponent>
-            <InterestComponent type="unselected" text={"키워드"}></InterestComponent>
-            <InterestComponent type="unselected" text={"키워드"}></InterestComponent>
-            <InterestComponent type="unselected" text={"키워드"}></InterestComponent>
-            <InterestComponent type="unselected" text={"키워드"}></InterestComponent>
-            <InterestComponent type="unselected" text={"키워드"}></InterestComponent>
-            <InterestComponent type="unselected" text={"키워드"}></InterestComponent>
-            <InterestComponent type="unselected" text={"키워드"}></InterestComponent>
+            <InterestComponent type="selected" text={"최대"}></InterestComponent>
+            <InterestComponent type="selected" text={"네글자"}></InterestComponent>
+            <InterestComponent type="selected" text={"최대"}></InterestComponent>
+            <InterestComponent type="unselected" text={"네글자"}></InterestComponent>
+            <InterestComponent type="unselected" text={"최대"}></InterestComponent>
+            <InterestComponent type="unselected" text={"네글자"}></InterestComponent>
+            <InterestComponent type="unselected" text={"최대"}></InterestComponent>
+            <InterestComponent type="unselected" text={"네글자요"}></InterestComponent>
+            <InterestComponent type="unselected" text={"최대"}></InterestComponent>
+            <InterestComponent type="unselected" text={"네글자요"}></InterestComponent>
+            <InterestComponent type="unselected" text={"최대"}></InterestComponent>
+            <InterestComponent type="unselected" text={"네글자요"}></InterestComponent>
         </InterestGrid>
 
         <BottomContianer>
           <InterestComponent type="cancel" text={"취소"}></InterestComponent>
-          <InterestComponent type="ok" text={"확인"}></InterestComponent>
+          <InterestComponent type={okBtnState} text={"확인"}></InterestComponent>
         </BottomContianer>
       </ModalWrap>
     );

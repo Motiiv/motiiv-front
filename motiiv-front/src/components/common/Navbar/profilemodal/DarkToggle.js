@@ -11,8 +11,6 @@ const SwitchLabel = styled.label`
   cursor: pointer;
   transition: background-color 0.2s;
 
-  @media ${props => props.theme.laptop} {
-  }
   @media ${props => props.theme.mobile} {
     width: 2.2rem;
     height: 1rem;
@@ -44,14 +42,11 @@ const SwitchButton = styled.span`
   ${SwitchInput}:checked + ${SwitchLabel} & {
     left: calc(100% - 0.4rem);
     transform: translateX(-100%);
-    @media ${props => props.theme.laptop} {
-    }
     @media ${props => props.theme.mobile} {
       left: calc(100% - 0.25rem);
     }
   }
-  @media ${props => props.theme.laptop} {
-  }
+
   @media ${props => props.theme.mobile} {
     width: 0.6rem;
     height: 0.6rem;

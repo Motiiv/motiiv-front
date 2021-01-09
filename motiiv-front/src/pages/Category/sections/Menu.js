@@ -1,12 +1,18 @@
 import React from 'react';
-import styled from 'styled-components';
-import MenuActive from '../../../assets/global/menu_active.svg';
-import MenuDefault from '../../../assets/global/menu_default.svg';
+import styled, { css } from 'styled-components';
 
 const TitleText = styled.div`
   font-size: 1.6rem;
   padding: 0.9rem 2.4rem;
   padding-right: 0;
+  ${props =>
+    props.choice === props.idx
+      ? css`
+          font-weight: 700;
+        `
+      : css`
+          font-weight: 400;
+        `};
 `;
 const MenuWrapper = styled.div`
   width: 100%;
@@ -16,11 +22,9 @@ const MenuWrapper = styled.div`
   align-items: center;
   border-radius: 0.5rem;
   padding-right: 1.1rem;
+
   &:hover {
     background-color: ${({ theme }) => theme.lightGray};
-    ${TitleText} {
-      font-weight: 700;
-    }
   }
 `;
 const TitleIconBox = styled.img`
@@ -32,15 +36,18 @@ const TitleIconBox = styled.img`
   border-radius: 0.5rem;
 `;
 function Menu({ word, choice, idx, onHandleMenuChoice }) {
-  const onClickHandle = () => {
-    onHandleMenuChoice(idx);
+  const onClickHandle = evt => {
+    onHandleMenuChoice(idx, evt.currentTarget.attributes.name.value);
+    console.log(idx, evt.currentTarget.attributes.name.value);
   };
   return (
-    <MenuWrapper onClick={onClickHandle}>
-      <TitleText>{word}</TitleText>
-      <TitleIconBox
+    <MenuWrapper name={word} onClick={onClickHandle}>
+      <TitleText idx={idx} choice={choice}>
+        {word}
+      </TitleText>
+      {/*       <TitleIconBox
         src={choice === idx ? MenuActive : MenuDefault}
-      ></TitleIconBox>
+      ></TitleIconBox> */}
     </MenuWrapper>
   );
 }
