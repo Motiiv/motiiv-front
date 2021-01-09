@@ -125,8 +125,8 @@ const DarkToggleContainer = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  border-top: 1px solid #a7a7a7;
-  border-bottom: 1px solid #a7a7a7;
+  border-top: 1px solid ${props => props.theme.gray};
+  border-bottom: 1px solid ${props => props.theme.gray};
   margin-top: 2rem;
   margin-bottom: 1.7rem;
 

@@ -10,10 +10,10 @@ import InterestComponent from './sections/InterstComponent'
 
 /* 타이틀 */
 const Border = styled.div`
-    background-color: #2CFF2C;
+    background-color: ${props => props.theme.primary};
     width: 11.4rem;
     height:1.3rem;
-    @media ${props => props.theme.laptop} {
+    @media ${props => props.theme.maxdesktop} {
     
     }
     @media ${props => props.theme.mobile} {
@@ -28,7 +28,7 @@ const Title = styled.div`
     margin : 5rem 5.5rem;
     position:relative;
 
-    @media ${props => props.theme.laptop} {
+    @media ${props => props.theme.maxdesktop} {
         font-size : 2rem;
         margin : 5rem 4rem;
     }
@@ -36,7 +36,6 @@ const Title = styled.div`
         font-size : 1.6rem;
         margin : 3rem 3.6rem;
     }
-
 /*
     {Border}{
         position:absolute;
@@ -61,8 +60,8 @@ const Container = styled.div`
     font-family:'Spoqa-Han-Sans';
     font-weight:700;
 
-    @media ${props => props.theme.laptop} {
-        //얘는 하단 패딩이 있을랑가?
+    @media ${props => props.theme.maxdesktop} {
+        padding-bottom : 20rem;
     }
     @media ${props => props.theme.mobile} {
         padding-bottom : 15rem;
@@ -70,12 +69,26 @@ const Container = styled.div`
 `
 
 /* 프로필 이미지 */
+
+const FirstLetter = styled.div`
+  color : ${props => props.theme.primary};
+  font-size: 12rem;
+
+  @media ${props => props.theme.maxdesktop} {
+    font-size: 11rem;
+  };
+  @media ${props => props.theme.mobile} {
+      font-size: 10rem;
+  };
+`
+
+
 const ProfileImageContainer = styled.div`
     width:20rem;
     height:20rem;
     position:relative;
     margin-bottom: 3rem;
-    @media ${props => props.theme.laptop} {
+    @media ${props => props.theme.maxdesktop} {
         width:18rem;
         height:18rem;
     }
@@ -103,7 +116,7 @@ const InputContainer = styled.label`
 
     cursor: pointer;
 
-    @media ${props => props.theme.laptop} {
+    @media ${props => props.theme.maxdesktop} {
         width:5rem;
         height:5rem;
     }
@@ -121,12 +134,13 @@ const PhotoInput = styled.input`
 const CameraIcon = styled.img`
 `
 
-const ProfileImage = styled.img`
+const ProfileImage = styled.div`
   width: 20rem;
   height: 20rem;
   z-index: 11;
   border-radius: 100%;
-  @media ${props => props.theme.laptop} {
+
+  @media ${props => props.theme.maxdesktop} {
     width:18rem;
     height:18rem;
   }
@@ -134,17 +148,53 @@ const ProfileImage = styled.img`
     width:18rem;
     height:18rem;
   }
+
+  background-image : url(${props => props.src});
+
+  ${props => props.src ?
+    `
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    `
+    :
+    `
+    background-color: #4E4E4E;
+    `
+    };
+
+    ${FirstLetter}{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    }
 `
 
 const InfoText = styled.div`
     font-size : 1.6rem;
     font-weight:100;
-    color:#A7A7A7;
-    @media ${props => props.theme.laptop} {
+    color:${props => props.theme.gray};
+    ${props => props.bottom == 'true' ? 
+        `
+        margin-left : 14.4rem;
+        margin-top: -3.5rem;
+        `:``};
+    @media ${props => props.theme.maxdesktop} {
         font-size : 1.4rem;
+        ${props => props.bottom == 'true' ? 
+        `
+        margin-left : 12.5rem;
+        margin-top: -2rem;
+        `:``};
     }
     @media ${props => props.theme.mobile} {
         font-size : 1.2rem;
+        ${props => props.bottom == 'true' ? 
+        `
+        margin-left : 9.5rem;
+        margin-top: -5.5rem;
+        `:``};
     }
 `
 
@@ -153,12 +203,12 @@ const InfoText = styled.div`
 //전체 컨테이너(마진설정)
 const InfoContainer = styled.div`
     margin-top:8rem;
-    margin-bottom:17rem;
-    @media ${props => props.theme.laptop} {
-        margin-bottom:16rem;
+    margin-bottom:18.4rem;
+    @media ${props => props.theme.maxdesktop} {
+        margin-bottom:12.4rem;
     }
     @media ${props => props.theme.mobile} {
-        margin-bottom:14.8rem;
+        margin-bottom:12.1rem;
     }
 `
 
@@ -167,7 +217,7 @@ const InfoWrapper = styled.div`
     display:flex;
     margin-bottom:5.5rem;
     align-items: center;
-    @media ${props => props.theme.laptop} {
+    @media ${props => props.theme.maxdesktop} {
         margin-bottom:4rem;
     }
     @media ${props => props.theme.mobile} {
@@ -177,7 +227,7 @@ const InfoWrapper = styled.div`
 //왼쪽 타이틀
 const Text = styled.div`
     font-size:2rem;
-    @media ${props => props.theme.laptop} {
+    @media ${props => props.theme.maxdesktop} {
         font-size:1.8rem;
     }
     @media ${props => props.theme.mobile} {
@@ -196,11 +246,11 @@ const NameInput = styled.input`
     margin-left: 10.7rem;
 
     font-size: 1.6rem;
-    color:#4E4E4E;
+    color:${props => props.theme.darkGray};
     font-family:'Spoqa-Han-Sans';
     font-weight:700;
 
-    @media ${props => props.theme.laptop} {
+    @media ${props => props.theme.maxdesktop} {
         width: 29.6rem;
         height: 3.6rem;
         margin-left: 9.2rem;
@@ -216,9 +266,9 @@ const NameInput = styled.input`
 const ChooseJob = styled.div`
     margin-left: 10.7rem;
     font-size: 1.6rem;
-    color:#4E4E4E;
+    color:${props => props.theme.darkGray};
     position:relative;
-    @media ${props => props.theme.laptop} {
+    @media ${props => props.theme.maxdesktop} {
         margin-left: 9.2rem;
     }
     @media ${props => props.theme.mobile} {
@@ -241,7 +291,7 @@ const ChooseInterst = styled.div`
     display:flex;
     align-items:center;
     position:relative;
-    @media ${props => props.theme.laptop} {
+    @media ${props => props.theme.maxdesktop} {
         margin-left: 4rem;
 
     }
@@ -265,12 +315,12 @@ const Button = styled.button`
     cursor:pointer;
 
     text-align:center;
-    color: #4E4E4E;
+    color: ${props => props.theme.darkGray};
     font-weight: 700;
     font-family: 'Spoqa-Han-Sans';
     font-size: 1.6rem;
 
-    @media ${props => props.theme.laptop} {
+    @media ${props => props.theme.maxdesktop} {
         width: 20rem;
         height: 5rem;
         margin : 0 1.5rem;
@@ -316,7 +366,7 @@ function Setting() {
 
             <Container>
                 <ProfileImageContainer>
-                    <ProfileImage src = {profile}/>
+                    <ProfileImage><FirstLetter>B</FirstLetter></ProfileImage>
                         <InputContainer for="upload">
                             <CameraIcon src = {camera}/>
                             <PhotoInput type="file" id="upload"/>
@@ -346,9 +396,9 @@ function Setting() {
                     <InfoWrapper>
                         <Text>관심 키워드</Text>
                         <ChooseInterst>
-                            <InterestComponent text={"키워드"} disabled></InterestComponent>
-                            <InterestComponent text={"키워드"} disabled>키워드</InterestComponent>
-                            <InterestComponent text={"키워드"} disabled>키워드</InterestComponent>
+                            <InterestComponent text={"네글자요"} disabled></InterestComponent>
+                            <InterestComponent text={"네글자요"} disabled>키워드</InterestComponent>
+                            <InterestComponent text={"네글자요"} disabled>키워드</InterestComponent>
                             <PolygonBtn src = {polygon}
                                         show={showInterestModalState} 
                                         onClick={onClickInterstBtn}
@@ -356,6 +406,7 @@ function Setting() {
                             <InterestModal show={showInterestModalState}/>
                         </ChooseInterst>
                     </InfoWrapper>
+                    <InfoText bottom='true'>최대 3개의 관심사 선택이 가능합니다.</InfoText>
                 </InfoContainer>
 
                 <ButtonContainer>
