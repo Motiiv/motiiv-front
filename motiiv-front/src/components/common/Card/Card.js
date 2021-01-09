@@ -1,4 +1,3 @@
-  
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Tag from '../Tag/Tag';
@@ -18,6 +17,7 @@ const CardWrap = styled.div`
     min-width: 30rem;
     min-height: 24.2rem;
   }
+
   /* height : ${props => (props.size === 'large' ? '32.6rem' : '28rem')};
     flex-direction: column;    
     box-shadow: ${props =>

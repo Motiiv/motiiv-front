@@ -68,6 +68,20 @@ const CategoryContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 10rem;
+  @media ${props => props.theme.mobile} {
+  }
+  @media ${props => props.theme.tablet} {
+    max-width: 768px;
+    padding: 5rem 4rem;
+  }
+  @media ${props => props.theme.laptop} {
+    max-width: 1024px;
+    padding: 5rem 5.5rem;
+  }
+  @media ${props => props.theme.desktop} {
+    max-width: 1280px;
+    padding: 5rem 5.5rem;
+  }
 `;
 const Aside = styled.div`
   min-width: 18.2rem;
@@ -80,13 +94,32 @@ const Aside = styled.div`
           display: flex !important;
         `}
   flex-direction: column;
-  margin-right: 11.7rem;
+  @media ${props => props.theme.mobile} {
+    margin-right: 4rem;
+  }
+  @media ${props => props.theme.tablet} {
+    margin-right: 4rem;
+  }
+  @media ${props => props.theme.laptop} {
+    margin-right: 11.7rem;
+  }
 `;
 const BodyContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   margin-left: 0;
+  @media ${props => props.theme.mobile} {
+  }
+  @media ${props => props.theme.tablet} {
+    //max-width: 45.2rem;
+  }
+  @media ${props => props.theme.laptop} {
+    //max-width: 87.1rem;
+  }
+  @media ${props => props.theme.desktop} {
+    max-width: none;
+  }
 `;
 const TitleTextAndButton = styled.div`
   display: flex;
@@ -126,13 +159,44 @@ const GridContainer = styled.div`
   ${props =>
     props.hashTag !== '0'
       ? css`
-          grid-template-columns: repeat(4, minmax(27.4rem, 1fr));
+          @media ${props => props.theme.mobile} {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          @media ${props => props.theme.tablet} {
+            grid-template-columns: repeat(3, 1fr);
+            //max-width: 65.8rem;
+          }
+          @media ${props => props.theme.laptop} {
+            grid-template-columns: repeat(4, 1fr);
+          }
+          @media ${props => props.theme.desktop} {
+            grid-template-columns: repeat(4, 1fr);
+          }
         `
       : css`
-          grid-template-columns: repeat(3, minmax(27.4rem, 1fr));
+          @media ${props => props.theme.mobile} {
+            grid-template-columns: repeat(1, 1fr);
+          }
+          @media ${props => props.theme.tablet} {
+            grid-template-columns: repeat(2, 1fr);
+            max-width: 55.7rem;
+          }
+          @media ${props => props.theme.laptop} {
+            grid-template-columns: repeat(2, 1fr);
+            max-width: none;
+          }
+          @media ${props => props.theme.desktop} {
+            grid-template-columns: repeat(3, 1fr);
+          }
         `}
   grid-template-rows: auto;
   grid-gap: 2.5rem;
+  & div {
+    @media ${props => props.theme.tablet} {
+      min-width: auto;
+      min-height: auto;
+    }
+  }
 `;
 function CategoryComponent({ hashTag }) {
   const [activeStatus, setActiveStatus] = useState({

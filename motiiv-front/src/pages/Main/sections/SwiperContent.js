@@ -9,7 +9,7 @@ const TextCard = styled.div`
   padding-right: 6.4rem;
   font-family: 'Spoqa-Han-Sans';
   font-weight: 700;
-  @media ${props => props.theme.tablet} {
+  @media ${props => props.theme.tablet768} {
     padding-right: 2.5rem;
   }
 `;
@@ -17,7 +17,7 @@ const VideoCard = styled.div`
   width: 32.5rem;
   height: 18.5rem;
   position: relative;
-  @media ${props => props.theme.mobile} {
+  @media ${props => props.theme.mobile375} {
     display: none;
   }
 `;
@@ -57,7 +57,7 @@ const ContentWrapper = styled.div`
                 display:none;
             }`
       : null}
-  @media ${props => props.theme.mobile} {
+  @media ${props => props.theme.mobile375} {
     width: 100%;
     height: 75%;
     background-size: cover;
@@ -86,7 +86,7 @@ const HeaderInfo = styled.div`
   color: ${({ theme }) => theme.primary};
   display: flex;
   flex-direction: column;
-  @media ${props => props.theme.mobile} {
+  @media ${props => props.theme.mobile375} {
     padding-left: 2rem;
     padding-top: 2rem;
   }
@@ -116,10 +116,10 @@ const VideoText = styled.div`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   padding-top: 0.2rem;
-  @media ${props => props.theme.tablet} {
+  @media ${props => props.theme.tablet768} {
     font-size: 2.5rem;
   }
-  @media ${props => props.theme.mobile} {
+  @media ${props => props.theme.mobile375} {
     display: none;
   }
 `;
@@ -127,7 +127,7 @@ const TagBox = styled.div`
   display: flex;
   width: 100%;
   margin-top: auto;
-  @media ${props => props.theme.mobile} {
+  @media ${props => props.theme.mobile375} {
     margin-bottom: 1rem;
     margin-left: 2rem;
   }
