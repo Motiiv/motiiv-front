@@ -37,7 +37,9 @@ const Logo = styled.img`
 const TabContainer = styled.div`
   display: flex;
   width: auto;
-
+  @media ${props => props.theme.mobile} {
+    display:none;
+  }
 `;
 
 const TabElem = styled(NavLink)`
