@@ -8,10 +8,10 @@ const InterstComponent = styled.button`
     border-radius: 3rem;
     font-family:'Spoqa-Han-Sans';
 
-    @media (max-width: 480px) {
+    @media ${props => props.theme.mobile} {
             width: 5.3rem;
             height: 2rem;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
     }
 
 ${props =>
@@ -75,6 +75,17 @@ ${props =>
           width: 6.2rem;
           height: 2.8rem;
           background-color : white;
+          margin: 0 1rem;
+          color: #4E4E4E;
+          font-size: 1.2rem;
+          font-weight: 700;
+          cursor:pointer;
+      `
+    : props.type === "ok-disabled" ?
+      `
+          width: 6.2rem;
+          height: 2.8rem;
+          background-color : #A7A7A7;
           margin: 0 1rem;
           color: #4E4E4E;
           font-size: 1.2rem;

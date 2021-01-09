@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import logo from '../../../assets/global/motiiv_logo.png';
 import star from '../../../assets/global/star.png';
-import profile from '../../../assets/profile/sampleImage.png';
 import SigninModal from './signinmodal/SignInModal';
 import ProfileModal from './ProfileModal';
 
@@ -79,18 +79,44 @@ const Login = styled.div`
   cursor:pointer;
 `;
 
+const FirstLetter = styled.div`
+  color : #2CFF2C;
+  font-size: 1.75rem;
+  font-family: 'Spoqa-Han-Sans';
+`
+
 const Profile = styled.div`
   display: ${props => (props.login === 'true' ? 'flex' : 'none')};
   width: 3rem;
   height: 3rem;
   z-index: 3;
+  position:relative;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   border-radius: 100%;
   border: ${props => (props.onclick === true ? '2px solid #2CFF2C' : 'none')};
-  background-image: ${props => 'url(' + props.src + ')'};
   cursor: pointer;
+
+  background-image : url(${props => props.src});
+  ${props => props.src ?
+    `
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    `
+    :
+    `
+    background-color: #4E4E4E;
+    `
+    };
+
+    ${FirstLetter}{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%, -50%);
+    }
 `;
 
 function Navbar() {
@@ -121,6 +147,14 @@ function Navbar() {
       }
     })();
   }
+
+  const { userInfo } = useSelector(({ user }) => ({
+    userInfo: user.userInfo
+  }));
+
+  const name = "Bonnie";
+  const firstletter = name.substr(0,1);
+  //첫글자가 영어인지 한글인지 테스트하는 로직 필요
 
   return (
     <>
@@ -153,8 +187,8 @@ function Navbar() {
 
       <LoginContainer>
         <Login login={loginState.isLoggined.toString()} onClick={onClickLoginBtn}>login</Login>
-        <Profile src={profile} login={loginState.isLoggined.toString()} onClick={onClickProfileImage} onclick = {profileModalState}/>
-        <ProfileModal showModal = {profileModalState}/>
+        <Profile src={userInfo.profileImageUrl} login={loginState.isLoggined.toString()} onClick={onClickProfileImage} onclick = {profileModalState}><FirstLetter>{firstletter}</FirstLetter></Profile>
+        <ProfileModal showModal = {profileModalState} name={name} firstletter={firstletter}/>
 
       </LoginContainer>
     </Header>
