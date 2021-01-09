@@ -16,7 +16,7 @@ const NavContainer = styled.div`
     align-items: center;
     justify-content: center;
     z-index : 99999;
-    position : sticky;
+    position : ${props => (props.tag ==='/mymotiiv' && props.loginState === false) ? 'absolute' : 'sticky'};
     bottom : 0;
     // 모바일일때만 하단 navBar 보이게 하는코드
     @media ${props => props.theme.mobile}{
@@ -47,7 +47,7 @@ const TagElem = styled(NavLink)`
 function MyNavBar({tag,loginState}) {
     return (
 
-      <NavContainer loginState = {loginState}>
+      <NavContainer tag = {tag} loginState = {loginState}>
             <TagWrapper>
                 <TagElem exact to="/main"  src={tag === '/main' ?  mainselected : mainunselected} >
                     {/* <TagImg></TagImg> */}
