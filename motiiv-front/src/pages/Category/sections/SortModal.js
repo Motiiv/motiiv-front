@@ -14,7 +14,7 @@ const ModalWrapper = styled.div`
           display: none;
         `}
   flex-direction: column;
-  z-index: 2;
+  z-index: 3;
   position: absolute;
   background-color: white;
   top: 2.5rem;

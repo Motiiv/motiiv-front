@@ -58,66 +58,63 @@ const SliderSection = styled.div`
     flex: 1 !important;
   }
   & .swiper-scrollbar {
-    display : none !important;
+    display: none !important;
   }
 
-  @media ${props => props.theme.mobile}{
-      padding: 0 2rem;
+  @media ${props => props.theme.mobile} {
+    padding: 0 2rem;
 
-      & .swiper-button-prev::after {
-        display: none !important;
-        }
-      & .swiper-button-next::after {
-        display : none !important;
-        }
-      
-      
-      }
+    & .swiper-button-prev::after {
+      display: none !important;
+    }
+    & .swiper-button-next::after {
+      display: none !important;
+    }
+  }
 `;
 
-
-function ImageSlider({object,type,size,text}) {
-    const swiperRef = useRef();
-    const num = type=== "top" ? 3 : 4;
-    const space = type === "top" ? 20 : 25;
-    return (
-        <>
-        <SliderSection size = {size}>
+function ImageSlider({ object, type, size, text }) {
+  const swiperRef = useRef();
+  const num = type === 'top' ? 3 : 4;
+  const space = type === 'top' ? 20 : 25;
+  return (
+    <>
+      <SliderSection size={size}>
         <Swiper
-        spaceBetween = {space}
-        slidesPerView = {num}
-        ref={swiperRef}
-        navigation
-        scrollbar
-        breakpointsInverse = {true}
-        breakpoints ={{
-          
-
-          768: {
-            spaceBetween: 20,
-            slidesPerView: 3 
-          }, 
-          468: {
-            spaceBetween: 16,
-            slidesPerView: 1
-          },
-          300: {
-            spaceBetween: 16,
-            slidesPerView: 1
-          }
-
-        }}
-        style={{position : "static",
-                width: '100%',
-                }}
-              >
-        {object.map((obj,idx) => (
+          spaceBetween={space}
+          slidesPerView={num}
+          ref={swiperRef}
+          navigation
+          scrollbar
+          breakpointsInverse={true}
+          breakpoints={{
+            768: {
+              spaceBetween: 20,
+              slidesPerView: 3,
+            },
+            468: {
+              spaceBetween: 16,
+              slidesPerView: 1,
+            },
+            300: {
+              spaceBetween: 16,
+              slidesPerView: 1,
+            },
+          }}
+          style={{ position: 'static', width: '100%' }}
+        >
+          {object.map((obj, idx) => (
             <SwiperSlide>
-                <Card size = {size} text = {text} key={`card-${idx}`} obj={obj}></Card>
+              <Card
+                size={size}
+                text={text}
+                key={`card-${idx}`}
+                obj={obj}
+              ></Card>
             </SwiperSlide>
-        ))}
-      </Swiper>
-    </SliderSection>
+          ))}
+        </Swiper>
+      </SliderSection>
     </>
   );
 }

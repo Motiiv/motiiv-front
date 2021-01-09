@@ -109,13 +109,14 @@ const Video = styled.img`
 `;
 const TextWrap = styled.div`
   width: 100%;
-  height: ${props => (props.size === 'large' ? '12.3rem' : '11.3rem')};
+  height: ${props =>
+    props.size === 'large' ? '12.3rem' : '11.3rem'}; //11.3rem
   display: flex;
   flex-direction: column;
   background: ${props => (props.size === 'large' ? 'white' : 'transparent')};
   border-radius: 0 0 1rem 1rem;
   @media ${props => props.theme.mobile} {
-    height: 7.4rem;
+    //height: 7.4rem;
   }
   @media ${props => props.theme.tablet} {
     height: auto;
@@ -140,6 +141,7 @@ const Title = styled.div`
   @media ${props => props.theme.mobile} {
     margin-left: 0;
     margin-top: ${props => (props.text ? '1.5rem' : '1rem')};
+    //overflow: visible;
   }
 `;
 const DescriptionContainer = styled.div`
@@ -157,7 +159,7 @@ const TagContainer = styled.div`
   margin-top: 1.5rem;
   margin-left: ${props => (props.size === 'large' ? '2rem' : '1px')};
   @media ${props => props.theme.mobile} {
-    display: none;
+    display: flex;
   }
   @media ${props => props.theme.tablet} {
     display: flex;

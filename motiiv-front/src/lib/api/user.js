@@ -7,10 +7,9 @@ const getUserProfile = async () => {
     return data;
   } catch (err) {
     console.log('[FAIL] getProfile', err);
-    console.log(err.data);
   }
 };
-const IWantCookies = async () => {
+/* const IWantCookies = async () => {
   try {
     const data = await client.post(
       `/users/login`,
@@ -18,14 +17,13 @@ const IWantCookies = async () => {
         snsId: '1',
         socialType: 'kakao',
       },
-      { withCredentials: 'include' },
+      { withCredentials: true },
     );
     console.log('[SUCCESS] IWantCookies', data);
-    //console.log(data.headers);
     return data.data;
   } catch (err) {
     console.log('[FAIL] IWantCookies', err);
   }
-};
+}; */
 
-export { getUserProfile, IWantCookies };
+export { getUserProfile /* IWantCookies  */ };

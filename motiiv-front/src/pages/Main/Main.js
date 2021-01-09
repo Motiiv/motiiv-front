@@ -86,7 +86,6 @@ function Main({ object }) {
   }, []);
   return (
     <>
-      <button onClick={() => dispatch(getProfile())}>text</button>
       <SwiperBanner />
       <Section
         object={SliderObject}
