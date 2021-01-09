@@ -17,6 +17,10 @@ const RoundBtn = styled.button`
   outline: none;
   white-space: nowrap;
   cursor: pointer;
+  @media ${props => props.theme.mobile375} {
+    font-size: 1.2rem;
+    padding: 0.5rem 1.5rem;
+  }
 `;
 
 function MoreBtn({ color, linkUrl, type, text }) {
