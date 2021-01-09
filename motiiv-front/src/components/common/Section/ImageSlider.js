@@ -61,9 +61,6 @@ const SliderSection = styled.div`
   & .swiper-scrollbar {
     display : none !important;
   }
-  /* @media ${props => props.theme.tablet}{
-    padding : 0 4rem;
-  } */
   @media ${props => props.theme.mobile}{
       padding: 0 2rem;
       & .swiper-button-prev::after {
@@ -72,9 +69,21 @@ const SliderSection = styled.div`
       & .swiper-button-next::after {
         display : none !important;
         }
-      
-      
       }
+
+  @media ${props => props.theme.tablet}{
+    padding : 0 4rem;
+    & .swiper-button-prev::after {
+        display: flex !important;
+        }
+      & .swiper-button-next::after {
+        display : flex !important;
+        }
+      }
+  
+  @media ${props => props.theme.desktop}{
+    padding: 0 5.5rem;
+  }
 `;
 
 
@@ -91,25 +100,11 @@ function ImageSlider({object,type,size,text}) {
         ref={swiperRef}
         navigation
         scrollbar
-        breakpointsInverse = {true}
         breakpoints ={{
-          
-          // 1024 : {
-          //   spaceBetween: {space},
-          //   slidesPerView: {num} 
-          // },
-          // 769 : {
-          //   spaceBetween: 20,
-          //   slidesPerView: 3 
-          // },
-          1280 : {
-            spaceBetween : space,
-            slidesPerView : num
-          },
-          
+    
           768: {
             spaceBetween: 20,
-            slidesPerView: 3
+            slidesPerView: 3,
           },
           600: {
             spaceBetween: 18,
@@ -123,7 +118,23 @@ function ImageSlider({object,type,size,text}) {
             spaceBetween: 16,
             slidesPerView: 1
           }
-
+          // 1024 : {
+          //   spaceBetween : 20,
+          //   slidesePerView: 3,
+          // }
+          // 769 : {
+          //   spaceBetween: 20,
+          //   slidesPerView: 3 
+          // },
+          // 1024 : {
+          //   spaceBetween: space,
+          //   slidesPerView: num,
+          // },
+          // 1280 : {
+          //   spaceBetween : space,
+          //   slidesPerView : num
+          // },
+        
         }}
         style={{position : "static",
                 width: '100%',

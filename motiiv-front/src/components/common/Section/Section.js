@@ -11,13 +11,17 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    @media ${props => props.theme.mobile}{
+    height: 30rem;
+    margin-bottom : 1.6rem;  
+    }
+
     @media ${props => props.theme.tablet}{
     height: ${props => (props.type === 'top' ? '39rem' : '37.2rem')};
-  } 
-    /* @media ${props => props.theme.mobile}{
-    height: 30rem;
-    margin-top : 2rem;
-    } */
+  }  
+  @media ${props => props.theme.desktop}{
+    height: ${props => (props.type === 'top' ? '51rem' : '42rem')};
+  }  
 `;
 //Section도 페이지별로 쓰이니까 maxwidth 1280px
 const Wrapper = styled.div`
@@ -25,15 +29,15 @@ const Wrapper = styled.div`
     max-width: 1280px;
     display: flex;
     flex-direction: column;
-    @media ${props => props.theme.laptop}{
-        max-width : 1024px;
-    } 
+    @media ${props => props.theme.mobile}{
+        max-width: 768px;
+    }
     @media ${props => props.theme.tablet}{
-        max-width : 768px;
+        min-width : 768px;
     } 
-    /* @media ${props => props.theme.mobile}{
-        
-    } */
+    @media ${props => props.theme.desktop}{
+        min-width : 1280px;
+    } 
 `;
 
 

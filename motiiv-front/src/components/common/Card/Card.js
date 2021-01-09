@@ -11,22 +11,28 @@ const CardWrap = styled.div`
   min-height: ${props => (props.size === 'large' ? '33.5 rem' : '26.7rem')};
   flex-direction: column;
   box-shadow: ${props =>
-    props.size === 'large' ? '2px 2px 7px rgba(0, 0, 0, 0.15)' : 'none'};
+  props.size === 'large' ? '2px 2px 7px rgba(0, 0, 0, 0.15)' : 'none'};
   border-radius: 1rem;
   @media ${props => props.theme.mobile} {
     min-width: 30rem;
     min-height: 24.2rem;
   }
+  @media ${props => props.theme.tablet} {
+    min-width: ${props => (props.size === 'large' ? '21.9rem' : '21.6rem')};
+    min-height: 23.2rem;
+    //max로 바꿔야하는지 여부
+  }
+  @media ${props => props.theme.desktop} {
+    min-width: ${props => (props.size === 'large' ? '37.7rem' : '27.4rem')};
+    height: auto;
+    min-height: ${props => (props.size === 'large' ? '33.5 rem' : '26.7rem')};
+  }
 
-  /* height : ${props => (props.size === 'large' ? '32.6rem' : '28rem')};
-    flex-direction: column;    
-    box-shadow: ${props =>
-    props.size === 'large' ? '2px 2px 7px rgba(0, 0, 0, 0.15)' : 'none'};
-    border-radius: 1rem; */
+
 `;
 const VideoWrap = styled.div`
   width: 100%;
-  height: auto;
+  /* height: auto; */
   height: ${props => (props.size === 'large' ? '21.2rem' : '15.4rem')};
   display: flex;
   align-items: center;
@@ -40,6 +46,15 @@ const VideoWrap = styled.div`
   @media ${props => props.theme.mobile} {
     height: 16.8rem;
   }
+  @media ${props => props.theme.tablet} {
+    height: ${props => (props.size === 'large' ? '12.3rem' : '12.2rem')};
+  }
+  @media ${props => props.theme.desktop} {
+ 
+    height: ${props => (props.size === 'large' ? '21.2rem' : '15.4rem')};
+   
+  }
+
 `;
 // const Video = styled.div`
 //     position : absolute;
@@ -66,6 +81,20 @@ const TimeContainer = styled.div`
   & + & {
     margin-left: 1.2rem;
   }
+  @media ${props => props.theme.tablet} {
+    right : 1.4rem;
+    bottom: 1.2rem;
+    width: 3.9rem;
+    height: 1.5rem;
+    font-size : 1rem;
+  }
+  @media ${props => props.theme.desktop} {
+    right: 1.5rem;
+    bottom: 1.4rem;
+    width: 4.5rem;
+    height: 1.8rem;
+    font-size: 1.2rem;
+  }
 `;
 
 const Views = styled.div`
@@ -81,6 +110,12 @@ const Views = styled.div`
   -webkit-box-orient: vertical;
   @media ${props => props.theme.mobile} {
     font-size: 1.2rem;
+  }
+  @media ${props => props.theme.tablet} {
+    font-size : 1.2rem;
+  }
+  @media ${props => props.theme.desktop} {
+    font-size: 1.5rem;
   }
 `;
 
@@ -101,6 +136,16 @@ const Channel = styled.div`
   @media ${props => props.theme.mobile} {
     font-size: 1.2rem;
   }
+  @media ${props => props.theme.tablet} {
+    font-size : 1.2rem;
+    margin-left: 0.5rem;
+    padding-left: 0.5 rem;
+  }
+  @media ${props => props.theme.desktop} {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    padding-left: 1rem;
+  }
 `;
 const Video = styled.img`
   width: 100%;
@@ -119,6 +164,10 @@ const TextWrap = styled.div`
   }
   @media ${props => props.theme.tablet} {
     height: auto;
+    /* height: 10.9rem; */
+  }
+  @media ${props => props.theme.desktop} {
+    height: ${props => (props.size === 'large' ? '12.3rem' : '11.3rem')};
   }
 `;
 const Title = styled.div`
@@ -141,6 +190,16 @@ const Title = styled.div`
     margin-left: 0;
     margin-top: ${props => (props.text ? '1.5rem' : '1rem')};
   }
+  @media ${props => props.theme.tablet} {
+    margin-top: 1rem;
+    max-height: 4.2rem;
+    margin-left: ${props => (props.size === 'large' ? '1.5rem' : '0')};
+  }
+  @media ${props => props.theme.desktop} {
+    margin-top: ${props => (props.size === 'large' ? '1rem' : '0.8rem')};
+    max-height: 4rem;
+    margin-left: ${props => (props.size === 'large' ? '2rem' : '0')};
+  }
 `;
 const DescriptionContainer = styled.div`
   display: flex;
@@ -149,6 +208,15 @@ const DescriptionContainer = styled.div`
   @media ${props => props.theme.mobile} {
     margin-left: 0;
     margin-top: ${props => (props.text ? '1.3rem' : '1rem')};
+  }
+  @media ${props => props.theme.tablet} {
+    margin-left: ${props => (props.size === 'large' ? '1.5rem' : '0')};
+    margin-top: 1rem;
+  }
+  @media ${props => props.theme.desktop} {
+    margin-top: ${props => (props.size === 'large' ? '1rem' : '0.8rem')};
+    margin-left: ${props => (props.size === 'large' ? '2rem' : '0')};
+    margin-top: 1rem;
   }
 `;
 const TagContainer = styled.div`
@@ -161,6 +229,12 @@ const TagContainer = styled.div`
   }
   @media ${props => props.theme.tablet} {
     display: flex;
+    margin-top: 1.6rem;
+    margin-left: ${props => (props.size === 'large' ? '1.5rem' : '0')};
+  }
+  @media ${props => props.theme.desktop} {
+    margin-top: 1.5rem;
+    margin-left: ${props => (props.size === 'large' ? '2rem' : '1px')};
   }
 `;
 // Tag 컴포넌트 만들어서 불러오기
@@ -169,7 +243,7 @@ function Card({ obj, size, text, history }) {
     <>
       <CardWrap size={size}>
         <VideoWrap size={size} onClick={() => history.push('/detail/1')}>
-          <HoverVideoPlayer
+          {/* <HoverVideoPlayer
             style={{ width: '100%', height: '100%', borderRadius: '1rem' }}
             videoSrc={obj.VideoInfo.src}
             pausedOverlayWrapperStyle={{
@@ -188,19 +262,7 @@ function Card({ obj, size, text, history }) {
             videoStyle={{
               borderRadius: '1rem',
             }}
-          />
-          {/* <Video src={obj.VideoInfo.src}></Video> */}
-          {/* <iframe
-            style={{
-              height: '100%',
-              width: '100%',
-              borderRadius: '1rem',
-            }}
-            src={obj.VideoInfo.src}
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe> */}
+          /> */}
           <TimeContainer>{obj.VideoInfo.runningTime}</TimeContainer>
         </VideoWrap>
         <TextWrap size={size}>

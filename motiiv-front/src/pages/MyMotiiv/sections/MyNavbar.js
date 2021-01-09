@@ -22,6 +22,9 @@ const NavContainer = styled.div`
     @media ${props => props.theme.mobile}{
     display : flex;
     }
+    @media ${props => props.theme.tablet} {
+        display: none;
+    }
 `;
 
 const TagWrapper = styled.div`
