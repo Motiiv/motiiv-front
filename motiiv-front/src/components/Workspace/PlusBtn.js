@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import FormBox from './FormBox';
 const OuterWrapper = styled.div`
   position: relative;
-  width: 12rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,6 +24,15 @@ const PlusBox = styled.div`
     color: ${({ theme }) => theme.darkGray};
   }
   position: relative;
+  @media ${props => props.theme.maxdesktop} {
+    width: 9rem;
+    height: 7.5rem;
+  }
+  & svg {
+    width: 2.8rem;
+    height: 2.8rem;
+    color: ${({ theme }) => theme.darkGray};
+  }
 `;
 
 function PlusBtn() {
