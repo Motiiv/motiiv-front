@@ -9,5 +9,21 @@ const getUserProfile = async () => {
     console.log('[FAIL] getProfile', err);
   }
 };
+/* const IWantCookies = async () => {
+  try {
+    const data = await client.post(
+      `/users/login`,
+      {
+        snsId: '1',
+        socialType: 'kakao',
+      },
+      { withCredentials: true },
+    );
+    console.log('[SUCCESS] IWantCookies', data);
+    return data.data;
+  } catch (err) {
+    console.log('[FAIL] IWantCookies', err);
+  }
+}; */
 
-export { getUserProfile };
+export { getUserProfile /* IWantCookies  */ };

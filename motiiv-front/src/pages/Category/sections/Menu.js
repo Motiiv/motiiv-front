@@ -32,15 +32,16 @@ const TitleIconBox = styled.img`
   border-radius: 0.5rem;
 `;
 function Menu({ word, choice, idx, onHandleMenuChoice }) {
-  const onClickHandle = () => {
-    onHandleMenuChoice(idx);
+  const onClickHandle = evt => {
+    onHandleMenuChoice(idx, evt.currentTarget.attributes.name.value);
+    console.log(idx, evt.currentTarget.attributes.name.value);
   };
   return (
-    <MenuWrapper onClick={onClickHandle}>
+    <MenuWrapper choice={choice} name={word} onClick={onClickHandle}>
       <TitleText>{word}</TitleText>
-      <TitleIconBox
+      {/*       <TitleIconBox
         src={choice === idx ? MenuActive : MenuDefault}
-      ></TitleIconBox>
+      ></TitleIconBox> */}
     </MenuWrapper>
   );
 }
