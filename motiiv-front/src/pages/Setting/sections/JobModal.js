@@ -14,7 +14,7 @@ const ModalWrap = styled.div`
   width: 29.6rem;
   height:13.8rem;
   border-radius: 1rem;
-  background: #4E4E4E;
+  background: ${props => props.theme.darkGray};
   padding: 2rem;
 
   justify-content: space-between;
@@ -22,7 +22,7 @@ const ModalWrap = styled.div`
   flex-direction: column;
 
   font-family : 'Spoqa-Han-Sans';
-  @media ${props => props.theme.laptop} {
+  @media ${props => props.theme.maxdesktop} {
     width: 23rem;
     height:13.8rem;
 
