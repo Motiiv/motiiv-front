@@ -120,6 +120,9 @@ const RecommendCardBox = styled.div`
     & :nth-child(1) {
       margin-top: 0;
     }
+    & :nth-child(6) {
+      display: none;
+    }
   }
 `;
 const VideoInfoWrapper = styled.div`

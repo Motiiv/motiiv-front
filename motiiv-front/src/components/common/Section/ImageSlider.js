@@ -59,94 +59,94 @@ const SliderSection = styled.div`
     flex: 1 !important;
   }
   & .swiper-scrollbar {
-    display : none !important;
+    display: none !important;
   }
-  @media ${props => props.theme.mobile}{
-      padding: 0 2rem;
-      & .swiper-button-prev::after {
-        display: none !important;
-        }
-      & .swiper-button-next::after {
-        display : none !important;
-        }
-      }
-
-  @media ${props => props.theme.tablet}{
-    padding : 0 4rem;
+  @media ${props => props.theme.mobile} {
+    padding: 0 2rem;
     & .swiper-button-prev::after {
-        display: flex !important;
-        }
-      & .swiper-button-next::after {
-        display : flex !important;
-        }
-      }
-  
-  @media ${props => props.theme.desktop}{
+      display: none !important;
+    }
+    & .swiper-button-next::after {
+      display: none !important;
+    }
+  }
+
+  @media ${props => props.theme.tablet} {
+    padding: 0 4rem;
+    & .swiper-button-prev::after {
+      display: flex !important;
+    }
+    & .swiper-button-next::after {
+      display: flex !important;
+    }
+  }
+
+  @media ${props => props.theme.desktop} {
     padding: 0 5.5rem;
   }
 `;
 
-
-function ImageSlider({object,type,size,text}) {
-    const swiperRef = useRef();
-    const num = type=== "top" ? 3 : 4;
-    const space = type === "top" ? 20 : 25;
-    return (
-        <>
-        <SliderSection size = {size}>
+function ImageSlider({ object, type, size, text }) {
+  const swiperRef = useRef();
+  const num = type === 'top' ? 3 : 4;
+  const space = type === 'top' ? 20 : 25;
+  return (
+    <>
+      <SliderSection size={size}>
         <Swiper
-        spaceBetween = {space}
-        slidesPerView = {num}
-        ref={swiperRef}
-        navigation
-        scrollbar
-        breakpoints ={{
-    
-          768: {
-            spaceBetween: 20,
-            slidesPerView: 3,
-          },
-          600: {
-            spaceBetween: 18,
-            slidesPerView: 1 
-          },
-          468: {
-            spaceBetween: 16,
-            slidesPerView: 1
-          },
-          300: {
-            spaceBetween: 16,
-            slidesPerView: 1
-          }
-          // 1024 : {
-          //   spaceBetween : 20,
-          //   slidesePerView: 3,
-          // }
-          // 769 : {
-          //   spaceBetween: 20,
-          //   slidesPerView: 3 
-          // },
-          // 1024 : {
-          //   spaceBetween: space,
-          //   slidesPerView: num,
-          // },
-          // 1280 : {
-          //   spaceBetween : space,
-          //   slidesPerView : num
-          // },
-        
-        }}
-        style={{position : "static",
-                width: '100%',
-                }}
-              >
-        {object.map((obj,idx) => (
+          spaceBetween={space}
+          slidesPerView={num}
+          ref={swiperRef}
+          navigation
+          scrollbar
+          breakpoints={{
+            768: {
+              spaceBetween: 20,
+              slidesPerView: 3,
+            },
+            600: {
+              spaceBetween: 18,
+              slidesPerView: 1,
+            },
+            468: {
+              spaceBetween: 16,
+              slidesPerView: 1,
+            },
+            300: {
+              spaceBetween: 16,
+              slidesPerView: 1,
+            },
+            // 1024 : {
+            //   spaceBetween : 20,
+            //   slidesePerView: 3,
+            // }
+            // 769 : {
+            //   spaceBetween: 20,
+            //   slidesPerView: 3
+            // },
+            // 1024 : {
+            //   spaceBetween: space,
+            //   slidesPerView: num,
+            // },
+            // 1280 : {
+            //   spaceBetween : space,
+            //   slidesPerView : num
+            // },
+          }}
+          style={{ position: 'static', width: '100%' }}
+        >
+          {object.map((obj, idx) => (
             <SwiperSlide>
-                <Card size = {size} text = {text} key={`card-${idx}`} obj={obj}></Card>
+              <Card
+                size={size}
+                text={text}
+                key={`card-${idx}`}
+                obj={obj}
+              ></Card>
             </SwiperSlide>
-        ))}
-      </Swiper>
-    </SliderSection>
+          ))}
+        </Swiper>
+      </SliderSection>
     </>
   );
 }
