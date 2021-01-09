@@ -14,12 +14,6 @@ const DropDownContainer = styled.div`
     margin-top: 2rem;
   }
   cursor: pointer;
-  @media ${props => props.theme.mobile} {
-    display: none;
-  }
-  @media ${props => props.theme.tablet} {
-    display: flex;
-  }
 `;
 const TitleBox = styled.div`
   width: 100%;

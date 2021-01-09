@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import logo from '../../../assets/global/motiiv_logo.png';
 import star from '../../../assets/global/star.png';
-import SigninModal from './signinmodal/SignInModal';
+import SigninModal from './SigninModal/SignInModal';
 import ProfileModal from './ProfileModal';
 
 const activeStyle = {
@@ -38,7 +38,7 @@ const TabContainer = styled.div`
   display: flex;
   width: auto;
   @media ${props => props.theme.mobile} {
-    display:none;
+    display: none;
   }
 `;
 
@@ -76,21 +76,21 @@ const Login = styled.div`
   color: white;
   text-align: left;
   text-decoration: none;
-  cursor:pointer;
+  cursor: pointer;
 `;
 
 const FirstLetter = styled.div`
-  color : #2CFF2C;
+  color: #2cff2c;
   font-size: 1.75rem;
   font-family: 'Spoqa-Han-Sans';
-`
+`;
 
 const Profile = styled.div`
   display: ${props => (props.login === 'true' ? 'flex' : 'none')};
   width: 3rem;
   height: 3rem;
   z-index: 3;
-  position:relative;
+  position: relative;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -98,25 +98,24 @@ const Profile = styled.div`
   border: ${props => (props.onclick === true ? '2px solid #2CFF2C' : 'none')};
   cursor: pointer;
 
-  background-image : url(${props => props.src});
-  ${props => props.src ?
-    `
+  background-image: url(${props => props.src});
+  ${props =>
+    props.src
+      ? `
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     `
-    :
-    `
+      : `
     background-color: #4E4E4E;
-    `
-    };
+    `};
 
-    ${FirstLetter}{
-      position:absolute;
-      top:50%;
-      left:50%;
-      transform: translate(-50%, -50%);
-    }
+  ${FirstLetter} {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 `;
 
 function Navbar() {
@@ -142,57 +141,70 @@ function Navbar() {
     (async () => {
       try {
         setLoginModalState(prev => !prev);
-      } catch (e) {
-        
-      }
+      } catch (e) {}
     })();
-  }
+  };
 
   const { userInfo } = useSelector(({ user }) => ({
-    userInfo: user.userInfo
+    userInfo: user.userInfo,
   }));
 
-  const name = "Bonnie";
-  const firstletter = name.substr(0,1);
+  const name = 'Bonnie';
+  const firstletter = name.substr(0, 1);
   //첫글자가 영어인지 한글인지 테스트하는 로직 필요
 
   return (
     <>
-    <Header>
-      <NavLink exact to="/main">
-        <Logo src={logo} />
-      </NavLink>
-      <TabContainer>
-        <TabElem exact to="/main" activeStyle={activeStyle}>
-          main
-        </TabElem>
-        <Star src={star} />
-        <TabElem to="/category/0" activeStyle={activeStyle}>
-          category
-        </TabElem>
-        <Star src={star} />
-        <TabElem exact to="/mymotiiv" activeStyle={activeStyle}>
-          mymotiiv
-        </TabElem>
-        <Star src={star} show={loginState.admin.toString()} />
-        <TabElem
-          exact
-          to="/admin"
-          show={loginState.admin.toString()}
-          activeStyle={activeStyle}
-        >
-          admin
-        </TabElem>
-      </TabContainer>
+      <Header>
+        <NavLink exact to="/main">
+          <Logo src={logo} />
+        </NavLink>
+        <TabContainer>
+          <TabElem exact to="/main" activeStyle={activeStyle}>
+            main
+          </TabElem>
+          <Star src={star} />
+          <TabElem to="/category/0" activeStyle={activeStyle}>
+            category
+          </TabElem>
+          <Star src={star} />
+          <TabElem exact to="/mymotiiv" activeStyle={activeStyle}>
+            mymotiiv
+          </TabElem>
+          <Star src={star} show={loginState.admin.toString()} />
+          <TabElem
+            exact
+            to="/admin"
+            show={loginState.admin.toString()}
+            activeStyle={activeStyle}
+          >
+            admin
+          </TabElem>
+        </TabContainer>
 
-      <LoginContainer>
-        <Login login={loginState.isLoggined.toString()} onClick={onClickLoginBtn}>login</Login>
-        <Profile src={userInfo.profileImageUrl} login={loginState.isLoggined.toString()} onClick={onClickProfileImage} onclick = {profileModalState}><FirstLetter>{firstletter}</FirstLetter></Profile>
-        <ProfileModal showModal = {profileModalState} name={name} firstletter={firstletter}/>
-
-      </LoginContainer>
-    </Header>
-    <SigninModal showModal={loginModalState}/>
+        <LoginContainer>
+          <Login
+            login={loginState.isLoggined.toString()}
+            onClick={onClickLoginBtn}
+          >
+            login
+          </Login>
+          <Profile
+            src={userInfo.profileImageUrl}
+            login={loginState.isLoggined.toString()}
+            onClick={onClickProfileImage}
+            onclick={profileModalState}
+          >
+            <FirstLetter>{firstletter}</FirstLetter>
+          </Profile>
+          <ProfileModal
+            showModal={profileModalState}
+            name={name}
+            firstletter={firstletter}
+          />
+        </LoginContainer>
+      </Header>
+      <SigninModal showModal={loginModalState} />
     </>
   );
 }
