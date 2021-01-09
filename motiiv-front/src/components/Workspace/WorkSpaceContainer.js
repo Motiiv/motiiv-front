@@ -17,9 +17,10 @@ const CenterWrapper = styled.div`
 function WorkSpaceContainer() {
   return (
     <CenterWrapper>
-      <WorkSpaceBox></WorkSpaceBox>
-      <WorkSpaceBox></WorkSpaceBox>
-      <PlusBtn></PlusBtn>
+      {[1, 2, 3, 4, 5, 6].map((pos, idx) => (
+        <WorkSpaceBox idx={idx}></WorkSpaceBox>
+      ))}
+      {/* <PlusBtn></PlusBtn> */}
     </CenterWrapper>
   );
 }

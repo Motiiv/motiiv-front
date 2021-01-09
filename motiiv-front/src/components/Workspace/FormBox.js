@@ -15,6 +15,10 @@ const WorkSpaceInputBox = styled.div`
   top: 12rem;
   filter: drop-shadow(2px 5px 10px rgba(0, 0, 0, 0.15));
   z-index: 3;
+  @media ${props => props.theme.maxdesktop} {
+    right: ${props => (props.idx === 5 ? '-7rem' : null)};
+    left: ${props => (props.idx === 0 ? '-7rem' : null)};
+  }
 `;
 const Triangle = styled.div`
   z-index: 3;
@@ -129,7 +133,7 @@ const WarningText = styled.p`
   font-size: 1.2rem;
 `;
 
-function FormBox({ hideForm, isShow, isCreate = false }) {
+function FormBox({ idx, hideForm, isShow, isCreate = false }) {
   const [inValidateUrl, SetInValidateUrl] = useState(false);
   const [spaceName, SetSpaceName] = useState('');
   const [urlInput, SetUrlInput] = useState('');
@@ -175,7 +179,7 @@ function FormBox({ hideForm, isShow, isCreate = false }) {
   return (
     isShow && (
       <>
-        <WorkSpaceInputBox ref={myRef}>
+        <WorkSpaceInputBox idx={idx} ref={myRef}>
           <LineInput
             placeholder="워크스페이스의 이름을 입력해주세요"
             value={spaceName}

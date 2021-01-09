@@ -12,6 +12,9 @@ const FloatBtnWrapper = styled.div`
   transform: translateX(-50%);
   transform-origin: center center;
   z-index: 2147483647;
+  @media ${props => props.theme.tablet768} {
+    display: none;
+  }
 `;
 const FloatButton = styled.button`
   width: ${props => (props.isActive || props.isHover ? '4rem' : '14.5rem')};

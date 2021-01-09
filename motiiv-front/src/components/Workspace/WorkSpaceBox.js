@@ -24,18 +24,33 @@ const ContentBox = styled.div`
   }
   position: relative;
   margin-right: 3rem;
+  @media ${props => props.theme.maxdesktop} {
+    width: 9rem;
+    height: 7.5rem;
+    margin-right: 1.8rem;
+  }
+  &:nth-child(6) {
+    margin-right: 0;
+  }
 `;
 
 const ImgIcon = styled.img`
   width: 3.2rem;
   height: 3.2rem;
   margin-bottom: 1.2rem;
+  @media ${props => props.theme.maxdesktop} {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 `;
 const Title = styled.div`
   font-size: 1.4rem;
+  @media ${props => props.theme.maxdesktop} {
+    font-size: 1.2rem;
+  }
 `;
 
-function WorkSpaceBox() {
+function WorkSpaceBox({ idx }) {
   const [isShow, SetIsShow] = useState(false);
   const toggleShow = () => {
     SetIsShow(!isShow);
@@ -48,7 +63,7 @@ function WorkSpaceBox() {
       <MoreOutlined onClick={toggleShow} />
       <ImgIcon src="https://cdn.worldvectorlogo.com/logos/notion-logo-1.svg" />
       <Title>Notion</Title>
-      <FormBox hideForm={hideForm} isShow={isShow}></FormBox>
+      <FormBox idx={idx} hideForm={hideForm} isShow={isShow}></FormBox>
     </ContentBox>
   );
 }
