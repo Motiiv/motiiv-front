@@ -9,6 +9,8 @@ import Admin from './pages/Admin/Admin';
 import Navbar from './components/common/Navbar/Navbar';
 import BottomBanner from './components/common/Banner/BottomBanner';
 import Footer from './components/common/Footer/Footer';
+import MyNavBar from './pages/MyMotiiv/sections/MyNavbar';
+import React, { useState } from 'react';
 import {
   useLocation,
   BrowserRouter as Router,
@@ -18,6 +20,9 @@ import {
 import FloatBtn from './components/common/Button/FloatBtn';
 
 function App({ props }) {
+  const [loginState, setLoginState] = useState({
+    isLogin: false,
+  });
   const location = useLocation();
   return (
     <>
@@ -71,12 +76,13 @@ function App({ props }) {
           path="/upload"
           render={props => <Upload props={props} />}
         ></Route>
-      </Switch>
+      </Switch> 
       <FloatBtn isShow={location.pathname !== '/mymotiiv'} />
       <BottomBanner />
       <Footer />
+      <MyNavBar loginState = {loginState.isLogin}tag = {location.pathname}></MyNavBar> 
     </>
-  );
+  )
 }
 
 export default App;

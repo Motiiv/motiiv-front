@@ -4,11 +4,19 @@ const Wrap = styled.div`
     margin-left: 5.5rem;
     display: flex;
     flex-direction: column;
-    margin-bottom : ${props => props.text ? '5.1rem': '3.8rem'};
+    margin-bottom : ${props => props.text ? '5.1rem': '3rem'};
     @media ${props => props.theme.mobile}{
     margin-left: 2rem;
     margin-bottom : ${props => props.text ? '2rem': '1rem'};
     }
+    @media ${props => props.theme.tablet}{
+    margin-left : 4rem;
+    margin-bottom : ${props => props.text ? '5.1rem': '3 .4rem'};
+  }
+    @media ${props => props.theme.desktop}{
+      margin-left: 5.5rem;
+      margin-bottom : ${props => props.text ? '5.1rem': '3rem'};
+  }
 `;
 const Title = styled.div`
     font-size: 3rem; 
@@ -18,6 +26,12 @@ const Title = styled.div`
     @media ${props => props.theme.mobile}{
     font-size : 1.8rem;
     }
+    @media ${props => props.theme.tablet}{
+    font-size : 2rem;
+  } 
+    @media ${props => props.theme.desktop}{
+    font-size: 3rem; 
+    } 
 `;
 
 const SubTitle = styled.div`
@@ -26,6 +40,13 @@ const SubTitle = styled.div`
   @media ${props => props.theme.mobile}{
     font-size : 1.2rem;
   }
+  @media ${props => props.theme.tablet}{
+  font-size : 1.4rem;
+  }
+  @media ${props => props.theme.desktop}{
+    font-size: 1.6rem;
+  }
+  
 `;
 
 const TitleText = styled.div`
@@ -35,6 +56,12 @@ const TitleText = styled.div`
     @media ${props => props.theme.mobile}{
     font-size : 1.8rem;
     }
+    @media ${props => props.theme.tablet}{
+    font-size : 2rem; 
+  } 
+  @media ${props => props.theme.desktop}{
+    font-size: 3rem;
+  }
 `;
 
 
@@ -42,7 +69,7 @@ const TitleText = styled.div`
 const TitleContent = ({object, text}) => {
     console.log(object)
     return(
-            <Wrap text={text}>
+            <Wrap text={text}> 
                 { !text ? ( 
                 <>
                 <Title>{object[0].TextInfo.category}</Title>
