@@ -6,6 +6,7 @@ import SortModal from '../../pages/Category/sections/SortModal';
 import DownArrow from '../../assets/global/downArrow.svg';
 import UpperArrow from '../../assets/global/upperArrow.svg';
 import AsideModal from '../../pages/Category/sections/AsideModal';
+import AsideMenu from '../../pages/Category/sections/AsideMenu';
 
 const SliderObject = [
   {
@@ -262,13 +263,18 @@ function CategoryComponent({ hashTag }) {
           active={activeStatus.status}
           onHandleMenuChoice={onHandleMenuChoice}
         />
-        <DropDownMenu
+        <AsideMenu
+          text={activeStatus.text}
+          choice={activeStatus.choice}
+          onHandleMenuChoice={onHandleMenuChoice}
+        ></AsideMenu>
+        {/* <DropDownMenu
           text={activeStatus.text}
           choice={activeStatus.choice}
           onChangeActiveStatus={onChangeActiveStatus}
           active={activeStatus.status}
           onHandleMenuChoice={onHandleMenuChoice}
-        />
+        /> */}
         {/*         <DropDownMenu
           text="직군"
           name="job"
@@ -288,7 +294,7 @@ function CategoryComponent({ hashTag }) {
           <SortButtonWrapper>
             <TitleTextAndButton onClick={onHandleSortModalStatus}>
               <SortTitleText>{sortStatus.text}</SortTitleText>
-              <SortButtonImg src={sortStatus.active ? UpperArrow : DownArrow} />
+              <SortButtonImg src={sortStatus.status ? UpperArrow : DownArrow} />
             </TitleTextAndButton>
             <SortModal
               sortModal={sortStatus.status}

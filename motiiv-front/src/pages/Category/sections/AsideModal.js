@@ -6,15 +6,21 @@ import Menu from './Menu';
 
 const ModalWrapper = styled.div`
   width: 100%;
-  height: fit-content;
+  //height: 100%;
   border-radius: 0.7rem;
+  overflow: hidden;
+  transition: 0.5s;
   ${props =>
     props.active
       ? css`
-          display: flex;
+          height: 12rem;
+          visibility: visible;
+          opacity: 1;
         `
       : css`
-          display: none;
+          height: 0;
+          visibility: hidden;
+          opacity: 0;
         `}
   flex-direction: column;
   z-index: 3;
