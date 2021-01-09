@@ -7,6 +7,7 @@ const Wrap = styled.div`
     margin-bottom : ${props => props.text ? '5.1rem': '3rem'};
     @media ${props => props.theme.mobile}{
     margin-left: 2rem;
+    margin-top : 1.5rem;
     margin-bottom : ${props => props.text ? '2rem': '1rem'};
     }
     @media ${props => props.theme.tablet}{

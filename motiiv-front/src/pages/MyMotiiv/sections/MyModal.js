@@ -1,8 +1,8 @@
 import React from 'react'
 import styled, {css} from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import ModalCoverImage from '../../../assets/global/0106_mymotiiv_login_mockup.png';
-import ModalMobileImage from '../../../assets/global/mobile_mymotiiv_mockup_mobile_3.png';
+import ModalCoverImage from '../../../assets/global/0109_mymotiiv_login_mockup.png';
+import ModalMobileImage from '../../../assets/global/0109_mobile_mymotiiv_mockup.png';
 import MyNavBar from '../sections/MyNavbar';
 const ModalContainer = styled.div`
     width: 100%;
@@ -13,6 +13,10 @@ const ModalContainer = styled.div`
     align-items: center; 
     z-index :998;
     background-color: rgba(0, 0, 0, 0.7);
+    @media ${props => props.theme.mobile}{
+    max-width: 76.8rem;
+    max-height: 64.3rem;
+  }
 `;
 const ModalOverlay = styled.div`
     position: absolute;
@@ -25,8 +29,8 @@ const ModalOverlay = styled.div`
     background-image: url(${ModalCoverImage});
     @media ${props => props.theme.mobile}{
     background-image : url(${ModalMobileImage});
-    max-width : 76.8rem;
-    max-height : 81.2rem;
+    max-width: 76.8rem;
+    max-height: 64.3rem;
   }
 
 `
@@ -43,7 +47,8 @@ const ModalWrapper = styled.div`
     @media ${props => props.theme.mobile}{
     width : 27.5rem;
     height : 35.3rem;
-    left : 37%; 
+    left : 51%;
+    position  : fixed;
 
   }
 `;

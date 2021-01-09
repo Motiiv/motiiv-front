@@ -16,11 +16,13 @@ const NavContainer = styled.div`
     align-items: center;
     justify-content: center;
     z-index : 99999;
-    position : sticky;
+    position: -webkit-sticky;
+    position : ${props => props.loginState ? 'sticky': 'absolute'};
     bottom : 0;
     // 모바일일때만 하단 navBar 보이게 하는코드
     @media ${props => props.theme.mobile}{
     display : flex;
+
     }
     @media ${props => props.theme.tablet} {
         display: none;

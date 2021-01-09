@@ -80,7 +80,7 @@ function App({ props }) {
       <FloatBtn isShow={location.pathname !== '/mymotiiv'} />
       <BottomBanner />
       <Footer />
-      <MyNavBar loginState = {loginState.isLogin}tag = {location.pathname}></MyNavBar> 
+      <MyNavBar loginState = {loginState.isLogin} tag = {location.pathname}></MyNavBar> 
     </>
   )
 }
