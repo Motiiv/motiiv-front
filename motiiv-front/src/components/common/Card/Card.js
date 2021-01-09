@@ -1,8 +1,10 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import styled, { css } from 'styled-components';
 import Tag from '../Tag/Tag';
 import { withRouter } from 'react-router-dom';
 import HoverVideoPlayer from 'react-hover-video-player';
+import SaveImage from '../../../assets/global/save_icon.svg';
+import SaveClickImage from '../../../assets/global/saveclick_icon.svg';
 const CardWrap = styled.div`
   display: flex;
   width: 100%;
@@ -11,7 +13,7 @@ const CardWrap = styled.div`
   min-height: ${props => (props.size === 'large' ? '33.5 rem' : '26.7rem')};
   flex-direction: column;
   box-shadow: ${props =>
-  props.size === 'large' ? '2px 2px 7px rgba(0, 0, 0, 0.15)' : 'none'};
+    props.size === 'large' ? '2px 2px 7px rgba(0, 0, 0, 0.15)' : 'none'};
   border-radius: 1rem;
   @media ${props => props.theme.mobile} {
     min-width: 30rem;
@@ -27,8 +29,6 @@ const CardWrap = styled.div`
     height: auto;
     min-height: ${props => (props.size === 'large' ? '33.5 rem' : '26.7rem')};
   }
-
-
 `;
 const VideoWrap = styled.div`
   width: 100%;
@@ -49,18 +49,43 @@ const VideoWrap = styled.div`
   @media ${props => props.theme.tablet} {
     height: ${props => (props.size === 'large' ? '12.3rem' : '12.2rem')};
   }
-  @media ${props => props.theme.desktop} {
- 
+  @media ${props => props.theme.laptop} {
     height: ${props => (props.size === 'large' ? '21.2rem' : '15.4rem')};
-   
   }
-
+  @media ${props => props.theme.desktop} {
+    height: ${props => (props.size === 'large' ? '21.2rem' : '15.4rem')};
+  }
 `;
 // const Video = styled.div`
 //     position : absolute;
 //     width: 100%;
 // `;
 
+const SaveBox = styled.div`
+  display:  ${props => (props.saveButton === false ? 'none' : 'flex')};
+  align-items: center;
+  position : absolute;
+  right: 1.5rem;
+  top: 1.4rem;
+  line-height: 0 !important;
+  cursor: pointer;
+`;
+const SaveImg = styled.img`
+  width: 3.5rem;
+  height: 3.542rem;
+  @media ${props => props.theme.mobile} {
+    width: 3rem;
+    height: 3rem;
+  }
+  @media ${props => props.theme.tablet} {
+    width: 2.2rem;
+  height: 2.2rem;
+  }
+  @media ${props => props.theme.desktop} {
+    width: 3.5rem;
+    height: 3.542rem;
+  }
+`;
 const TimeContainer = styled.div`
   position: absolute;
   right: 1.5rem;
@@ -82,11 +107,11 @@ const TimeContainer = styled.div`
     margin-left: 1.2rem;
   }
   @media ${props => props.theme.tablet} {
-    right : 1.4rem;
+    right: 1.4rem;
     bottom: 1.2rem;
     width: 3.9rem;
     height: 1.5rem;
-    font-size : 1rem;
+    font-size: 1rem;
   }
   @media ${props => props.theme.desktop} {
     right: 1.5rem;
@@ -112,7 +137,7 @@ const Views = styled.div`
     font-size: 1.2rem;
   }
   @media ${props => props.theme.tablet} {
-    font-size : 1.2rem;
+    font-size: 1.2rem;
   }
   @media ${props => props.theme.desktop} {
     font-size: 1.5rem;
@@ -137,7 +162,7 @@ const Channel = styled.div`
     font-size: 1.2rem;
   }
   @media ${props => props.theme.tablet} {
-    font-size : 1.2rem;
+    font-size: 1.2rem;
     margin-left: 0.5rem;
     padding-left: 0.5 rem;
   }
@@ -161,7 +186,8 @@ const TextWrap = styled.div`
   background: ${props => (props.size === 'large' ? 'white' : 'transparent')};
   border-radius: 0 0 1rem 1rem;
   @media ${props => props.theme.mobile} {
-    //height: 7.4rem;
+    height : auto;
+   
   }
   @media ${props => props.theme.tablet} {
     height: auto;
@@ -227,7 +253,7 @@ const TagContainer = styled.div`
   margin-top: 1.5rem;
   margin-left: ${props => (props.size === 'large' ? '2rem' : '1px')};
   @media ${props => props.theme.mobile} {
-    display: flex;
+    display: none;
   }
   @media ${props => props.theme.tablet} {
     display: flex;
@@ -240,7 +266,8 @@ const TagContainer = styled.div`
   }
 `;
 // Tag 컴포넌트 만들어서 불러오기
-function Card({ obj, size, text, history }) {
+function Card({ obj, size, text, history,saveButton }) {
+  const [save, setSave] = useState(false);
   return (
     <>
       <CardWrap size={size}>
@@ -265,6 +292,9 @@ function Card({ obj, size, text, history }) {
               borderRadius: '1rem',
             }}
           /> */}
+            <SaveBox saveButton = {saveButton}onClick={() => setSave(!save)}>
+                  <SaveImg src={save ? SaveClickImage : SaveImage} />
+                </SaveBox>
           <TimeContainer>{obj.VideoInfo.runningTime}</TimeContainer>
         </VideoWrap>
         <TextWrap size={size}>

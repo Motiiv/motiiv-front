@@ -10,6 +10,7 @@ const theme = {
   darkGray: '#4e4e4e',
   gray: '#a7a7a7',
   lightGray: '#f3f3f3',
+
   mobile375: `(max-width: ${size.mobile})`,
   mobile: `(max-width: ${size.tablet})`,
   tablet768: `(max-width: ${size.tablet})`,

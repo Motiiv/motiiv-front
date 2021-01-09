@@ -25,7 +25,7 @@ import { useCookies } from 'react-cookie'; */
 
 function App({ props }) {
   const [loginState, setLoginState] = useState({
-    isLogin: false,
+    isLogin: true,
   });
   const location = useLocation();
   //const [cookies, setCookie] = useCookies(['user']);
@@ -109,7 +109,7 @@ function App({ props }) {
       <FloatBtn isShow={location.pathname !== '/mymotiiv'} />
       <BottomBanner />
       <Footer />
-      <MyNavBar loginState = {loginState.isLogin}tag = {location.pathname}></MyNavBar> 
+      <MyNavBar loginState = {loginState.isLogin} tag = {location.pathname}></MyNavBar> 
     </>
   )
 }

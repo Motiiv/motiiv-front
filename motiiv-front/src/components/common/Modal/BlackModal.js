@@ -1,39 +1,8 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled, {css} from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import ModalCoverImage from '../../../assets/global/0109_mymotiiv_login_mockup.png';
-import ModalMobileImage from '../../../assets/global/0109_mobile_mymotiiv_mockup.png';
-import MyNavBar from '../sections/MyNavbar';
-// const ModalContainer = styled.div`
-//     width: 100%;
-//     height:100%;
-//     position : fixed;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center; 
-//     z-index :998;
-//     background-color: rgba(0, 0, 0, 0.7);
-//     @media ${props => props.theme.mobile}{
-//     max-width: 76.8rem;
-//     max-height: 64.3rem;
-//   }
-// `;
-const ModalOverlay = styled.div`
-    position: fixed;
-    z-index: 999;
-    width: 100%; 
-    height: 100%;
-    background-size: cover;
-    border : none;
-    overflow : hidden;
-    background-image: url(${ModalCoverImage});
-    @media ${props => props.theme.mobile}{
-    background-image : url(${ModalMobileImage});
-    /* max-width: 76.8rem;
-    max-height: 64.3rem; */
-  }
+import { Modal, Button} from 'antd';
 
-`;
 const ModalWrapper = styled.div`
     z-index: 1000;
     background-color: rgba(0, 0, 0, 0.8);
@@ -41,21 +10,14 @@ const ModalWrapper = styled.div`
     height: 43.6rem;
     border-radius: 1.5rem;
     position: absolute;
-    top: 50%;
+    top: 43%;
     left: 50%;
     transform: translate(-50%, -50%);
     @media ${props => props.theme.mobile}{
     width : 27.5rem;
     height : 35.3rem;
-  }
-
-  @media ${props => props.theme.tablet}{
-    width : 30rem;
-    height : 38rem;
-  }
-  @media ${props => props.theme.desktop}{
-    width: 35rem;
-    height: 43.6rem;
+    left : 51%;
+    position  : fixed;
   }
 `;
 
@@ -75,14 +37,7 @@ const ToggleGif = styled.div`
     @media ${props => props.theme.mobile}{
     width: 8rem;
     hegiht : 3.7rem; 
-  }
-  @media ${props => props.theme.tablet}{
-    width: 6.5rem;
-    hegiht : 3rem; 
-  }
-  @media ${props => props.theme.desktop}{
-    width: 9rem;
-    height : 3.7rem;
+    
   }
 `;
 
@@ -95,12 +50,6 @@ const Title = styled.div`
     @media ${props => props.theme.mobile}{
     margin-top : 3.5rem;
     font-size : 1.6rem;
-  }
-  @media ${props => props.theme.tablet}{
-    font-size : 2rem;
-  }
-  @media ${props => props.theme.desktop}{
-    font-size : 2rem;
   }
 `;
 
@@ -115,12 +64,8 @@ const Subtitle = styled.div`
     margin-top : 3rem;
     font-size : 1.4rem;
   }
-  @media ${props => props.theme.tablet}{
-    font-size : 1.6rem;
-  }
     
 `;
-
 
 const TagWrapper = styled.div`
     width : 13.8rem;
@@ -134,14 +79,6 @@ const TagWrapper = styled.div`
     @media ${props => props.theme.mobile}{
     margin-top : 4rem;
   }
-  @media ${props => props.theme.tablet}{
-    margin-top : 6.1rem;
-  }
-  @media ${props => props.theme.desktop}{
-    margin-top : 7rem;
-  }
-  
-  
     
     
 `;
@@ -187,11 +124,10 @@ const Login = styled(NavLink)`
 
 
 
-function MyModal() {
-
+function BlackModal() {
     return (
-         <>  
-            <ModalOverlay />
+        <>
+       
             <ModalWrapper>
                 <ModalInner>
                     <ToggleGif></ToggleGif>
@@ -206,9 +142,9 @@ function MyModal() {
                     </TagWrapper>
                 </ModalInner>
             </ModalWrapper>
-            
-        </>
+</>
+    
     )
 }
 
-export default MyModal;
+export default BlackModal;

@@ -4,10 +4,8 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import Tag from '../../../components/common/Tag/ProfileTag';
 import ToggleBtn from '../Button/ToggleBtn';
-import profile from '../../../assets/profile/sampleImage.png';
 import naver from '../../../assets/profile/naverlink_btn_small.png';
 import kakao from '../../../assets/profile/kakaolink_btn_small.png';
-import camera from '../../../assets/profile/ic_camera.png';
 
 import { useSelector } from 'react-redux';
 import Loading from '../Loading/Loading';
@@ -19,7 +17,7 @@ const ModalWrap = styled.div`
   position: absolute;
   top: 5rem;
   right: 3.5rem;
-  z-index: 10;
+  z-index: 10000;
 
   width: 28rem;
   height: 41.3rem;
@@ -32,58 +30,110 @@ const ModalWrap = styled.div`
   flex-direction: column;
 
   font-family: 'Spoqa-Han-Sans';
+
+  @media ${props => props.theme.maxlaptop} {
+    width: 25rem;
+    height: 36.8rem;
+  }
+  @media ${props => props.theme.mobile} {
+    width: 17rem;
+    height: 28.5rem;
+  }
 `;
 
-/* 프로필 이미지 */
+const FirstLetter = styled.div`
+  color : #2CFF2C;
+  ${props => props.lang == 'kor' ?
+  `
+    font-size : 5.5rem;
+  `
+  :
+  `
+    font-size : 6.5rem;
+  `
+  };
+  @media ${props => props.theme.maxlaptop} {
+    ${props => props.lang == 'kor' ?
+  `
+    font-size : 4rem;
+  `
+  :
+  `
+    font-size : 5.3rem;
+  `
+  };
+  }
+  @media ${props => props.theme.mobile} {
+    ${props => props.lang == 'kor' ?
+  `
+    font-size : 2.8rem;
+  `
+  :
+  `
+    font-size : 3.5rem;
+  `
+  };
+  }
+`
 
-const ProfileImageContainer = styled.div`
+/* 프로필 이미지 */
+const ProfileImage = styled.div`
   width: 10rem;
   height: 10rem;
   margin-top: 2.5rem;
-  margin-bottom: 2rem;
-  position: relative;
-`;
-
-const InputContainer = styled.label`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-
-  width: 2.8rem;
-  height: 2.8rem;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 100%;
-  background-color: white;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
-
-  cursor: pointer;
-`;
-
-const PhotoInput = styled.input`
-  position: absolute;
-  clip: rect(0, 0, 0, 0);
-`;
-
-const CameraIcon = styled.img`
-  width: 1.6rem;
-`;
-
-const ProfileImage = styled.img`
-  width: 10rem;
-  height: 10rem;
+  margin-bottom: 1.8rem;
   z-index: 11;
   border-radius: 100%;
+  position: relative;
+
+  @media ${props => props.theme.maxlaptop} {
+    width: 8.5rem;
+    height: 8.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+  @media ${props => props.theme.mobile} {
+    width: 5rem;
+    height: 5rem;
+    margin-top: 2rem;
+    margin-bottom: 1.9rem;
+  }
+
+  background-image : url(${props => props.src});
+
+  ${props => props.src ?
+  `
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  `
+  :
+  `
+    background-color: #4E4E4E;
+  `
+  };
+
+  ${FirstLetter}{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+  }
+
 `;
+
 
 /* 닉네임 + 소셜 로그인 아이콘 */
 const FirstDiv = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 1.8rem;
+  margin-bottom: 1.5rem;
+  @media ${props => props.theme.maxlaptop} {
+    margin-bottom: 1.2rem;
+  }
+  @media ${props => props.theme.mobile} {
+    margin-bottom: 1.5rem;
+  }  
 `;
 
 const SocialImage = styled.img`
@@ -95,12 +145,24 @@ const SocialImage = styled.img`
 const ProfileName = styled.div`
   font-weight: 700;
   font-size: 2rem;
+  @media ${props => props.theme.maxlaptop} {
+    font-size: 1.7rem;
+  }
+  @media ${props => props.theme.mobile} {
+    font-size: 1.2rem;
+  } 
 `;
 
 /* 관심사 태그 컨테이너 */
 const TagBox = styled.div`
   display: flex;
   margin-bottom: 3.6rem;
+  @media ${props => props.theme.maxlaptop} {
+    margin-bottom: 3rem; 
+  }
+  @media ${props => props.theme.mobile} {
+    margin-bottom: 2rem;
+  }
 `;
 
 /* 다크 모드 버튼 영역 */
@@ -119,17 +181,32 @@ const DarkToggleContainer = styled.div`
   margin-bottom: 1.7rem;
 
   padding: 0 2.5rem;
+  @media ${props => props.theme.maxlaptop} {
+    width: 25rem;
+    height: 5.1rem;
+    margin-bottom: 1.5rem;
+  }
+  @media ${props => props.theme.mobile} {
+    width: 17rem;
+    height: 3.9rem;
+  }
 `;
+
 const ToggleText = styled.div`
   font-weight: 'Spoqa-Han-Sans';
   font-size: 1.4rem;
   font-weight: 700;
+  @media ${props => props.theme.mobile} {
+    font-size: 1rem;
+  }
 `;
 
-function ProfileModal({ showModal }) {
+function ProfileModal({ showModal, name, firstletter }) {
+  
   //추후 서버 연결시 kakao/naver 구분해서 state 관리
   const [socialState, setSocialState] = useState(true);
   const [isToggled, setIsToggled] = useState(false); //추후 isToggled 여부로 다크모드 설정
+  const [langState, setLangState] = useState('kor');
 
   const { userInfo, loading } = useSelector(({ user, loading }) => ({
     userInfo: user.userInfo,
@@ -138,27 +215,21 @@ function ProfileModal({ showModal }) {
 
   return (
     <ModalWrap show={showModal}>
-      <ProfileImageContainer>
         {!loading ? (
-          <ProfileImage src={userInfo.profileImageUrl} />
+          <ProfileImage src={userInfo.profileImageUrl}><FirstLetter lang={langState}>{firstletter}</FirstLetter></ProfileImage>
         ) : (
           <Loading></Loading>
         )}
-        <InputContainer for="upload">
-          <CameraIcon src={camera} />
-          <PhotoInput type="file" id="upload" />
-        </InputContainer>
-      </ProfileImageContainer>
 
       <FirstDiv>
-        <ProfileName>모디부</ProfileName>
+        <ProfileName>{name}</ProfileName>
         <SocialImage src={socialState === true ? kakao : naver} />
       </FirstDiv>
 
       <TagBox>
-        <Tag text={'여기는'} padding="0.4rem 0.8rem" />
-        <Tag text={'카테고리'} padding="0.4rem 0.8rem" />
-        <Tag text={'들어감'} padding="0.4rem 0.8rem" />
+        <Tag text={'관심사는'} padding="0.4rem 0.8rem" />
+        <Tag text={'최대네글'} padding="0.4rem 0.8rem" />
+        <Tag text={'자입니다'} padding="0.4rem 0.8rem" />
       </TagBox>
 
       <NavLink exact to="/setting" style={{ textDecoration: 'none' }}>
