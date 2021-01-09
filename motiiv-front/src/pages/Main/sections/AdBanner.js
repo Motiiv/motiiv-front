@@ -16,14 +16,31 @@ const Container = styled.div`
   height: 25rem;
   max-width: 128rem;
   padding-left: 15rem;
-  @media ${props => props.theme.laptop} {
+  position: relative;
+  @media ${props => props.theme.maxdesktop} {
     padding-left: 5.5rem;
+  }
+  @media ${props => props.theme.tablet768} {
+    padding-left: 3rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0.5) 100%
+      ),
+      ${props => 'url(' + props.src + ')'};
   }
 `;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
+  @media ${props => props.theme.tablet768} {
+    height: 80%;
+    justify-content: space-between;
+  }
 `;
 const Text = styled.h1`
   color: white;
@@ -32,7 +49,7 @@ const Text = styled.h1`
   padding-top: 0.3rem;
   margin-bottom: 2rem;
   line-height: 5rem;
-  @media ${props => props.theme.laptop} {
+  @media ${props => props.theme.tablet768} {
     font-size: 2rem;
     line-height: 3rem;
   }
@@ -48,12 +65,15 @@ const ImgBanner = styled.div`
       rgba(0, 0, 0, 1) 0%,
       rgba(196, 196, 196, 0) 50%
     ),
-    ${props => 'url(' + props.src + ')'}; ;
+    ${props => 'url(' + props.src + ')'};
+  @media ${props => props.theme.tablet768} {
+    display: none;
+  }
 `;
 function AdBanner() {
   return (
     <BannerWrapper>
-      <Container>
+      <Container src={'https://i.ytimg.com/vi/WpVLudOlauA/maxresdefault.jpg'}>
         <Wrapper>
           <Text>
             이영상을 본
