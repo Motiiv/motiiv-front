@@ -29,6 +29,7 @@ const ModalOverlay = styled.div`
     background-image: url(${ModalCoverImage});
     @media ${props => props.theme.mobile}{
     background-image : url(${ModalMobileImage});
+
     /* max-width: 76.8rem;
     max-height: 64.3rem; */
   }
