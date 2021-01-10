@@ -10,7 +10,9 @@ import Navbar from './components/common/Navbar/Navbar';
 import BottomBanner from './components/common/Banner/BottomBanner';
 import Footer from './components/common/Footer/Footer';
 import MyNavBar from './pages/MyMotiiv/sections/MyNavbar';
+import MyModal from './pages/MyMotiiv/sections/MyModal';
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import {
   useLocation,
   BrowserRouter as Router,
@@ -22,6 +24,23 @@ import FloatBtn from './components/common/Button/FloatBtn';
 /* import { IWantCookies } from './lib/api/user';
 import Cookies from 'js-cookie';
 import { useCookies } from 'react-cookie'; */
+
+const Container = styled.div`
+  display : flex;
+  justify-content: center;
+  align-items: center;
+  
+`;
+
+const Button = styled.button`
+  min-width: 100px;
+  padding: 16px 32px;
+  border-radius: 4px;
+  background: #141414;
+  color : #fff;
+  font-size : 24px;
+  cursor: pointer;
+`;
 
 function App({ props }) {
   const [loginState, setLoginState] = useState({
@@ -44,10 +63,18 @@ function App({ props }) {
     //console.log(document.cookie);
     //setCookie('userToken', newName, { path: '/' });
   }; */
+  // const [showModal,setShowModal] = useState(false);
 
+  // const openModal = () => {
+  //   setShowModal(prev=> !prev)
+  // }
   return (
     <>
       <Navbar />
+      {/* <Container>
+           <Button onClick={openModal}>I'm a modal</Button>
+           <MyModal showModal={showModal} setShowModal = {setShowModal}/>
+         </Container> */}
       {/*       <div style={{ width: '100%', textAlign: 'center', fontWeight: 'bold' }}>
         <input
           style={{ fontWeight: 'bold' }}

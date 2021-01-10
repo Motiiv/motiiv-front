@@ -1,7 +1,29 @@
-import React, { useState } from 'react';
+import React ,{useState,useEffect,useCallback,useRef}from 'react'
+import {useSpring,animated} from 'react-spring';
+import {MdClose} from 'react-icons/md';
 import styled, { css } from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { Modal, Button } from 'antd';
+
+const ModalContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0);
+`;
+
+const ModalOverlay = styled.div`
+    position: fixed;
+    top : 0;
+    left : 0;
+    right: 0;
+    bottom : 0;
+    background-size: cover;
+    border : none;
+    background-color : black;
+    opacity: 0.7;
+    z-index : 10;
+`;
 
 const ModalWrapper = styled.div`
   z-index: 1000;
@@ -10,14 +32,28 @@ const ModalWrapper = styled.div`
   height: 43.6rem;
   border-radius: 1.5rem;
   position: absolute;
-  top: 43%;
   left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
   @media ${props => props.theme.mobile} {
     width: 27.5rem;
     height: 35.3rem;
-    left: 51%;
-    position: fixed;
+    transform: translate(-50%, -50%);
+  }
+  @media ${props => props.theme.mobile375} {
+    width: 27.5rem;
+    height: 35.3rem;
+
+    
+  }
+  @media ${props => props.theme.tablet} {
+    width: 30rem;
+    height: 38rem;
+  
+  }
+  @media ${props => props.theme.desktop}{
+    width: 35rem;
+    height: 43.6rem;
   }
 `;
 
@@ -34,9 +70,17 @@ const ToggleGif = styled.div`
   height: 3.7rem;
   border-radius: 3rem;
   margin-top: 5rem;
-  @media ${props => props.theme.mobile} {
+  @media ${props => props.theme.mobile}{
     width: 8rem;
-    hegiht: 3.7rem;
+    hegiht : 3.7rem; 
+  }
+  @media ${props => props.theme.tablet}{
+    width: 6.5rem;
+    hegiht : 3rem; 
+  }
+  @media ${props => props.theme.desktop}{
+    width: 9rem;
+    height : 3.7rem;
   }
 `;
 
@@ -46,9 +90,15 @@ const Title = styled.div`
   font-size: 2rem;
   color: ${({ theme }) => theme.primary};
   margin-top: 6rem;
-  @media ${props => props.theme.mobile} {
-    margin-top: 3.5rem;
-    font-size: 1.6rem;
+  @media ${props => props.theme.mobile}{
+    margin-top : 3.5rem;
+    font-size : 1.6rem;
+  }
+  @media ${props => props.theme.tablet}{
+    font-size : 2rem;
+  }
+  @media ${props => props.theme.desktop}{
+    font-size : 2rem;
   }
 `;
 
@@ -59,9 +109,12 @@ const Subtitle = styled.div`
   line-height: 150%;
   margin-top: 4.5rem;
   text-align: center;
-  @media ${props => props.theme.mobile} {
-    margin-top: 3rem;
-    font-size: 1.4rem;
+  @media ${props => props.theme.mobile}{
+    margin-top : 3rem;
+    font-size : 1.4rem;
+  }
+  @media ${props => props.theme.tablet}{
+    font-size : 1.6rem;
   }
 `;
 
@@ -74,8 +127,14 @@ const TagWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 7rem;
-  @media ${props => props.theme.mobile} {
-    margin-top: 4rem;
+  @media ${props => props.theme.mobile}{
+    margin-top : 4rem;
+  }
+  @media ${props => props.theme.tablet}{
+    margin-top : 6.1rem;
+  }
+  @media ${props => props.theme.desktop}{
+    margin-top : 7rem;
   }
 `;
 const ContentWrapper = styled.div`
@@ -117,10 +176,54 @@ const Login = styled(NavLink)`
   text-decoration: none;
 `;
 
-function BlackModal() {
+function BlackModal({blackModal,setBlackModal}) {
+
+  const modalRef = useRef();
+
+
+  const animation = useSpring({
+    config : {
+      duration : 250
+    },
+    opacity: BlackModal.active ? 1: 0,
+    transform : BlackModal.active ? `translateY(0%)` : `translateY(-100%)`
+  })
+
+  const closeModal = e => {
+    if(modalRef.current === e.target) {
+      setBlackModal({
+        ...blackModal,
+        active: false,
+      });
+      document.body.style.overflow = "unset"
+    }
+  }
+
+  const keyPress = useCallback(
+    e => {
+      if (e.key === 'Escape' && blackModal.active) {
+        setBlackModal({
+          ...blackModal,
+          active: false,
+        });
+        console.log('I pressed');
+      }
+    },
+    [setBlackModal, blackModal]
+  );
+  useEffect(() => {
+    document.addEventListener('keydown', keyPress);
+    document.body.style.overflow = "hidden";
+    return () => document.removeEventListener('keydown',keyPress)
+  }, [keyPress])
   return (
     <>
-      <ModalWrapper>
+    {blackModal.active ? (
+    // <ModalContainer>
+    <>
+    {/* <ModalContainer> */}
+    <ModalOverlay onClick={closeModal} ref={modalRef}>
+      <ModalWrapper  showModal={blackModal.active}>
         <ModalInner>
           <ToggleGif></ToggleGif>
           <Title>회원만 접근할 수 있어요!</Title>
@@ -143,6 +246,10 @@ function BlackModal() {
           </TagWrapper>
         </ModalInner>
       </ModalWrapper>
+      </ModalOverlay>
+       {/* </ModalContainer> */}
+      </>
+    ) : null}
     </>
   );
 }

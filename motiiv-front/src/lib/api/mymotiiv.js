@@ -1,12 +1,12 @@
 import client from './_client';
 
-const getSwiperVideo = async (aid, noteContent) => {
+const getMyMotiiv = async (aid, noteContent) => {
   try {
-    const { data } = await client.post(`/note/${aid}`, noteContent);
-    console.log('[SUCCESS] createNote', data);
+    const { data } = await client.get(`/videos/myMotiiv`);
+    console.log('[SUCCESS] getMyMotiiv', data);
     return data;
   } catch (e) {
-    console.log('[FAIL] createNote', e);
+    console.log('[FAIL] getMyMotiiv', err);
     throw e;
   }
 };
@@ -22,4 +22,4 @@ const updateNoteApi = async (aid, noteContent) => {
   }
 };
 
-export { createNoteApi, updateNoteApi };
+export { getMyMotiiv };

@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import {useSpring,animated} from 'react-spring';
+import {MdClose} from 'react-icons/md';
+import React ,{useState,useEffect,useCallback,useRef}from 'react'
 import styled, { css } from 'styled-components';
 import LikeImage from '../../assets/global/like_icon.svg';
 import SaveImage from '../../assets/global/save_icon.svg';
@@ -9,6 +11,7 @@ import RecommendCard from '../../pages/Detail/sections/RecommendCard';
 import ShareModal from '../../pages/Detail/sections/ShareModal';
 import { withRouter } from 'react-router-dom';
 import BlackModal from '../common/Modal/BlackModal';
+import MyModal from '../../pages/MyMotiiv/sections/MyModal';
 
 const SliderObject = [
   {
@@ -385,6 +388,22 @@ function DetailComponent({ location }) {
   });
   const descRef = useRef();
 
+
+///////////////
+
+const BlackModalConfirm = () => {
+  if (!blackModal.isLogin) {
+    setBlackModal({
+      ...blackModal,
+      active: !blackModal.active,
+    });
+  }
+};
+
+
+
+
+///////////////
   /* 더보기 버튼 모달창 */
   /*   const onHandleToggleButton = () => {
     setToggle(!toggle);
@@ -396,14 +415,7 @@ function DetailComponent({ location }) {
     } */
   }, []);
 
-  const BlackModalConfirm = () => {
-    if (!blackModal.isLogin) {
-      setBlackModal({
-        ...blackModal,
-        active: !blackModal.active,
-      });
-    }
-  };
+
   const LikeToggle = () => {
     setLike(!like);
     BlackModalConfirm();
@@ -413,8 +425,8 @@ function DetailComponent({ location }) {
     BlackModalConfirm();
   };
   return (
+    <>
     <DetailContainer>
-      {blackModal.active && <BlackModal></BlackModal>}
       <VideoWrapper>
         <VideoDisplay>
           <iframe
@@ -482,11 +494,11 @@ function DetailComponent({ location }) {
             </TextBox>
             <MobileButtonBox>
               <ButtonBox>
-                <LikeBox onClick={() => setLike(!like)}>
+                <LikeBox onClick={LikeToggle}>
                   <LikeText like={like}>좋아요</LikeText>
                   <LikeImg src={like ? LikeClickImage : LikeImage} />
                 </LikeBox>
-                <SaveBox onClick={() => setSave(!save)}>
+                <SaveBox onClick={SaveToggle}>
                   <SaveText save={save}>저장</SaveText>{' '}
                   <SaveImg src={save ? SaveClickImage : SaveImage} />
                 </SaveBox>
@@ -532,6 +544,8 @@ function DetailComponent({ location }) {
         </RecommendCardBox>
       </RecommendWrapper>
     </DetailContainer>
+    {blackModal.active && <BlackModal blackModal={blackModal} setBlackModal={setBlackModal} ></BlackModal>}
+    </>
   );
 }
 

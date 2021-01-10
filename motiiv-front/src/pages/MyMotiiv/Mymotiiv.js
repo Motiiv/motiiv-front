@@ -158,6 +158,7 @@ function MyMotiiv() {
   const [loginState, setLoginState] = useState({
     isLogin: false,
   });
+  // const [showModal,setShowModal] = useState(false);
   return loginState.isLogin ? (
     <>
       <MotiivWrapper isLoggined={loginState.isLogin}>
@@ -204,6 +205,7 @@ function MyMotiiv() {
     </>
   ) : (
     <>
+      {/* {setShowModal(prev=> !prev)} */}
       <MyModal />
       {/* <BlackModal/> */}
     </>
