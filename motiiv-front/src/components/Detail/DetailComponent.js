@@ -9,48 +9,10 @@ import RecommendCard from '../../pages/Detail/sections/RecommendCard';
 import ShareModal from '../../pages/Detail/sections/ShareModal';
 import { withRouter } from 'react-router-dom';
 import BlackModal from '../common/Modal/BlackModal';
+import Loading from '../common/Loading/Loading';
+import { changeLikeStatus, changeSaveStatus } from '../../modules/video';
+import { useDispatch, useSelector } from 'react-redux';
 
-const SliderObject = [
-  {
-    idx: 0,
-    TextInfo: {
-      category: 'Hot Motiiv',
-      categoryTxt: '어제 하루 조회수가 가장 높았던 모티브',
-      videoTxt: `"영화 "굿 윌 헌팅" 명장면"`,
-      hashTag: ['movie', 'pride'],
-    },
-    VideoInfo: {
-      src: 'https://www.youtube.com/embed/ZzTQFe5qX_0',
-      runningTime: '02:09',
-    },
-  },
-  {
-    idx: 1,
-    TextInfo: {
-      category: 'Best Motiiv',
-      categoryTxt: '어제 하루 좋아요가 가장 많았던 모티브',
-      videoTxt: `"영화 "울프 오브 월스트리트" 명장면"`,
-      hashTag: ['movie', 'pride'],
-    },
-    VideoInfo: {
-      src: 'https://www.youtube.com/embed/GIoofmjN-8U',
-      runningTime: '03:32',
-    },
-  },
-  {
-    idx: 2,
-    TextInfo: {
-      category: 'Most motivated motiiv',
-      categoryTxt: '어제 워크스페이스로 가장 많이 이동한 모티브',
-      videoTxt: 'The Devil Wears Prada final scene',
-      hashTag: ['movie', 'pride'],
-    },
-    VideoInfo: {
-      src: 'https://www.youtube.com/embed/8xCfGlYQiPI',
-      runningTime: '22:01',
-    },
-  },
-];
 const DetailContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -372,13 +334,20 @@ const MobileButtonBox = styled.div`
   border-bottom: 1px #c4c4c4 solid;
 `;
 
-function DetailComponent({ location }) {
+function DetailComponent({
+  videoInfo,
+  recVideoList,
+  detailLoading,
+  likeStatus,
+  saveStatus,
+}) {
   /*   const [toggle, setToggle] = useState(false);
   const [toggleExist, setToggleExist] = useState(false); */
 
   const [shareModal, setShareModal] = useState(false);
-  const [like, setLike] = useState(false);
-  const [save, setSave] = useState(false);
+  const dispatch = useDispatch();
+  const [like, setLike] = useState(likeStatus);
+  const [save, setSave] = useState(saveStatus);
   const [blackModal, setBlackModal] = useState({
     isLogin: false,
     active: false,
@@ -407,131 +376,128 @@ function DetailComponent({ location }) {
   const LikeToggle = () => {
     setLike(!like);
     BlackModalConfirm();
+    console.log(videoInfo.id);
+    dispatch(changeLikeStatus(videoInfo.id));
   };
   const SaveToggle = () => {
     setSave(!save);
     BlackModalConfirm();
+    dispatch(changeSaveStatus(videoInfo.id));
   };
+
   return (
-    <DetailContainer>
-      {blackModal.active && <BlackModal></BlackModal>}
-      <VideoWrapper>
-        <VideoDisplay>
-          <iframe
-            style={{
-              height: '100%',
-              width: '100%',
-              position: 'absolute',
-            }}
-            src={SliderObject[0].VideoInfo.src}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-        </VideoDisplay>
-        <VideoInfoWrapper>
-          <InfoHeaderBox>
-            <TitleAndButtonBox>
-              <TitleText>{SliderObject[0].TextInfo.videoTxt}</TitleText>
-              <ButtonBox>
-                <LikeBox onClick={LikeToggle}>
-                  <LikeText like={like}>좋아요</LikeText>
-                  <LikeImg src={like ? LikeClickImage : LikeImage} />
-                </LikeBox>
-                <SaveBox onClick={SaveToggle}>
-                  <SaveText save={save}>저장</SaveText>{' '}
-                  <SaveImg src={save ? SaveClickImage : SaveImage} />
-                </SaveBox>
-              </ButtonBox>
-            </TitleAndButtonBox>
-            <TagBox>
-              <Tag
-                hashTag={1}
-                color="black"
-                fontSize="1.5rem"
-                text="movie"
-              ></Tag>
-              <Tag
-                hashTag={1}
-                color="black"
-                fontSize="1.5rem"
-                text="good"
-              ></Tag>
-              <Tag
-                hashTag={1}
-                color="black"
-                fontSize="1.5rem"
-                text="amazing"
-              ></Tag>
-            </TagBox>
-            <TextBox>
-              <LeftBox>
-                <ViewCount>조회수 1000만회</ViewCount>
-                <DateInfo>2021.01.01</DateInfo>
-                <UserName>영화친구 김시선</UserName>
-              </LeftBox>
-              <ShareBox>
-                <ShareButton onClick={() => setShareModal(!shareModal)}>
-                  공유하기
-                </ShareButton>
-                <ShareModal
-                  pageURL={window.location.href}
-                  shareModal={shareModal}
-                ></ShareModal>
-              </ShareBox>
-            </TextBox>
-            <MobileButtonBox>
-              <ButtonBox>
-                <LikeBox onClick={() => setLike(!like)}>
-                  <LikeText like={like}>좋아요</LikeText>
-                  <LikeImg src={like ? LikeClickImage : LikeImage} />
-                </LikeBox>
-                <SaveBox onClick={() => setSave(!save)}>
-                  <SaveText save={save}>저장</SaveText>{' '}
-                  <SaveImg src={save ? SaveClickImage : SaveImage} />
-                </SaveBox>
-              </ButtonBox>
-              <ShareBox>
-                <ShareButton onClick={() => setShareModal(!shareModal)}>
-                  공유하기
-                </ShareButton>
-                <ShareModal
-                  pageURL={window.location.href}
-                  shareModal={shareModal}
-                ></ShareModal>
-              </ShareBox>
-            </MobileButtonBox>
-          </InfoHeaderBox>
-          <VideoDescriptionWrapper>
-            <VideoDescription
-              //toggle={toggle}
-              ref={descRef}
-              //toggleExist={toggleExist}
-            >
-              시작하는 것의 즐거움, 어떻게 시작하는 것이 좋을까? 작은 시작을
-              시작하는 것의 즐거움, 어떻게 시작하는 것이 좋을까? 작은 시작을
-              시작하는 것의 즐거움, 어떻게 시작하는 것이 좋을까? 작은 시작을
-            </VideoDescription>
-            {/*             <MoreToggleButton
+    <>
+      {!detailLoading ? (
+        <DetailContainer>
+          {/*           {blackModal.active && <BlackModal></BlackModal>} */}
+          <VideoWrapper>
+            <VideoDisplay>
+              <iframe
+                style={{
+                  height: '100%',
+                  width: '100%',
+                  position: 'absolute',
+                }}
+                src={videoInfo.videoUrl}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </VideoDisplay>
+            <VideoInfoWrapper>
+              <InfoHeaderBox>
+                <TitleAndButtonBox>
+                  <TitleText>{videoInfo.title}</TitleText>
+                  <ButtonBox>
+                    <LikeBox onClick={LikeToggle}>
+                      <LikeText like={like}>좋아요</LikeText>
+                      <LikeImg src={like ? LikeClickImage : LikeImage} />
+                    </LikeBox>
+                    <SaveBox onClick={SaveToggle}>
+                      <SaveText save={save}>저장</SaveText>{' '}
+                      <SaveImg src={save ? SaveClickImage : SaveImage} />
+                    </SaveBox>
+                  </ButtonBox>
+                </TitleAndButtonBox>
+                <TagBox>
+                  {videoInfo.VideoTags &&
+                    videoInfo.VideoTags.map(tag => (
+                      <Tag
+                        hashTag={1}
+                        color="black"
+                        fontSize="1.5rem"
+                        text={tag.name}
+                        id={tag.id}
+                      ></Tag>
+                    ))}
+                </TagBox>
+                <TextBox>
+                  <LeftBox>
+                    <ViewCount>조회수 {videoInfo.viewCount}회</ViewCount>
+                    <DateInfo>2021.01.01</DateInfo>
+                    <UserName>{videoInfo.channelName}</UserName>
+                  </LeftBox>
+                  <ShareBox>
+                    <ShareButton onClick={() => setShareModal(!shareModal)}>
+                      공유하기
+                    </ShareButton>
+                    <ShareModal
+                      pageURL={window.location.href}
+                      shareModal={shareModal}
+                    ></ShareModal>
+                  </ShareBox>
+                </TextBox>
+                <MobileButtonBox>
+                  <ButtonBox>
+                    <LikeBox onClick={LikeToggle}>
+                      <LikeText like={like}>좋아요</LikeText>
+                      <LikeImg src={like ? LikeClickImage : LikeImage} />
+                    </LikeBox>
+                    <SaveBox onClick={SaveToggle}>
+                      <SaveText save={save}>저장</SaveText>{' '}
+                      <SaveImg src={save ? SaveClickImage : SaveImage} />
+                    </SaveBox>
+                  </ButtonBox>
+                  <ShareBox>
+                    <ShareButton onClick={() => setShareModal(!shareModal)}>
+                      공유하기
+                    </ShareButton>
+                    <ShareModal
+                      pageURL={window.location.href}
+                      shareModal={shareModal}
+                    ></ShareModal>
+                  </ShareBox>
+                </MobileButtonBox>
+              </InfoHeaderBox>
+              <VideoDescriptionWrapper>
+                <VideoDescription
+                  //toggle={toggle}
+                  ref={descRef}
+                  //toggleExist={toggleExist}
+                >
+                  {videoInfo.description}
+                </VideoDescription>
+                {/*             <MoreToggleButton
               onClick={onHandleToggleButton}
               toggleExist={toggleExist}
               toggle={toggle}
             ></MoreToggleButton> */}
-          </VideoDescriptionWrapper>
-        </VideoInfoWrapper>
-      </VideoWrapper>
-      <RecommendWrapper>
-        <RecommendTitleText>추천 모티브</RecommendTitleText>
-        <RecommendCardBox>
-          <RecommendCard />
-          <RecommendCard />
-          <RecommendCard />
-          <RecommendCard />
-          <RecommendCard />
-          <RecommendCard />
-        </RecommendCardBox>
-      </RecommendWrapper>
-    </DetailContainer>
+              </VideoDescriptionWrapper>
+            </VideoInfoWrapper>
+          </VideoWrapper>
+          <RecommendWrapper>
+            <RecommendTitleText>추천 모티브</RecommendTitleText>
+            <RecommendCardBox>
+              {recVideoList.map((video, idx) => (
+                <RecommendCard video={video} key={`RecVideo-${idx}`} />
+              ))}
+            </RecommendCardBox>
+          </RecommendWrapper>
+        </DetailContainer>
+      ) : (
+        <Loading></Loading>
+      )}
+    </>
   );
 }
 

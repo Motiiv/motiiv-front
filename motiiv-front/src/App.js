@@ -105,13 +105,16 @@ function App({ props }) {
           path="/upload"
           render={props => <Upload props={props} />}
         ></Route>
-      </Switch> 
+      </Switch>
       <FloatBtn isShow={location.pathname !== '/mymotiiv'} />
       <BottomBanner />
       <Footer />
-      <MyNavBar loginState = {loginState.isLogin} tag = {location.pathname}></MyNavBar> 
+      <MyNavBar
+        loginState={loginState.isLogin}
+        tag={location.pathname}
+      ></MyNavBar>
     </>
-  )
+  );
 }
 
 export default App;

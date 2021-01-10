@@ -279,10 +279,13 @@ function Card({ obj, size, text, history, saveButton, category }) {
   return (
     <>
       <CardWrap size={size}>
-        <VideoWrap size={size} onClick={() => history.push('/detail/1')}>
-          {/* <HoverVideoPlayer
+        <VideoWrap
+          size={size}
+          onClick={() => history.push(`/detail/${obj.id}`)}
+        >
+          <HoverVideoPlayer
             style={{ width: '100%', height: '100%', borderRadius: '1rem' }}
-            videoSrc={obj.VideoInfo.src}
+            //videoSrc={obj.VideoInfo.src}
             pausedOverlayWrapperStyle={{
               borderRadius: '1rem',
               overflow: 'hidden',
@@ -292,46 +295,50 @@ function Card({ obj, size, text, history, saveButton, category }) {
                 width="100%"
                 height="100%"
                 borderRadius="1rem"
-                src="https://user-images.githubusercontent.com/61861809/103748463-82a9d380-5047-11eb-9720-697a1f2de7cd.jpg"
+                src={obj.thumbnailImageUrl}
               />
             }
             loadingOverlay={<div className="loading-spinner-overlay" />}
             videoStyle={{
               borderRadius: '1rem',
             }}
-          /> */}
+          />
           <SaveBox saveButton={saveButton} onClick={() => setSave(!save)}>
             <SaveImg src={save ? SaveClickImage : SaveImage} />
           </SaveBox>
-          <TimeContainer>{obj.VideoInfo.runningTime}</TimeContainer>
+          <TimeContainer>{obj.videoLength}</TimeContainer>
         </VideoWrap>
         <TextWrap size={size}>
           <Title
-            onClick={() => history.push('/detail/1')}
+            onClick={() => history.push(`/detail/${obj.id}`)}
             size={size}
             text={text}
           >
-            {obj.TextInfo.videoTxt}
+            {obj.title}
           </Title>
           <DescriptionContainer
             size={size}
             text={text}
-            onClick={() => history.push('/detail/1')}
+            onClick={() => history.push(`/detail/${obj.id}`)}
           >
-            <Views>100만회</Views>
-            <Channel>dk-master</Channel>
+            <Views>{obj.viewCount}</Views>
+            <Channel>{obj.channelName}</Channel>
           </DescriptionContainer>
           <TagContainer size={size} category={category}>
-            {obj.TextInfo.hashTag.map((tag, idx) => (
-              <div style={{ marginRight: '1.2rem', marginTop: '-2.8rem' }}>
-                <Tag
-                  hashTag={1}
-                  color="black"
-                  text={obj.TextInfo.hashTag[idx]}
-                  fontSize="1.2rem"
-                ></Tag>
-              </div>
-            ))}
+            {obj.VideoTags
+              ? obj.VideoTags.map(tag => (
+                  <div style={{ marginRight: '1.2rem', marginTop: '-2.8rem' }}>
+                    <Tag
+                      hashTag={1}
+                      color="black"
+                      text={tag.name}
+                      key={`Tag-${tag.id}`}
+                      fontSize="1.2rem"
+                      id={tag.id}
+                    ></Tag>
+                  </div>
+                ))
+              : null}
           </TagContainer>
         </TextWrap>
       </CardWrap>
