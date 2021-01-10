@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import information from '../../assets/global/information.png';
 import ToggleBtn from '../../components/common/Button/ToggleBtn';
 import WorkSpaceContainer from './WorkSpaceContainer';
+import { toggleShowFloat } from '../../modules/mymotiiv';
+import { useDispatch, useSelector } from 'react-redux';
+
 const WorkSpaceWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -103,11 +106,17 @@ const InfoBox = styled.div`
 `;
 
 function WorkSpace() {
+  const dispatch = useDispatch();
   const [showInfo, setShowInfo] = useState(false);
+  const onToggleShowFloat = checked => dispatch(toggleShowFloat(checked));
   const toggleShow = () => {
     console.log('click');
     setShowInfo(!showInfo);
   };
+  const onToggle = e => {
+    onToggleShowFloat(e.target.checked);
+  };
+  const { onFloatBtn } = useSelector(state => state.mymotiiv);
   return (
     <WorkSpaceWrapper>
       <Container>
@@ -125,7 +134,7 @@ function WorkSpace() {
               워크스페이스 <b>바로가기</b>
             </SubText>
             <InfoIcon onClick={toggleShow} />
-            <ToggleBtn></ToggleBtn>
+            <ToggleBtn onChange={onToggle} toggled={onFloatBtn}></ToggleBtn>
             <InfoBox show={showInfo}>
               <b>워크스페이스 바로가기란?</b>
               <br />

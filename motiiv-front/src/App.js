@@ -11,6 +11,7 @@ import BottomBanner from './components/common/Banner/BottomBanner';
 import Footer from './components/common/Footer/Footer';
 import MyNavBar from './pages/MyMotiiv/sections/MyNavbar';
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   useLocation,
   BrowserRouter as Router,
@@ -19,18 +20,25 @@ import {
 } from 'react-router-dom';
 import { useEffect } from 'react';
 import FloatBtn from './components/common/Button/FloatBtn';
+import { getWorkspaces } from './modules/mymotiiv';
 
 function App({ props }) {
 
+  const dispatch = useDispatch();
   const [loginState, setLoginState] = useState({
     isLogin: true,
   });
   const location = useLocation();
+  const { onFloatBtn } = useSelector(state => state.mymotiiv);
+  const { workspaces } = useSelector(state => state.mymotiiv);
+  //const getMyWorkspaces = () => dispatch(getWorkspaces(checked));
+  useEffect(() => {
+    dispatch(getWorkspaces());
+  }, []);
 
   return (
     <>
-      <Navbar isloggined = {loginState} location = {location.pathname}/>
-      {/* <MyModal/> */}
+      <Navbar isloggined = {loginState}/>
       <Switch>
         {/* Main & Category & MyMotiiv */}
         <Route
@@ -79,12 +87,15 @@ function App({ props }) {
           render={props => <Upload props={props} />}
         ></Route>
       </Switch>
-      <FloatBtn isShow={location.pathname !== '/mymotiiv'} />
-      <BottomBanner isShow={location.pathname !== '/setting'}/>
-      <Footer isShow={location.pathname !== '/setting'}/>
-      <MyNavBar loginState = {loginState.isLogin} tag = {location.pathname}></MyNavBar> 
+      <FloatBtn workspaces={workspaces} isShow={onFloatBtn} />
+      <BottomBanner isShow={location.pathname != '/setting'}/>
+      <Footer isShow={location.pathname != '/setting'}/>
+      <MyNavBar
+        loginState={loginState.isLogin}
+        tag={location.pathname}
+      ></MyNavBar>
     </>
-  )
+  );
 }
 
 export default App;

@@ -47,17 +47,6 @@ const TabElem = styled(NavLink)`
   color: white;
   text-decoration: none;
   padding: 1.6rem 0.8rem;
-
-  ${props => props.hightlight == true? 
-    `
-      color: #2cff2c;
-      border-bottom: 0.2rem solid #2cff2c;
-    `
-    :
-    `
-
-    `}
-
   &:nth-child(7) {
     display: ${props => (props.show === 'true' ? 'flex' : 'none')};
   }
@@ -83,7 +72,7 @@ const LoginContainer = styled.div`
 `;
 
 const Login = styled.div`
-  display: ${props => (props.login === false ? 'flex' : 'none')};
+  display: ${props => (props.login === 'false' ? 'flex' : 'none')};
   color: white;
   text-align: left;
   text-decoration: none;
@@ -94,19 +83,10 @@ const FirstLetter = styled.div`
   color: #2cff2c;
   font-size: 1.75rem;
   font-family: 'Spoqa-Han-Sans';
-
-  ${props => props.isShow ?
-  `
-    display:none;
-  `
-  :
-  `
-  `
-  };
 `;
 
 const Profile = styled.div`
-  display: ${props => (props.login === true ? 'flex' : 'none')};
+  display: ${props => (props.login === 'true' ? 'flex' : 'none')};
   width: 3rem;
   height: 3rem;
   z-index: 3;
@@ -117,7 +97,6 @@ const Profile = styled.div`
   border-radius: 100%;
   border: ${props => (props.onclick === true ? '2px solid #2CFF2C' : 'none')};
   cursor: pointer;
-
   background-image: url(${props => props.src});
   ${props =>
     props.src
@@ -129,7 +108,6 @@ const Profile = styled.div`
       : css`
           background-color: #4e4e4e;
         `};
-
   ${FirstLetter} {
     position: absolute;
     top: 50%;
@@ -138,14 +116,12 @@ const Profile = styled.div`
   }
 `;
 
-function Navbar({location, isloggined}) {
-
-  const { userInfo } = useSelector(({ user }) => ({
-    userInfo: user.userInfo
-  }));
-  console.log(userInfo);
-
-  const pathname = location.substr(1, 1);
+function Navbar() {
+  //로그인 여부 판단 + 어드민 여부 판단
+  const [loginState, setLoginState] = useState({
+    isLoggined: true,
+    admin: false,
+  });
 
   //프로필 드롭다운 나타나고 없애기
   const [profileModalState, setProfileModalState] = useState(false);
@@ -167,63 +143,65 @@ function Navbar({location, isloggined}) {
     })();
   };
 
-  const name = "어쩌구"
+  const { userInfo } = useSelector(({ user }) => ({
+    userInfo: user.userInfo,
+  }));
+
+  const name = 'Bonnie';
   const firstletter = name.substr(0, 1);
   //첫글자가 영어인지 한글인지 테스트하는 로직 필요
 
   return (
     <>
       <Header>
-        
         <NavLink exact to="/main">
           <Logo src={logo} />
         </NavLink>
-
         <TabContainer>
-          <TabElem
-            exact to="/main"
-            activeStyle={activeStyle}
-          >
+          <TabElem exact to="/main" activeStyle={activeStyle}>
             main
           </TabElem>
           <Star src={star} />
-          <TabElem
-            to="/category/0"
-            activeStyle={activeStyle}
-          >
+          <TabElem to="/category/0" activeStyle={activeStyle}>
             category
           </TabElem>
           <Star src={star} />
+          <TabElem exact to="/mymotiiv" activeStyle={activeStyle}>
+            mymotiiv
+          </TabElem>
+          <Star src={star} show={loginState.admin.toString()} />
           <TabElem
-            exact to="/mymotiiv"
+            exact
+            to="/admin"
+            show={loginState.admin.toString()}
             activeStyle={activeStyle}
           >
-            mymotiiv
+            admin
           </TabElem>
         </TabContainer>
 
         <LoginContainer>
           <Login
-            login={isloggined.isLogin}
+            login={loginState.isLoggined.toString()}
             onClick={onClickLoginBtn}
           >
             login
           </Login>
           <Profile
             src={userInfo.profileImageUrl}
-            login={isloggined.isLogin}
+            login={loginState.isLoggined.toString()}
             onClick={onClickProfileImage}
             onclick={profileModalState}
-          ><FirstLetter isShow = {userInfo.profileImageUrl}>{firstletter}</FirstLetter>
+          >
+            <FirstLetter>{firstletter}</FirstLetter>
           </Profile>
           <ProfileModal
             showModal={profileModalState}
-            name={userInfo.username}
+            name={name}
             firstletter={firstletter}
           />
         </LoginContainer>
       </Header>
-
       <SigninModal showModal={loginModalState} />
     </>
   );
