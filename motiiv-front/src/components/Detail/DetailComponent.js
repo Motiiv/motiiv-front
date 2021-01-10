@@ -371,6 +371,7 @@ const MobileButtonBox = styled.div`
   padding-bottom: 2rem;
   border-bottom: 1px #c4c4c4 solid;
 `;
+
 function DetailComponent({ location }) {
   /*   const [toggle, setToggle] = useState(false);
   const [toggleExist, setToggleExist] = useState(false); */
@@ -380,7 +381,7 @@ function DetailComponent({ location }) {
   const [save, setSave] = useState(false);
   const [blackModal, setBlackModal] = useState({
     isLogin: false,
-    active: true,
+    active: false,
   });
   const descRef = useRef();
 
