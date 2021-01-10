@@ -86,14 +86,13 @@ const SliderSection = styled.div`
   }
 `;
 
-
-function ImageSlider({object,type,size,text,saveButton}) {
-    const swiperRef = useRef();
-    const num = type=== "top" ? 3 : 4;
-    const space = type === "top" ? 20 : 25;
-    return (
-        <>
-        <SliderSection size = {size}>
+function ImageSlider({ object, type, size, text, saveButton }) {
+  const swiperRef = useRef();
+  const num = type === 'top' ? 3 : 4;
+  const space = type === 'top' ? 20 : 25;
+  return (
+    <>
+      <SliderSection size={size}>
         <Swiper
           spaceBetween={space}
           slidesPerView={num}
@@ -138,7 +137,13 @@ function ImageSlider({object,type,size,text,saveButton}) {
         >
           {object.map((obj, idx) => (
             <SwiperSlide>
-                <Card size = {size} text = {text} key={`card-${idx}`} obj={obj} saveButton = {saveButton}></Card>
+              <Card
+                size={size}
+                text={text}
+                key={`card-${idx}`}
+                obj={obj}
+                saveButton={saveButton}
+              ></Card>
             </SwiperSlide>
           ))}
         </Swiper>

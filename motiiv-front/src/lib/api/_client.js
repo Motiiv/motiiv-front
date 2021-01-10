@@ -5,8 +5,7 @@ const client = axios.create({
   headers: {
     'Content-Type': 'application/json',
     credentials: true,
-    jwt:
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInVzZXJuYW1lIjoi7Jqw7JiBIiwic25zSWQiOiIxIiwic29jaWFsVHlwZSI6Imtha2FvIiwiaWF0IjoxNjEwMDA4NzU1LCJleHAiOjE2MTI2MDA3NTUsImlzcyI6Im1vdGlpdiJ9.1_CTWbQWps8vcpPUzzKuAYFy7Th4fqpIPummhhabEm8',
+    //jwt:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInVzZXJuYW1lIjoi7Jqw7JiBIiwic25zSWQiOiIxIiwic29jaWFsVHlwZSI6Imtha2FvIiwiaWF0IjoxNjEwMDA4NzU1LCJleHAiOjE2MTI2MDA3NTUsImlzcyI6Im1vdGlpdiJ9.1_CTWbQWps8vcpPUzzKuAYFy7Th4fqpIPummhhabEm8',
   },
 });
 //ApiConfig.defaults.headers.jwt = data.data.accessToken; // api 토큰 바꿔치기
