@@ -7,6 +7,8 @@ import polygon from '../../assets/profile/ic_polygon.png'
 import JobModal from './sections/JobModal'
 import InterestModal from './sections/InterestModal'
 import InterestComponent from './sections/InterstComponent'
+import { useSelector } from 'react-redux';
+import Loading from '../../components/common/Loading/Loading';
 
 /* 타이틀 */
 const Border = styled.div`
@@ -73,6 +75,8 @@ const Container = styled.div`
 const FirstLetter = styled.div`
   color : ${props => props.theme.primary};
   font-size: 12rem;
+
+  ${props => props.src ? `display : none;` : `` };
 
   @media ${props => props.theme.maxdesktop} {
     font-size: 11rem;
@@ -334,6 +338,10 @@ const Button = styled.button`
 
 function Setting() {
 
+    const { userInfo, loading } = useSelector(({ user, loading }) => ({
+        userInfo: user.userInfo,
+        loading: loading['user/GET_PROFILE'],
+      }));
     
     //폴리건 버튼 모달 체크용
     const [showJobModalState, setShowJobModalState] = useState(false);
@@ -367,7 +375,7 @@ function Setting() {
 
             <Container>
                 <ProfileImageContainer>
-                    <ProfileImage><FirstLetter>B</FirstLetter></ProfileImage>
+                    <ProfileImage src = {userInfo.profileImageUrl}><FirstLetter src = {userInfo.profileImageUrl}>{userInfo.username && userInfo.username.substr(0,1)}</FirstLetter></ProfileImage>
                         <InputContainer for="upload">
                             <CameraIcon src = {camera}/>
                             <PhotoInput type="file" id="upload"/>
@@ -379,12 +387,12 @@ function Setting() {
                 <InfoContainer>
                     <InfoWrapper>
                         <Text>이름</Text>
-                        <NameInput placeholder='프로필 이름 넣고'></NameInput>
+                        <NameInput type='text' value={userInfo.username}></NameInput>
                     </InfoWrapper>
 
                     <InfoWrapper>
                         <Text>직군</Text>
-                        <ChooseJob>프로필 직군 넣고
+                        <ChooseJob>{userInfo.Job && userInfo.Job.name}
                             <PolygonBtn src = {polygon}
                                         show={showJobModalState}
                                         onClick={onClickJobBtn}
@@ -397,9 +405,7 @@ function Setting() {
                     <InfoWrapper>
                         <Text>관심 키워드</Text>
                         <ChooseInterst>
-                            <InterestComponent text={"관심사는"} disabled></InterestComponent>
-                            <InterestComponent text={"maps로"} disabled>키워드</InterestComponent>
-                            <InterestComponent text={"뿌릴것임"} disabled>키워드</InterestComponent>
+                            {userInfo.UserKeywords && userInfo.UserKeywords.map((tag, i) => <InterestComponent key = {"interest-" + i} text={tag.name} disabled/>)}
                             <PolygonBtn src = {polygon}
                                         show={showInterestModalState} 
                                         onClick={onClickInterstBtn}

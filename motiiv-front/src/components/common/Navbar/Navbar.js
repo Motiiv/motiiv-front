@@ -72,7 +72,7 @@ const LoginContainer = styled.div`
 `;
 
 const Login = styled.div`
-  display: ${props => (props.login === 'false' ? 'flex' : 'none')};
+  display: ${props => (props.login === false ? 'flex' : 'none')};
   color: white;
   text-align: left;
   text-decoration: none;
@@ -83,10 +83,17 @@ const FirstLetter = styled.div`
   color: #2cff2c;
   font-size: 1.75rem;
   font-family: 'Spoqa-Han-Sans';
+
+  ${props =>
+    props.src
+      ? css`
+          display : none;
+        `
+      : css``};
 `;
 
 const Profile = styled.div`
-  display: ${props => (props.login === 'true' ? 'flex' : 'none')};
+  display: ${props => (props.login === true ? 'flex' : 'none')};
   width: 3rem;
   height: 3rem;
   z-index: 3;
@@ -116,12 +123,7 @@ const Profile = styled.div`
   }
 `;
 
-function Navbar() {
-  //로그인 여부 판단 + 어드민 여부 판단
-  const [loginState, setLoginState] = useState({
-    isLoggined: true,
-    admin: false,
-  });
+function Navbar({ isloggined }) {
 
   //프로필 드롭다운 나타나고 없애기
   const [profileModalState, setProfileModalState] = useState(false);
@@ -147,10 +149,6 @@ function Navbar() {
     userInfo: user.userInfo,
   }));
 
-  const name = 'Bonnie';
-  const firstletter = name.substr(0, 1);
-  //첫글자가 영어인지 한글인지 테스트하는 로직 필요
-
   return (
     <>
       <Header>
@@ -169,37 +167,24 @@ function Navbar() {
           <TabElem exact to="/mymotiiv" activeStyle={activeStyle}>
             mymotiiv
           </TabElem>
-          <Star src={star} show={loginState.admin.toString()} />
-          <TabElem
-            exact
-            to="/admin"
-            show={loginState.admin.toString()}
-            activeStyle={activeStyle}
-          >
-            admin
-          </TabElem>
         </TabContainer>
 
         <LoginContainer>
           <Login
-            login={loginState.isLoggined.toString()}
+            login={isloggined}
             onClick={onClickLoginBtn}
           >
             login
           </Login>
           <Profile
             src={userInfo.profileImageUrl}
-            login={loginState.isLoggined.toString()}
+            login={isloggined}
             onClick={onClickProfileImage}
             onclick={profileModalState}
           >
-            <FirstLetter>{firstletter}</FirstLetter>
+            <FirstLetter src={userInfo.profileImageUrl}>{userInfo.username && userInfo.username.substr(0,1)}</FirstLetter>
           </Profile>
-          <ProfileModal
-            showModal={profileModalState}
-            name={name}
-            firstletter={firstletter}
-          />
+          <ProfileModal showModal={profileModalState} />
         </LoginContainer>
       </Header>
       <SigninModal showModal={loginModalState} />

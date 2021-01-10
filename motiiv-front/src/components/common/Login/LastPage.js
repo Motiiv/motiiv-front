@@ -38,7 +38,6 @@ function LastPage({page}) {
 
   //처음 버튼 state는 모두 false
   const btnstate = ['unselected-login', 'unselected-login', 'unselected-login', 'unselected-login', 'unselected-login', 'unselected-login', 'unselected-login', 'unselected-login', 'unselected-login', 'unselected-login', 'unselected-login', 'unselected-login'];
-  
   const [countState, setCountState] = useState(0);
 
   const onClickBtn = () => {
@@ -77,6 +76,17 @@ function LastPage({page}) {
           <SubTitle>보고 싶은 관심사는 최대 3개까지 선택 가능해요!</SubTitle>
 
           <InterestGrid>
+            <InterestComponent type={btnstate[0]} text={"키워드"}></InterestComponent>
+            <InterestComponent type={btnstate[0]} text={"키워드"}></InterestComponent>
+            <InterestComponent type={btnstate[0]} text={"키워드"}></InterestComponent>
+            <InterestComponent type={btnstate[0]} text={"키워드"}></InterestComponent>
+            <InterestComponent type={btnstate[0]} text={"키워드"}></InterestComponent>
+            <InterestComponent type={btnstate[0]} text={"키워드"}></InterestComponent>
+            <InterestComponent type={btnstate[0]} text={"키워드"}></InterestComponent>
+            <InterestComponent type={btnstate[0]} text={"키워드"}></InterestComponent>
+            <InterestComponent type={btnstate[0]} text={"키워드"}></InterestComponent>
+            <InterestComponent type={btnstate[0]} text={"키워드"}></InterestComponent>
+            <InterestComponent type={btnstate[0]} text={"키워드"}></InterestComponent>
             <InterestComponent type={btnstate[0]} text={"키워드"}></InterestComponent>
           </InterestGrid>
       </Container>

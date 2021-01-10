@@ -6,7 +6,6 @@ import Tag from '../../Tag/ProfileTag';
 import ToggleBtn from '../../Button/ToggleBtn';
 import naver from '../../../../assets/profile/naverlink_btn_small.png';
 import kakao from '../../../../assets/profile/kakaolink_btn_small.png';
-
 import { useSelector } from 'react-redux';
 import Loading from '../../Loading/Loading';
 
@@ -43,6 +42,7 @@ const ModalWrap = styled.div`
 
 const FirstLetter = styled.div`
   color : #2CFF2C;
+  ${props => props.src ? `display : none;` : `` };
   ${props => props.lang == 'kor' ?
   `
     font-size : 5.5rem;
@@ -201,10 +201,7 @@ const ToggleText = styled.div`
   }
 `;
 
-function ProfileModal({ showModal, name, firstletter }) {
-  
-  //추후 서버 연결시 kakao/naver 구분해서 state 관리
-  const [socialState, setSocialState] = useState(true);
+function ProfileModal({ showModal }) {
   const [isToggled, setIsToggled] = useState(false); //추후 isToggled 여부로 다크모드 설정
   const [langState, setLangState] = useState('kor');
 
@@ -216,20 +213,20 @@ function ProfileModal({ showModal, name, firstletter }) {
   return (
     <ModalWrap show={showModal}>
         {!loading ? (
-          <ProfileImage src={userInfo.profileImageUrl}><FirstLetter lang={langState}>{firstletter}</FirstLetter></ProfileImage>
+          <ProfileImage src={userInfo.profileImageUrl}>
+            <FirstLetter lang={langState} src={userInfo.profileImageUrl}>{userInfo.username && userInfo.username.substr(0,1)}</FirstLetter>
+          </ProfileImage>
         ) : (
           <Loading></Loading>
         )}
 
       <FirstDiv>
-        <ProfileName>{name}</ProfileName>
-        <SocialImage src={socialState === true ? kakao : naver} />
+        <ProfileName>{userInfo.username}</ProfileName>
+        <SocialImage src={userInfo.socialType === 'kakao' ? kakao : naver} />
       </FirstDiv>
 
       <TagBox>
-        <Tag text={'관심사는'} padding="0.4rem 0.8rem" />
-        <Tag text={'최대네글'} padding="0.4rem 0.8rem" />
-        <Tag text={'자입니다'} padding="0.4rem 0.8rem" />
+        {userInfo.UserKeywords && userInfo.UserKeywords.map((tag, i) => <Tag key = {"interest-" + i} text={tag.name} padding="0.4rem 0.8rem"/>)}
       </TagBox>
 
       <NavLink exact to="/setting" style={{ textDecoration: 'none' }}>
