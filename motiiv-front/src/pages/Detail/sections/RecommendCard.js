@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 const VideoWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  cursor: pointer;
   /*   & + & {
     margin-top: 2rem;
   } */
@@ -20,17 +22,14 @@ const VideoSubText = styled.div`
   font-size: 1.8rem;
   color: ${({ theme }) => theme.gray};
 `;
-function RecommendCard() {
+function RecommendCard({ video, history }) {
   return (
-    <VideoWrapper>
-      <VideoContent
-        src="https://i.ytimg.com/vi/XeOfUbLL-7Q/hq720_live.jpg?sqp=CLTkx_8F-oaymwEZCNAFEJQDSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLA65nbGSn5uuIqanAAfgR8uEl9-uA"
-        style={{ width: '100%' }}
-      />
-      <VideoTitleText>스트리트 푸드 파이터</VideoTitleText>
+    <VideoWrapper onClick={() => history.push(`/detail/${video.id}`)}>
+      <VideoContent src={video.thumbnailImageUrl} style={{ width: '100%' }} />
+      <VideoTitleText>{video.title}</VideoTitleText>
       <VideoSubText>tvN</VideoSubText>
     </VideoWrapper>
   );
 }
 
-export default RecommendCard;
+export default withRouter(RecommendCard);

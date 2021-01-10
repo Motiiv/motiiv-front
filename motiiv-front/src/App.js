@@ -13,14 +13,18 @@ import MyNavBar from './pages/MyMotiiv/sections/MyNavbar';
 import SigninModal from './components/common/Login/SignInModal';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  useLocation,
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
 import { useEffect } from 'react';
 import FloatBtn from './components/common/Button/FloatBtn';
 import { getProfile, showSigninModal } from './modules/user';
 import { getWorkspaces } from './modules/mymotiiv';
 
 function App({ props }) {
-
   const dispatch = useDispatch();
   const [loginState, setLoginState] = useState({
     isLogin: true,
@@ -30,7 +34,7 @@ function App({ props }) {
   //const { showLoginModal } = useSelector(state => state.user);
   const { onFloatBtn } = useSelector(state => state.mymotiiv);
   const { workspaces } = useSelector(state => state.mymotiiv);
-  
+
   useEffect(() => {
     dispatch(getWorkspaces());
     dispatch(getProfile());
@@ -39,7 +43,7 @@ function App({ props }) {
 
   return (
     <>
-      <Navbar isloggined = {loginState.isLogin}/>
+      <Navbar isloggined={loginState.isLogin} />
       <Switch>
         {/* Main & Category & MyMotiiv */}
         <Route
@@ -88,10 +92,10 @@ function App({ props }) {
           render={props => <Upload props={props} />}
         ></Route>
       </Switch>
-      <SigninModal isShow={location.pathname == '/setting'}/>
+      <SigninModal isShow={location.pathname == '/setting'} />
       <FloatBtn workspaces={workspaces} isShow={onFloatBtn} />
-      <BottomBanner isShow={location.pathname != '/setting'}/>
-      <Footer isShow={location.pathname != '/setting'}/>
+      <BottomBanner isShow={location.pathname != '/setting'} />
+      <Footer isShow={location.pathname != '/setting'} />
       <MyNavBar
         loginState={loginState.isLogin}
         tag={location.pathname}

@@ -18,14 +18,11 @@ const [
   SHOW_SIGNIN_MODAL_FAILURE,
 ] = createRequestActionTypes('user/GET_PROFILE');
 
-
 /* 액션 호출 함수 생성 */
 //프로필 정보
 export const getProfile = createAction(GET_PROFILE);
 //로그인모달창
 export const showSigninModal = createAction(SHOW_SIGNIN_MODAL);
-
-
 
 /* 해당하는 액션 호출시 Saga실행 */
 //프로필 정보
@@ -38,7 +35,6 @@ const showSigninModalSaga = createRequestSaga(
   SHOW_SIGNIN_MODAL,
   showSigninModalState,
 );
-
 
 /* 요청된 것들 중 가장 마지막 요청만 처리 (여러번 클릭시 모두 처리되면 매우 비효율적!) */
 export function* userSaga() {
@@ -58,7 +54,7 @@ const initState = {
       id: null,
       name: '',
     },
-    UserKeywords: []
+    UserKeywords: [],
   },
 
   showLoginModal: false,

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import theme from '../../../style/theme';
+import { getCategoryTagVideos } from '../../../modules/video';
+import { useDispatch, useSelector } from 'react-redux';
 
 const HashTag = styled.div`
   font-size: ${props => props.fontSize};
@@ -51,9 +53,14 @@ const TagContainer = styled.div`
     }
   }
 `;
-function Tag({ hashTag, color, text, fontSize, history }) {
+function Tag({ hashTag, color, text, fontSize, history, id }) {
+  const dispatch = useDispatch();
+  const onClickTag = () => {
+    dispatch(getCategoryTagVideos(id));
+    history.push('/category/1');
+  };
   return (
-    <TagContainer color={color} onClick={() => history.push('/category/1')}>
+    <TagContainer color={color} onClick={onClickTag}>
       {hashTag === 1 && (
         <HashTag fontSize={fontSize} color={color}>
           &#x00023;

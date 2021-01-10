@@ -13,7 +13,7 @@ const ModalWrapper = styled.div`
   ${props =>
     props.active
       ? css`
-          height: 12rem;
+          height: fit-content;
           visibility: visible;
           opacity: 1;
         `
@@ -98,6 +98,7 @@ function AsideModal({
   choice,
   onHandleMenuChoice,
   onChangeActiveStatus,
+  keywords,
 }) {
   const onHandleActive = () => {
     onChangeActiveStatus();
@@ -116,25 +117,16 @@ function AsideModal({
           choice={choice}
           idx={0}
           onHandleMenuChoice={onHandleMenuChoice}
-        >
-          최신순
-        </Menu>
-        <Menu
-          word="word1"
-          choice={choice}
-          idx={1}
-          onHandleMenuChoice={onHandleMenuChoice}
-        >
-          좋아요순
-        </Menu>
-        <Menu
-          word="word2"
-          choice={choice}
-          idx={2}
-          onHandleMenuChoice={onHandleMenuChoice}
-        >
-          저장순
-        </Menu>
+        ></Menu>
+        {keywords.map((keyword, idx) => (
+          <Menu
+            key={`AsideMenu-${idx}`}
+            word={keyword.name}
+            choice={choice}
+            idx={keyword.id}
+            onHandleMenuChoice={onHandleMenuChoice}
+          />
+        ))}
       </ModalWrapper>
     </AsideMenuContainer>
   );

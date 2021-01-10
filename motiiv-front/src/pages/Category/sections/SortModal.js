@@ -1,5 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { getCategoryVideos } from '../../../modules/video';
+import { useDispatch, useSelector } from 'react-redux';
+
 const ModalWrapper = styled.div`
   width: 10rem;
   border-radius: 1rem;
@@ -50,15 +53,30 @@ const SortText = styled.div`
           //height: 0;
         `}
 `;
-function SortModal({ sortModal, onHandleSortText }) {
+function SortModal({ sortModal, onHandleSortText, keyword }) {
+  const dispatch = useDispatch();
+  const { loading } = useSelector(({ loading }) => ({
+    loading: loading['video/GET_CATEGORY_VIDEOS'],
+  }));
+
   const onHandleSortButton = evt => {
-    onHandleSortText(evt.target.attributes.name.value);
+    onHandleSortText(
+      evt.target.attributes.name.value,
+      evt.target.attributes.id.value,
+    );
+    dispatch(
+      getCategoryVideos({
+        keyword: keyword,
+        filters: evt.target.attributes.id.value,
+      }),
+    );
   };
   return (
     <ModalWrapper sortModal={sortModal}>
       <SortText
         sortModal={sortModal}
         name="최신순"
+        id="new"
         onClick={onHandleSortButton}
       >
         최신순
@@ -66,6 +84,7 @@ function SortModal({ sortModal, onHandleSortText }) {
       <SortText
         sortModal={sortModal}
         name="좋아요순"
+        id="like"
         onClick={onHandleSortButton}
       >
         좋아요순
@@ -73,6 +92,7 @@ function SortModal({ sortModal, onHandleSortText }) {
       <SortText
         sortModal={sortModal}
         name="저장순"
+        id="save"
         onClick={onHandleSortButton}
       >
         저장순
@@ -80,6 +100,7 @@ function SortModal({ sortModal, onHandleSortText }) {
       <SortText
         sortModal={sortModal}
         name="조회순"
+        id="view"
         onClick={onHandleSortButton}
       >
         조회순
