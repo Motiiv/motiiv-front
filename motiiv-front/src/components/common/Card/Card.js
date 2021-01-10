@@ -24,6 +24,7 @@ const CardWrap = styled.div`
     min-height: 23.2rem;
     //max로 바꿔야하는지 여부
   }
+ 
   @media ${props => props.theme.desktop} {
     min-width: ${props => (props.size === 'large' ? '37.7rem' : '27.4rem')};
     height: auto;
@@ -49,9 +50,7 @@ const VideoWrap = styled.div`
   @media ${props => props.theme.tablet} {
     height: ${props => (props.size === 'large' ? '12.3rem' : '12.2rem')};
   }
-  /* @media ${props => props.theme.laptop} {
-    height: ${props => (props.size === 'large' ? '21.2rem' : '15.4rem')};
-  } */
+ 
   @media ${props => props.theme.desktop} {
     height: ${props => (props.size === 'large' ? '21.2rem' : '15.4rem')};
   }
