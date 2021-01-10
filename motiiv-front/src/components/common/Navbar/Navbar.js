@@ -1,5 +1,5 @@
 import React from 'react';
-import styled ,{css}from 'styled-components';
+import styled, { css } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -102,13 +102,13 @@ const Profile = styled.div`
   ${props =>
     props.src
       ? css`
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    `
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+        `
       : css`
-    background-color: #4E4E4E;
-    `};
+          background-color: #4e4e4e;
+        `};
 
   ${FirstLetter} {
     position: absolute;

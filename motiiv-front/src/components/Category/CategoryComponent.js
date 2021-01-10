@@ -304,7 +304,7 @@ function CategoryComponent({ hashTag }) {
         </TitleAndSort>
         <GridContainer hashTag={hashTag}>
           {SliderObject.map((obj, idx) => (
-            <Card key={`Card-${idx}`} obj={obj} />
+            <Card key={`Card-${idx}`} obj={obj} category={true} />
           ))}
         </GridContainer>
       </BodyContainer>

@@ -8,6 +8,7 @@ import Tag from '../common/Tag/Tag';
 import RecommendCard from '../../pages/Detail/sections/RecommendCard';
 import ShareModal from '../../pages/Detail/sections/ShareModal';
 import { withRouter } from 'react-router-dom';
+import BlackModal from '../common/Modal/BlackModal';
 
 const SliderObject = [
   {
@@ -323,7 +324,7 @@ const VideoDescription = styled.div`
           overflow: visible;
           -webkit-line-clamp: 10;
         `
-      : null}*/
+      : null} */
 `;
 const MoreToggleButton = styled.div`
   font-size: 1.5rem;
@@ -332,7 +333,7 @@ const MoreToggleButton = styled.div`
   bottom: 0;
   cursor: pointer;
   display: none;
-  ${props =>
+  /*   ${props =>
     props.toggleExist
       ? css`
           display: block;
@@ -349,7 +350,7 @@ const MoreToggleButton = styled.div`
           &::after {
             content: '더보기';
           }
-        `}
+        `} */
 `;
 const ShareBox = styled.div`
   display: flex;
@@ -370,30 +371,55 @@ const MobileButtonBox = styled.div`
   padding-bottom: 2rem;
   border-bottom: 1px #c4c4c4 solid;
 `;
+
 function DetailComponent({ location }) {
-  const [toggle, setToggle] = useState(false);
-  const [toggleExist, setToggleExist] = useState(false);
+  /*   const [toggle, setToggle] = useState(false);
+  const [toggleExist, setToggleExist] = useState(false); */
+
   const [shareModal, setShareModal] = useState(false);
   const [like, setLike] = useState(false);
   const [save, setSave] = useState(false);
+  const [blackModal, setBlackModal] = useState({
+    isLogin: false,
+    active: false,
+  });
   const descRef = useRef();
 
-  const onHandleToggleButton = () => {
+  /* 더보기 버튼 모달창 */
+  /*   const onHandleToggleButton = () => {
     setToggle(!toggle);
-  };
+  }; */
+  /* 더보기 버튼 로직 - 텍스트창 높이구해서 일정 이상이면 '더보기'버튼 활성화 */
   useEffect(() => {
-    console.log(descRef.current.offsetHeight);
-    if (descRef.current.offsetHeight > 66) {
+    /*     if (descRef.current.offsetHeight > 66) {
       setToggleExist(!toggleExist);
-    }
+    } */
   }, []);
+
+  const BlackModalConfirm = () => {
+    if (!blackModal.isLogin) {
+      setBlackModal({
+        ...blackModal,
+        active: !blackModal.active,
+      });
+    }
+  };
+  const LikeToggle = () => {
+    setLike(!like);
+    BlackModalConfirm();
+  };
+  const SaveToggle = () => {
+    setSave(!save);
+    BlackModalConfirm();
+  };
   return (
     <DetailContainer>
+      {blackModal.active && <BlackModal></BlackModal>}
       <VideoWrapper>
         <VideoDisplay>
           <iframe
             style={{
-              /* height: '42vw' */ height: '100%',
+              height: '100%',
               width: '100%',
               position: 'absolute',
             }}
@@ -408,11 +434,11 @@ function DetailComponent({ location }) {
             <TitleAndButtonBox>
               <TitleText>{SliderObject[0].TextInfo.videoTxt}</TitleText>
               <ButtonBox>
-                <LikeBox onClick={() => setLike(!like)}>
+                <LikeBox onClick={LikeToggle}>
                   <LikeText like={like}>좋아요</LikeText>
                   <LikeImg src={like ? LikeClickImage : LikeImage} />
                 </LikeBox>
-                <SaveBox onClick={() => setSave(!save)}>
+                <SaveBox onClick={SaveToggle}>
                   <SaveText save={save}>저장</SaveText>{' '}
                   <SaveImg src={save ? SaveClickImage : SaveImage} />
                 </SaveBox>
@@ -478,9 +504,9 @@ function DetailComponent({ location }) {
           </InfoHeaderBox>
           <VideoDescriptionWrapper>
             <VideoDescription
-              toggle={toggle}
+              //toggle={toggle}
               ref={descRef}
-              toggleExist={toggleExist}
+              //toggleExist={toggleExist}
             >
               시작하는 것의 즐거움, 어떻게 시작하는 것이 좋을까? 작은 시작을
               시작하는 것의 즐거움, 어떻게 시작하는 것이 좋을까? 작은 시작을
