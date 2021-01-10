@@ -19,43 +19,17 @@ import {
 } from 'react-router-dom';
 import { useEffect } from 'react';
 import FloatBtn from './components/common/Button/FloatBtn';
-/* import { IWantCookies } from './lib/api/user';
-import Cookies from 'js-cookie';
-import { useCookies } from 'react-cookie'; */
 
 function App({ props }) {
+
   const [loginState, setLoginState] = useState({
-    isLogin: false,
+    isLogin: true,
   });
   const location = useLocation();
-  //const [cookies, setCookie] = useCookies(['user']);
-
-  /*   const IWantCookiesPlease = () => {
-        setCookie(
-      'userToken',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInVzZXJuYW1lIjoi7Jqw7JiBIiwic25zSWQiOiIxIiwic29jaWFsVHlwZSI6Imtha2FvIiwiaWF0IjoxNjEwMTI3ODI3LCJleHAiOjE2MTI3MTk4MjcsImlzcyI6Im1vdGlpdiJ9.v0ksiTTsAKvrnR-iZyoNly1QntI94OtthUoCEy3o5c8',
-      {
-        path: '/',
-      },
-    );
-    const result = IWantCookies();
-    console.log(document.cookie);
-    //console.log(Cookies.get('userToken'));
-    //console.log(document.cookie);
-    //setCookie('userToken', newName, { path: '/' });
-  }; */
 
   return (
     <>
-      <Navbar />
-      {/*       <div style={{ width: '100%', textAlign: 'center', fontWeight: 'bold' }}>
-        <input
-          style={{ fontWeight: 'bold' }}
-          type="button"
-          value="쿠키를 갖고 싶은가?ㅋ"
-          onClick={IWantCookiesPlease}
-        ></input>
-      </div> */}
+      <Navbar isloggined = {loginState} location = {location.pathname}/>
       {/* <MyModal/> */}
       <Switch>
         {/* Main & Category & MyMotiiv */}
@@ -75,7 +49,6 @@ function App({ props }) {
             render={props => <MyMotiiv props={props} />}
           ></Route>
         }
-
         <Route
           exact
           path="/signup"
@@ -105,10 +78,10 @@ function App({ props }) {
           path="/upload"
           render={props => <Upload props={props} />}
         ></Route>
-      </Switch> 
+      </Switch>
       <FloatBtn isShow={location.pathname !== '/mymotiiv'} />
-      <BottomBanner />
-      <Footer />
+      <BottomBanner isShow={location.pathname !== '/setting'}/>
+      <Footer isShow={location.pathname !== '/setting'}/>
       <MyNavBar loginState = {loginState.isLogin} tag = {location.pathname}></MyNavBar> 
     </>
   )

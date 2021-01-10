@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import img from '../../../../assets/profile/sampleImage.png';
+import img from '../../../assets/profile/sampleImage.png';
 
 const Container = styled.div`
   display: ${props => props.page === 2 ? 'flex' : 'none' };

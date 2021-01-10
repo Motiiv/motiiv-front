@@ -334,6 +334,7 @@ const Button = styled.button`
 
 function Setting() {
 
+    
     //폴리건 버튼 모달 체크용
     const [showJobModalState, setShowJobModalState] = useState(false);
     const [showInterestModalState, setInterestJobModalState] = useState(false);
@@ -378,12 +379,12 @@ function Setting() {
                 <InfoContainer>
                     <InfoWrapper>
                         <Text>이름</Text>
-                        <NameInput/>
+                        <NameInput placeholder='프로필 이름 넣고'></NameInput>
                     </InfoWrapper>
 
                     <InfoWrapper>
                         <Text>직군</Text>
-                        <ChooseJob>디자인
+                        <ChooseJob>프로필 직군 넣고
                             <PolygonBtn src = {polygon}
                                         show={showJobModalState}
                                         onClick={onClickJobBtn}
@@ -396,9 +397,9 @@ function Setting() {
                     <InfoWrapper>
                         <Text>관심 키워드</Text>
                         <ChooseInterst>
-                            <InterestComponent text={"네글자요"} disabled></InterestComponent>
-                            <InterestComponent text={"네글자요"} disabled>키워드</InterestComponent>
-                            <InterestComponent text={"네글자요"} disabled>키워드</InterestComponent>
+                            <InterestComponent text={"관심사는"} disabled></InterestComponent>
+                            <InterestComponent text={"maps로"} disabled>키워드</InterestComponent>
+                            <InterestComponent text={"뿌릴것임"} disabled>키워드</InterestComponent>
                             <PolygonBtn src = {polygon}
                                         show={showInterestModalState} 
                                         onClick={onClickInterstBtn}
