@@ -1,8 +1,31 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import trashIcon from '../../assets/global/trash_box.png';
 
+const popUp = keyframes`
+  0% {
+    transform: scale(0.5);
+    opacity:0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity:1;
+  }
+`;
+
+const fadeIn = keyframes`
+  0% {
+    opacity:0;
+  }
+
+  100% {
+    opacity:1;
+  }
+`;
+
 const WorkSpaceInputBox = styled.div`
+  transform-origin: center top;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -19,6 +42,7 @@ const WorkSpaceInputBox = styled.div`
     right: ${props => (props.idx === 5 ? '-7rem' : null)};
     left: ${props => (props.idx === 0 ? '-7rem' : null)};
   }
+  animation: ${popUp} 0.3s both ease-in;
 `;
 const Triangle = styled.div`
   z-index: 3;
@@ -48,6 +72,8 @@ const Triangle = styled.div`
   &:after {
     transform: rotate(135deg) skewY(-45deg) scale(0.707, 1.414) translate(50%);
   }
+  animation: ${fadeIn} 0.1s both ease-in;
+  animation-delay: 0.25s;
 `;
 
 const LineInput = styled.input`
