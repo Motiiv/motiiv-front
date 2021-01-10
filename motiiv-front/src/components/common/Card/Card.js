@@ -24,6 +24,9 @@ const CardWrap = styled.div`
     min-height: 23.2rem;
     //max로 바꿔야하는지 여부
   }
+  @media ${props => props.theme.laptop} {
+    min-width: ${props => (props.size === 'large' ? '30rem' : '21.6rem')};
+  }
   @media ${props => props.theme.desktop} {
     min-width: ${props => (props.size === 'large' ? '37.7rem' : '27.4rem')};
     height: auto;
