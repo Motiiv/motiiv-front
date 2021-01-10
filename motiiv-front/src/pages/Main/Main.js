@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import MyNavBar from '../MyMotiiv/sections/MyNavbar';
 import styled from 'styled-components';
 import ImageSlider from '../../components/common/Section/ImageSlider';
-const SliderObject = [ 
+const SliderObject = [
   {
     idx: 0,
     TextInfo: {

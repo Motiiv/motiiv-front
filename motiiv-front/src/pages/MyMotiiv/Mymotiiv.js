@@ -96,60 +96,60 @@ const SliderObject = [
   },
 ];
 const Container = styled.div`
-    width: 100%;
-    height: 42rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    @media ${props => props.theme.mobile}{
+  width: 100%;
+  height: 42rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media ${props => props.theme.mobile} {
     height: 33rem;
-    margin-bottom : 1.6rem;  
-    }
-    @media ${props => props.theme.tablet}{
-    height: 37.2rem
-  }  
-  @media ${props => props.theme.desktop}{
+    margin-bottom: 1.6rem;
+  }
+  @media ${props => props.theme.tablet} {
+    height: 37.2rem;
+  }
+  @media ${props => props.theme.desktop} {
     height: 42rem;
-  }  
+  }
 `;
 //Section도 페이지별로 쓰이니까 maxwidth 1280px
 const Wrapper = styled.div`
-    width: 100%;
-    max-width: 1280px;
-    display: flex;
-    flex-direction: column;
-    @media ${props => props.theme.mobile}{
-        max-width: 768px;
-    }
-    @media ${props => props.theme.tablet}{
-        min-width : 768px;
-    } 
-    @media ${props => props.theme.desktop}{
-        min-width : 1280px;
-    } 
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  @media ${props => props.theme.mobile} {
+    max-width: 768px;
+  }
+  @media ${props => props.theme.tablet} {
+    min-width: 768px;
+  }
+  @media ${props => props.theme.desktop} {
+    min-width: 1280px;
+  }
 `;
 
 const Title = styled.h2`
   margin-left: 5.5rem;
-  font-size: 3rem; 
+  font-size: 3rem;
   font-weight: bold;
   color: black;
   margin-bottom: 3rem;
-  @media ${props => props.theme.mobile}{
-    font-size : 1.8rem;
+  @media ${props => props.theme.mobile} {
+    font-size: 1.8rem;
     margin-left: 2rem;
-    margin-bottom : 2rem;
-    }
-    @media ${props => props.theme.tablet}{
-    font-size : 2rem;
-    margin-left : 4rem;
-    margin-bottom : 5.1rem;
-  } 
-    @media ${props => props.theme.desktop}{
-      font-size: 3rem; 
-      margin-left: 5.5rem;
-      margin-bottom : 5.1rem;
-    } 
+    margin-bottom: 2rem;
+  }
+  @media ${props => props.theme.tablet} {
+    font-size: 2rem;
+    margin-left: 4rem;
+    margin-bottom: 5.1rem;
+  }
+  @media ${props => props.theme.desktop} {
+    font-size: 3rem;
+    margin-left: 5.5rem;
+    margin-bottom: 5.1rem;
+  }
 `;
 
 // const textArray = ["내가 자주본 모티브", "내가 저장한 모티브", "최근 재생한 모티브"];
@@ -164,22 +164,37 @@ function MyMotiiv() {
         <WorkSpace></WorkSpace>
         <Container>
           <Wrapper>
-          <Title>내가 <HighLight>자주 본</HighLight>모티브</Title>
-          <ImageSlider saveButton = {saveButton} object={SliderObject}></ImageSlider>
-          </Wrapper>
-        </Container>
-        
-        <Container>
-          <Wrapper>
-          <Title>내가 <HighLight>저장 한</HighLight>모티브</Title>
-          <ImageSlider saveButton = {saveButton} object={SliderObject}></ImageSlider>
+            <Title>
+              내가 <HighLight>자주 본</HighLight>모티브
+            </Title>
+            <ImageSlider
+              saveButton={saveButton}
+              object={SliderObject}
+            ></ImageSlider>
           </Wrapper>
         </Container>
 
         <Container>
           <Wrapper>
-          <Title>최근 <HighLight>재생한</HighLight>모티브</Title>
-          <ImageSlider saveButton = {saveButton} object={SliderObject}></ImageSlider>
+            <Title>
+              내가 <HighLight>저장 한</HighLight>모티브
+            </Title>
+            <ImageSlider
+              saveButton={saveButton}
+              object={SliderObject}
+            ></ImageSlider>
+          </Wrapper>
+        </Container>
+
+        <Container>
+          <Wrapper>
+            <Title>
+              최근 <HighLight>재생한</HighLight>모티브
+            </Title>
+            <ImageSlider
+              saveButton={saveButton}
+              object={SliderObject}
+            ></ImageSlider>
           </Wrapper>
         </Container>
         {/* <Section object={SliderObject} text="내가 자주 본 모티브"></Section> */}
@@ -189,8 +204,8 @@ function MyMotiiv() {
     </>
   ) : (
     <>
-    <MyModal />
-    {/* <BlackModal/> */}
+      <MyModal />
+      {/* <BlackModal/> */}
     </>
   );
 }
