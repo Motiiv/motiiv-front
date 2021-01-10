@@ -28,19 +28,21 @@ const GoPrivacy = styled.a`
   /* cursor: pointer; */
 `;
 
-function Footer({ history }) {
+function Footer({ history, isShow }) {
   const goToPrivacy = () => {
     history.push('privacy');
   };
 
   return (
-    <FooterWrapper>
-      <FooterLogo src={logoImg} />
-      <Text>
-        <b>Copyright</b> motiiv All right reserved
-      </Text>
-      <GoPrivacy>개인정보처리방침</GoPrivacy>
-    </FooterWrapper>
+    isShow && (
+      <FooterWrapper>
+        <FooterLogo src={logoImg} />
+        <Text>
+          <b>Copyright</b> motiiv All right reserved
+        </Text>
+        <GoPrivacy>개인정보처리방침</GoPrivacy>
+      </FooterWrapper>
+    )
   );
 }
 

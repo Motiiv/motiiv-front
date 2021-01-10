@@ -10,12 +10,13 @@ const ModalBackgorundWrap = styled.div`
   background: #000000;
   opacity: 0.5;
 
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
   z-index:30;
+  overflow : hidden;
 
   width: auto;
   height: auto;
@@ -24,7 +25,7 @@ const ModalBackgorundWrap = styled.div`
 `;
 
 const NextBtn = styled.div`
-  ${props => props.page === 3 ?
+  ${props => props.page != 2 ?
     `display:none;` : 
     `opacity: 100; cursor:pointer;`
   };
@@ -33,7 +34,7 @@ const NextBtn = styled.div`
 `
 
 const PrevBtn = styled.div`
-    ${props => props.page === 1 ?
+    ${props => props.page != 3 ?
     `display:none;` :
     `display:flex; cursor:pointer;`
   };
@@ -131,9 +132,9 @@ const IndicatorContainer = styled.div`
   justify-content:space-between;
 `
 
-function SigninModal({showModal}) {
+function SigninModal({isShow }) {
 
-  const [pageState, setPageState] = useState(1);
+  const [pageState, setPageState] = useState(2);
   const pageDown = () => {
     (async () => {
       try {
@@ -174,21 +175,14 @@ function SigninModal({showModal}) {
 
     return (
       <>
-        <ModalBackgorundWrap show = {showModal}/>
-        <ModalWrap show = {showModal}>
+        <ModalBackgorundWrap show = {isShow}/>
+        <ModalWrap show = {isShow}>
 
           <FirstPage page = {pageState}/>
           <SecondPage page = {pageState}/>
           <LastPage page = {pageState}/>
 
             <PrevBtn page = {pageState} onClick={pageDown}>&#xE000; &nbsp; 이전</PrevBtn>
-            
-            <IndicatorContainer>
-              <Indicator activeBtn={pageData[pageState-1].first}/>
-              <Indicator activeBtn={pageData[pageState-1].second}/>
-              <Indicator activeBtn={pageData[pageState-1].last}/>
-            </IndicatorContainer>
-            
             <NextBtn page = {pageState} onClick={pageUp}>다음 &nbsp; &#xE001;</NextBtn>
             <FinBtn page = {pageState}>완료</FinBtn>
         </ModalWrap>
