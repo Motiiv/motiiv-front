@@ -301,7 +301,7 @@ function Card({ obj, size, text, history, saveButton, category }) {
           <SaveBox saveButton={saveButton} onClick={() => setSave(!save)}>
             <SaveImg src={save ? SaveClickImage : SaveImage} />
           </SaveBox>
-          <TimeContainer>{obj.VideoInfo.runningTime}</TimeContainer>
+          <TimeContainer>{obj.videoLength}</TimeContainer>
         </VideoWrap>
         <TextWrap size={size}>
           <Title
@@ -309,15 +309,15 @@ function Card({ obj, size, text, history, saveButton, category }) {
             size={size}
             text={text}
           >
-            {obj.TextInfo.videoTxt}
+            {obj.title}
           </Title>
           <DescriptionContainer
             size={size}
             text={text}
             onClick={() => history.push('/detail/1')}
           >
-            <Views>100만회</Views>
-            <Channel>dk-master</Channel>
+            <Views>{obj.viewCount}</Views>
+            <Channel>{obj.channelName}</Channel>
           </DescriptionContainer>
           <TagContainer size={size} category={category}>
             {obj.TextInfo.hashTag.map((tag, idx) => (
@@ -325,7 +325,7 @@ function Card({ obj, size, text, history, saveButton, category }) {
                 <Tag
                   hashTag={1}
                   color="black"
-                  text={obj.TextInfo.hashTag[idx]}
+                  text={obj.VideoTags[idx].name}
                   fontSize="1.2rem"
                 ></Tag>
               </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import styled from 'styled-components';
 import MyModal from './sections/MyModal';
 import Section from '../../components/common/Section/Section';
@@ -6,6 +6,9 @@ import WorkSpace from '../../components/Workspace/WorkSpace';
 import MyNavBar from './sections/MyNavbar';
 import ImageSlider from '../../components/common/Section/ImageSlider';
 import BlackModal from '../../components/common/Modal/BlackModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMyMotiiv } from '../../modules/mymotiiv';
+
 const MotiivWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -154,10 +157,16 @@ const Title = styled.h2`
 
 // const textArray = ["내가 자주본 모티브", "내가 저장한 모티브", "최근 재생한 모티브"];
 function MyMotiiv() {
+  const dispatch = useDispatch();
   const saveButton = false;
   const [loginState, setLoginState] = useState({
-    isLogin: false,
+    isLogin: true,
   });
+  const { mymotiiv } = useSelector(state => state.mymotiiv);
+  useEffect(() => {
+    dispatch(getMyMotiiv());
+  }, []);
+
   // const [showModal,setShowModal] = useState(false);
   return loginState.isLogin ? (
     <>
@@ -170,7 +179,7 @@ function MyMotiiv() {
             </Title>
             <ImageSlider
               saveButton={saveButton}
-              object={SliderObject}
+              object={mymotiiv.mostViewSort}
             ></ImageSlider>
           </Wrapper>
         </Container>

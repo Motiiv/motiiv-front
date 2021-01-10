@@ -4,13 +4,12 @@ import {MdClose} from 'react-icons/md';
 import styled, { css } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
-const ModalContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0);
-`;
+// const ModalContainer = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-content: center;
+//   background-color: rgba(0, 0, 0, 0);
+// `;
 
 const ModalOverlay = styled.div`
     position: fixed;
@@ -247,6 +246,7 @@ function BlackModal({blackModal,setBlackModal}) {
         </ModalInner>
       </ModalWrapper>
       </ModalOverlay>
+      {/* </ModalOverlay> */}
        {/* </ModalContainer> */}
       </>
     ) : null}

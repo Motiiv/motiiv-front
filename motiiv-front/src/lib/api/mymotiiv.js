@@ -1,25 +1,38 @@
 import client from './_client';
 
-const getMyMotiiv = async (aid, noteContent) => {
+
+const getMyMotiiv = async () => {
   try {
     const { data } = await client.get(`/videos/myMotiiv`);
     console.log('[SUCCESS] getMyMotiiv', data);
     return data;
-  } catch (e) {
+  } catch (err) {
     console.log('[FAIL] getMyMotiiv', err);
-    throw e;
+    throw err;
   }
 };
 
-const updateNoteApi = async (aid, noteContent) => {
+
+const getMyWorkspaces = async () => {
   try {
-    const { data } = await client.put(`/note/${aid}`, noteContent);
-    console.log('[SUCCESS] updateNote', data);
+    const { data } = await client.get(`/workspaces/`);
+    console.log('[SUCCESS] getMyWorkspaces', data);
     return data;
   } catch (e) {
-    console.log('[FAIL] updateNote', e);
+    console.log('[FAIL] getMyWorkspaces', e);
     throw e;
   }
 };
 
-export { getMyMotiiv };
+// const updateNoteApi = async (aid, noteContent) => {
+//   try {
+//     const { data } = await client.put(`/note/${aid}`, noteContent);
+//     console.log('[SUCCESS] updateNote', data);
+//     return data;
+//   } catch (e) {
+//     console.log('[FAIL] updateNote', e);
+//     throw e;
+//   }
+// };
+
+export { getMyMotiiv,getMyWorkspaces };
