@@ -87,10 +87,7 @@ function App({ props }) {
           render={props => <Upload props={props} />}
         ></Route>
       </Switch>
-      <FloatBtn
-        workspaces={workspaces}
-        isShow={location.pathname !== '/mymotiiv' || onFloatBtn}
-      />
+      <FloatBtn workspaces={workspaces} isShow={onFloatBtn} />
       <BottomBanner />
       <Footer />
       <MyNavBar
