@@ -11,6 +11,7 @@ import BottomBanner from './components/common/Banner/BottomBanner';
 import Footer from './components/common/Footer/Footer';
 import MyNavBar from './pages/MyMotiiv/sections/MyNavbar';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   useLocation,
   BrowserRouter as Router,
@@ -25,7 +26,7 @@ import { useCookies } from 'react-cookie'; */
 
 function App({ props }) {
   const [loginState, setLoginState] = useState({
-    isLogin: false,
+    isLogin: true,
   });
   const location = useLocation();
   //const [cookies, setCookie] = useCookies(['user']);
@@ -44,6 +45,7 @@ function App({ props }) {
     //console.log(document.cookie);
     //setCookie('userToken', newName, { path: '/' });
   }; */
+  const { onFloatBtn } = useSelector(state => state.mymotiiv);
 
   return (
     <>
@@ -105,13 +107,16 @@ function App({ props }) {
           path="/upload"
           render={props => <Upload props={props} />}
         ></Route>
-      </Switch> 
-      <FloatBtn isShow={location.pathname !== '/mymotiiv'} />
+      </Switch>
+      <FloatBtn isShow={location.pathname !== '/mymotiiv' && onFloatBtn} />
       <BottomBanner />
       <Footer />
-      <MyNavBar loginState = {loginState.isLogin} tag = {location.pathname}></MyNavBar> 
+      <MyNavBar
+        loginState={loginState.isLogin}
+        tag={location.pathname}
+      ></MyNavBar>
     </>
-  )
+  );
 }
 
 export default App;
