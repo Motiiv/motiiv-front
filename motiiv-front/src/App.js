@@ -11,7 +11,7 @@ import BottomBanner from './components/common/Banner/BottomBanner';
 import Footer from './components/common/Footer/Footer';
 import MyNavBar from './pages/MyMotiiv/sections/MyNavbar';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   useLocation,
   BrowserRouter as Router,
@@ -20,11 +20,13 @@ import {
 } from 'react-router-dom';
 import { useEffect } from 'react';
 import FloatBtn from './components/common/Button/FloatBtn';
+import { getWorkspaces } from './modules/mymotiiv';
 /* import { IWantCookies } from './lib/api/user';
 import Cookies from 'js-cookie';
 import { useCookies } from 'react-cookie'; */
 
 function App({ props }) {
+  const dispatch = useDispatch();
   const [loginState, setLoginState] = useState({
     isLogin: true,
   });
@@ -46,6 +48,11 @@ function App({ props }) {
     //setCookie('userToken', newName, { path: '/' });
   }; */
   const { onFloatBtn } = useSelector(state => state.mymotiiv);
+  const { workspaces } = useSelector(state => state.mymotiiv);
+  //const getMyWorkspaces = () => dispatch(getWorkspaces(checked));
+  useEffect(() => {
+    dispatch(getWorkspaces());
+  }, []);
 
   return (
     <>
@@ -108,7 +115,10 @@ function App({ props }) {
           render={props => <Upload props={props} />}
         ></Route>
       </Switch>
-      <FloatBtn isShow={location.pathname !== '/mymotiiv' && onFloatBtn} />
+      <FloatBtn
+        workspaces={workspaces}
+        isShow={location.pathname !== '/mymotiiv' || onFloatBtn}
+      />
       <BottomBanner />
       <Footer />
       <MyNavBar

@@ -51,13 +51,12 @@ const FloatButton = styled.button`
   font-size: 1.6rem;
 `;
 
-function FloatBtn({ isShow }) {
+function FloatBtn({ isShow, workspaces }) {
   const [isActive, setIsActive] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const onTransfrom = () => {
     setIsActive(!isActive);
   };
-  const spaceNum = 6;
   const positionTable = [
     [{ x: '0rem', y: '-7.7rem' }],
     [
@@ -91,42 +90,6 @@ function FloatBtn({ isShow }) {
       { x: '12.4rem', y: '-0.7rem' },
     ],
   ];
-  const mySpaces = [
-    {
-      iconSrc: 'https://cdn.worldvectorlogo.com/logos/notion-logo-1.svg',
-      text: '웹파트 노션웹파트 노션',
-      url: 'https://www.notion.so/WEB-7ea63413a235451198c3e770cceb8044',
-    },
-
-    {
-      iconSrc: 'https://image.flaticon.com/icons/png/512/2111/2111615.png',
-      text: '슬랙슬랙슬랙슬랙슬랙슬랙',
-      url: 'https://www.notion.so/WEB-7ea63413a235451198c3e770cceb8044',
-    },
-    {
-      iconSrc: 'https://cdn.worldvectorlogo.com/logos/notion-logo-1.svg',
-      text: '웹파트 노션웹파트 노션',
-      url: 'https://www.notion.so/WEB-7ea63413a235451198c3e770cceb8044',
-    },
-
-    {
-      iconSrc: 'https://image.flaticon.com/icons/png/512/2111/2111615.png',
-      text: '슬랙슬랙슬랙슬랙슬랙슬랙',
-      url: 'https://www.notion.so/WEB-7ea63413a235451198c3e770cceb8044',
-    },
-    {
-      iconSrc: 'https://cdn.worldvectorlogo.com/logos/notion-logo-1.svg',
-      text: '웹파트 노션웹파트 노션',
-      url: 'https://www.notion.so/WEB-7ea63413a235451198c3e770cceb8044',
-    },
-
-    {
-      iconSrc: 'https://image.flaticon.com/icons/png/512/2111/2111615.png',
-      text: '슬랙슬랙슬랙슬랙슬랙슬랙',
-      url: 'https://www.notion.so/WEB-7ea63413a235451198c3e770cceb8044',
-    },
-  ];
-
   const onHandleMouseOver = () => {
     !isActive && setIsHover(true);
   };
@@ -138,15 +101,16 @@ function FloatBtn({ isShow }) {
   return (
     isShow && (
       <FloatBtnWrapper isActive={isActive} isHover={isHover}>
-        {positionTable[spaceNum - 1].map((pos, idx) => (
-          <SpaceBtn
-            isActive={isActive}
-            key={'content-' + idx}
-            delay={`${idx / 10}s`}
-            transPosition={pos}
-            space={mySpaces[idx]}
-          />
-        ))}
+        {workspaces &&
+          positionTable[workspaces.length - 1].map((pos, idx) => (
+            <SpaceBtn
+              isActive={isActive}
+              key={'content-' + idx}
+              delay={`${idx / 10}s`}
+              transPosition={pos}
+              space={workspaces[idx]}
+            />
+          ))}
         <FloatButton
           isActive={isActive}
           isHover={isHover}
