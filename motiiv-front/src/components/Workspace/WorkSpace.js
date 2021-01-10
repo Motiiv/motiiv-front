@@ -110,7 +110,6 @@ function WorkSpace() {
   const [showInfo, setShowInfo] = useState(false);
   const onToggleShowFloat = checked => dispatch(toggleShowFloat(checked));
   const toggleShow = () => {
-    console.log('click');
     setShowInfo(!showInfo);
   };
   const onToggle = e => {

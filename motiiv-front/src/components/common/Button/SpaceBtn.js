@@ -11,7 +11,6 @@ const popUp = transPosition => keyframes`
     transform: scale(1);
     opacity:1;
     transform:translate(${transPosition.x},${transPosition.y})
-
   }
 `;
 const SpaceTitle = styled.p`

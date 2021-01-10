@@ -133,7 +133,7 @@ const WarningText = styled.p`
   font-size: 1.2rem;
 `;
 
-function FormBox({ idx, hideForm, isShow, isCreate = false }) {
+function FormBox({ space, idx, hideForm, isShow, isCreate = false }) {
   const [inValidateUrl, SetInValidateUrl] = useState(false);
   const [spaceName, SetSpaceName] = useState('');
   const [urlInput, SetUrlInput] = useState('');
@@ -152,8 +152,10 @@ function FormBox({ idx, hideForm, isShow, isCreate = false }) {
   };
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
+    space && SetSpaceName(space.name);
+    space && SetUrlInput(space.url);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  });
+  }, [isShow]);
 
   const onChangeName = e => {
     SetSpaceName(e.target.value);

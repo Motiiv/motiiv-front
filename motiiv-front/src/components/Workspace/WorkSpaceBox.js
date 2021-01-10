@@ -3,7 +3,27 @@ import { MoreOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import FormBox from './FormBox';
 
+const OuterBox = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  & svg {
+    position: absolute;
+    top: 1rem;
+    right: 3rem;
+    width: 3rem;
+    height: 2rem;
+    color: ${({ theme }) => theme.gray};
+    cursor: pointer;
+    z-index: 2;
+    stroke-width: 4;
+    @media ${props => props.theme.maxdesktop} {
+      right: 1.3rem;
+    }
+  }
+`;
 const ContentBox = styled.div`
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,15 +33,6 @@ const ContentBox = styled.div`
   background: white;
   border-radius: 1.5rem;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15);
-  & svg {
-    position: absolute;
-    top: 1rem;
-    right: 0.5rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    color: ${({ theme }) => theme.gray};
-    cursor: pointer;
-  }
   position: relative;
   margin-right: 3rem;
   @media ${props => props.theme.maxdesktop} {
@@ -45,12 +56,17 @@ const ImgIcon = styled.img`
 `;
 const Title = styled.div`
   font-size: 1.4rem;
+  width: 70%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
   @media ${props => props.theme.maxdesktop} {
     font-size: 1.2rem;
   }
 `;
 
-function WorkSpaceBox({ idx }) {
+function WorkSpaceBox({ idx, space }) {
   const [isShow, SetIsShow] = useState(false);
   const toggleShow = () => {
     SetIsShow(!isShow);
@@ -58,13 +74,23 @@ function WorkSpaceBox({ idx }) {
   const hideForm = () => {
     SetIsShow(false);
   };
+  const goSpace = () => {
+    !isShow && window.open(space.url);
+  };
   return (
-    <ContentBox>
+    <OuterBox>
       <MoreOutlined onClick={toggleShow} />
-      <ImgIcon src="https://cdn.worldvectorlogo.com/logos/notion-logo-1.svg" />
-      <Title>Notion</Title>
-      <FormBox idx={idx} hideForm={hideForm} isShow={isShow}></FormBox>
-    </ContentBox>
+      <ContentBox onClick={goSpace}>
+        <ImgIcon src={space.logoUrl} />
+        <Title>{space.name}</Title>
+        <FormBox
+          space={space}
+          idx={idx}
+          hideForm={hideForm}
+          isShow={isShow}
+        ></FormBox>
+      </ContentBox>
+    </OuterBox>
   );
 }
 
