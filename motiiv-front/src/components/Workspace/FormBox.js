@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import trashIcon from '../../assets/global/trash_box.png';
+import { useDispatch } from 'react-redux';
+import { deleteWorkspace } from '../../modules/mymotiiv';
 
 const popUp = keyframes`
   0% {
@@ -160,6 +162,7 @@ const WarningText = styled.p`
 `;
 
 function FormBox({ space, idx, hideForm, isShow, isCreate = false }) {
+  const dispatch = useDispatch();
   const [inValidateUrl, SetInValidateUrl] = useState(false);
   const [spaceName, SetSpaceName] = useState('');
   const [urlInput, SetUrlInput] = useState('');
@@ -190,6 +193,10 @@ function FormBox({ space, idx, hideForm, isShow, isCreate = false }) {
     SetUrlInput(e.target.value);
 
     validURL(e.target.value) ? SetInValidateUrl(false) : SetInValidateUrl(true);
+  };
+  const onDeleteSpace = () => {
+    console.log('delete');
+    dispatch(deleteWorkspace(space.id));
   };
   const pattern = new RegExp(
     '^(https?:\\/\\/)?' + // protocol
@@ -231,7 +238,9 @@ function FormBox({ space, idx, hideForm, isShow, isCreate = false }) {
             >
               확인
             </RoundBtn>
-            {!isCreate && <TranshIcon src={trashIcon} />}
+            {!isCreate && (
+              <TranshIcon onClick={onDeleteSpace} src={trashIcon} />
+            )}
           </EndWrapper>
         </WorkSpaceInputBox>
         <Triangle></Triangle>

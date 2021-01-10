@@ -11,6 +11,17 @@ const getMyWorkspaces = async () => {
   }
 };
 
+const deleteMyeWorkSpace = async id => {
+  try {
+    const { data } = await client.delete(`/workspaces/${id}`);
+    console.log('[SUCCESS] deleteWorkSpace', data);
+    return data;
+  } catch (e) {
+    console.log('[FAIL] deleteWorkSpace', e);
+    throw e;
+  }
+};
+
 // const updateNoteApi = async (aid, noteContent) => {
 //   try {
 //     const { data } = await client.put(`/note/${aid}`, noteContent);
@@ -22,4 +33,4 @@ const getMyWorkspaces = async () => {
 //   }
 // };
 
-export { getMyWorkspaces };
+export { getMyWorkspaces, deleteMyeWorkSpace };
