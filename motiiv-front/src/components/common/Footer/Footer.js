@@ -16,6 +16,7 @@ const Text = styled.h6`
   font-size: 1.6rem;
   font-weight: 400;
   margin: 1.5rem 0;
+  text-align: center;
 `;
 const FooterLogo = styled.img`
   height: 2rem;

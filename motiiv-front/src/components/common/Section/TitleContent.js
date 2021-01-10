@@ -7,11 +7,12 @@ const Wrap = styled.div`
   margin-bottom: ${props => (props.text ? '5.1rem' : '3rem')};
   @media ${props => props.theme.mobile} {
     margin-left: 2rem;
-    margin-bottom: ${props => (props.text ? '2rem' : '1rem')};
-  }
-  @media ${props => props.theme.tablet} {
-    margin-left: 4rem;
-    margin-bottom: ${props => (props.text ? '5.1rem' : '3 .4rem')};
+    margin-top : 1.5rem;
+    margin-bottom : ${props => props.text ? '2rem': '1rem'};
+    }
+    @media ${props => props.theme.tablet}{
+    margin-left : 4rem;
+    margin-bottom : ${props => props.text ? '5.1rem': '3 .4rem'};
   }
   @media ${props => props.theme.desktop} {
     margin-left: 5.5rem;

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import Tag from '../Tag/Tag';
 import { withRouter } from 'react-router-dom';
 import HoverVideoPlayer from 'react-hover-video-player';
+import SaveImage from '../../../assets/global/save_icon.svg';
+import SaveClickImage from '../../../assets/global/saveclick_icon.svg';
 const CardWrap = styled.div`
   display: flex;
   width: 100%;
@@ -42,7 +44,7 @@ const VideoWrap = styled.div`
   &:hover {
   }
   @media ${props => props.theme.mobile} {
-    height: 19.1rem;
+    height: 16.8rem;
   }
   @media ${props => props.theme.tablet} {
     height: ${props => (props.size === 'large' ? '12.3rem' : '12.2rem')};
@@ -59,6 +61,31 @@ const VideoWrap = styled.div`
 //     width: 100%;
 // `;
 
+const SaveBox = styled.div`
+  display: ${props => (props.saveButton === false ? 'none' : 'flex')};
+  align-items: center;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.4rem;
+  line-height: 0 !important;
+  cursor: pointer;
+`;
+const SaveImg = styled.img`
+  width: 3.5rem;
+  height: 3.542rem;
+  @media ${props => props.theme.mobile} {
+    width: 3rem;
+    height: 3rem;
+  }
+  @media ${props => props.theme.tablet} {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+  @media ${props => props.theme.desktop} {
+    width: 3.5rem;
+    height: 3.542rem;
+  }
+`;
 const TimeContainer = styled.div`
   position: absolute;
   right: 1.5rem;
@@ -159,7 +186,7 @@ const TextWrap = styled.div`
   background: ${props => (props.size === 'large' ? 'white' : 'transparent')};
   border-radius: 0 0 1rem 1rem;
   @media ${props => props.theme.mobile} {
-    //height: 7.4rem;
+    height: auto;
   }
   @media ${props => props.theme.tablet} {
     height: auto;
@@ -225,7 +252,13 @@ const TagContainer = styled.div`
   margin-top: 1.5rem;
   margin-left: ${props => (props.size === 'large' ? '2rem' : '1px')};
   @media ${props => props.theme.mobile} {
-    display: flex;
+    display: none;
+    ${props =>
+      props.category
+        ? css`
+            display: flex;
+          `
+        : null}
   }
   @media ${props => props.theme.tablet} {
     display: flex;
@@ -238,7 +271,8 @@ const TagContainer = styled.div`
   }
 `;
 // Tag 컴포넌트 만들어서 불러오기
-function Card({ obj, size, text, history }) {
+function Card({ obj, size, text, history, saveButton, category }) {
+  const [save, setSave] = useState(false);
   return (
     <>
       <CardWrap size={size}>
@@ -263,6 +297,9 @@ function Card({ obj, size, text, history }) {
               borderRadius: '1rem',
             }}
           /> */}
+          <SaveBox saveButton={saveButton} onClick={() => setSave(!save)}>
+            <SaveImg src={save ? SaveClickImage : SaveImage} />
+          </SaveBox>
           <TimeContainer>{obj.VideoInfo.runningTime}</TimeContainer>
         </VideoWrap>
         <TextWrap size={size}>
@@ -281,7 +318,7 @@ function Card({ obj, size, text, history }) {
             <Views>100만회</Views>
             <Channel>dk-master</Channel>
           </DescriptionContainer>
-          <TagContainer size={size}>
+          <TagContainer size={size} category={category}>
             {obj.TextInfo.hashTag.map((tag, idx) => (
               <div style={{ marginRight: '1.2rem', marginTop: '-2.8rem' }}>
                 <Tag

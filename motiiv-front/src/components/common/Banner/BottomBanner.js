@@ -18,12 +18,20 @@ const Container = styled.div`
   height: 12rem;
   max-width: 128rem;
   padding: 0 5.5rem;
+  @media ${props => props.theme.tablet768} {
+    padding: 0 2rem;
+  }
 `;
 const BannerImg = styled.img`
   height: ${props => props.height};
   margin-right: 2rem;
-  @media ${props => props.theme.tablet} {
-    display: none;
+  @media ${props => props.theme.maxdesktop} {
+    height: 1.5rem;
+  }
+  @media ${props => props.theme.tablet768} {
+    height: 1.2rem;
+    display: ${props => props.mobileDisplay};
+    margin-right: 1rem;
   }
 `;
 const Text = styled.h2`
@@ -32,6 +40,13 @@ const Text = styled.h2`
   font-size: 2rem;
   padding-top: 0.3rem;
   margin-right: 3rem;
+  @media ${props => props.theme.maxdesktop} {
+    font-size: 1.5rem;
+  }
+  @media ${props => props.theme.mobile375} {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+  }
 `;
 const Wrapper = styled.div`
   display: flex;
@@ -42,11 +57,11 @@ function BottomBanner() {
     <BannerWrapper>
       <Container>
         <Wrapper>
-          <BannerImg src={starImg} height={'3rem'} />
-          <Text>모티브에 대해서 더욱 궁금하다면?</Text>
+          <BannerImg src={starImg} height={'3rem'} mobileDisplay="flex" />
+          <Text>모티브에 대해 더욱 궁금하다면?</Text>
         </Wrapper>
         <Wrapper>
-          <BannerImg src={logoImg} height={'2.5rem'} />
+          <BannerImg src={logoImg} height={'2.5rem'} mobileDisplay="none" />
           <MoreBtn
             linkUrl="https://motiiv.herokuapp.com"
             type="blank"

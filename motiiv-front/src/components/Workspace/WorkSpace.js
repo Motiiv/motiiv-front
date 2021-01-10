@@ -39,11 +39,17 @@ const Title = styled.h2`
   font-size: 3rem;
   font-family: 'Campton';
   margin-bottom: 1rem;
+  @media ${props => props.theme.maxdesktop} {
+    font-size: 2.5rem;
+  }
 `;
 const SubText = styled.p`
   color: black;
   font-size: 1.6rem;
   margin-right: 1rem;
+  @media ${props => props.theme.maxdesktop} {
+    font-size: 1.4rem;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -59,7 +65,7 @@ const ColumnWrapper = styled.div`
 const BetweenWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
 `;
 const InfoIcon = styled.div`
   width: 1.5rem;
