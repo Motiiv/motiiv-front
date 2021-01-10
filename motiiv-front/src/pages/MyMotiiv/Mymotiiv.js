@@ -7,7 +7,7 @@ import MyNavBar from './sections/MyNavbar';
 import ImageSlider from '../../components/common/Section/ImageSlider';
 import BlackModal from '../../components/common/Modal/BlackModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMyMotiiv } from '../../modules/mymotiiv';
+import { getMotiiv } from '../../modules/myMotiiv';
 
 const MotiivWrapper = styled.div`
   width: 100%;
@@ -162,11 +162,10 @@ function MyMotiiv() {
   const [loginState, setLoginState] = useState({
     isLogin: true,
   });
-  const { mymotiiv } = useSelector(state => state.mymotiiv);
+  const { mymotiivs } = useSelector(state => state.mymotiiv);
   useEffect(() => {
-    dispatch(getMyMotiiv());
+    dispatch(getMotiiv());
   }, []);
-
   // const [showModal,setShowModal] = useState(false);
   return loginState.isLogin ? (
     <>
@@ -179,7 +178,7 @@ function MyMotiiv() {
             </Title>
             <ImageSlider
               saveButton={saveButton}
-              object={mymotiiv.mostViewSort}
+              object={mymotiivs.mostViewSort}
             ></ImageSlider>
           </Wrapper>
         </Container>

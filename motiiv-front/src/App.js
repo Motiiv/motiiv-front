@@ -21,7 +21,7 @@ import {
 } from 'react-router-dom';
 import { useEffect } from 'react';
 import FloatBtn from './components/common/Button/FloatBtn';
-import { getWorkspaces } from './modules/mymotiiv';
+import { getWorkspaces } from './modules/myMotiiv';
 
 
 function App({ props }) {

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import information from '../../assets/global/information.png';
 import ToggleBtn from '../../components/common/Button/ToggleBtn';
 import WorkSpaceContainer from './WorkSpaceContainer';
-import { toggleShowFloat } from '../../modules/mymotiiv';
+import { toggleShowFloat } from '../../modules/myMotiiv';
 import { useDispatch, useSelector } from 'react-redux';
 
 const WorkSpaceWrapper = styled.div`
