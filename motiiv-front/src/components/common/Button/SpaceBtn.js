@@ -46,7 +46,7 @@ const SpaceButton = styled.button`
   background-size: 2.5rem 2.5rem;
   background-color: white;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
-  background-image: url(${props => props.space.iconSrc});
+  background-image: url(${props => props.space.logoUrl});
   &:hover {
     background-color: #efefef;
     & .title {
@@ -74,7 +74,7 @@ function SpaceBtn({ isActive, transPosition, space, delay }) {
       delay={delay}
     >
       <SpaceTitle className="title" transX={transPosition.x}>
-        {space.text}
+        {space.name}
       </SpaceTitle>
     </SpaceButton>
   );

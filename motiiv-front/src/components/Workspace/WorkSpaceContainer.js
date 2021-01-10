@@ -18,7 +18,7 @@ function WorkSpaceContainer() {
   return (
     <CenterWrapper>
       {[1, 2, 3, 4, 5, 6].map((pos, idx) => (
-        <WorkSpaceBox idx={idx}></WorkSpaceBox>
+        <WorkSpaceBox key={'box-' + idx} idx={idx}></WorkSpaceBox>
       ))}
       {/* <PlusBtn></PlusBtn> */}
     </CenterWrapper>

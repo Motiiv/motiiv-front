@@ -11,6 +11,7 @@ import BottomBanner from './components/common/Banner/BottomBanner';
 import Footer from './components/common/Footer/Footer';
 import MyNavBar from './pages/MyMotiiv/sections/MyNavbar';
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   useLocation,
   BrowserRouter as Router,
@@ -19,44 +20,24 @@ import {
 } from 'react-router-dom';
 import { useEffect } from 'react';
 import FloatBtn from './components/common/Button/FloatBtn';
-/* import { IWantCookies } from './lib/api/user';
-import Cookies from 'js-cookie';
-import { useCookies } from 'react-cookie'; */
+import { getWorkspaces } from './modules/mymotiiv';
 
 function App({ props }) {
+  const dispatch = useDispatch();
   const [loginState, setLoginState] = useState({
-    isLogin: false,
+    isLogin: true,
   });
   const location = useLocation();
-  //const [cookies, setCookie] = useCookies(['user']);
-
-  /*   const IWantCookiesPlease = () => {
-        setCookie(
-      'userToken',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInVzZXJuYW1lIjoi7Jqw7JiBIiwic25zSWQiOiIxIiwic29jaWFsVHlwZSI6Imtha2FvIiwiaWF0IjoxNjEwMTI3ODI3LCJleHAiOjE2MTI3MTk4MjcsImlzcyI6Im1vdGlpdiJ9.v0ksiTTsAKvrnR-iZyoNly1QntI94OtthUoCEy3o5c8',
-      {
-        path: '/',
-      },
-    );
-    const result = IWantCookies();
-    console.log(document.cookie);
-    //console.log(Cookies.get('userToken'));
-    //console.log(document.cookie);
-    //setCookie('userToken', newName, { path: '/' });
-  }; */
+  const { onFloatBtn } = useSelector(state => state.mymotiiv);
+  const { workspaces } = useSelector(state => state.mymotiiv);
+  //const getMyWorkspaces = () => dispatch(getWorkspaces(checked));
+  useEffect(() => {
+    dispatch(getWorkspaces());
+  }, []);
 
   return (
     <>
       <Navbar />
-      {/*       <div style={{ width: '100%', textAlign: 'center', fontWeight: 'bold' }}>
-        <input
-          style={{ fontWeight: 'bold' }}
-          type="button"
-          value="쿠키를 갖고 싶은가?ㅋ"
-          onClick={IWantCookiesPlease}
-        ></input>
-      </div> */}
-      {/* <MyModal/> */}
       <Switch>
         {/* Main & Category & MyMotiiv */}
         <Route
@@ -105,13 +86,19 @@ function App({ props }) {
           path="/upload"
           render={props => <Upload props={props} />}
         ></Route>
-      </Switch> 
-      <FloatBtn isShow={location.pathname !== '/mymotiiv'} />
+      </Switch>
+      <FloatBtn
+        workspaces={workspaces}
+        isShow={location.pathname !== '/mymotiiv' || onFloatBtn}
+      />
       <BottomBanner />
       <Footer />
-      <MyNavBar loginState = {loginState.isLogin} tag = {location.pathname}></MyNavBar> 
+      <MyNavBar
+        loginState={loginState.isLogin}
+        tag={location.pathname}
+      ></MyNavBar>
     </>
-  )
+  );
 }
 
 export default App;
