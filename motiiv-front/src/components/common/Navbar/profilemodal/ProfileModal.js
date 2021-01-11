@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import Tag from '../../Tag/ProfileTag';
@@ -40,40 +40,37 @@ const ModalWrap = styled.div`
 `;
 
 const FirstLetter = styled.div`
-  color : #2CFF2C;
-  ${props => props.src ? `display : none;` : `` };
-  ${props => props.lang == 'kor' ?
-  `
+  color: #2cff2c;
+  ${props => (props.src ? `display : none;` : ``)};
+  ${props =>
+    props.lang == 'kor'
+      ? `
     font-size : 5.5rem;
   `
-  :
-  `
+      : `
     font-size : 6.5rem;
-  `
-  };
+  `};
   @media ${props => props.theme.maxlaptop} {
-    ${props => props.lang == 'kor' ?
-  `
+    ${props =>
+      props.lang == 'kor'
+        ? `
     font-size : 4rem;
   `
-  :
-  `
+        : `
     font-size : 5.3rem;
-  `
-  };
+  `};
   }
   @media ${props => props.theme.mobile} {
-    ${props => props.lang == 'kor' ?
-  `
+    ${props =>
+      props.lang == 'kor'
+        ? `
     font-size : 2.8rem;
   `
-  :
-  `
+        : `
     font-size : 3.5rem;
-  `
-  };
+  `};
   }
-`
+`;
 
 /* 프로필 이미지 */
 const ProfileImage = styled.div`
@@ -98,29 +95,26 @@ const ProfileImage = styled.div`
     margin-bottom: 1.9rem;
   }
 
-  background-image : url(${props => props.src});
+  background-image: url(${props => props.src});
 
-  ${props => props.src ?
-  `
+  ${props =>
+    props.src
+      ? `
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
   `
-  :
-  `
+      : `
     background-color: #4E4E4E;
-  `
-  };
+  `};
 
-  ${FirstLetter}{
-    position:absolute;
-    top:50%;
-    left:50%;
+  ${FirstLetter} {
+    position: absolute;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
   }
-
 `;
-
 
 /* 닉네임 + 소셜 로그인 아이콘 */
 const FirstDiv = styled.div`
@@ -132,7 +126,7 @@ const FirstDiv = styled.div`
   }
   @media ${props => props.theme.mobile} {
     margin-bottom: 1.5rem;
-  }  
+  }
 `;
 
 const SocialImage = styled.img`
@@ -149,7 +143,7 @@ const ProfileName = styled.div`
   }
   @media ${props => props.theme.mobile} {
     font-size: 1.2rem;
-  } 
+  }
 `;
 
 /* 관심사 태그 컨테이너 */
@@ -157,7 +151,7 @@ const TagBox = styled.div`
   display: flex;
   margin-bottom: 3.6rem;
   @media ${props => props.theme.maxlaptop} {
-    margin-bottom: 3rem; 
+    margin-bottom: 3rem;
   }
   @media ${props => props.theme.mobile} {
     margin-bottom: 2rem;
@@ -203,7 +197,7 @@ const ToggleText = styled.div`
 function ProfileModal({ hideModal, showModal }) {
   const [isToggled, setIsToggled] = useState(false); //추후 isToggled 여부로 다크모드 설정
   const [langState, setLangState] = useState('kor');
-
+  const myRef = useRef();
   const { userInfo, loading } = useSelector(({ user, loading }) => ({
     userInfo: user.userInfo,
     loading: loading['user/GET_PROFILE'],
@@ -212,7 +206,9 @@ function ProfileModal({ hideModal, showModal }) {
   // 아웃 사이드 클릭
   // 내부를 클릭할 땐 안 꺼져야 하는데.. 흠
   const handleClickOutside = e => {
-    hideModal();
+    if (!myRef?.current?.contains(e.target)) {
+      hideModal();
+    }
   };
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
@@ -220,14 +216,16 @@ function ProfileModal({ hideModal, showModal }) {
   });
 
   return (
-    <ModalWrap show={showModal}>
-        {!loading ? (
-          <ProfileImage src={userInfo.profileImageUrl}>
-            <FirstLetter lang={langState} src={userInfo.profileImageUrl}>{userInfo.username && userInfo.username.substr(0,1)}</FirstLetter>
-          </ProfileImage>
-        ) : (
-          <Loading></Loading>
-        )}
+    <ModalWrap show={showModal} ref={myRef}>
+      {!loading ? (
+        <ProfileImage src={userInfo.profileImageUrl}>
+          <FirstLetter lang={langState} src={userInfo.profileImageUrl}>
+            {userInfo.username && userInfo.username.substr(0, 1)}
+          </FirstLetter>
+        </ProfileImage>
+      ) : (
+        <Loading></Loading>
+      )}
 
       <FirstDiv>
         <ProfileName>{userInfo.username}</ProfileName>
@@ -235,7 +233,14 @@ function ProfileModal({ hideModal, showModal }) {
       </FirstDiv>
 
       <TagBox>
-        {userInfo.UserKeywords && userInfo.UserKeywords.map((tag, i) => <Tag key = {"interest-" + i} text={tag.name} padding="0.4rem 0.8rem"/>)}
+        {userInfo.UserKeywords &&
+          userInfo.UserKeywords.map((tag, i) => (
+            <Tag
+              key={'interest-' + i}
+              text={tag.name}
+              padding="0.4rem 0.8rem"
+            />
+          ))}
       </TagBox>
 
       <NavLink exact to="/setting" style={{ textDecoration: 'none' }}>
