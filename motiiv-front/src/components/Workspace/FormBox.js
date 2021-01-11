@@ -1,8 +1,37 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import trashIcon from '../../assets/global/trash_box.png';
+import { useDispatch } from 'react-redux';
+import {
+  deleteWorkspace,
+  createWorkspace,
+  updateWorkspace,
+} from '../../modules/mymotiiv';
+
+const popUp = keyframes`
+  0% {
+    transform: scale(0.5);
+    opacity:0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity:1;
+  }
+`;
+
+const fadeIn = keyframes`
+  0% {
+    opacity:0;
+  }
+
+  100% {
+    opacity:1;
+  }
+`;
 
 const WorkSpaceInputBox = styled.div`
+  transform-origin: center top;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -16,9 +45,10 @@ const WorkSpaceInputBox = styled.div`
   filter: drop-shadow(2px 5px 10px rgba(0, 0, 0, 0.15));
   z-index: 3;
   @media ${props => props.theme.maxdesktop} {
-    right: ${props => (props.idx === 5 ? '-7rem' : null)};
+    right: ${props => (props.moveLeft ? '-7rem' : null)};
     left: ${props => (props.idx === 0 ? '-7rem' : null)};
   }
+  animation: ${popUp} 0.3s both ease-in;
 `;
 const Triangle = styled.div`
   z-index: 3;
@@ -48,6 +78,8 @@ const Triangle = styled.div`
   &:after {
     transform: rotate(135deg) skewY(-45deg) scale(0.707, 1.414) translate(50%);
   }
+  animation: ${fadeIn} 0.1s both ease-in;
+  animation-delay: 0.25s;
 `;
 
 const LineInput = styled.input`
@@ -133,7 +165,15 @@ const WarningText = styled.p`
   font-size: 1.2rem;
 `;
 
-function FormBox({ idx, hideForm, isShow, isCreate = false }) {
+function FormBox({
+  hasToShift,
+  space,
+  idx,
+  hideForm,
+  isShow,
+  isCreate = false,
+}) {
+  const dispatch = useDispatch();
   const [inValidateUrl, SetInValidateUrl] = useState(false);
   const [spaceName, SetSpaceName] = useState('');
   const [urlInput, SetUrlInput] = useState('');
@@ -152,16 +192,31 @@ function FormBox({ idx, hideForm, isShow, isCreate = false }) {
   };
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
+    space && SetSpaceName(space.name);
+    space && SetUrlInput(space.url);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  });
+  }, [isShow]);
 
   const onChangeName = e => {
     SetSpaceName(e.target.value);
   };
   const onChangeUrl = e => {
     SetUrlInput(e.target.value);
-
     validURL(e.target.value) ? SetInValidateUrl(false) : SetInValidateUrl(true);
+  };
+  const onDeleteSpace = () => {
+    dispatch(deleteWorkspace(space.id));
+    reSetForm();
+  };
+  const onCreateSpace = () => {
+    const spaceContent = {
+      name: spaceName,
+      url: urlInput,
+    };
+    isCreate
+      ? dispatch(createWorkspace(spaceContent))
+      : dispatch(updateWorkspace({ spaceContent, id: space.id }));
+    reSetForm();
   };
   const pattern = new RegExp(
     '^(https?:\\/\\/)?' + // protocol
@@ -179,7 +234,11 @@ function FormBox({ idx, hideForm, isShow, isCreate = false }) {
   return (
     isShow && (
       <>
-        <WorkSpaceInputBox idx={idx} ref={myRef}>
+        <WorkSpaceInputBox
+          idx={idx}
+          moveLeft={hasToShift && (idx === 5 || isCreate)}
+          ref={myRef}
+        >
           <LineInput
             placeholder="워크스페이스의 이름을 입력해주세요"
             value={spaceName}
@@ -197,13 +256,16 @@ function FormBox({ idx, hideForm, isShow, isCreate = false }) {
           <EndWrapper>
             <RoundBtn onClick={reSetForm}>취소</RoundBtn>
             <RoundBtn
+              onClick={onCreateSpace}
               className={
                 spaceName && urlInput && !inValidateUrl ? 'active' : ''
               }
             >
               확인
             </RoundBtn>
-            {!isCreate && <TranshIcon src={trashIcon} />}
+            {!isCreate && (
+              <TranshIcon onClick={onDeleteSpace} src={trashIcon} />
+            )}
           </EndWrapper>
         </WorkSpaceInputBox>
         <Triangle></Triangle>

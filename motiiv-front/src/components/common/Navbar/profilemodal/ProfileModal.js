@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
 import Tag from '../../Tag/ProfileTag';
 import ToggleBtn from '../../Button/ToggleBtn';
 import naver from '../../../../assets/profile/naverlink_btn_small.png';
@@ -201,7 +200,7 @@ const ToggleText = styled.div`
   }
 `;
 
-function ProfileModal({ showModal }) {
+function ProfileModal({ hideModal, showModal }) {
   const [isToggled, setIsToggled] = useState(false); //추후 isToggled 여부로 다크모드 설정
   const [langState, setLangState] = useState('kor');
 
@@ -209,6 +208,16 @@ function ProfileModal({ showModal }) {
     userInfo: user.userInfo,
     loading: loading['user/GET_PROFILE'],
   }));
+
+  // 아웃 사이드 클릭
+  // 내부를 클릭할 땐 안 꺼져야 하는데.. 흠
+  const handleClickOutside = e => {
+    hideModal();
+  };
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  });
 
   return (
     <ModalWrap show={showModal}>

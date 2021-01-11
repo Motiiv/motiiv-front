@@ -15,6 +15,13 @@ const Container = styled.div`
 const Title = styled.div`
   font-weight:700;
   font-size:2.5rem;
+
+  @media ${props => props.theme.maxlaptop} {
+    font-size:2.3rem;
+  }
+  @media ${props => props.theme.mobile} {
+    font-size:1.8rem;
+  }
 `
 
 const SubTitle = styled.div`
@@ -22,11 +29,32 @@ const SubTitle = styled.div`
   font-size:1.5rem;
   margin-top:1.5rem;
   margin-bottom:4.5rem;
+  color: ${props => props.theme.darkGray};
+  @media ${props => props.theme.maxlaptop} {
+    font-size:1.5rem;
+    margin-bottom:3.5rem;
+  }
+  @media ${props => props.theme.mobile} {
+    font-size:1.2rem;
+    margin-bottom:4rem;
+    margin-top:1.8rem;
+  }
 `
 
 const ImageContainer = styled.div`
     display:flex;
     margin-bottom:7.3rem;
+
+  @media ${props => props.theme.maxlaptop} {
+    margin-bottom:6rem;
+  }
+  @media ${props => props.theme.mobile} {
+    width:23rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    gap: 2rem;
+    margin-bottom:4.6rem;
+  }
 `
 const Text = styled.div`
     width:12rem;
@@ -38,6 +66,12 @@ const Text = styled.div`
       `
       -webkit-text-stroke: 1px #000
       `:``};
+  @media ${props => props.theme.maxlaptop} {
+    font-size:1.5rem;
+  }
+  @media ${props => props.theme.mobile} {
+
+  }
 `
 
 const ImageBtn = styled.div`
@@ -63,9 +97,17 @@ const ImageBtn = styled.div`
     `
       border : 1.5px solid #2CFF2C;
     `:``};
+
+  @media ${props => props.theme.maxlaptop} {
+    width:11rem;
+    height:11rem;
+  }
+  @media ${props => props.theme.mobile} {
+    margin:0;
+    width:10.5rem;
+    height:10.5rem;
+  }
 `
-
-
 
 function SecondPage({page}) {
 

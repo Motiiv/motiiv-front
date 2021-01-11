@@ -126,7 +126,7 @@ const Profile = styled.div`
   }
 `;
 
-function Navbar({ isloggined }) {
+function Navbar({ showModal, isloggined }) {
   //프로필 드롭다운 나타나고 없애기
   const [profileModalState, setProfileModalState] = useState(false);
   const onClickProfileImage = () => {
@@ -136,16 +136,11 @@ function Navbar({ isloggined }) {
       } catch (e) {}
     })();
   };
-
-  //로그인 모달 나타나고 없애기
-  const [loginModalState, setLoginModalState] = useState(false);
-  const onClickLoginBtn = () => {
-    (async () => {
-      try {
-        setLoginModalState(prev => !prev);
-      } catch (e) {}
-    })();
+  const hideModal = () => {
+    setProfileModalState(false);
   };
+
+  //로그인 모달창 나타내기
 
   const { userInfo } = useSelector(({ user }) => ({
     userInfo: user.userInfo,
@@ -172,7 +167,7 @@ function Navbar({ isloggined }) {
         </TabContainer>
 
         <LoginContainer>
-          <Login login={isloggined} onClick={onClickLoginBtn}>
+          <Login login={isloggined} onClick={showModal}>
             login
           </Login>
           <Profile
@@ -185,10 +180,9 @@ function Navbar({ isloggined }) {
               {userInfo.username && userInfo.username.substr(0, 1)}
             </FirstLetter>
           </Profile>
-          <ProfileModal showModal={profileModalState} />
+          <ProfileModal hideModal={hideModal} showModal={profileModalState} />
         </LoginContainer>
       </Header>
-      <SigninModal showModal={loginModalState} />
     </>
   );
 }

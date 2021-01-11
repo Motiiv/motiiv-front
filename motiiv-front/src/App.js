@@ -26,9 +26,8 @@ import { getWorkspaces } from './modules/mymotiiv';
 
 function App({ props }) {
   const dispatch = useDispatch();
-  const [loginState, setLoginState] = useState({
-    isLogin: true,
-  });
+  const [loginState, setLoginState] = useState(false);
+  const [showLoginModalState, setShowLoginModalState] = useState(false);
 
   const location = useLocation();
   //const { showLoginModal } = useSelector(state => state.user);
@@ -41,9 +40,17 @@ function App({ props }) {
     //dispatch(showSigninModal());
   }, []);
 
+  const hideModal = () => {
+    setShowLoginModalState(false);
+  };
+
+  const showModal = () => {
+    setShowLoginModalState(true);
+  };
+
   return (
     <>
-      <Navbar isloggined={loginState.isLogin} />
+      <Navbar showModal={showModal} isloggined={loginState} />
       <Switch>
         {/* Main & Category & MyMotiiv */}
         <Route
@@ -92,14 +99,11 @@ function App({ props }) {
           render={props => <Upload props={props} />}
         ></Route>
       </Switch>
-      <SigninModal isShow={location.pathname == '/setting'} />
-      {/* <FloatBtn workspaces={workspaces} isShow={onFloatBtn} /> */}
+      <SigninModal hideModal={hideModal} isShow={showLoginModalState} />
+      <FloatBtn workspaces={workspaces} isShow={onFloatBtn} />
       <BottomBanner isShow={location.pathname != '/setting'} />
       <Footer isShow={location.pathname != '/setting'} />
-      <MyNavBar
-        loginState={loginState.isLogin}
-        tag={location.pathname}
-      ></MyNavBar>
+      <MyNavBar loginState={loginState} tag={location.pathname}></MyNavBar>
     </>
   );
 }
