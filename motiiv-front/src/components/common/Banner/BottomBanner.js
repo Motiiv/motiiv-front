@@ -52,24 +52,26 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
 `;
-function BottomBanner() {
+function BottomBanner({ isShow }) {
   return (
-    <BannerWrapper>
-      <Container>
-        <Wrapper>
-          <BannerImg src={starImg} height={'3rem'} mobileDisplay="flex" />
-          <Text>모티브에 대해 더욱 궁금하다면?</Text>
-        </Wrapper>
-        <Wrapper>
-          <BannerImg src={logoImg} height={'2.5rem'} mobileDisplay="none" />
-          <MoreBtn
-            linkUrl="https://motiiv.herokuapp.com"
-            type="blank"
-            text="더 알아보기"
-          ></MoreBtn>
-        </Wrapper>
-      </Container>
-    </BannerWrapper>
+    isShow && (
+      <BannerWrapper>
+        <Container>
+          <Wrapper>
+            <BannerImg src={starImg} height={'3rem'} mobileDisplay="flex" />
+            <Text>모티브에 대해 더욱 궁금하다면?</Text>
+          </Wrapper>
+          <Wrapper>
+            <BannerImg src={logoImg} height={'2.5rem'} mobileDisplay="none" />
+            <MoreBtn
+              linkUrl="https://motiiv.herokuapp.com"
+              type="blank"
+              text="더 알아보기"
+            ></MoreBtn>
+          </Wrapper>
+        </Container>
+      </BannerWrapper>
+    )
   );
 }
 

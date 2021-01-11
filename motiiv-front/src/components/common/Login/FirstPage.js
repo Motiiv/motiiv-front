@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import btnNaver from '../../../../assets/global/btn_naver.png';
-import btnKakao from '../../../../assets/global/btn_kakao.png';
+import btnNaver from '../../../assets/global/btn_naver.png';
+import btnKakao from '../../../assets/global/btn_kakao.png';
 
 const Container = styled.div`
   display: ${props => props.page === 1 ? 'flex' : 'none' };
@@ -16,6 +16,12 @@ const Container = styled.div`
 const Title = styled.div`
   font-weight:700;
   font-size:2.5rem;
+  @media ${props => props.theme.maxlaptop} {
+    font-size:2.3rem;
+  }
+  @media ${props => props.theme.mobile} {
+    font-size:1.8rem;
+  }
 `
 
 const SubTitle = styled.div`
@@ -23,6 +29,19 @@ const SubTitle = styled.div`
   font-size:1.5rem;
   margin-top:1.5rem;
   margin-bottom:4rem;
+  color: ${props => props.theme.darkGray};
+  @media ${props => props.theme.maxlaptop} {
+    font-size:1.5rem;
+    margin-bottom:3.5rem;
+  }
+  @media ${props => props.theme.mobile} {
+    font-size:1.2rem;
+    margin-bottom:5rem;
+    margin-top:1.8rem;
+    width:18rem;
+    text-align:center;
+    line-height:1.5;
+  }
 `
 
 const LoginBtn = styled.button`
@@ -38,8 +57,17 @@ const LinkText = styled.div`
   margin-top:4rem;
   margin-bottom:2.9rem;
   color: #A7A7A7;
-
   text-decoration:none;
+  @media ${props => props.theme.maxlaptop} {
+    margin-top:3.1rem;
+  }
+  @media ${props => props.theme.mobile} {
+    font-size:1.2rem;
+    margin-top:5.5rem;
+    width:17rem;
+    text-align:center;
+    line-height:1.5;
+  }
 `
 
 function FirstPage({page}) {

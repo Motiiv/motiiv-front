@@ -1,5 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { getCategoryVideos } from '../../../modules/video';
+import { useDispatch } from 'react-redux';
 
 const TitleText = styled.div`
   font-size: 1.6rem;
@@ -35,10 +37,12 @@ const TitleIconBox = styled.img`
   margin: 0.7rem 0;
   border-radius: 0.5rem;
 `;
-function Menu({ word, choice, idx, onHandleMenuChoice }) {
+function Menu({ word, choice, idx, onHandleMenuChoice, filters }) {
+  const dispatch = useDispatch();
+
   const onClickHandle = evt => {
     onHandleMenuChoice(idx, evt.currentTarget.attributes.name.value);
-    console.log(idx, evt.currentTarget.attributes.name.value);
+    dispatch(getCategoryVideos({ keyword: idx, filters: filters }));
   };
   return (
     <MenuWrapper name={word} onClick={onClickHandle}>
