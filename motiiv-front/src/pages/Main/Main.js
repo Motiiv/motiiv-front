@@ -15,13 +15,8 @@ const SliderObject = [
       categoryTxt: '어제 하루 조회수가 가장 높았던 모티브',
       videoTxt:
         '유재석이 꿈도 없이 성공할 수 있었던 자기관리.목표나 계획을 세우지 않는 유느님 명언 모음',
-<<<<<<< HEAD
-      hashTag: ['무비무비', 'pride'],
-    }, 
-=======
       hashTag: ['movie', 'pride'],
     },
->>>>>>> 9e2b896a7b3643ac21877420df7e38ab3a4308e8
     VideoInfo: {
       src: 'https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4',
       runningTime: '02:09',

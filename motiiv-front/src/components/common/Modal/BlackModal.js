@@ -25,7 +25,7 @@ const ModalOverlay = styled.div`
 
 const ModalWrapper = styled.div`
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 1);
+  background-color: rgba(0, 0, 0, 0.8);
   width: 35rem;
   height: 43.6rem;
   border-radius: 1.5rem;

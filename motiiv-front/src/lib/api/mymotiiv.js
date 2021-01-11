@@ -35,9 +35,6 @@ const deleteMyeWorkSpace = async id => {
   }
 };
 
-<<<<<<< HEAD
-export { getMyMotiiv,getMyWorkspaces };
-=======
 const createMyeWorkSpace = async spaceContent => {
   try {
     const { data } = await client.post(`/workspaces`, spaceContent);
@@ -67,4 +64,3 @@ export {
   createMyeWorkSpace,
   updateMyeWorkSpace,
 };
->>>>>>> 9e2b896a7b3643ac21877420df7e38ab3a4308e8

@@ -102,8 +102,8 @@ function App({ props }) {
       </Switch>
       <SigninModal hideModal={hideModal} isShow={showLoginModalState} />
       <FloatBtn workspaces={workspaces} isShow={onFloatBtn} />
-      <BottomBanner isShow={location.pathname != '/setting'} />
-      <Footer isShow={location.pathname != '/setting'} />
+      <BottomBanner isShow={location.pathname !== '/setting'} />
+      <Footer isShow={location.pathname !== '/setting'} />
       <MyNavBar loginState={loginState} tag={location.pathname}></MyNavBar>
     </>
   );

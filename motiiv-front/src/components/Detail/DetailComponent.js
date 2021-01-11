@@ -357,8 +357,6 @@ function DetailComponent({
   const descRef = useRef();
 
 
-///////////////
-
 const BlackModalConfirm = () => {
   if (!blackModal.isLogin) {
     setBlackModal({
@@ -383,7 +381,7 @@ const BlackModalConfirm = () => {
     } */
   }, []);
 
-
+ // [ Black Modal] 사용하고자 하는 버튼에 blackmodalconfirm 함수 넣어주면 됨
   const LikeToggle = () => {
     setLike(!like);
     BlackModalConfirm();
@@ -395,12 +393,12 @@ const BlackModalConfirm = () => {
     BlackModalConfirm();
     dispatch(changeSaveStatus(videoInfo.id));
   };
-
+ // [blackModal] active 부분 모달띄우게하는 컴퍼넌트
   return (
     <>
       {!detailLoading ? (
         <DetailContainer>
-          {/*           {blackModal.active && <BlackModal></BlackModal>} */}
+          { blackModal.active && <BlackModal blackModal={blackModal} setBlackModal={setBlackModal} ></BlackModal>}  
           <VideoWrapper>
             <VideoDisplay>
               <iframe
