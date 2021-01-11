@@ -24,6 +24,7 @@ import FloatBtn from './components/common/Button/FloatBtn';
 import { getProfile, showSigninModal } from './modules/user';
 import { getWorkspaces } from './modules/mymotiiv';
 
+
 function App({ props }) {
   const dispatch = useDispatch();
   const [loginState, setLoginState] = useState(false);
@@ -101,8 +102,8 @@ function App({ props }) {
       </Switch>
       <SigninModal hideModal={hideModal} isShow={showLoginModalState} />
       <FloatBtn workspaces={workspaces} isShow={onFloatBtn} />
-      <BottomBanner isShow={location.pathname != '/setting'} />
-      <Footer isShow={location.pathname != '/setting'} />
+      <BottomBanner isShow={location.pathname !== '/setting'} />
+      <Footer isShow={location.pathname !== '/setting'} />
       <MyNavBar loginState={loginState} tag={location.pathname}></MyNavBar>
     </>
   );

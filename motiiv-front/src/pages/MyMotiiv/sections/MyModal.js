@@ -1,23 +1,17 @@
-import React from 'react'
+import React ,{useState,useEffect,useCallback,useRef}from 'react'
+import {useSpring,animated} from 'react-spring';
 import styled, {css} from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import ModalCoverImage from '../../../assets/global/0109_mymotiiv_login_mockup.png';
 import ModalMobileImage from '../../../assets/global/0109_mobile_mymotiiv_mockup.png';
 import MyNavBar from '../sections/MyNavbar';
-// const ModalContainer = styled.div`
-//     width: 100%;
-//     height:100%;
-//     position : fixed;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center; 
-//     z-index :998;
-//     background-color: rgba(0, 0, 0, 0.7);
-//     @media ${props => props.theme.mobile}{
-//     max-width: 76.8rem;
-//     max-height: 64.3rem;
-//   }
-// `;
+import {MdClose} from 'react-icons/md';
+const ModalContainer = styled.div`
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+`;
 const ModalOverlay = styled.div`
     position: fixed;
     z-index: 999;
@@ -26,12 +20,14 @@ const ModalOverlay = styled.div`
     background-size: cover;
     border : none;
     overflow : hidden;
+    /* background-color : black;
+    opacity: 0.7; */
     background-image: url(${ModalCoverImage});
     @media ${props => props.theme.mobile}{
     background-image : url(${ModalMobileImage});
 
-    /* max-width: 76.8rem;
-    max-height: 64.3rem; */
+    max-width: 76.8rem;
+    max-height: 64.3rem;
   }
 
 `;
@@ -186,13 +182,82 @@ const Login = styled(NavLink)`
 `;
 
 
+// const Background = styled.div`
+//   width: 100%;
+//   height: 100%;
+//   background: rgba(0,0,0,0.8);
+//   position : fixed;
+//   display: flex;
+//   justify-content: center;
+//   align-items : center; 
+// `;
 
+// const ModalWrapper = styled.div`
+//   width: 800px;
+//   height: 500px;
+//   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
+//   background: #fff;
+//   color: #000;
+//   display: grid;
+//   grid-template-columns: 1fr 1fr;
+//   position: relative;
+//   z-index: 10;
+//   border-radius: 10px;
+// `;
+// const ModalImg = styled.img`
+//   width: 100%;
+//   height: 100%;
+//   border-radius: 10px 0 0 10px;
+//   background: #000;
+// `;
 
+// const ModalContent = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   line-height: 1.8;
+//   color: #141414;
+//   p {
+//     margin-bottom: 1rem;
+//   }
+//   button {
+//     padding: 10px 24px;
+//     background: #141414;
+//     color: #fff;
+//     border: none;
+//   }
+// `;
+
+// const CloseModalButton = styled(MdClose)`
+//   cursor: pointer;
+//   position: absolute;
+//   top: 20px;
+//   right: 20px;
+//   width: 32px;
+//   height: 32px;
+//   padding: 0;
+//   z-index: 10;
+// `;
 function MyModal() {
+    // document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "unset"
 
     return (
-         <>  
+         <> 
+          {/* {showModal ? <Background ref={modalRef} onClick={closeModal}>
+            <animated.div style = {animation}>
+            <ModalWrapper showModal={showModal}>
+            <ModalContent>
+              <h1>Are you ready?</h1>
+              </ModalContent>
+              <CloseModalButton aria-label="Close modal" onClick={() => setShowModal(prev=> !prev)}></CloseModalButton>
+            </ModalWrapper>
+            </animated.div>
+          </Background> : null} */}
+          {/* <ModalContainer> */}
             <ModalOverlay />
+            {/* <animated.div style={animation}> */}
             <ModalWrapper>
                 <ModalInner>
                     <ToggleGif></ToggleGif>
@@ -207,7 +272,8 @@ function MyModal() {
                     </TagWrapper>
                 </ModalInner>
             </ModalWrapper>
-            
+            {/* </animated.div> */}
+            {/* </ModalContainer> */}
         </>
     )
 }

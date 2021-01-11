@@ -11,7 +11,7 @@ const ModalWrap = styled.div`
   top:5rem;
   left:0;
   z-index:3;
-
+ 
   width: 64.4rem;
   height:18.7rem;
   border-radius: 1rem;
