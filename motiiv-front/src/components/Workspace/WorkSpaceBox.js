@@ -1,25 +1,44 @@
 import React, { useState } from 'react';
 import { MoreOutlined } from '@ant-design/icons';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import FormBox from './FormBox';
+
+const popUp = keyframes`
+  0% {
+    transform: scale(0.5);
+    opacity:0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity:1;
+  }
+`;
 
 const OuterBox = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  z-index: 4;
   & svg {
     position: absolute;
     top: 1rem;
-    right: 3rem;
-    width: 3rem;
-    height: 2rem;
+    right: 3.6rem;
+    width: 1.6rem;
+    height: 1.6rem;
     color: ${({ theme }) => theme.gray};
     cursor: pointer;
     z-index: 2;
-    stroke-width: 4;
+    stroke-width: 7rem;
+    stroke: ${({ theme }) => theme.gray};
     @media ${props => props.theme.maxdesktop} {
-      right: 1.3rem;
+      right: 2.2rem;
+      top: 0.8rem;
+      stroke-width: 5rem;
     }
+  }
+  &:last-child {
+    animation: ${popUp} 0.5s both ease-in;
   }
 `;
 const ContentBox = styled.div`
@@ -39,6 +58,7 @@ const ContentBox = styled.div`
     width: 9rem;
     height: 7.5rem;
     margin-right: 1.8rem;
+    border-radius: 1rem;
   }
   &:nth-child(6) {
     margin-right: 0;
@@ -66,7 +86,7 @@ const Title = styled.div`
   }
 `;
 
-function WorkSpaceBox({ idx, space }) {
+function WorkSpaceBox({ idx, space, hasToShift }) {
   const [isShow, SetIsShow] = useState(false);
   const toggleShow = () => {
     SetIsShow(!isShow);
@@ -84,6 +104,7 @@ function WorkSpaceBox({ idx, space }) {
         <ImgIcon src={space.logoUrl} />
         <Title>{space.name}</Title>
         <FormBox
+          hasToShift={hasToShift}
           space={space}
           idx={idx}
           hideForm={hideForm}

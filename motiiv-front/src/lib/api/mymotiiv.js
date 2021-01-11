@@ -22,15 +22,32 @@ const deleteMyeWorkSpace = async id => {
   }
 };
 
-// const updateNoteApi = async (aid, noteContent) => {
-//   try {
-//     const { data } = await client.put(`/note/${aid}`, noteContent);
-//     console.log('[SUCCESS] updateNote', data);
-//     return data;
-//   } catch (e) {
-//     console.log('[FAIL] updateNote', e);
-//     throw e;
-//   }
-// };
+const createMyeWorkSpace = async spaceContent => {
+  try {
+    const { data } = await client.post(`/workspaces`, spaceContent);
+    console.log('[SUCCESS] createMyeWorkSpace', data);
+    return data;
+  } catch (e) {
+    console.log('[FAIL] createMyeWorkSpace', e);
+    throw e;
+  }
+};
 
-export { getMyWorkspaces, deleteMyeWorkSpace };
+const updateMyeWorkSpace = async ({ id, spaceContent }) => {
+  const payload = { newName: spaceContent.name, newUrl: spaceContent.url };
+  try {
+    const { data } = await client.put(`/workspaces/${id}`, payload);
+    console.log('[SUCCESS] updateMyeWorkSpace', data);
+    return data;
+  } catch (e) {
+    console.log('[FAIL] updateMyeWorkSpace', e);
+    throw e;
+  }
+};
+
+export {
+  getMyWorkspaces,
+  deleteMyeWorkSpace,
+  createMyeWorkSpace,
+  updateMyeWorkSpace,
+};

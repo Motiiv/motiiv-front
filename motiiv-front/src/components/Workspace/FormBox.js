@@ -2,7 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import trashIcon from '../../assets/global/trash_box.png';
 import { useDispatch } from 'react-redux';
-import { deleteWorkspace } from '../../modules/mymotiiv';
+import {
+  deleteWorkspace,
+  createWorkspace,
+  updateWorkspace,
+} from '../../modules/mymotiiv';
 
 const popUp = keyframes`
   0% {
@@ -41,7 +45,7 @@ const WorkSpaceInputBox = styled.div`
   filter: drop-shadow(2px 5px 10px rgba(0, 0, 0, 0.15));
   z-index: 3;
   @media ${props => props.theme.maxdesktop} {
-    right: ${props => (props.idx === 5 ? '-7rem' : null)};
+    right: ${props => (props.moveLeft ? '-7rem' : null)};
     left: ${props => (props.idx === 0 ? '-7rem' : null)};
   }
   animation: ${popUp} 0.3s both ease-in;
@@ -161,7 +165,14 @@ const WarningText = styled.p`
   font-size: 1.2rem;
 `;
 
-function FormBox({ space, idx, hideForm, isShow, isCreate = false }) {
+function FormBox({
+  hasToShift,
+  space,
+  idx,
+  hideForm,
+  isShow,
+  isCreate = false,
+}) {
   const dispatch = useDispatch();
   const [inValidateUrl, SetInValidateUrl] = useState(false);
   const [spaceName, SetSpaceName] = useState('');
@@ -191,12 +202,21 @@ function FormBox({ space, idx, hideForm, isShow, isCreate = false }) {
   };
   const onChangeUrl = e => {
     SetUrlInput(e.target.value);
-
     validURL(e.target.value) ? SetInValidateUrl(false) : SetInValidateUrl(true);
   };
   const onDeleteSpace = () => {
-    console.log('delete');
     dispatch(deleteWorkspace(space.id));
+    reSetForm();
+  };
+  const onCreateSpace = () => {
+    const spaceContent = {
+      name: spaceName,
+      url: urlInput,
+    };
+    isCreate
+      ? dispatch(createWorkspace(spaceContent))
+      : dispatch(updateWorkspace({ spaceContent, id: space.id }));
+    reSetForm();
   };
   const pattern = new RegExp(
     '^(https?:\\/\\/)?' + // protocol
@@ -214,7 +234,11 @@ function FormBox({ space, idx, hideForm, isShow, isCreate = false }) {
   return (
     isShow && (
       <>
-        <WorkSpaceInputBox idx={idx} ref={myRef}>
+        <WorkSpaceInputBox
+          idx={idx}
+          moveLeft={hasToShift && (idx === 5 || isCreate)}
+          ref={myRef}
+        >
           <LineInput
             placeholder="워크스페이스의 이름을 입력해주세요"
             value={spaceName}
@@ -232,6 +256,7 @@ function FormBox({ space, idx, hideForm, isShow, isCreate = false }) {
           <EndWrapper>
             <RoundBtn onClick={reSetForm}>취소</RoundBtn>
             <RoundBtn
+              onClick={onCreateSpace}
               className={
                 spaceName && urlInput && !inValidateUrl ? 'active' : ''
               }
