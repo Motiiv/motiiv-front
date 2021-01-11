@@ -7,6 +7,7 @@ const TitleText = styled.div`
   font-size: 1.6rem;
   padding: 0.9rem 2.4rem;
   padding-right: 0;
+  padding-top: 1.3rem;
   ${props =>
     props.choice === props.idx
       ? css`
@@ -24,7 +25,12 @@ const MenuWrapper = styled.div`
   align-items: center;
   border-radius: 0.5rem;
   padding-right: 1.1rem;
-
+  ${props =>
+    props.choice === props.idx
+      ? css`
+          border: 1px solid ${({ theme }) => theme.primary};
+        `
+      : null};
   &:hover {
     background-color: ${({ theme }) => theme.lightGray};
   }
@@ -41,11 +47,14 @@ function Menu({ word, choice, idx, onHandleMenuChoice, filters }) {
   const dispatch = useDispatch();
 
   const onClickHandle = evt => {
+    //console.log(evt.currentTarget.attributes.name.value);
+    //console.log(idx);
     onHandleMenuChoice(idx, evt.currentTarget.attributes.name.value);
+    console.log(filters);
     dispatch(getCategoryVideos({ keyword: idx, filters: filters }));
   };
   return (
-    <MenuWrapper name={word} onClick={onClickHandle}>
+    <MenuWrapper idx={idx} choice={choice} name={word} onClick={onClickHandle}>
       <TitleText idx={idx} choice={choice}>
         {word}
       </TitleText>

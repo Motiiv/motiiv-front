@@ -24,18 +24,13 @@ const [
   SHOW_SIGNIN_MODAL_FAILURE,
 ] = createRequestActionTypes('user/GET_PROFILE');
 
-
-/* ============== 액션 호출 함수 생성 ============== */
-//프로필 정보
+/* 액션 호출 함수 생성 */
+//프로필 정보4 3
 export const getProfile = createAction(GET_PROFILE);
 //프로필 정보 수정
-export const changeProfile = createAction(
-  CHANGE_PROFILE,
-  payload => payload,
-);
+export const changeProfile = createAction(CHANGE_PROFILE, payload => payload);
 //로그인모달창
 export const showSigninModal = createAction(SHOW_SIGNIN_MODAL);
-
 
 /* ============== 해당하는 액션 호출시 Saga실행 ============== */
 //프로필 정보

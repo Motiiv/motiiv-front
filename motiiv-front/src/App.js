@@ -46,11 +46,11 @@ function App({ props }) {
 
   const showModal = () => {
     setShowLoginModalState(true);
-  }
+  };
 
   return (
     <>
-      <Navbar showModal = {showModal} isloggined={loginState} />
+      <Navbar showModal={showModal} isloggined={loginState} />
       <Switch>
         {/* Main & Category & MyMotiiv */}
         <Route
@@ -99,7 +99,7 @@ function App({ props }) {
           render={props => <Upload props={props} />}
         ></Route>
       </Switch>
-      <SigninModal hideModal = {hideModal} isShow={showLoginModalState} />
+      <SigninModal hideModal={hideModal} isShow={showLoginModalState} />
       <FloatBtn workspaces={workspaces} isShow={onFloatBtn} />
       <BottomBanner isShow={location.pathname != '/setting'} />
       <Footer isShow={location.pathname != '/setting'} />

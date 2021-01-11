@@ -15,13 +15,13 @@ const CategoryContainer = styled.div`
   width: 100%;
   max-width: 1280px;
   display: flex;
-  justify-content: center;
+  //justify-content: center;
   margin-bottom: 10rem;
   min-height: 100rem;
 
   @media ${props => props.theme.mobile} {
     flex-direction: column;
-    max-width: 38rem;
+    max-width: 37.8rem;
     padding: 1.6rem;
   }
   @media ${props => props.theme.tablet} {
@@ -37,9 +37,12 @@ const CategoryContainer = styled.div`
     max-width: 1280px;
     padding: 5rem 5.5rem;
   }
+  & {
+    letter-spacing: -1px;
+  }
 `;
 const Aside = styled.div`
-  min-width: 18.2rem;
+  min-width: 19.4rem;
   ${props =>
     props.hashTag !== '0'
       ? css`
@@ -60,7 +63,7 @@ const Aside = styled.div`
     width: 18.2rem;
   }
   @media ${props => props.theme.laptop} {
-    margin-right: 11.7rem;
+    margin-right: 10.5rem;
   }
 `;
 const BodyContainer = styled.div`
@@ -68,7 +71,9 @@ const BodyContainer = styled.div`
   flex-direction: column;
   width: 100%;
   margin-left: 0;
+
   @media ${props => props.theme.mobile} {
+    padding: 0 0.1rem;
   }
   @media ${props => props.theme.tablet} {
     //max-width: 45.2rem;
@@ -123,12 +128,13 @@ const SortButtonWrapper = styled.div`
 `;
 const SortTitleText = styled.div`
   font-size: 1.5rem;
-  margin-right: 1rem;
+  margin-right: 0.7rem;
   font-weight: 700;
 `;
 const SortButtonImg = styled.img`
   width: 1.5rem;
-  height: 0.75rem;
+  height: 1rem;
+  padding-bottom: 0.3rem;
 `;
 const GridContainer = styled.div`
   margin-top: 2.4rem;
@@ -230,8 +236,8 @@ function CategoryComponent({
           text={activeStatus.text}
           choice={activeStatus.choice}
           filters={sortStatus.id}
-          onChangeActiveStatus={onChangeActiveStatus}
           active={activeStatus.status}
+          onChangeActiveStatus={onChangeActiveStatus}
           onHandleMenuChoice={onHandleMenuChoice}
         />
         <AsideMenu
@@ -275,6 +281,7 @@ function CategoryComponent({
                   <SortTitleText>{sortStatus.text}</SortTitleText>
                   <SortButtonImg
                     src={sortStatus.status ? UpperArrow : DownArrow}
+                    style={{ fill: '#ffffff' }}
                   />
                 </TitleTextAndButton>
                 <SortModal

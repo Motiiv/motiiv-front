@@ -28,7 +28,7 @@ const ModalWrapper = styled.div`
   top: 2.5rem;
   right: 0;
   justify-content: center;
-  box-shadow: 2px 2px 2px 2px gray;
+  box-shadow: 0 0 0 2px ${({ theme }) => theme.lightGray};
   padding: 1.4rem;
 `;
 const SortText = styled.div`
