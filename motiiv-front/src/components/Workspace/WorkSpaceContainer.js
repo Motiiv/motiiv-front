@@ -42,7 +42,7 @@ function WorkSpaceContainer() {
             hasToShift={workspaces.length === 4}
           ></WorkSpaceBox>
         ))}
-      {workspaces && workspaces.length < 6 && (
+      {!loading && workspaces.length < 6 && (
         <PlusBtn hasToShift={workspaces.length === 4}></PlusBtn>
       )}
       {loading && <Loading></Loading>}
