@@ -94,7 +94,8 @@ const HeaderInfo = styled.div`
 const HeaderTitleText = styled.div`
   font-size: 2rem;
   color: #2cff2c;
-  font-weight: bold;
+  font-weight: 700;
+  font-family: 'Campton';
 `;
 const HeaderSubText = styled.div`
   font-size: 1.2rem;
@@ -105,13 +106,12 @@ const VideoText = styled.div`
   font-size: 2.8rem;
   color: white;
   margin-top: 2.4rem;
-
   overflow: hidden;
   text-overflow: ellipsis;
   word-wrap: break-word;
   word-break: keep-all;
-  line-height: 2.8rem;
-  max-height: 5.6rem;
+  line-height: 3.7rem;
+  max-height: 8rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -130,6 +130,50 @@ const TagBox = styled.div`
   @media ${props => props.theme.mobile375} {
     margin-bottom: 1rem;
     margin-left: 2rem;
+  }
+`;
+const TimeContainer = styled.div`
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1.4rem;
+  z-index: 1000;
+  font-size: 1.2rem;
+  padding: 0.3rem 0.5rem;
+  padding-top: 0.4rem;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 1rem;
+  display: flex;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Campton';
+  & + & {
+    margin-left: 1.2rem;
+  }
+  @media ${props => props.theme.tablet} {
+    right: 1.4rem;
+    bottom: 1.2rem;
+    width: 3.9rem;
+    height: 1.5rem;
+    font-size: 1rem;
+  }
+  @media ${props => props.theme.desktop} {
+    right: 1.5rem;
+    bottom: 1.4rem;
+    width: 4.5rem;
+    height: 1.8rem;
+    font-size: 1.2rem;
+
+    ${props =>
+      props.size === 'large'
+        ? css`
+            width: 5.1rem;
+            height: 2.1rem;
+          `
+        : css`
+            width: 4.5rem;
+            height: 1.8rem;
+          `}
   }
 `;
 function SwiperContent({ obj, choice, isNext, isPrev }) {
@@ -168,7 +212,7 @@ function SwiperContent({ obj, choice, isNext, isPrev }) {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
-        <VideoRunningTime>{obj.VideoInfo.runningTime}</VideoRunningTime>
+        <TimeContainer size="large">{obj.VideoInfo.runningTime}</TimeContainer>
       </VideoCard>
     </ContentWrapper>
   );

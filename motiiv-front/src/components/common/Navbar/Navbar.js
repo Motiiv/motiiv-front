@@ -25,6 +25,9 @@ const Header = styled.header`
   font-family: 'Campton';
   font-weight: 700;
   /* z-index: 1001; */
+  & {
+    letter-spacing: -0.3px;
+  }
 `;
 
 const Logo = styled.img`
@@ -87,7 +90,7 @@ const FirstLetter = styled.div`
   ${props =>
     props.src
       ? css`
-          display : none;
+          display: none;
         `
       : css``};
 `;
@@ -124,7 +127,6 @@ const Profile = styled.div`
 `;
 
 function Navbar({ isloggined }) {
-
   //프로필 드롭다운 나타나고 없애기
   const [profileModalState, setProfileModalState] = useState(false);
   const onClickProfileImage = () => {
@@ -170,10 +172,7 @@ function Navbar({ isloggined }) {
         </TabContainer>
 
         <LoginContainer>
-          <Login
-            login={isloggined}
-            onClick={onClickLoginBtn}
-          >
+          <Login login={isloggined} onClick={onClickLoginBtn}>
             login
           </Login>
           <Profile
@@ -182,7 +181,9 @@ function Navbar({ isloggined }) {
             onClick={onClickProfileImage}
             onclick={profileModalState}
           >
-            <FirstLetter src={userInfo.profileImageUrl}>{userInfo.username && userInfo.username.substr(0,1)}</FirstLetter>
+            <FirstLetter src={userInfo.profileImageUrl}>
+              {userInfo.username && userInfo.username.substr(0, 1)}
+            </FirstLetter>
           </Profile>
           <ProfileModal showModal={profileModalState} />
         </LoginContainer>

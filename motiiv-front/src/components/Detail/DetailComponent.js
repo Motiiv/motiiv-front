@@ -254,7 +254,7 @@ const VideoDescription = styled.div`
   margin-top: 2rem;
   font-size: 1.8rem;
   margin-bottom: 3rem;
-  line-height: 2.2rem;
+  line-height: 2.5rem;
   @media ${props => props.theme.mobile} {
     width: 100%;
     border-bottom: 1px #c4c4c4 solid;

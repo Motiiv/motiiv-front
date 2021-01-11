@@ -19,7 +19,7 @@ const [
 ] = createRequestActionTypes('user/GET_PROFILE');
 
 /* 액션 호출 함수 생성 */
-//프로필 정보
+//프로필 정보4 3
 export const getProfile = createAction(GET_PROFILE);
 //로그인모달창
 export const showSigninModal = createAction(SHOW_SIGNIN_MODAL);

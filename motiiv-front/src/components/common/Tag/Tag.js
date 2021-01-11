@@ -11,8 +11,9 @@ const HashTag = styled.div`
   &:hover {
     color: ${({ theme }) => theme.primary};
   }
-  padding: 0.6rem 0.8rem;
-  padding-top: 0.4rem;
+  padding: 0.4rem 0.9rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.5rem;
   padding-right: 0;
   font-family: 'Cantarell' !important;
   font-weight: 700 !important;
@@ -21,9 +22,10 @@ const HashTag = styled.div`
 const TagText = styled.div`
   font-size: ${props => props.fontSize};
   color: ${props => props.color};
-  padding: 0.6rem 0.8rem;
-  padding-top: 0.8rem;
+  padding: 0.4rem 0.9rem;
+  padding-top: 0.6rem;
   padding-left: 0.2rem;
+  padding-bottom: 0.3rem;
   text-align: center;
   font-family: 'Spoqa-Han-Sans' !important;
   font-weight: 700 !important;
@@ -40,7 +42,7 @@ const TagContainer = styled.div`
   align-items: center;
   z-index: 3;
   & + & {
-    margin-left: 1.2rem;
+    margin-left: 0.7rem;
   }
   cursor: pointer;
   &:hover {

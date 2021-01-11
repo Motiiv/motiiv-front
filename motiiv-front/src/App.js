@@ -93,7 +93,7 @@ function App({ props }) {
         ></Route>
       </Switch>
       <SigninModal isShow={location.pathname == '/setting'} />
-      <FloatBtn workspaces={workspaces} isShow={onFloatBtn} />
+      {/* <FloatBtn workspaces={workspaces} isShow={onFloatBtn} /> */}
       <BottomBanner isShow={location.pathname != '/setting'} />
       <Footer isShow={location.pathname != '/setting'} />
       <MyNavBar
