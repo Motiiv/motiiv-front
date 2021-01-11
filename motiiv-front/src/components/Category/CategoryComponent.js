@@ -38,7 +38,7 @@ const CategoryContainer = styled.div`
     padding: 5rem 5.5rem;
   }
   & {
-    letter-spacing: -1px;
+    letter-spacing: -0.5px;
   }
 `;
 const Aside = styled.div`
@@ -129,7 +129,7 @@ const SortButtonWrapper = styled.div`
 const SortTitleText = styled.div`
   font-size: 1.5rem;
   margin-right: 0.7rem;
-  font-weight: 700;
+  //font-weight: 700;
 `;
 const SortButtonImg = styled.img`
   width: 1.5rem;

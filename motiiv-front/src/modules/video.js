@@ -152,7 +152,9 @@ const video = handleActions(
     [GET_DETAIL_VIDEO_INFO_SUCCESS]: (state, { payload: data }) => ({
       ...state,
       d_recVideoList: data.recommandVideos,
-      d_videoInfo: data.details,
+      d_videoInfo: data.videoDetailData,
+      like: data.videoDetailData.isLiked,
+      save: data.videoDetailData.isSaved,
     }),
     [GET_DETAIL_VIDEO_INFO_FAILURE]: (state, { payload: error }) => ({
       ...state,

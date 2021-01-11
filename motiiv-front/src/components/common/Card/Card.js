@@ -117,7 +117,7 @@ const TimeContainer = styled.div`
   position: absolute;
   right: 1.5rem;
   bottom: 1.4rem;
-  z-index: 1000;
+  z-index: 1;
   font-size: 1.2rem;
   padding: 0.3rem 0.5rem;
   padding-top: 0.4rem;

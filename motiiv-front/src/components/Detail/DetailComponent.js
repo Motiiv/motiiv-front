@@ -86,6 +86,9 @@ const RecommendCardBox = styled.div`
     & :nth-child(6) {
       display: none;
     }
+    & :nth-child(5) {
+      display: none;
+    }
   }
 `;
 const VideoInfoWrapper = styled.div`
@@ -360,6 +363,8 @@ function DetailComponent({
   }; */
   /* 더보기 버튼 로직 - 텍스트창 높이구해서 일정 이상이면 '더보기'버튼 활성화 */
   useEffect(() => {
+    setLike(likeStatus);
+    setSave(saveStatus);
     /*     if (descRef.current.offsetHeight > 66) {
       setToggleExist(!toggleExist);
     } */
