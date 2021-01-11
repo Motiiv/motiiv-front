@@ -50,7 +50,11 @@ function App({ props }) {
 
   return (
     <>
-      <Navbar showModal={showModal} isloggined={loginState} />
+      <Navbar
+        location={location.pathname}
+        showModal={showModal}
+        isloggined={loginState}
+      />
       <Switch>
         {/* Main & Category & MyMotiiv */}
         <Route
