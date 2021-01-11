@@ -100,7 +100,6 @@ function ImageSlider({ object, type, size, text, saveButton }) {
           navigation
           scrollbar
           breakpoints={{
-          
             768: {
               spaceBetween: 20,
               slidesPerView: 3,

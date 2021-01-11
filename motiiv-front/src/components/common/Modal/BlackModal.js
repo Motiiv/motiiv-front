@@ -19,14 +19,13 @@ const ModalOverlay = styled.div`
     bottom : 0;
     background-size: cover;
     border : none;
-    background-color : black;
-    opacity: 0.7;
+    background-color : rgba(0,0,0,0.5);
     z-index : 10;
 `;
 
 const ModalWrapper = styled.div`
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 1);
   width: 35rem;
   height: 43.6rem;
   border-radius: 1.5rem;
@@ -61,6 +60,7 @@ const ModalInner = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 1.5rem;
 `;
 
 const ToggleGif = styled.div`

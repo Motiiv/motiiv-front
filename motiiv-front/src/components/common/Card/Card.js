@@ -320,16 +320,20 @@ function Card({ obj, size, text, history, saveButton, category }) {
             <Channel>{obj.channelName}</Channel>
           </DescriptionContainer>
           <TagContainer size={size} category={category}>
-            {obj.TextInfo.hashTag.map((tag, idx) => (
-              <div style={{ marginRight: '1.2rem', marginTop: '-2.8rem' }}>
-                <Tag
-                  hashTag={1}
-                  color="black"
-                  text={obj.VideoTags[idx].name}
-                  fontSize="1.2rem"
-                ></Tag>
-              </div>
-            ))}
+            {obj.VideoTags
+              ? obj.VideoTags.map(tag => (
+                  <div style={{ marginRight: '1.2rem', marginTop: '-2.8rem' }}>
+                    <Tag
+                      hashTag={1}
+                      color="black"
+                      text={tag.name}
+                      key={`Tag-${tag.id}`}
+                      fontSize="1.2rem"
+                      id={tag.id}
+                    ></Tag>
+                  </div>
+                ))
+              : null}
           </TagContainer>
         </TextWrap>
       </CardWrap>

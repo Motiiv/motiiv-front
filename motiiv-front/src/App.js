@@ -21,7 +21,7 @@ import {
 } from 'react-router-dom';
 import { useEffect } from 'react';
 import FloatBtn from './components/common/Button/FloatBtn';
-import { getWorkspaces } from './modules/myMotiiv';
+import { getWorkspaces } from './modules/mymotiiv';
 
 
 function App({ props }) {
@@ -36,6 +36,7 @@ function App({ props }) {
   useEffect(() => {
     dispatch(getWorkspaces());
   }, []);
+
 
   // const openModal = () => {
   //   setShowModal(prev=> !prev)
