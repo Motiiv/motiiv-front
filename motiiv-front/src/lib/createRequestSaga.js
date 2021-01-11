@@ -19,7 +19,6 @@ export default function createRequestSage(type, request) {
         payload: response.data,
         meta: response,
       });
-      console.log(response.data);
     } catch (error) {
       yield put({
         type: FAILURE,
