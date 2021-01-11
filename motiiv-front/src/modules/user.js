@@ -4,13 +4,19 @@ import { createRequestActionTypes } from '../lib/createRequestSaga';
 import * as userAPI from '../lib/api/user';
 import { takeLatest } from 'redux-saga/effects';
 
-/* GET_USER에 대한 성공,실패 액션을 생성 */
+/* ============== 성공,실패 액션을 생성 ============== */
 //프로필 정보
 const [
   GET_PROFILE,
   GET_PROFILE_SUCCESS,
   GET_PROFILE_FAILURE,
 ] = createRequestActionTypes('user/GET_PROFILE');
+//프로필 정보 수정(setting)
+const [
+  CHANGE_PROFILE,
+  CHANGE_PROFILE_SUCCESS,
+  CHANGE_PROFILE_FAILURE,
+] = createRequestActionTypes('user/CHANGE_PROFILE');
 //로그인모달창
 const [
   SHOW_SIGNIN_MODAL,
@@ -18,15 +24,24 @@ const [
   SHOW_SIGNIN_MODAL_FAILURE,
 ] = createRequestActionTypes('user/GET_PROFILE');
 
-/* 액션 호출 함수 생성 */
+
+/* ============== 액션 호출 함수 생성 ============== */
 //프로필 정보
 export const getProfile = createAction(GET_PROFILE);
+//프로필 정보 수정
+export const changeProfile = createAction(
+  CHANGE_PROFILE,
+  payload => payload,
+);
 //로그인모달창
 export const showSigninModal = createAction(SHOW_SIGNIN_MODAL);
 
-/* 해당하는 액션 호출시 Saga실행 */
+
+/* ============== 해당하는 액션 호출시 Saga실행 ============== */
 //프로필 정보
 const getUserSaga = createRequestSaga(GET_PROFILE, userAPI.getUserProfile);
+//프로필 정보 수정
+
 //로그인 모달창 - 나중에 마이모티브 모달창에서 버튼 클릭 시마다 떠야 함
 const showSigninModalState = () => {
   return { data: true };
@@ -36,13 +51,13 @@ const showSigninModalSaga = createRequestSaga(
   showSigninModalState,
 );
 
-/* 요청된 것들 중 가장 마지막 요청만 처리 (여러번 클릭시 모두 처리되면 매우 비효율적!) */
+/* ============== 요청된 것들 중 가장 마지막 요청만 처리 (여러번 클릭시 모두 처리되면 매우 비효율적!) ============== */
 export function* userSaga() {
   yield takeLatest(GET_PROFILE, getUserSaga);
   yield takeLatest(SHOW_SIGNIN_MODAL, showSigninModalSaga);
 }
 
-/* State 초기값 */
+/* ============== State 초기값 ============== */
 const initState = {
   userInfo: {
     id: null,
@@ -60,7 +75,7 @@ const initState = {
   showLoginModal: false,
 };
 
-/* 액션을 store에 저장하는 리듀서를 handleActions로 쉽게 처리! */
+/* ============== 액션을 store에 저장하는 리듀서를 handleActions로 처리 ============== */
 const user = handleActions(
   {
     //유저 정보 조회

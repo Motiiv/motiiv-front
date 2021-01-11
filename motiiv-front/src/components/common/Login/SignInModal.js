@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useState } from 'react';
 import FirstPage from './FirstPage';
 import SecondPage from './SecondPage';
 import LastPage from './LastPage';
@@ -23,6 +22,10 @@ const ModalBackgorundWrap = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+const CancelBtn = styled.div`
+
+`
 
 const NextBtn = styled.div`
   ${props => props.page != 2 ?
@@ -72,21 +75,56 @@ const ModalWrap = styled.div`
   font-family : 'Spoqa-Han-Sans';
   color:black;
 
+  @media ${props => props.theme.maxlaptop} {
+    width: 59rem;
+    height: 35.3rem;
+    padding : 4.5rem 2.5rem 2.5rem 3.3rem;
+  }
+  @media ${props => props.theme.mobile} {
+    width: 31.1rem;
+    height: 44.2rem;
+    padding : 5rem 2rem 2rem 2rem;
+  }
+
   ${NextBtn}{
     position:absolute;
     right:2.5rem;
     bottom:2.5rem;
+    @media ${props => props.theme.maxlaptop} {
+      bottom:3.3rem;
+    }
+    @media ${props => props.theme.mobile} {
+      right:2rem;
+      bottom:2rem;
+    }
   };
   ${PrevBtn}{
     position:absolute;
     left:2.5rem;
     bottom:2.5rem;
+    @media ${props => props.theme.maxlaptop} {
+      bottom:3.3rem;
+    }
+    @media ${props => props.theme.mobile} {
+      left:2rem;
+      bottom:2rem;
+    }
   };
   ${FinBtn}{
     position:absolute;
     right:2.5rem;
     bottom:2.5rem;
+    @media ${props => props.theme.maxlaptop} {
+      bottom:3.3rem;
+    }
+    @media ${props => props.theme.mobile} {
+      right:2rem;
+      bottom:2rem;
+    }
   };
+  ${CancelBtn}{
+
+  }
 `;
 
 const Indicator = styled.div`
@@ -132,9 +170,19 @@ const IndicatorContainer = styled.div`
   justify-content:space-between;
 `
 
-function SigninModal({isShow }) {
+function SigninModal({ hideModal, isShow }) {
 
-  const [pageState, setPageState] = useState(2);
+  // 아웃 사이드 클릭
+  // 내부를 클릭할 땐 안 꺼져야 하는데.. 흠
+  const handleClickOutside = e => {
+    hideModal();
+  };
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  });
+
+  const [pageState, setPageState] = useState(3);
   const pageDown = () => {
     (async () => {
       try {
@@ -177,14 +225,13 @@ function SigninModal({isShow }) {
       <>
         <ModalBackgorundWrap show = {isShow}/>
         <ModalWrap show = {isShow}>
-
+          <CancelBtn />
           <FirstPage page = {pageState}/>
           <SecondPage page = {pageState}/>
           <LastPage page = {pageState}/>
-
             <PrevBtn page = {pageState} onClick={pageDown}>&#xE000; &nbsp; 이전</PrevBtn>
             <NextBtn page = {pageState} onClick={pageUp}>다음 &nbsp; &#xE001;</NextBtn>
-            <FinBtn page = {pageState}>완료</FinBtn>
+            <FinBtn page = {pageState} onclick={hideModal}>완료</FinBtn>
         </ModalWrap>
       </>
     );
