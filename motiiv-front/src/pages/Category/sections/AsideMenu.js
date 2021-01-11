@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const AsideMenuContainer = styled.div`
   display: flex;
   flex-direction: column;
+  cursor: pointer;
   @media ${props => props.theme.mobile} {
     display: none;
   }
@@ -12,7 +13,7 @@ const AsideMenuContainer = styled.div`
     display: flex;
   }
 `;
-function AsideMenu({ choice, onHandleMenuChoice, text }) {
+function AsideMenu({ choice, onHandleMenuChoice, keywords, filters }) {
   return (
     <AsideMenuContainer>
       <Menu
@@ -20,19 +21,18 @@ function AsideMenu({ choice, onHandleMenuChoice, text }) {
         choice={choice}
         idx={0}
         onHandleMenuChoice={onHandleMenuChoice}
+        filters={filters}
       />
-      <Menu
-        word="word1"
-        choice={choice}
-        idx={1}
-        onHandleMenuChoice={onHandleMenuChoice}
-      />
-      <Menu
-        word="word2"
-        choice={choice}
-        idx={2}
-        onHandleMenuChoice={onHandleMenuChoice}
-      />
+      {keywords.map((keyword, idx) => (
+        <Menu
+          key={`AsideMenu-${idx}`}
+          word={keyword.name}
+          choice={choice}
+          idx={keyword.id}
+          onHandleMenuChoice={onHandleMenuChoice}
+          filters={filters}
+        />
+      ))}
     </AsideMenuContainer>
   );
 }

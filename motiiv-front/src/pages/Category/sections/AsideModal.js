@@ -6,14 +6,13 @@ import Menu from './Menu';
 
 const ModalWrapper = styled.div`
   width: 100%;
-  //height: 100%;
   border-radius: 0.7rem;
   overflow: hidden;
   transition: 0.5s;
   ${props =>
     props.active
       ? css`
-          height: 12rem;
+          height: fit-content;
           visibility: visible;
           opacity: 1;
         `
@@ -29,7 +28,7 @@ const ModalWrapper = styled.div`
   top: 4.5rem;
   right: 0;
   justify-content: center;
-  box-shadow: 2px 2px 2px 2px gray;
+  box-shadow: 0 0 0 2px ${({ theme }) => theme.lightGray};
   padding: 1rem;
   & :nth-child(n) {
     font-size: 1.4rem;
@@ -92,12 +91,15 @@ const AsideMenuContainer = styled.div`
           border: solid 1px ${({ theme }) => theme.lightGray}; // 원래 lightGray
         `}
 `;
+
 function AsideModal({
   text,
   active,
   choice,
   onHandleMenuChoice,
   onChangeActiveStatus,
+  keywords,
+  filters,
 }) {
   const onHandleActive = () => {
     onChangeActiveStatus();
@@ -116,25 +118,18 @@ function AsideModal({
           choice={choice}
           idx={0}
           onHandleMenuChoice={onHandleMenuChoice}
-        >
-          최신순
-        </Menu>
-        <Menu
-          word="word1"
-          choice={choice}
-          idx={1}
-          onHandleMenuChoice={onHandleMenuChoice}
-        >
-          좋아요순
-        </Menu>
-        <Menu
-          word="word2"
-          choice={choice}
-          idx={2}
-          onHandleMenuChoice={onHandleMenuChoice}
-        >
-          저장순
-        </Menu>
+          filters={filters}
+        ></Menu>
+        {keywords.map((keyword, idx) => (
+          <Menu
+            key={`AsideMenu-${idx}`}
+            word={keyword.name}
+            choice={choice}
+            idx={keyword.id}
+            filters={filters}
+            onHandleMenuChoice={onHandleMenuChoice}
+          />
+        ))}
       </ModalWrapper>
     </AsideMenuContainer>
   );

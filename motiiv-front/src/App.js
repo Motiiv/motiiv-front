@@ -10,7 +10,7 @@ import Navbar from './components/common/Navbar/Navbar';
 import BottomBanner from './components/common/Banner/BottomBanner';
 import Footer from './components/common/Footer/Footer';
 import MyNavBar from './pages/MyMotiiv/sections/MyNavbar';
-import MyModal from './pages/MyMotiiv/sections/MyModal';
+import SigninModal from './components/common/Login/SignInModal';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -21,29 +21,37 @@ import {
 } from 'react-router-dom';
 import { useEffect } from 'react';
 import FloatBtn from './components/common/Button/FloatBtn';
+import { getProfile, showSigninModal } from './modules/user';
 import { getWorkspaces } from './modules/mymotiiv';
 
 
 function App({ props }) {
   const dispatch = useDispatch();
-  const [loginState, setLoginState] = useState({
-    isLogin: true,
-  });
+  const [loginState, setLoginState] = useState(false);
+  const [showLoginModalState, setShowLoginModalState] = useState(false);
+
   const location = useLocation();
+  //const { showLoginModal } = useSelector(state => state.user);
   const { onFloatBtn } = useSelector(state => state.mymotiiv);
   const { workspaces } = useSelector(state => state.mymotiiv);
-  //const getMyWorkspaces = () => dispatch(getWorkspaces(checked));
+
   useEffect(() => {
     dispatch(getWorkspaces());
+    dispatch(getProfile());
+    //dispatch(showSigninModal());
   }, []);
 
+  const hideModal = () => {
+    setShowLoginModalState(false);
+  };
 
-  // const openModal = () => {
-  //   setShowModal(prev=> !prev)
-  // }
+  const showModal = () => {
+    setShowLoginModalState(true);
+  };
+
   return (
     <>
-      <Navbar />
+      <Navbar showModal={showModal} isloggined={loginState} />
       <Switch>
         {/* Main & Category & MyMotiiv */}
         <Route
@@ -62,7 +70,6 @@ function App({ props }) {
             render={props => <MyMotiiv props={props} />}
           ></Route>
         }
-
         <Route
           exact
           path="/signup"
@@ -93,13 +100,11 @@ function App({ props }) {
           render={props => <Upload props={props} />}
         ></Route>
       </Switch>
+      <SigninModal hideModal={hideModal} isShow={showLoginModalState} />
       <FloatBtn workspaces={workspaces} isShow={onFloatBtn} />
-      <BottomBanner />
-      <Footer />
-      <MyNavBar
-        loginState={loginState.isLogin}
-        tag={location.pathname}
-      ></MyNavBar>
+      <BottomBanner isShow={location.pathname != '/setting'} />
+      <Footer isShow={location.pathname != '/setting'} />
+      <MyNavBar loginState={loginState} tag={location.pathname}></MyNavBar>
     </>
   );
 }

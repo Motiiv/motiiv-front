@@ -35,7 +35,7 @@ const PlusBox = styled.div`
   }
 `;
 
-function PlusBtn() {
+function PlusBtn({ hasToShift }) {
   const [isShow, SetIsShow] = useState(false);
   const toggleShow = () => {
     SetIsShow(!isShow);
@@ -48,7 +48,12 @@ function PlusBtn() {
       <PlusBox onClick={toggleShow}>
         <PlusOutlined />
       </PlusBox>
-      <FormBox hideForm={hideForm} isShow={isShow} isCreate={true}></FormBox>
+      <FormBox
+        hasToShift={hasToShift}
+        hideForm={hideForm}
+        isShow={isShow}
+        isCreate={true}
+      ></FormBox>
     </OuterWrapper>
   );
 }

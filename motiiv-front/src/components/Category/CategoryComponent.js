@@ -7,73 +7,21 @@ import DownArrow from '../../assets/global/downArrow.svg';
 import UpperArrow from '../../assets/global/upperArrow.svg';
 import AsideModal from '../../pages/Category/sections/AsideModal';
 import AsideMenu from '../../pages/Category/sections/AsideMenu';
+import Loading from '../common/Loading/Loading';
 
-const SliderObject = [
-  {
-    idx: 0,
-    TextInfo: {
-      category: 'Hot Motiiv',
-      categoryTxt: '어제 하루 조회수가 가장 높았던 모티브',
-      videoTxt: `"영화 "굿 윌 헌팅" 명장면"`,
-      hashTag: ['movie', 'pride'],
-    },
-    VideoInfo: {
-      src: 'https://www.youtube.com/embed/ZzTQFe5qX_0',
-      runningTime: '02:09',
-    },
-  },
-  {
-    idx: 1,
-    TextInfo: {
-      category: 'Best Motiiv',
-      categoryTxt: '어제 하루 좋아요가 가장 많았던 모티브',
-      videoTxt: `"영화 "울프 오브 월스트리트" 명장면"`,
-      hashTag: ['movie', 'pride'],
-    },
-    VideoInfo: {
-      src: 'https://www.youtube.com/embed/GIoofmjN-8U',
-      runningTime: '03:32',
-    },
-  },
-  {
-    idx: 2,
-    TextInfo: {
-      category: 'Most motivated motiiv',
-      categoryTxt: '어제 워크스페이스로 가장 많이 이동한 모티브',
-      videoTxt: 'The Devil Wears Prada final scene',
-      hashTag: ['movie', 'pride'],
-    },
-    VideoInfo: {
-      src: 'https://www.youtube.com/embed/8xCfGlYQiPI',
-      runningTime: '22:01',
-    },
-  },
-  {
-    idx: 3,
-    TextInfo: {
-      category: 'Most motivated motiiv',
-      categoryTxt: '어제 워크스페이스로 가장 많이 이동한 모티브',
-      videoTxt: 'The Devil Wears Prada final scene',
-      hashTag: ['movie', 'pride'],
-    },
-    VideoInfo: {
-      src: 'https://www.youtube.com/embed/8xCfGlYQiPI',
-      runningTime: '22:01',
-    },
-  },
-];
 const CategoryContainer = styled.div`
   padding: 5rem 5.5rem;
   margin: 0 auto;
   width: 100%;
   max-width: 1280px;
   display: flex;
-  justify-content: center;
+  //justify-content: center;
   margin-bottom: 10rem;
+  min-height: 100rem;
 
   @media ${props => props.theme.mobile} {
     flex-direction: column;
-    max-width: 38rem;
+    max-width: 37.8rem;
     padding: 1.6rem;
   }
   @media ${props => props.theme.tablet} {
@@ -89,9 +37,12 @@ const CategoryContainer = styled.div`
     max-width: 1280px;
     padding: 5rem 5.5rem;
   }
+  & {
+    letter-spacing: -1px;
+  }
 `;
 const Aside = styled.div`
-  min-width: 18.2rem;
+  min-width: 19.4rem;
   ${props =>
     props.hashTag !== '0'
       ? css`
@@ -112,7 +63,7 @@ const Aside = styled.div`
     width: 18.2rem;
   }
   @media ${props => props.theme.laptop} {
-    margin-right: 11.7rem;
+    margin-right: 10.5rem;
   }
 `;
 const BodyContainer = styled.div`
@@ -120,7 +71,9 @@ const BodyContainer = styled.div`
   flex-direction: column;
   width: 100%;
   margin-left: 0;
+
   @media ${props => props.theme.mobile} {
+    padding: 0 0.1rem;
   }
   @media ${props => props.theme.tablet} {
     //max-width: 45.2rem;
@@ -149,11 +102,23 @@ const TitleText = styled.div`
           @media ${props => props.theme.mobile} {
             font-size: 2rem;
           }
+          &:after {
+            ${props =>
+              css`
+                content: '# ${props.tagName}';
+              `}
+          }
         `
       : css`
           font-size: 1.6rem;
           @media ${props => props.theme.mobile} {
             //font-size: 2rem;
+          }
+          &:after {
+            ${props =>
+              css`
+                content: '총 ${props.videoCnt}개의 모티브가 있어요!';
+              `}
           }
         `}
   font-weight: 700;
@@ -163,12 +128,13 @@ const SortButtonWrapper = styled.div`
 `;
 const SortTitleText = styled.div`
   font-size: 1.5rem;
-  margin-right: 1rem;
+  margin-right: 0.7rem;
   font-weight: 700;
 `;
 const SortButtonImg = styled.img`
   width: 1.5rem;
-  height: 0.75rem;
+  height: 1rem;
+  padding-bottom: 0.3rem;
 `;
 const GridContainer = styled.div`
   margin-top: 2.4rem;
@@ -216,7 +182,14 @@ const GridContainer = styled.div`
     }
   }
 `;
-function CategoryComponent({ hashTag }) {
+function CategoryComponent({
+  hashTag,
+  keywords,
+  videos,
+  loading,
+  videoCnt,
+  tagName,
+}) {
   const [activeStatus, setActiveStatus] = useState({
     status: false,
     choice: 0,
@@ -225,6 +198,7 @@ function CategoryComponent({ hashTag }) {
   const [sortStatus, setSortStatus] = useState({
     text: '최신순',
     status: false,
+    id: 'new',
   });
   const onChangeActiveStatus = () => {
     setActiveStatus({
@@ -246,10 +220,11 @@ function CategoryComponent({ hashTag }) {
       status: !sortStatus.status,
     });
   };
-  const onHandleSortText = name => {
+  const onHandleSortText = (name, id) => {
     setSortStatus({
       status: !sortStatus.status,
       text: name,
+      id: id,
     });
   };
 
@@ -257,15 +232,19 @@ function CategoryComponent({ hashTag }) {
     <CategoryContainer>
       <Aside hashTag={hashTag}>
         <AsideModal
+          keywords={keywords}
           text={activeStatus.text}
           choice={activeStatus.choice}
-          onChangeActiveStatus={onChangeActiveStatus}
+          filters={sortStatus.id}
           active={activeStatus.status}
+          onChangeActiveStatus={onChangeActiveStatus}
           onHandleMenuChoice={onHandleMenuChoice}
         />
         <AsideMenu
+          keywords={keywords}
           text={activeStatus.text}
           choice={activeStatus.choice}
+          filters={sortStatus.id}
           onHandleMenuChoice={onHandleMenuChoice}
         ></AsideMenu>
         {/* <DropDownMenu
@@ -289,24 +268,38 @@ function CategoryComponent({ hashTag }) {
         /> */}
       </Aside>
       <BodyContainer>
-        <TitleAndSort>
-          <TitleText hashTag={hashTag}>총 1997개의 모티브가 있어요!</TitleText>
-          <SortButtonWrapper>
-            <TitleTextAndButton onClick={onHandleSortModalStatus}>
-              <SortTitleText>{sortStatus.text}</SortTitleText>
-              <SortButtonImg src={sortStatus.status ? UpperArrow : DownArrow} />
-            </TitleTextAndButton>
-            <SortModal
-              sortModal={sortStatus.status}
-              onHandleSortText={onHandleSortText}
-            ></SortModal>
-          </SortButtonWrapper>
-        </TitleAndSort>
-        <GridContainer hashTag={hashTag}>
-          {SliderObject.map((obj, idx) => (
-            <Card key={`Card-${idx}`} obj={obj} category={true} />
-          ))}
-        </GridContainer>
+        {!loading ? (
+          <>
+            <TitleAndSort>
+              <TitleText
+                hashTag={hashTag}
+                tagName={tagName}
+                videoCnt={videoCnt}
+              ></TitleText>
+              <SortButtonWrapper>
+                <TitleTextAndButton onClick={onHandleSortModalStatus}>
+                  <SortTitleText>{sortStatus.text}</SortTitleText>
+                  <SortButtonImg
+                    src={sortStatus.status ? UpperArrow : DownArrow}
+                    style={{ fill: '#ffffff' }}
+                  />
+                </TitleTextAndButton>
+                <SortModal
+                  sortModal={sortStatus.status}
+                  onHandleSortText={onHandleSortText}
+                  keyword={activeStatus.choice}
+                ></SortModal>
+              </SortButtonWrapper>
+            </TitleAndSort>
+            <GridContainer hashTag={hashTag}>
+              {videos.map((video, idx) => (
+                <Card key={`Card-${idx}`} obj={video} category={true} />
+              ))}
+            </GridContainer>
+          </>
+        ) : (
+          <Loading></Loading>
+        )}
       </BodyContainer>
     </CategoryContainer>
   );

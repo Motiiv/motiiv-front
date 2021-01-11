@@ -15,8 +15,13 @@ const SliderObject = [
       categoryTxt: '어제 하루 조회수가 가장 높았던 모티브',
       videoTxt:
         '유재석이 꿈도 없이 성공할 수 있었던 자기관리.목표나 계획을 세우지 않는 유느님 명언 모음',
+<<<<<<< HEAD
       hashTag: ['무비무비', 'pride'],
     }, 
+=======
+      hashTag: ['movie', 'pride'],
+    },
+>>>>>>> 9e2b896a7b3643ac21877420df7e38ab3a4308e8
     VideoInfo: {
       src: 'https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4',
       runningTime: '02:09',
@@ -78,91 +83,90 @@ const SliderObject = [
 ];
 
 const Container = styled.div`
-    width: 100%;
-    height: 51rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: ${({ theme }) => theme.lightGray};
-    @media ${props => props.theme.mobile}{
+  width: 100%;
+  height: 51rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.lightGray};
+  @media ${props => props.theme.mobile} {
     height: 30rem;
-    margin-bottom : 1.6rem;  
-    }
-    @media ${props => props.theme.tablet}{
+    margin-bottom: 1.6rem;
+  }
+  @media ${props => props.theme.tablet} {
     height: 37.2rem;
-    margin-bottom : 0;
-  }  
-  @media ${props => props.theme.desktop}{
+    margin-bottom: 0;
+  }
+  @media ${props => props.theme.desktop} {
     height: 51rem;
-    margin-bottom : 0;
-  }  
+    margin-bottom: 0;
+  }
 `;
 //Section도 페이지별로 쓰이니까 maxwidth 1280px
 const Wrapper = styled.div`
-    width: 100%;
-    max-width: 1280px;
-    display: flex;
-    flex-direction: column;
-    @media ${props => props.theme.mobile}{
-        max-width: 768px;
-    }
-    @media ${props => props.theme.tablet}{
-        min-width : 768px;
-    } 
-    @media ${props => props.theme.desktop}{
-        min-width : 1280px;
-    } 
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  @media ${props => props.theme.mobile} {
+    max-width: 768px;
+  }
+  @media ${props => props.theme.tablet} {
+    min-width: 768px;
+  }
+  @media ${props => props.theme.desktop} {
+    min-width: 1280px;
+  }
 `;
 
 const Wrap = styled.div`
-    margin-left: 5.5rem;
-    display: flex;
-    flex-direction: column;
-    margin-bottom : ${props => props.text ? '5.1rem': '3rem'};
-    @media ${props => props.theme.mobile}{
+  margin-left: 5.5rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: ${props => (props.text ? '5.1rem' : '3rem')};
+  @media ${props => props.theme.mobile} {
     margin-left: 2rem;
-    margin-top : 1.5rem;
-    margin-bottom : ${props => props.text ? '2rem': '1rem'};
-    }
-    @media ${props => props.theme.tablet}{
-    margin-left : 4rem;
-    margin-bottom : ${props => props.text ? '5.1rem': '3.4rem'};
+    margin-top: 1.5rem;
+    margin-bottom: ${props => (props.text ? '2rem' : '1rem')};
   }
-    @media ${props => props.theme.desktop}{
-      margin-left: 5.5rem;
-      margin-bottom : ${props => props.text ? '5.1rem': '3rem'};
+  @media ${props => props.theme.tablet} {
+    margin-left: 4rem;
+    margin-bottom: ${props => (props.text ? '5.1rem' : '3.4rem')};
+  }
+  @media ${props => props.theme.desktop} {
+    margin-left: 5.5rem;
+    margin-bottom: ${props => (props.text ? '5.1rem' : '3rem')};
   }
 `;
 const Title = styled.h2`
-  font-size: 3rem; 
+  font-size: 3rem;
   font-weight: bold;
   color: black;
-  @media ${props => props.theme.mobile}{
-    font-size : 1.8rem;
-    margin-bottom : 0.6rem;
-    }
-    @media ${props => props.theme.tablet}{
-    font-size : 2rem;
-    margin-bottom : 0.6rem;
-  } 
-    @media ${props => props.theme.desktop}{
-      font-size: 3rem; 
-      margin-bottom : 0.6rem;
-    } 
+  @media ${props => props.theme.mobile} {
+    font-size: 1.8rem;
+    margin-bottom: 0.6rem;
+  }
+  @media ${props => props.theme.tablet} {
+    font-size: 2rem;
+    margin-bottom: 0.6rem;
+  }
+  @media ${props => props.theme.desktop} {
+    font-size: 3rem;
+    margin-bottom: 0.6rem;
+  }
 `;
 const SubTitle = styled.div`
   font-size: 1.6rem;
   color: black;
-  @media ${props => props.theme.mobile}{
-    font-size : 1.2rem;
+  @media ${props => props.theme.mobile} {
+    font-size: 1.2rem;
   }
-  @media ${props => props.theme.tablet}{
-  font-size : 1.4rem;
+  @media ${props => props.theme.tablet} {
+    font-size: 1.4rem;
   }
-  @media ${props => props.theme.desktop}{
+  @media ${props => props.theme.desktop} {
     font-size: 1.6rem;
   }
-  
 `;
 const HighLight = styled.span`
   background: ${({ theme }) => theme.primary};
@@ -193,9 +197,9 @@ function Main({ object }) {
         type="top"
         size="large"
         color="gray"
-        text="motiiv top10"
+        text="motiiv top 10"
       ></Section>
-        {/* <Container>
+      {/* <Container>
           <Wrapper>
             <Wrap>
           <Title>motiiv<HighLight>top 10</HighLight></Title>
@@ -206,13 +210,13 @@ function Main({ object }) {
         color="gray"></ImageSlider>
           </Wrapper>
         </Container> */}
-      <Section object={SliderObject}></Section>
-      <Section object={SliderObject}></Section>
-      <Section object={SliderObject}></Section>
+      <Section object={SliderObject} nonfix="true"></Section>
+      <Section object={SliderObject} nonfix="true"></Section>
+      <Section object={SliderObject} nonfix="true"></Section>
       <AdBanner />
-      <Section object={SliderObject}></Section>
-      <Section object={SliderObject}></Section>
-      <Section object={SliderObject}></Section>
+      <Section object={SliderObject} nonfix="true"></Section>
+      <Section object={SliderObject} nonfix="true"></Section>
+      <Section object={SliderObject} nonfix="true"></Section>
     </>
   );
 }

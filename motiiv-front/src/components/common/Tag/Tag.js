@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import theme from '../../../style/theme';
+import { getCategoryTagVideos } from '../../../modules/video';
+import { useDispatch, useSelector } from 'react-redux';
 
 const HashTag = styled.div`
   font-size: ${props => props.fontSize};
@@ -9,8 +11,9 @@ const HashTag = styled.div`
   &:hover {
     color: ${({ theme }) => theme.primary};
   }
-  padding: 0.6rem 0.8rem;
-  padding-top: 0.4rem;
+  padding: 0.4rem 0.9rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.5rem;
   padding-right: 0;
   font-family: 'Cantarell' !important;
   font-weight: 700 !important;
@@ -19,9 +22,10 @@ const HashTag = styled.div`
 const TagText = styled.div`
   font-size: ${props => props.fontSize};
   color: ${props => props.color};
-  padding: 0.6rem 0.8rem;
-  padding-top: 0.8rem;
+  padding: 0.4rem 0.9rem;
+  padding-top: 0.6rem;
   padding-left: 0.2rem;
+  padding-bottom: 0.3rem;
   text-align: center;
   font-family: 'Spoqa-Han-Sans' !important;
   font-weight: 700 !important;
@@ -38,7 +42,7 @@ const TagContainer = styled.div`
   align-items: center;
   z-index: 3;
   & + & {
-    margin-left: 1.2rem;
+    margin-left: 0.7rem;
   }
   cursor: pointer;
   &:hover {
@@ -51,9 +55,14 @@ const TagContainer = styled.div`
     }
   }
 `;
-function Tag({ hashTag, color, text, fontSize, history }) {
+function Tag({ hashTag, color, text, fontSize, history, id }) {
+  const dispatch = useDispatch();
+  const onClickTag = () => {
+    dispatch(getCategoryTagVideos(id));
+    history.push('/category/1');
+  };
   return (
-    <TagContainer color={color} onClick={() => history.push('/category/1')}>
+    <TagContainer color={color} onClick={onClickTag}>
       {hashTag === 1 && (
         <HashTag fontSize={fontSize} color={color}>
           &#x00023;

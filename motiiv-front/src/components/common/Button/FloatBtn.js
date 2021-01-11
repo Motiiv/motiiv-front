@@ -101,7 +101,7 @@ function FloatBtn({ isShow, workspaces }) {
   return (
     isShow && (
       <FloatBtnWrapper isActive={isActive} isHover={isHover}>
-        {workspaces &&
+        {workspaces.length !== 0 &&
           positionTable[workspaces.length - 1].map((pos, idx) => (
             <SpaceBtn
               isActive={isActive}

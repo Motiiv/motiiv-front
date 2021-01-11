@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import logo from '../../../assets/global/motiiv_logo.png';
 import star from '../../../assets/global/star.png';
-import SigninModal from './SigninModal/SignInModal';
-import ProfileModal from './ProfileModal';
+import SigninModal from '../Login/SignInModal';
+import ProfileModal from './profilemodal/ProfileModal';
 
 const activeStyle = {
   color: '#2cff2c',
@@ -25,6 +25,9 @@ const Header = styled.header`
   font-family: 'Campton';
   font-weight: 700;
   /* z-index: 1001; */
+  & {
+    letter-spacing: -0.3px;
+  }
 `;
 
 const Logo = styled.img`
@@ -72,7 +75,7 @@ const LoginContainer = styled.div`
 `;
 
 const Login = styled.div`
-  display: ${props => (props.login === 'false' ? 'flex' : 'none')};
+  display: ${props => (props.login === false ? 'flex' : 'none')};
   color: white;
   text-align: left;
   text-decoration: none;
@@ -83,10 +86,17 @@ const FirstLetter = styled.div`
   color: #2cff2c;
   font-size: 1.75rem;
   font-family: 'Spoqa-Han-Sans';
+
+  ${props =>
+    props.src
+      ? css`
+          display: none;
+        `
+      : css``};
 `;
 
 const Profile = styled.div`
-  display: ${props => (props.login === 'true' ? 'flex' : 'none')};
+  display: ${props => (props.login === true ? 'flex' : 'none')};
   width: 3rem;
   height: 3rem;
   z-index: 3;
@@ -97,7 +107,6 @@ const Profile = styled.div`
   border-radius: 100%;
   border: ${props => (props.onclick === true ? '2px solid #2CFF2C' : 'none')};
   cursor: pointer;
-
   background-image: url(${props => props.src});
   ${props =>
     props.src
@@ -109,7 +118,6 @@ const Profile = styled.div`
       : css`
           background-color: #4e4e4e;
         `};
-
   ${FirstLetter} {
     position: absolute;
     top: 50%;
@@ -118,13 +126,7 @@ const Profile = styled.div`
   }
 `;
 
-function Navbar() {
-  //로그인 여부 판단 + 어드민 여부 판단
-  const [loginState, setLoginState] = useState({
-    isLoggined: true,
-    admin: false,
-  });
-
+function Navbar({ showModal, isloggined }) {
   //프로필 드롭다운 나타나고 없애기
   const [profileModalState, setProfileModalState] = useState(false);
   const onClickProfileImage = () => {
@@ -134,24 +136,15 @@ function Navbar() {
       } catch (e) {}
     })();
   };
-
-  //로그인 모달 나타나고 없애기
-  const [loginModalState, setLoginModalState] = useState(false);
-  const onClickLoginBtn = () => {
-    (async () => {
-      try {
-        setLoginModalState(prev => !prev);
-      } catch (e) {}
-    })();
+  const hideModal = () => {
+    setProfileModalState(false);
   };
+
+  //로그인 모달창 나타내기
 
   const { userInfo } = useSelector(({ user }) => ({
     userInfo: user.userInfo,
   }));
-
-  const name = 'Bonnie';
-  const firstletter = name.substr(0, 1);
-  //첫글자가 영어인지 한글인지 테스트하는 로직 필요
 
   return (
     <>
@@ -171,40 +164,25 @@ function Navbar() {
           <TabElem exact to="/mymotiiv" activeStyle={activeStyle}>
             mymotiiv
           </TabElem>
-          <Star src={star} show={loginState.admin.toString()} />
-          <TabElem
-            exact
-            to="/admin"
-            show={loginState.admin.toString()}
-            activeStyle={activeStyle}
-          >
-            admin
-          </TabElem>
         </TabContainer>
 
         <LoginContainer>
-          <Login
-            login={loginState.isLoggined.toString()}
-            onClick={onClickLoginBtn}
-          >
+          <Login login={isloggined} onClick={showModal}>
             login
           </Login>
           <Profile
             src={userInfo.profileImageUrl}
-            login={loginState.isLoggined.toString()}
+            login={isloggined}
             onClick={onClickProfileImage}
             onclick={profileModalState}
           >
-            <FirstLetter>{firstletter}</FirstLetter>
+            <FirstLetter src={userInfo.profileImageUrl}>
+              {userInfo.username && userInfo.username.substr(0, 1)}
+            </FirstLetter>
           </Profile>
-          <ProfileModal
-            showModal={profileModalState}
-            name={name}
-            firstletter={firstletter}
-          />
+          <ProfileModal hideModal={hideModal} showModal={profileModalState} />
         </LoginContainer>
       </Header>
-      <SigninModal showModal={loginModalState} />
     </>
   );
 }

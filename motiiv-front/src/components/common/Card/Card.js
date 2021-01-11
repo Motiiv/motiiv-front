@@ -13,8 +13,10 @@ const CardWrap = styled.div`
   min-height: ${props => (props.size === 'large' ? '33.5 rem' : '26.7rem')};
   flex-direction: column;
   box-shadow: ${props =>
-    props.size === 'large' ? '2px 2px 7px rgba(0, 0, 0, 0.15)' : 'none'};
-  border-radius: 1rem;
+    props.size === 'large' ? '2px 2px  7px rgba(0, 0, 0, 0.15)' : 'none'};
+  //border-radius: 1rem;
+  border-radius: ${props => (props.size === 'large' ? '1rem' : '1rem')};
+  cursor: pointer;
   @media ${props => props.theme.mobile} {
     min-width: 30rem;
     min-height: 24.2rem;
@@ -32,6 +34,9 @@ const CardWrap = styled.div`
     height: auto;
     min-height: ${props => (props.size === 'large' ? '33.5 rem' : '26.7rem')};
   }
+  & {
+    letter-spacing: -1px;
+  }
 `;
 const VideoWrap = styled.div`
   width: 100%;
@@ -41,9 +46,9 @@ const VideoWrap = styled.div`
   align-items: center;
   justify-content: center;
   background: #c4c4c4;
+  position: relative;
   border-radius: ${props =>
     props.size === 'large' ? '1rem 1rem 0 0' : '1rem'};
-  position: relative;
   &:hover {
   }
   @media ${props => props.theme.mobile} {
@@ -69,11 +74,10 @@ const SaveBox = styled.div`
   right: 1.5rem;
   top: 1.4rem;
   line-height: 0 !important;
+  z-index: 1;
   cursor: pointer;
 `;
 const SaveImg = styled.img`
-  width: 3.5rem;
-  height: 3.542rem;
   @media ${props => props.theme.mobile} {
     width: 3rem;
     height: 3rem;
@@ -82,22 +86,40 @@ const SaveImg = styled.img`
     width: 2.2rem;
     height: 2.2rem;
   }
+  @media ${props => props.theme.laptop} {
+    ${props =>
+      props.size === 'large'
+        ? css`
+            width: 3.5rem;
+            height: 3.5rem;
+          `
+        : css`
+            width: 3rem;
+            height: 3rem;
+          `};
+  }
   @media ${props => props.theme.desktop} {
-    width: 3.5rem;
-    height: 3.542rem;
+    ${props =>
+      props.size === 'large'
+        ? css`
+            width: 3.5rem;
+            height: 3.5rem;
+          `
+        : css`
+            width: 3rem;
+            height: 3rem;
+          `};
   }
 `;
 const TimeContainer = styled.div`
   position: absolute;
   right: 1.5rem;
   bottom: 1.4rem;
-  width: 4.5rem;
   z-index: 1000;
-  height: 1.8rem;
   font-size: 1.2rem;
   padding: 0.3rem 0.5rem;
   padding-top: 0.4rem;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.8);
   border-radius: 1rem;
   display: flex;
   color: white;
@@ -120,6 +142,17 @@ const TimeContainer = styled.div`
     width: 4.5rem;
     height: 1.8rem;
     font-size: 1.2rem;
+
+    ${props =>
+      props.size === 'large'
+        ? css`
+            width: 5.1rem;
+            height: 2.1rem;
+          `
+        : css`
+            width: 4.5rem;
+            height: 1.8rem;
+          `}
   }
 `;
 
@@ -135,10 +168,10 @@ const Views = styled.div`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   @media ${props => props.theme.mobile} {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
   @media ${props => props.theme.tablet} {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
   @media ${props => props.theme.desktop} {
     font-size: 1.5rem;
@@ -149,8 +182,8 @@ const Channel = styled.div`
   font-size: 1.5rem;
   font-family: 'Spoqa-Han-Sans';
   border-left: 0.15rem solid;
-  margin-left: 1rem;
-  padding-left: 1rem;
+  margin-left: 0.9rem;
+  padding-left: 0.9rem;
   color: ${({ theme }) => theme.darkGray};
   overflow: hidden;
   text-overflow: ellipsis;
@@ -160,17 +193,17 @@ const Channel = styled.div`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   @media ${props => props.theme.mobile} {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
   @media ${props => props.theme.tablet} {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-left: 0.5rem;
-    padding-left: 0.5 rem;
+    padding-left: 0.5rem;
   }
   @media ${props => props.theme.desktop} {
     font-size: 1.5rem;
     margin-left: 1rem;
-    padding-left: 1rem;
+    padding-left: 0.9rem;
   }
 `;
 const Video = styled.img`
@@ -208,7 +241,7 @@ const Title = styled.div`
   height: 3.4rem;
   margin-top: ${props => (props.size === 'large' ? '1rem' : '0.8rem')};
   text-overflow: ellipsis;
-  word-break: keep-all;
+  word-break: normal;
   word-wrap: break-word;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -250,7 +283,7 @@ const DescriptionContainer = styled.div`
 const TagContainer = styled.div`
   display: flex;
   width: 100%;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   margin-left: ${props => (props.size === 'large' ? '2rem' : '1px')};
   @media ${props => props.theme.mobile} {
     display: none;
@@ -263,11 +296,11 @@ const TagContainer = styled.div`
   }
   @media ${props => props.theme.tablet} {
     display: flex;
-    margin-top: 1.6rem;
+    margin-top: 1rem;
     margin-left: ${props => (props.size === 'large' ? '1.5rem' : '0')};
   }
   @media ${props => props.theme.desktop} {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     margin-left: ${props => (props.size === 'large' ? '2rem' : '1px')};
   }
 `;
@@ -277,10 +310,13 @@ function Card({ obj, size, text, history, saveButton, category }) {
   return (
     <>
       <CardWrap size={size}>
-        <VideoWrap size={size} onClick={() => history.push('/detail/1')}>
-          {/* <HoverVideoPlayer
+        <VideoWrap
+          size={size}
+          onClick={() => history.push(`/detail/${obj.id}`)}
+        >
+          <HoverVideoPlayer
             style={{ width: '100%', height: '100%', borderRadius: '1rem' }}
-            videoSrc={obj.VideoInfo.src}
+            //videoSrc={obj.VideoInfo.src}
             pausedOverlayWrapperStyle={{
               borderRadius: '1rem',
               overflow: 'hidden',
@@ -290,22 +326,22 @@ function Card({ obj, size, text, history, saveButton, category }) {
                 width="100%"
                 height="100%"
                 borderRadius="1rem"
-                src="https://user-images.githubusercontent.com/61861809/103748463-82a9d380-5047-11eb-9720-697a1f2de7cd.jpg"
+                src={obj.thumbnailImageUrl}
               />
             }
             loadingOverlay={<div className="loading-spinner-overlay" />}
             videoStyle={{
               borderRadius: '1rem',
             }}
-          /> */}
+          />
           <SaveBox saveButton={saveButton} onClick={() => setSave(!save)}>
-            <SaveImg src={save ? SaveClickImage : SaveImage} />
+            <SaveImg size={size} src={save ? SaveClickImage : SaveImage} />
           </SaveBox>
-          <TimeContainer>{obj.videoLength}</TimeContainer>
+          <TimeContainer size={size}>{obj.videoLength}</TimeContainer>
         </VideoWrap>
         <TextWrap size={size}>
           <Title
-            onClick={() => history.push('/detail/1')}
+            onClick={() => history.push(`/detail/${obj.id}`)}
             size={size}
             text={text}
           >
@@ -314,15 +350,15 @@ function Card({ obj, size, text, history, saveButton, category }) {
           <DescriptionContainer
             size={size}
             text={text}
-            onClick={() => history.push('/detail/1')}
+            onClick={() => history.push(`/detail/${obj.id}`)}
           >
-            <Views>{obj.viewCount}</Views>
+            <Views>{`조회수 ${obj.viewCount}회`}</Views>
             <Channel>{obj.channelName}</Channel>
           </DescriptionContainer>
           <TagContainer size={size} category={category}>
             {obj.VideoTags
               ? obj.VideoTags.map(tag => (
-                  <div style={{ marginRight: '1.2rem', marginTop: '-2.8rem' }}>
+                  <div style={{ marginRight: '0.7rem', marginTop: '-2.8rem' }}>
                     <Tag
                       hashTag={1}
                       color="black"
