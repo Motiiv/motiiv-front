@@ -37,9 +37,7 @@ const OuterBox = styled.div`
       stroke-width: 5rem;
     }
   }
-  &:last-child {
-    animation: ${popUp} 0.5s both ease-in;
-  }
+  animation: ${popUp} 0.5s both ease-in;
 `;
 const ContentBox = styled.div`
   cursor: pointer;
