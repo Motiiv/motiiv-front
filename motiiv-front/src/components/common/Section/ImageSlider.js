@@ -15,7 +15,7 @@ const SliderSection = styled.div`
   position: relative;
   max-width: 1280px;
   width: 100%;
-  padding: 0 5.5rem;
+  padding: 0 5rem;
   justify-content: center;
   & .swiper-button-prev::after {
     position: absolute !important;
@@ -82,7 +82,15 @@ const SliderSection = styled.div`
   }
 
   @media ${props => props.theme.desktop} {
-    padding: 0 5.5rem;
+    ${props =>
+      props.size === 'large'
+        ? css`
+            padding: 0 4.5rem;
+            padding-left: 5.1rem;
+          `
+        : css`
+            padding: 0 5.5rem;
+          `}
   }
 `;
 
@@ -90,6 +98,7 @@ function ImageSlider({ object, type, size, text, saveButton }) {
   const swiperRef = useRef();
   const num = type === 'top' ? 3 : 4;
   const space = type === 'top' ? 20 : 25;
+  const largeHeight = size === 'large' ? '36rem' : 'auto';
   return (
     <>
       <SliderSection size={size}>
@@ -101,7 +110,7 @@ function ImageSlider({ object, type, size, text, saveButton }) {
           scrollbar
           breakpoints={{
             768: {
-              spaceBetween: 20,
+              spaceBetween: 23,
               slidesPerView: 3,
             },
             600: {
@@ -133,7 +142,13 @@ function ImageSlider({ object, type, size, text, saveButton }) {
             //   slidesPerView : num
             // },
           }}
-          style={{ position: 'static', width: '100%' }}
+          style={{
+            position: 'static',
+            width: '100%',
+            height: largeHeight,
+            paddingLeft: '0.5rem',
+            paddingRight: '0.7rem',
+          }}
         >
           {object.map((obj, idx) => (
             <SwiperSlide>
