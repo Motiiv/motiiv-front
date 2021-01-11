@@ -16,15 +16,21 @@ const popUp = transPosition => keyframes`
 const SpaceTitle = styled.p`
   display: none;
   font-size: 1.2rem;
-  width: 7.6rem;
-  color: black;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   position: absolute;
-  top: -2rem;
-  left: -1.1rem;
-  transform: ${props => `translateX(calc(${props.transX} / 4))`};
+  border-radius: 50%;
+  //top: -2rem;
+  //left: -1.1rem;
+  //transform: ${props => `translateX(calc(${props.transX} / 4))`};
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  width: 5.4rem;
+  height: 5.4rem;
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 const SpaceButton = styled.button`
   // 포지션 관련
@@ -47,9 +53,10 @@ const SpaceButton = styled.button`
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
   background-image: url(${props => props.space.logoUrl});
   &:hover {
-    background-color: #efefef;
     & .title {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
   &.active {
@@ -64,6 +71,14 @@ function SpaceBtn({ isActive, transPosition, space, delay }) {
   const goSpace = () => {
     window.open(space.url);
   };
+  const innerText = spaceName => {
+    const regExp = /[a-zA-Z]/g;
+    if (spaceName.length < 6) {
+      return spaceName;
+    }
+    const slicedText = spaceName.substring(0, 5);
+    return regExp.test(slicedText) ? `${slicedText}...` : slicedText;
+  };
   return (
     <SpaceButton
       className={isActive ? 'active' : ''}
@@ -73,7 +88,7 @@ function SpaceBtn({ isActive, transPosition, space, delay }) {
       delay={delay}
     >
       <SpaceTitle className="title" transX={transPosition.x}>
-        {space.name}
+        {innerText(space.name)}
       </SpaceTitle>
     </SpaceButton>
   );
