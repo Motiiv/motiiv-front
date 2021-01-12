@@ -408,6 +408,7 @@ function DetailComponent({ videoInfo, recVideoList, detailLoading,showModal }) {
                     <Like
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
+                      blackModal={blackModal}
                     ></Like>
                     <Save
                       id={videoInfo.id}
@@ -449,6 +450,7 @@ function DetailComponent({ videoInfo, recVideoList, detailLoading,showModal }) {
                     <Like
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
+                      blackModal={blackModal}
                     ></Like>
                     <Save
                       id={videoInfo.id}
