@@ -38,7 +38,7 @@ function Like({ BlackModalConfirm, id, blackModal}) {
     loading_like: loading['video/CHANGE_LIKE_STATUS'],
   }));
   const LikeToggle = () => {
-    if(blackModal === true){
+    if(blackModal.isLogin === true){
       dispatch(changeLikeStatus(id));
       }
       else BlackModalConfirm();
