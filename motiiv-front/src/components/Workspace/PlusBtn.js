@@ -18,6 +18,7 @@ const PlusBox = styled.div`
   background: ${({ theme }) => theme.lightGray};
   border-radius: 1.5rem;
   cursor: pointer;
+  opacity: ${props => (props.isShow ? 1 : 0.5)};
   & svg {
     width: 3.2rem;
     height: 3.2rem;
@@ -33,6 +34,9 @@ const PlusBox = styled.div`
     height: 2.8rem;
     color: ${({ theme }) => theme.darkGray};
   }
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 function PlusBtn({ hasToShift }) {
@@ -45,7 +49,7 @@ function PlusBtn({ hasToShift }) {
   };
   return (
     <OuterWrapper>
-      <PlusBox onClick={toggleShow}>
+      <PlusBox isShow={isShow} onClick={toggleShow}>
         <PlusOutlined />
       </PlusBox>
       <FormBox

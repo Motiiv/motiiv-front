@@ -39,11 +39,11 @@ function WorkSpaceContainer() {
             space={space}
             key={'box-' + idx}
             idx={idx}
-            hasToShift={workspaces.length === 4}
+            hasToShift={workspaces.length > 3}
           ></WorkSpaceBox>
         ))}
       {!loading && workspaces.length < 6 && (
-        <PlusBtn hasToShift={workspaces.length === 4}></PlusBtn>
+        <PlusBtn hasToShift={workspaces.length > 3}></PlusBtn>
       )}
       {loading && <Loading></Loading>}
     </CenterWrapper>
