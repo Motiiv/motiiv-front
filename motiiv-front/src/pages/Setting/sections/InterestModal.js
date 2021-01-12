@@ -71,6 +71,8 @@ const BottomContianer = styled.div`
 
 function InterestModal({show}) {
 
+  const interest = ['자기계발','성장','목표','도전','인물','스타트업','변화','위로','조언','개발','디자인','기획']
+
   const [selectedBtnCountState, setSelectedBtnCountState] = useState(1);
   const [okBtnState, setOkBtnState] = useState("ok-disabled");
 
@@ -94,19 +96,8 @@ function InterestModal({show}) {
     return(
         <ModalWrap show = {show}>
           <InterestGrid>
-            <InterestComponent type="selected" text={"최대"}></InterestComponent>
-            <InterestComponent type="selected" text={"네글자"}></InterestComponent>
-            <InterestComponent type="selected" text={"최대"}></InterestComponent>
-            <InterestComponent type="unselected" text={"네글자"}></InterestComponent>
-            <InterestComponent type="unselected" text={"최대"}></InterestComponent>
-            <InterestComponent type="unselected" text={"네글자"}></InterestComponent>
-            <InterestComponent type="unselected" text={"최대"}></InterestComponent>
-            <InterestComponent type="unselected" text={"네글자요"}></InterestComponent>
-            <InterestComponent type="unselected" text={"최대"}></InterestComponent>
-            <InterestComponent type="unselected" text={"네글자요"}></InterestComponent>
-            <InterestComponent type="unselected" text={"최대"}></InterestComponent>
-            <InterestComponent type="unselected" text={"네글자요"}></InterestComponent>
-        </InterestGrid>
+            {interest.map((tag, i) => <InterestComponent key = {"interest-" + i} type={'unselected'} text={tag} />)}
+          </InterestGrid>
 
         <BottomContianer>
           <InterestComponent type="cancel" text={"취소"}></InterestComponent>

@@ -130,7 +130,7 @@ const Profile = styled.div`
 `;
 
 function Navbar({ showModal, isloggined, location }) {
-  console.log(location);
+
   //프로필 드롭다운 나타나고 없애기
   const [profileModalState, setProfileModalState] = useState(false);
   const onClickProfileImage = () => {
@@ -149,6 +149,27 @@ function Navbar({ showModal, isloggined, location }) {
   const { userInfo } = useSelector(({ user }) => ({
     userInfo: user.userInfo,
   }));
+
+  const [nameLangState, setNamelangState] = useState('kor');
+  const firstletter = userInfo && userInfo.username.substr(0,1);
+/*
+  const onChangeName = () => {
+    firstLetter(firstletter) ? setNameKorState('eng') : setNameKorState('kor');
+  };
+
+  const pattern = new RegExp(
+    '^(https?:\\/\\/)?' + // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+      '(\\#[-a-z\\d_]*)?$',
+    'i',
+  );
+  const firstLetter = str => {
+    return !str || pattern.test(str);
+  };
+*/
 
   return (
     <>
