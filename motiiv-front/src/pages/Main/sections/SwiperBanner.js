@@ -124,52 +124,22 @@ const RightButton = styled.div`
   cursor: pointer;
   z-index: 2;
 `;
-
-const SliderObject = [
+const str = [
   {
-    idx: 0,
-    TextInfo: {
-      category: 'Hot Motiiv',
-      categoryTxt: '어제 하루 조회수가 가장 높았던 모티브',
-      videoTxt: `"영화 "굿 윌 헌팅" 명장면"`,
-      hashTag: ['movie', 'pride'],
-    },
-    VideoInfo: {
-      src: 'https://www.youtube.com/embed/ZzTQFe5qX_0',
-      runningTime: '02:09',
-    },
+    titleText: 'Best motiiv',
+    subText: '어제 하루 조회수가 가장 높았던 모티브',
   },
   {
-    idx: 1,
-    TextInfo: {
-      category: 'Best Motiiv',
-      categoryTxt: '어제 하루 좋아요가 가장 많았던 모티브',
-      videoTxt: `"영화 "울프 오브 월스트리트" 명장면"`,
-      hashTag: ['movie', 'pride'],
-    },
-    VideoInfo: {
-      src: 'https://www.youtube.com/embed/GIoofmjN-8U',
-      runningTime: '03:32',
-    },
-  },
-  {
-    idx: 2,
-    TextInfo: {
-      category: 'Most motivated motiiv',
-      categoryTxt: '어제 워크스페이스로 가장 많이 이동한 모티브',
-      videoTxt: 'The Devil Wears Prada final scene',
-      hashTag: ['movie', 'pride'],
-    },
-    VideoInfo: {
-      src: 'https://www.youtube.com/embed/8xCfGlYQiPI',
-      runningTime: '22:01',
-    },
+    titleText: 'Most motivated motiiv',
+    subText: '어제 하루 조회수가 가장 높았던 모티브',
   },
 ];
-function SwiperBanner() {
+function SwiperBanner({ mostLikeVideo, mostViewVideo }) {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const swiperRef = useRef();
+  var bannerObj = [mostViewVideo, mostLikeVideo];
+  useEffect(() => {}, []);
 
   const params = {
     navigation: {
@@ -215,6 +185,7 @@ function SwiperBanner() {
       position: 'relative',
     },
   };
+  console.log(bannerObj);
   return (
     <BannerSection>
       <SliderContainer>
@@ -248,10 +219,12 @@ function SwiperBanner() {
             <div className="swiper-pagination">•</div>
             <LeftButton ref={prevRef}></LeftButton>
             <RightButton ref={nextRef}></RightButton>
-            {SliderObject.map((obj, idx) => (
+            {bannerObj.map((obj, idx) => (
               <SwiperSlide key={`content-${idx}`}>
                 {({ isActive, isPrev, isNext }) => (
                   <SwiperContent
+                    titleText={str[idx].titleText}
+                    subText={str[idx].subText}
                     choice={isActive}
                     isPrev={isPrev}
                     isNext={isNext}

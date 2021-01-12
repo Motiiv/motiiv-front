@@ -1,6 +1,6 @@
-import {useSpring,animated} from 'react-spring';
-import {MdClose} from 'react-icons/md';
-import React ,{useState,useEffect,useCallback,useRef}from 'react'
+import { useSpring, animated } from 'react-spring';
+import { MdClose } from 'react-icons/md';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import LikeImage from '../../assets/global/like_icon.svg';
 import SaveImage from '../../assets/global/save_icon.svg';
@@ -14,6 +14,8 @@ import BlackModal from '../common/Modal/BlackModal';
 import Loading from '../common/Loading/Loading';
 import { changeLikeStatus, changeSaveStatus } from '../../modules/video';
 import { useDispatch, useSelector } from 'react-redux';
+import Like from '../common/Like/Like';
+import Save from '../common/Save/Save';
 
 const DetailContainer = styled.div`
   width: 100%;
@@ -86,6 +88,9 @@ const RecommendCardBox = styled.div`
       margin-top: 0;
     }
     & :nth-child(6) {
+      display: none;
+    }
+    & :nth-child(5) {
       display: none;
     }
   }
@@ -356,32 +361,30 @@ function DetailComponent({
   });
   const descRef = useRef();
 
+  const BlackModalConfirm = () => {
+    if (!blackModal.isLogin) {
+      setBlackModal({
+        ...blackModal,
+        active: !blackModal.active,
+      });
+    }
+  };
 
-const BlackModalConfirm = () => {
-  if (!blackModal.isLogin) {
-    setBlackModal({
-      ...blackModal,
-      active: !blackModal.active,
-    });
-  }
-};
-
-
-
-
-///////////////
+  ///////////////
   /* 더보기 버튼 모달창 */
   /*   const onHandleToggleButton = () => {
     setToggle(!toggle);
   }; */
   /* 더보기 버튼 로직 - 텍스트창 높이구해서 일정 이상이면 '더보기'버튼 활성화 */
   useEffect(() => {
+    setLike(likeStatus);
+    setSave(saveStatus);
     /*     if (descRef.current.offsetHeight > 66) {
       setToggleExist(!toggleExist);
     } */
   }, []);
 
- // [ Black Modal] 사용하고자 하는 버튼에 blackmodalconfirm 함수 넣어주면 됨
+  // [ Black Modal] 사용하고자 하는 버튼에 blackmodalconfirm 함수 넣어주면 됨
   const LikeToggle = () => {
     setLike(!like);
     BlackModalConfirm();
@@ -393,12 +396,17 @@ const BlackModalConfirm = () => {
     BlackModalConfirm();
     dispatch(changeSaveStatus(videoInfo.id));
   };
- // [blackModal] active 부분 모달띄우게하는 컴퍼넌트
+  // [blackModal] active 부분 모달띄우게하는 컴퍼넌트
   return (
     <>
       {!detailLoading ? (
         <DetailContainer>
-          { blackModal.active && <BlackModal blackModal={blackModal} setBlackModal={setBlackModal} ></BlackModal>}  
+          {blackModal.active && (
+            <BlackModal
+              blackModal={blackModal}
+              setBlackModal={setBlackModal}
+            ></BlackModal>
+          )}
           <VideoWrapper>
             <VideoDisplay>
               <iframe
