@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import styled from 'styled-components';
 import MyModal from './sections/MyModal';
 import Section from '../../components/common/Section/Section';
@@ -6,6 +6,9 @@ import WorkSpace from '../../components/Workspace/WorkSpace';
 import MyNavBar from './sections/MyNavbar';
 import ImageSlider from '../../components/common/Section/ImageSlider';
 import BlackModal from '../../components/common/Modal/BlackModal';
+import { useDispatch, useSelector } from 'react-redux';
+// import { getMotiiv } from '../../modules/mymotiiv';
+
 const MotiivWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -154,11 +157,18 @@ const Title = styled.h2`
 
 // const textArray = ["내가 자주본 모티브", "내가 저장한 모티브", "최근 재생한 모티브"];
 function MyMotiiv() {
+  // const dispatch = useDispatch();
   const saveButton = false;
   const [loginState, setLoginState] = useState({
     isLogin: true,
   });
-  return loginState.isLogin ? (
+
+
+  // useEffect(() => {
+  //   dispatch(getMotiiv());
+  // }, []);
+
+  return !loginState.isLogin ?  (
     <>
       <MotiivWrapper isLoggined={loginState.isLogin}>
         <WorkSpace></WorkSpace>
@@ -202,11 +212,12 @@ function MyMotiiv() {
         <Section object={SliderObject} text="최근 재생한 모티브"></Section> */}
       </MotiivWrapper>
     </>
-  ) : (
-    <>
-      <MyModal />
-      {/* <BlackModal/> */}
-    </>
+      ) : (
+        <>
+          {/* {setShowModal(prev=> !prev)} */}
+          <MyModal />
+          {/* <BlackModal/> */}
+        </>
   );
 }
 export default MyMotiiv;

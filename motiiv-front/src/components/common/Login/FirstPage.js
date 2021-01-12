@@ -11,6 +11,8 @@ const Container = styled.div`
   flex-direction: column;
   font-family : 'Spoqa-Han-Sans';
   color:black;
+  @media ${props => props.theme.maxlaptop} {
+  }
 `
 
 const Title = styled.div`
@@ -59,7 +61,7 @@ const LinkText = styled.div`
   color: #A7A7A7;
   text-decoration:none;
   @media ${props => props.theme.maxlaptop} {
-    margin-top:3.1rem;
+    margin-top:4rem;
   }
   @media ${props => props.theme.mobile} {
     font-size:1.2rem;
@@ -70,14 +72,16 @@ const LinkText = styled.div`
   }
 `
 
-function FirstPage({page}) {
+function FirstPage({ page, pageUp }) {
+
+  //버튼에 소셜로그인 함수 달기
 
     return (
       <Container page={page}>
           <Title>모티브에 오신걸 환영해요!</Title>
           <SubTitle>로그인을 하고 나의 하루가 달라지는 동기부여 서비스를 경험해보세요.</SubTitle>
           <LoginBtn style = {{marginBottom:"1.6rem"}}><img src = {btnNaver}/></LoginBtn>
-          <LoginBtn src = {btnKakao}><img src = {btnKakao}/></LoginBtn>
+          <LoginBtn src = {btnKakao} onClick={pageUp}><img src = {btnKakao}/></LoginBtn>
           <LinkText>
             <Link exact to="/main" style={{color:'#A7A7A7'}}>개인정보처리방침</Link>
             을 확인하였으며 이에 동의합니다.

@@ -10,6 +10,9 @@ const Container = styled.div`
   flex-direction: column;
   font-family : 'Spoqa-Han-Sans';
   color:black;
+  @media ${props => props.theme.maxlaptop} {
+    margin-bottom:1.5rem;
+  }
 `
 
 const Title = styled.div`
@@ -32,11 +35,11 @@ const SubTitle = styled.div`
   color: ${props => props.theme.darkGray};
   @media ${props => props.theme.maxlaptop} {
     font-size:1.5rem;
-    margin-bottom:3.5rem;
+    margin-bottom:5rem;
   }
   @media ${props => props.theme.mobile} {
     font-size:1.2rem;
-    margin-bottom:4rem;
+    margin-bottom:2.5rem;
     margin-top:1.8rem;
   }
 `
@@ -68,9 +71,10 @@ const Text = styled.div`
       `:``};
   @media ${props => props.theme.maxlaptop} {
     font-size:1.5rem;
+    width:10rem;
   }
   @media ${props => props.theme.mobile} {
-
+    width:10rem;
   }
 `
 

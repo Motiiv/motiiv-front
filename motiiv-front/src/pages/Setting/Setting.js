@@ -357,7 +357,6 @@ function Setting() {
           }
         })();
     }
-
     const onClickInterstBtn = () => {
         (async () => {
           try {
@@ -367,6 +366,9 @@ function Setting() {
             
           }
         })();
+    }
+    const UpdateProfile = () =>{
+
     }
 
     return (
@@ -418,7 +420,7 @@ function Setting() {
 
                 <ButtonContainer>
                     <Button bgColor="#F3F3F3">취소</Button>
-                    <Button bgColor="#2CFF2C">저장</Button>
+                    <Button bgColor="#2CFF2C" onClick={UpdateProfile}>저장</Button>
                 </ButtonContainer>
             </Container>
         </>

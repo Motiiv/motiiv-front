@@ -24,20 +24,19 @@ import FloatBtn from './components/common/Button/FloatBtn';
 import { getProfile, showSigninModal } from './modules/user';
 import { getWorkspaces } from './modules/mymotiiv';
 
+
 function App({ props }) {
   const dispatch = useDispatch();
   const [loginState, setLoginState] = useState(false);
   const [showLoginModalState, setShowLoginModalState] = useState(false);
 
   const location = useLocation();
-  //const { showLoginModal } = useSelector(state => state.user);
   const { onFloatBtn } = useSelector(state => state.mymotiiv);
   const { workspaces } = useSelector(state => state.mymotiiv);
 
   useEffect(() => {
     dispatch(getWorkspaces());
     dispatch(getProfile());
-    //dispatch(showSigninModal());
   }, []);
 
   const hideModal = () => {
@@ -50,7 +49,11 @@ function App({ props }) {
 
   return (
     <>
-      <Navbar showModal={showModal} isloggined={loginState} />
+      <Navbar
+        location={location.pathname}
+        showModal={showModal}
+        isloggined={loginState}
+      />
       <Switch>
         {/* Main & Category & MyMotiiv */}
         <Route
@@ -101,8 +104,8 @@ function App({ props }) {
       </Switch>
       <SigninModal hideModal={hideModal} isShow={showLoginModalState} />
       <FloatBtn workspaces={workspaces} isShow={onFloatBtn} />
-      <BottomBanner isShow={location.pathname != '/setting'} />
-      <Footer isShow={location.pathname != '/setting'} />
+      <BottomBanner isShow={location.pathname !== '/setting'} />
+      <Footer isShow={location.pathname !== '/setting'} />
       <MyNavBar loginState={loginState} tag={location.pathname}></MyNavBar>
     </>
   );

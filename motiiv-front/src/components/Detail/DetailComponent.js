@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useSpring, animated } from 'react-spring';
+import { MdClose } from 'react-icons/md';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import LikeImage from '../../assets/global/like_icon.svg';
 import SaveImage from '../../assets/global/save_icon.svg';
@@ -359,6 +361,16 @@ function DetailComponent({
   });
   const descRef = useRef();
 
+  const BlackModalConfirm = () => {
+    if (!blackModal.isLogin) {
+      setBlackModal({
+        ...blackModal,
+        active: !blackModal.active,
+      });
+    }
+  };
+
+  ///////////////
   /* 더보기 버튼 모달창 */
   /*   const onHandleToggleButton = () => {
     setToggle(!toggle);
@@ -372,15 +384,7 @@ function DetailComponent({
     } */
   }, []);
 
-  const BlackModalConfirm = () => {
-    if (!blackModal.isLogin) {
-      setBlackModal({
-        ...blackModal,
-        active: !blackModal.active,
-      });
-    }
-  };
-
+  // [ Black Modal] 사용하고자 하는 버튼에 blackmodalconfirm 함수 넣어주면 됨
   const LikeToggle = () => {
     setLike(!like);
     BlackModalConfirm();
@@ -392,12 +396,17 @@ function DetailComponent({
     BlackModalConfirm();
     dispatch(changeSaveStatus(videoInfo.id));
   };
-
+  // [blackModal] active 부분 모달띄우게하는 컴퍼넌트
   return (
     <>
       {!detailLoading ? (
         <DetailContainer>
-          {/*           {blackModal.active && <BlackModal></BlackModal>} */}
+          {blackModal.active && (
+            <BlackModal
+              blackModal={blackModal}
+              setBlackModal={setBlackModal}
+            ></BlackModal>
+          )}
           <VideoWrapper>
             <VideoDisplay>
               <iframe

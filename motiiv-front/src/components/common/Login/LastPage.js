@@ -10,7 +10,6 @@ const Container = styled.div`
   flex-direction: column;
   font-family : 'Spoqa-Han-Sans';
   color:black;
-  margin-top:3rem;
 `
 
 const Title = styled.div`
@@ -67,6 +66,7 @@ function LastPage({page}) {
 
   //처음 버튼 state는 모두 false
   const flag = false;
+  const interest = ['자기계발','성장','목표','도전','인물','스타트업','변화','위로','조언','개발','디자인','기획']
   const [countState, setCountState] = useState(0);
 
   /*
@@ -107,18 +107,7 @@ function LastPage({page}) {
           <SubTitle>보고 싶은 관심사는 최대 3개까지 선택 가능해요!</SubTitle>
 
           <InterestGrid>
-            <LoginInterestComponent type={flag} text={"키워드"}></LoginInterestComponent>
-            <LoginInterestComponent type={flag} text={"키워드"}></LoginInterestComponent>
-            <LoginInterestComponent type={flag} text={"키워드"}></LoginInterestComponent>
-            <LoginInterestComponent type={flag} text={"키워드"}></LoginInterestComponent>
-            <LoginInterestComponent type={flag} text={"키워드"}></LoginInterestComponent>
-            <LoginInterestComponent type={flag} text={"키워드"}></LoginInterestComponent>
-            <LoginInterestComponent type={flag} text={"키워드"}></LoginInterestComponent>
-            <LoginInterestComponent type={flag} text={"키워드"}></LoginInterestComponent>
-            <LoginInterestComponent type={flag} text={"키워드"}></LoginInterestComponent>
-            <LoginInterestComponent type={flag} text={"키워드"}></LoginInterestComponent>
-            <LoginInterestComponent type={flag} text={"키워드"}></LoginInterestComponent>
-            <LoginInterestComponent type={flag} text={"키워드"}></LoginInterestComponent>
+            {interest.map((tag, i) => <LoginInterestComponent key = {"interest-" + i} type={false} text={tag} />)}
           </InterestGrid>
       </Container>
     );

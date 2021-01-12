@@ -60,9 +60,7 @@ const VideoWrap = styled.div`
   @media ${props => props.theme.tablet} {
     height: ${props => (props.size === 'large' ? '12.3rem' : '12.2rem')};
   }
-  @media ${props => props.theme.laptop} {
-    height: ${props => (props.size === 'large' ? '21.2rem' : '15.4rem')};
-  }
+ 
   @media ${props => props.theme.desktop} {
     height: ${props => (props.size === 'large' ? '21.2rem' : '15.4rem')};
   }
