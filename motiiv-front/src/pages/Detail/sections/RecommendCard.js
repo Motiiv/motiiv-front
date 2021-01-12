@@ -6,6 +6,9 @@ const VideoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  & {
+    letter-spacing: -1px;
+  }
   /*   & + & {
     margin-top: 2rem;
   } */
@@ -27,7 +30,7 @@ function RecommendCard({ video, history }) {
     <VideoWrapper onClick={() => history.push(`/detail/${video.id}`)}>
       <VideoContent src={video.thumbnailImageUrl} style={{ width: '100%' }} />
       <VideoTitleText>{video.title}</VideoTitleText>
-      <VideoSubText>tvN</VideoSubText>
+      <VideoSubText>{video.channelName}</VideoSubText>
     </VideoWrapper>
   );
 }

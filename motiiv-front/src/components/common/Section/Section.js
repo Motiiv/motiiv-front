@@ -68,6 +68,7 @@ const Section = ({ type, size, color, object, text, nonfix, subText }) => {
             size={size}
             color={color}
             text={text}
+            nonfix={nonfix}
           ></ImageSlider>
         </Wrapper>
       </Container>
