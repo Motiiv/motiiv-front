@@ -12,7 +12,6 @@ import ShareModal from '../../pages/Detail/sections/ShareModal';
 import { withRouter } from 'react-router-dom';
 import BlackModal from '../common/Modal/BlackModal';
 import Loading from '../common/Loading/Loading';
-import { changeLikeStatus, changeSaveStatus } from '../../modules/video';
 import { useDispatch, useSelector } from 'react-redux';
 import Like from '../common/Like/Like';
 import Save from '../common/Save/Save';
@@ -341,20 +340,12 @@ const MobileButtonBox = styled.div`
   border-bottom: 1px #c4c4c4 solid;
 `;
 
-function DetailComponent({
-  videoInfo,
-  recVideoList,
-  detailLoading,
-  likeStatus,
-  saveStatus,
-}) {
+function DetailComponent({ videoInfo, recVideoList, detailLoading }) {
   /*   const [toggle, setToggle] = useState(false);
   const [toggleExist, setToggleExist] = useState(false); */
 
   const [shareModal, setShareModal] = useState(false);
   const dispatch = useDispatch();
-  const [like, setLike] = useState(likeStatus);
-  const [save, setSave] = useState(saveStatus);
   const [blackModal, setBlackModal] = useState({
     isLogin: false,
     active: false,
@@ -377,25 +368,11 @@ function DetailComponent({
   }; */
   /* 더보기 버튼 로직 - 텍스트창 높이구해서 일정 이상이면 '더보기'버튼 활성화 */
   useEffect(() => {
-    setLike(likeStatus);
-    setSave(saveStatus);
     /*     if (descRef.current.offsetHeight > 66) {
       setToggleExist(!toggleExist);
     } */
   }, []);
 
-  // [ Black Modal] 사용하고자 하는 버튼에 blackmodalconfirm 함수 넣어주면 됨
-  const LikeToggle = () => {
-    setLike(!like);
-    BlackModalConfirm();
-    console.log(videoInfo.id);
-    dispatch(changeLikeStatus(videoInfo.id));
-  };
-  const SaveToggle = () => {
-    setSave(!save);
-    BlackModalConfirm();
-    dispatch(changeSaveStatus(videoInfo.id));
-  };
   // [blackModal] active 부분 모달띄우게하는 컴퍼넌트
   return (
     <>
@@ -426,14 +403,14 @@ function DetailComponent({
                 <TitleAndButtonBox>
                   <TitleText>{videoInfo.title}</TitleText>
                   <ButtonBox>
-                    <LikeBox onClick={LikeToggle}>
-                      <LikeText like={like}>좋아요</LikeText>
-                      <LikeImg src={like ? LikeClickImage : LikeImage} />
-                    </LikeBox>
-                    <SaveBox onClick={SaveToggle}>
-                      <SaveText save={save}>저장</SaveText>{' '}
-                      <SaveImg src={save ? SaveClickImage : SaveImage} />
-                    </SaveBox>
+                    <Like
+                      id={videoInfo.id}
+                      BlackModalConfirm={BlackModalConfirm}
+                    ></Like>
+                    <Save
+                      id={videoInfo.id}
+                      BlackModalConfirm={BlackModalConfirm}
+                    ></Save>
                   </ButtonBox>
                 </TitleAndButtonBox>
                 <TagBox>
@@ -466,14 +443,14 @@ function DetailComponent({
                 </TextBox>
                 <MobileButtonBox>
                   <ButtonBox>
-                    <LikeBox onClick={LikeToggle}>
-                      <LikeText like={like}>좋아요</LikeText>
-                      <LikeImg src={like ? LikeClickImage : LikeImage} />
-                    </LikeBox>
-                    <SaveBox onClick={SaveToggle}>
-                      <SaveText save={save}>저장</SaveText>{' '}
-                      <SaveImg src={save ? SaveClickImage : SaveImage} />
-                    </SaveBox>
+                    <Like
+                      id={videoInfo.id}
+                      BlackModalConfirm={BlackModalConfirm}
+                    ></Like>
+                    <Save
+                      id={videoInfo.id}
+                      BlackModalConfirm={BlackModalConfirm}
+                    ></Save>
                   </ButtonBox>
                   <ShareBox>
                     <ShareButton onClick={() => setShareModal(!shareModal)}>
@@ -518,4 +495,4 @@ function DetailComponent({
   );
 }
 
-export default withRouter(DetailComponent);
+export default React.memo(withRouter(DetailComponent));

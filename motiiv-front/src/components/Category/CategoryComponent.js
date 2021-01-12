@@ -65,6 +65,9 @@ const Aside = styled.div`
     width: 18.2rem;
   }
   @media ${props => props.theme.laptop} {
+    margin-right: 14.5rem;
+  }
+  @media ${props => props.theme.desktop} {
     margin-right: 10.5rem;
   }
 `;

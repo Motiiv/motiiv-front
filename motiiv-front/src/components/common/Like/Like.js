@@ -2,6 +2,9 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import LikeImage from '../../../assets/global/like_icon.svg';
 import LikeClickImage from '../../../assets/global/likeclick_icon.svg';
+import { changeLikeStatus, changeLike } from '../../../modules/video';
+import { useDispatch, useSelector } from 'react-redux';
+import Loading from '../Loading/Loading';
 
 const LikeBox = styled.div`
   display: flex;
@@ -28,7 +31,16 @@ const LikeImg = styled.img`
   width: 2rem;
   height: 2rem;
 `;
-function Like({ LikeToggle, like }) {
+function Like({ BlackModalConfirm, id }) {
+  const dispatch = useDispatch();
+  const { loading_like, like } = useSelector(({ video, loading }) => ({
+    like: video.like,
+    loading_like: loading['video/CHANGE_LIKE_STATUS'],
+  }));
+  const LikeToggle = () => {
+    //BlackModalConfirm();
+    dispatch(changeLikeStatus(id));
+  };
   return (
     <LikeBox onClick={LikeToggle}>
       <LikeText like={like}>좋아요</LikeText>
@@ -37,4 +49,4 @@ function Like({ LikeToggle, like }) {
   );
 }
 
-export default Like;
+export default React.memo(Like);
