@@ -56,7 +56,7 @@ const SliderSection = styled.div`
     z-index: 2 !important;
   }
   & .swiper-slide {
-    flex: 1 !important;
+    flex : ${props => (props.defaultSpace ? 'none' : '1')};
   }
   & .swiper-scrollbar {
     display: none !important;
@@ -69,6 +69,9 @@ const SliderSection = styled.div`
     & .swiper-button-next::after {
       display: none !important;
     }
+    & .swiper-slide {
+      flex : ${props => (props.defaultSpace ? '1' : '1')}!important;
+  }
   }
 
   @media ${props => props.theme.tablet} {
@@ -79,6 +82,23 @@ const SliderSection = styled.div`
     & .swiper-button-next::after {
       display: flex !important;
     }
+    & .swiper-slide {
+      flex : ${props => (props.defaultSpace ? 'none' : '1')}!important;
+  }
+  }
+
+  @media ${props => props.theme.laptop} {
+    padding: 0 4rem;
+    & .swiper-button-prev::after {
+      display: flex !important;
+    }
+    & .swiper-button-next::after {
+      display: flex !important;
+    }
+    & .swiper-slide {
+      flex : ${props => (props.defaultSpace ? 'none' : '1')}!important;
+  }
+    
   }
 
   @media ${props => props.theme.desktop} {
@@ -96,12 +116,16 @@ const SliderSection = styled.div`
 
 function ImageSlider({ object, type, size, text, saveButton }) {
   const swiperRef = useRef();
-  const num = type === 'top' ? 3 : 4;
+  const num =  type === 'top' ? 3 : 4;
   const space = type === 'top' ? 20 : 25;
   const largeHeight = size === 'large' ? '36rem' : 'auto';
+  let defaultSpace = false;
+  if(object && (object.length === 2 || object.length === 3)) {
+      defaultSpace = true;
+  }
   return (
     <>
-      <SliderSection size={size}>
+      <SliderSection size={size} defaultSpace = {defaultSpace}>
         <Swiper
           spaceBetween={space}
           slidesPerView={num}
@@ -109,12 +133,20 @@ function ImageSlider({ object, type, size, text, saveButton }) {
           navigation
           scrollbar
           breakpoints={{
+            1280 : {
+              spaceBetween : space,
+              slidesPerView : num
+            },
+            1024: {
+              spaceBetween: 20,
+              slidesPerView: 3,
+            },
             768: {
-              spaceBetween: 23,
+              spaceBetween: 20,
               slidesPerView: 3,
             },
             600: {
-              spaceBetween: 18,
+              spaceBetween: 16,
               slidesPerView: 1,
             },
             468: {
@@ -150,7 +182,7 @@ function ImageSlider({ object, type, size, text, saveButton }) {
             paddingRight: '0.7rem',
           }}
         >
-          {object.map((obj, idx) => (
+        {object && object.map((obj, idx) => (
             <SwiperSlide>
               <Card
                 size={size}
@@ -164,7 +196,7 @@ function ImageSlider({ object, type, size, text, saveButton }) {
         </Swiper>
       </SliderSection>
     </>
-  );
+  ); 
 }
 
 export default ImageSlider;

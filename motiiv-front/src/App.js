@@ -107,7 +107,7 @@ function App({ props }) {
       <FloatBtn workspaces={workspaces} isShow={onFloatBtn} />
       <BottomBanner isShow={location.pathname !== '/setting'} />
       <Footer isShow={location.pathname !== '/setting'} />
-      <MyNavBar loginState={loginState} tag={location.pathname}></MyNavBar>
+      <MyNavBar loginState={true} tag={location.pathname}></MyNavBar>
     </>
   );
 }

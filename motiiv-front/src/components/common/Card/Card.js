@@ -8,9 +8,9 @@ import SaveClickImage from '../../../assets/global/saveclick_icon.svg';
 const CardWrap = styled.div`
   display: flex;
   width: 100%;
-  min-width: ${props => (props.size === 'large' ? '37.7rem' : '27.4rem')};
+  max-width: ${props => (props.size === 'large' ? '37.7rem' : '27.4rem')};
   height: auto;
-  min-height: ${props => (props.size === 'large' ? '33.5 rem' : '26.7rem')};
+  max-height: ${props => (props.size === 'large' ? '33.5 rem' : '26.7rem')};
   flex-direction: column;
   box-shadow: ${props =>
     props.size === 'large' ? '2px 2px  7px rgba(0, 0, 0, 0.15)' : 'none'};
