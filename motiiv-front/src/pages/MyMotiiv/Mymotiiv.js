@@ -157,11 +157,11 @@ const Title = styled.h2`
 `;
 
 // const textArray = ["내가 자주본 모티브", "내가 저장한 모티브", "최근 재생한 모티브"];
-function MyMotiiv() {
+function MyMotiiv({showModal}) {
   const dispatch = useDispatch();
   const saveButton = false;
   const [loginState, setLoginState] = useState({
-    isLogin: false,
+    isLogin: true,
   });
 
   const { myvideos, loading} = useSelector(({mymotiiv,loading}) => ({
@@ -221,7 +221,7 @@ function MyMotiiv() {
 {loading && <Loading/>}
       </MotiivWrapper>
     </>
-      ) :  <MyModal />;
+      ) :  <MyModal showModal={showModal}/>;
 }
 export default MyMotiiv;
 

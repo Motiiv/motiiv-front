@@ -169,14 +169,15 @@ const IndicatorContainer = styled.div`
   justify-content:space-between;
 `
 
-function SigninModal({ hideModal, isShow }) {
-
+function SigninModal({ hideModal, isShow ,showModal}) {
+  
   // 아웃 사이드 클릭
   const myRef = useRef();
   const handleClickOutside = e => {
     if (!myRef?.current?.contains(e.target)) {
       hideModal();
       pageReset();
+      document.body.style.overflow = "unset";
     }
   };
   useEffect(() => {

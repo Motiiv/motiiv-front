@@ -342,6 +342,7 @@ function DetailComponent({
   detailLoading,
   likeStatus,
   saveStatus,
+  showModal
 }) {
   /*   const [toggle, setToggle] = useState(false);
   const [toggleExist, setToggleExist] = useState(false); */
@@ -399,7 +400,7 @@ const BlackModalConfirm = () => {
     <>
       {!detailLoading ? (
         <DetailContainer>
-          { blackModal.active && <BlackModal blackModal={blackModal} setBlackModal={setBlackModal} ></BlackModal>}  
+          { blackModal.active && <BlackModal blackModal={blackModal} setBlackModal={setBlackModal} showModal={showModal} ></BlackModal>}  
           <VideoWrapper>
             <VideoDisplay>
               <iframe

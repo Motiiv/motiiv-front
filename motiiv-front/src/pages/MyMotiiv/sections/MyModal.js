@@ -240,7 +240,7 @@ const Login = styled.div`
 //   padding: 0;
 //   z-index: 10;
 // `;
-function MyModal() {
+function MyModal({showModal}) {
     const [showLogin,setShowLogin] = useState(false);
 
     const showLoginModal = () => {
@@ -251,7 +251,8 @@ function MyModal() {
 
     return (
          <> 
-          {/* {showModal ? <Background ref={modalRef} onClick={closeModal}>
+          {/* {
+             ? <Background ref={modalRef} onClick={closeModal}>
             <animated.div style = {animation}>
             <ModalWrapper showModal={showModal}>
             <ModalContent>
@@ -271,14 +272,16 @@ function MyModal() {
                     <Subtitle>지금 가입하고<br /><b>나만을 위한 작업 공간</b>을<br/>구성해보세요</Subtitle>
                     <TagWrapper>
                         <ContentWrapper> 
-                            <Signup onClick = {showLoginModal} >sign up</Signup>
+                            <Signup  onClick={() => {  showModal();
+                showLoginModal(); }} >sign up</Signup>
                             <Devider>&#47;</Devider>
-                            <Login>login</Login>
+                            <Login  onClick={() => {  showModal();
+                showLoginModal(); }}>login</Login>
                         </ContentWrapper>
                     </TagWrapper>
                 </ModalInner>
             </ModalWrapper> </>)
-} {showLogin && <SignInModal isShow = {true} num = {1} />}
+} 
             {/* </animated.div> */}
             {/* </ModalContainer> */}
         </>
