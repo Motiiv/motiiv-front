@@ -126,6 +126,10 @@ const RightButton = styled.div`
 `;
 const str = [
   {
+    titleText: 'Today’s hot motiiv',
+    subText: '어제 하루 인기가 가장 높았던 모티브',
+  },
+  {
     titleText: 'Best motiiv',
     subText: '어제 하루 조회수가 가장 높았던 모티브',
   },
@@ -134,11 +138,11 @@ const str = [
     subText: '어제 하루 조회수가 가장 높았던 모티브',
   },
 ];
-function SwiperBanner({ mostLikeVideo, mostViewVideo }) {
+function SwiperBanner({ mostLikeVideo, mostViewVideo, bestVideo }) {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const swiperRef = useRef();
-  var bannerObj = [mostViewVideo, mostLikeVideo];
+  var bannerObj = [bestVideo, mostViewVideo, mostLikeVideo];
   useEffect(() => {}, []);
 
   const params = {

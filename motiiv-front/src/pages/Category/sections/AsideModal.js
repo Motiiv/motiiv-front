@@ -3,7 +3,9 @@ import styled, { css } from 'styled-components';
 import DownArrow from '../../../assets/global/downArrow.svg';
 import UpperArrow from '../../../assets/global/upperArrow.svg';
 import Menu from './Menu';
-
+const FixedBox = styled.div`
+  position: absolute;
+`;
 const ModalWrapper = styled.div`
   width: 100%;
   border-radius: 0.7rem;
@@ -76,6 +78,7 @@ const AsideMenuContainer = styled.div`
   display: none;
   margin-bottom: 3rem;
   position: relative;
+  //position: fixed;
   @media ${props => props.theme.mobile} {
     display: flex;
   }

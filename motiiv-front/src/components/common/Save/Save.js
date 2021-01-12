@@ -13,14 +13,6 @@ const SaveBox = styled.div`
   cursor: pointer;
 `;
 const SaveText = styled.div`
-  ${props =>
-    props.save
-      ? css`
-          color: black;
-        `
-      : css`
-          color: ${({ theme }) => theme.gray};
-        `}
   font-size: 2rem;
   margin-right: 0.5rem;
   line-height: 0 !important;

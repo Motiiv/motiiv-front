@@ -45,6 +45,8 @@ const CategoryContainer = styled.div`
 `;
 const Aside = styled.div`
   min-width: 19.4rem;
+  //margin-top: 20rem;
+  position: relative;
   ${props =>
     props.hashTag !== '0'
       ? css`
@@ -79,9 +81,11 @@ const BodyContainer = styled.div`
 
   @media ${props => props.theme.mobile} {
     padding: 0 0.1rem;
+    //margin-top: 3rem;
   }
   @media ${props => props.theme.tablet} {
     //max-width: 45.2rem;
+    margin-top: 0;
   }
   @media ${props => props.theme.laptop} {
     //max-width: 87.1rem;

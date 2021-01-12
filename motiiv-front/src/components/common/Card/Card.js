@@ -5,6 +5,8 @@ import { withRouter } from 'react-router-dom';
 import HoverVideoPlayer from 'react-hover-video-player';
 import SaveImage from '../../../assets/global/save_icon.svg';
 import SaveClickImage from '../../../assets/global/saveclick_icon.svg';
+import CardSave from '../Save/CardSave';
+
 const CardWrap = styled.div`
   display: flex;
   width: 100%;
@@ -12,6 +14,7 @@ const CardWrap = styled.div`
   height: auto;
   min-height: ${props => (props.size === 'large' ? '33.5 rem' : '26.7rem')};
   flex-direction: column;
+  position: relative;
   box-shadow: ${props =>
     props.size === 'large' ? '2px 2px  7px rgba(0, 0, 0, 0.15)' : 'none'};
   //border-radius: 1rem;
@@ -60,7 +63,7 @@ const VideoWrap = styled.div`
   @media ${props => props.theme.tablet} {
     height: ${props => (props.size === 'large' ? '12.3rem' : '12.2rem')};
   }
- 
+
   @media ${props => props.theme.desktop} {
     height: ${props => (props.size === 'large' ? '21.2rem' : '15.4rem')};
   }
@@ -323,39 +326,43 @@ const TagContainer = styled.div`
   }
 `;
 // Tag 컴포넌트 만들어서 불러오기
-function Card({ obj, size, text, history, saveButton, category }) {
-  const [save, setSave] = useState(false);
+// obj.videoGif
+function Card({ obj, size, text, history, saveButton, category, nonfix }) {
   const borderValue = size === 'large' ? '1rem 1rem 0 0' : '1rem';
+  const BlackModalConfirm = () => {
+    if (!blackModal.isLogin) {
+      setBlackModal({
+        ...blackModal,
+        active: !blackModal.active,
+      });
+    }
+  };
+
+  const [blackModal, setBlackModal] = useState({
+    isLogin: false,
+    active: false,
+  });
   return (
     <>
       <CardWrap size={size}>
+        <CardSave
+          id={obj.id}
+          BlackModalConfirm={BlackModalConfirm}
+          card="true"
+          size={size}
+          nonfix={nonfix}
+          isSave={obj.isSave}
+        ></CardSave>
         <VideoWrap
           size={size}
           onClick={() => history.push(`/detail/${obj.id}`)}
         >
-          <HoverVideoPlayer
-            style={{ width: '100%', height: '100%' /* borderRadius: '1rem' */ }}
-            //videoSrc={obj.VideoInfo.src}
-            pausedOverlayWrapperStyle={{
-              borderRadius: borderValue,
-              overflow: 'hidden',
-            }}
-            pausedOverlay={
-              <img
-                width="100%"
-                height="100%"
-                borderRadius="1rem"
-                src={obj.thumbnailImageUrl}
-              />
-            }
-            loadingOverlay={<div className="loading-spinner-overlay" />}
-            videoStyle={{
-              borderRadius: '1rem',
-            }}
+          <img
+            width="100%"
+            height="100%"
+            borderRadius="1rem"
+            src={obj.thumbnailImageUrl}
           />
-          <SaveBox saveButton={saveButton} onClick={() => setSave(!save)}>
-            <SaveImg size={size} src={save ? SaveClickImage : SaveImage} />
-          </SaveBox>
           <TimeContainer size={size}>{obj.videoLength}</TimeContainer>
         </VideoWrap>
         <TextWrap size={size}>
