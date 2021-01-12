@@ -1,13 +1,12 @@
 import client from './_client';
 
-
-const getMyMotiiv = async () => {
+const getMyVideos = async () => {
   try {
     const { data } = await client.get(`/videos/myMotiiv`);
-    console.log('[SUCCESS] getMyMotiiv', data);
+    console.log('[SUCCESS] getMyVideos', data);
     return data;
   } catch (err) {
-    console.log('[FAIL] getMyMotiiv', err);
+    console.log('[FAIL] getMyVideos', err);
     throw err;
   }
 };
@@ -63,4 +62,5 @@ export {
   deleteMyeWorkSpace,
   createMyeWorkSpace,
   updateMyeWorkSpace,
+  getMyVideos,
 };

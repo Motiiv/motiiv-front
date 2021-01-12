@@ -8,13 +8,12 @@ const ModalBackgorundWrap = styled.div`
   display: ${props => props.show ? `flex` : `none`};
   background: #000000;
   opacity: 0.5;
-
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
-  bottom: 0;
-  z-index:30;
+  bottom: 0; 
+  z-index:9999;
   overflow : hidden;
 
   width: auto;
@@ -60,7 +59,7 @@ const ModalWrap = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index:30;
+  z-index: 10000;
 
   padding : 5rem 2.6rem 2.6rem 3rem;
   width: 65rem;
@@ -222,7 +221,7 @@ function SigninModal({ hideModal, isShow }) {
   */
 
     return (
-      <>
+      <> 
         <ModalBackgorundWrap show = {isShow}/>
         <ModalWrap show = {isShow}>
           <CancelBtn />

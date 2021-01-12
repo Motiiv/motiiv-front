@@ -3,6 +3,7 @@ import {useSpring,animated} from 'react-spring';
 import {MdClose} from 'react-icons/md';
 import styled, { css } from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import toggle from '../../../assets/global/toggle.gif';
 
 // const ModalContainer = styled.div`
 //   display: flex;
@@ -63,13 +64,11 @@ const ModalInner = styled.div`
   border-radius: 1.5rem;
 `;
 
-const ToggleGif = styled.div`
-  background: ${({ theme }) => theme.primary};
-  width: 9rem;
-  height: 3.7rem;
-  border-radius: 3rem;
-  margin-top: 5rem;
-  @media ${props => props.theme.mobile}{
+const ToggleGif = styled.img`
+    background-size: cover;
+    border-radius: 3rem;
+    margin-top : 5rem;
+    @media ${props => props.theme.mobile}{
     width: 8rem;
     hegiht : 3.7rem; 
   }
@@ -142,7 +141,7 @@ const ContentWrapper = styled.div`
   align-items: center;
 `;
 
-const Signup = styled(NavLink)`
+const Signup = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -164,7 +163,7 @@ const Devider = styled.div`
   color: ${({ theme }) => theme.primary};
 `;
 
-const Login = styled(NavLink)`
+const Login = styled.div`
   display: flex;
   align-items: center;
   font-weight: bold;
@@ -173,6 +172,18 @@ const Login = styled(NavLink)`
   font-family: Campton;
   color: ${({ theme }) => theme.primary};
   text-decoration: none;
+`;
+const CloseModalButton = styled(MdClose)`
+  cursor: pointer;
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 2.8rem;
+  height: 2.8rem;
+  padding: 0;
+  z-index: 10000;
+  color: #A7A7A7;
+  opacity: 0.5;
 `;
 
 function BlackModal({blackModal,setBlackModal}) {
@@ -210,6 +221,7 @@ function BlackModal({blackModal,setBlackModal}) {
     },
     [setBlackModal, blackModal]
   );
+  
   useEffect(() => {
     document.addEventListener('keydown', keyPress);
     document.body.style.overflow = "hidden";
@@ -224,7 +236,7 @@ function BlackModal({blackModal,setBlackModal}) {
     <ModalOverlay onClick={closeModal} ref={modalRef}>
       <ModalWrapper  showModal={blackModal.active}>
         <ModalInner>
-          <ToggleGif></ToggleGif>
+          <ToggleGif src={toggle}></ToggleGif>
           <Title>회원만 접근할 수 있어요!</Title>
           <Subtitle>
             지금 가입하고
@@ -234,16 +246,25 @@ function BlackModal({blackModal,setBlackModal}) {
           </Subtitle>
           <TagWrapper>
             <ContentWrapper>
-              <Signup exact to="/signup">
+              <Signup >
                 sign up
               </Signup>
               <Devider>&#47;</Devider>
-              <Login exact to="/signin">
+              <Login >
                 login
               </Login>
             </ContentWrapper>
           </TagWrapper>
         </ModalInner>
+        <CloseModalButton
+                aria-label='Close modal'
+                onClick={() => {  setBlackModal({
+                  ...blackModal,
+                  active: false,
+                  
+                })
+                document.body.style.overflow = "unset"}}
+              />
       </ModalWrapper>
       </ModalOverlay>
       {/* </ModalOverlay> */}

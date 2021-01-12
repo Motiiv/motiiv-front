@@ -367,8 +367,6 @@ const BlackModalConfirm = () => {
 };
 
 
-
-
 ///////////////
   /* 더보기 버튼 모달창 */
   /*   const onHandleToggleButton = () => {
@@ -383,15 +381,18 @@ const BlackModalConfirm = () => {
 
  // [ Black Modal] 사용하고자 하는 버튼에 blackmodalconfirm 함수 넣어주면 됨
   const LikeToggle = () => {
+    if(blackModal.isLogin === true){
     setLike(!like);
-    BlackModalConfirm();
     console.log(videoInfo.id);
     dispatch(changeLikeStatus(videoInfo.id));
+    }
+    else BlackModalConfirm();
   };
   const SaveToggle = () => {
+    if(blackModal.isLogin === true){
     setSave(!save);
-    BlackModalConfirm();
     dispatch(changeSaveStatus(videoInfo.id));
+    }else BlackModalConfirm();
   };
  // [blackModal] active 부분 모달띄우게하는 컴퍼넌트
   return (

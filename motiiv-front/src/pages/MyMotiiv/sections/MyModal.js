@@ -4,6 +4,8 @@ import styled, {css} from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import ModalCoverImage from '../../../assets/global/0109_mymotiiv_login_mockup.png';
 import ModalMobileImage from '../../../assets/global/0109_mobile_mymotiiv_mockup.png';
+import toggle from '../../../assets/global/toggle.gif';
+import SignInModal from '../../../components/common/Login/SignInModal';
 import MyNavBar from '../sections/MyNavbar';
 import {MdClose} from 'react-icons/md';
 const ModalContainer = styled.div`
@@ -41,6 +43,7 @@ const ModalWrapper = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display : ${props => ( !props.showLogin ? 'block' : 'none')};
     @media ${props => props.theme.mobile}{
     width : 27.5rem;
     height : 35.3rem;
@@ -63,10 +66,8 @@ const ModalInner = styled.div`
     align-items: center;
 `
 
-const ToggleGif = styled.div`
-    background : ${({theme}) => theme.primary};
-    width: 9rem;
-    height : 3.7rem;
+const ToggleGif = styled.img`
+    background-size: cover;
     border-radius: 3rem;
     margin-top : 5rem;
     @media ${props => props.theme.mobile}{
@@ -148,7 +149,7 @@ const ContentWrapper = styled.div`
     align-items : center;
 `;
 
-const Signup = styled(NavLink)`
+const Signup = styled.div`
     display : flex;
     align-items : center;
     cursor : pointer;
@@ -170,7 +171,7 @@ const Devider = styled.div`
     color : ${({theme}) => theme.primary};
 `;
 
-const Login = styled(NavLink)`
+const Login = styled.div`
     display : flex;
     align-items : center;
     font-weight: bold; 
@@ -240,6 +241,11 @@ const Login = styled(NavLink)`
 //   z-index: 10;
 // `;
 function MyModal() {
+    const [showLogin,setShowLogin] = useState(false);
+
+    const showLoginModal = () => {
+        setShowLogin(!showLogin)
+    };
     // document.body.style.overflow = "hidden";
     // document.body.style.overflow = "unset"
 
@@ -258,20 +264,21 @@ function MyModal() {
           {/* <ModalContainer> */}
             <ModalOverlay />
             {/* <animated.div style={animation}> */}
-            <ModalWrapper>
+           { !showLogin && (<> <ModalWrapper showLogin = {showLogin}>
                 <ModalInner>
-                    <ToggleGif></ToggleGif>
+                    <ToggleGif src = {toggle}></ToggleGif>
                     <Title>회원만 접근할 수 있어요!</Title> 
                     <Subtitle>지금 가입하고<br /><b>나만을 위한 작업 공간</b>을<br/>구성해보세요</Subtitle>
                     <TagWrapper>
                         <ContentWrapper> 
-                            <Signup  exact to="/signup">sign up</Signup>
+                            <Signup onClick = {showLoginModal} >sign up</Signup>
                             <Devider>&#47;</Devider>
-                            <Login  exact to="/signin">login</Login>
+                            <Login>login</Login>
                         </ContentWrapper>
                     </TagWrapper>
                 </ModalInner>
-            </ModalWrapper>
+            </ModalWrapper> </>)
+} {showLogin && <SignInModal isShow = {true} num = {1} />}
             {/* </animated.div> */}
             {/* </ModalContainer> */}
         </>
