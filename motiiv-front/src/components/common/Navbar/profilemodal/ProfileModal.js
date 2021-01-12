@@ -204,7 +204,6 @@ function ProfileModal({ hideModal, showModal }) {
   }));
 
   // 아웃 사이드 클릭
-  // 내부를 클릭할 땐 안 꺼져야 하는데.. 흠
   const handleClickOutside = e => {
     if (!myRef?.current?.contains(e.target)) {
       hideModal();
