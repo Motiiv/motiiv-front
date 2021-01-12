@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import Tag from '../Tag/Tag';
 import { withRouter } from 'react-router-dom';
-import HoverVideoPlayer from 'react-hover-video-player';
+
 import SaveImage from '../../../assets/global/save_icon.svg';
 import SaveClickImage from '../../../assets/global/saveclick_icon.svg';
 const CardWrap = styled.div`
@@ -21,6 +21,7 @@ const CardWrap = styled.div`
     min-width: 30rem;
     min-height: 24.2rem;
     box-shadow: none;
+    margin: auto;
   }
   @media ${props => props.theme.tablet} {
     min-width: ${props => (props.size === 'large' ? '21.9rem' : '21.6rem')};
@@ -60,7 +61,10 @@ const VideoWrap = styled.div`
   @media ${props => props.theme.tablet} {
     height: ${props => (props.size === 'large' ? '12.3rem' : '12.2rem')};
   }
- 
+  @media ${props => props.theme.laptop} {
+    height: 15.4rem;
+  }
+
   @media ${props => props.theme.desktop} {
     height: ${props => (props.size === 'large' ? '21.2rem' : '15.4rem')};
   }
@@ -333,26 +337,13 @@ function Card({ obj, size, text, history, saveButton, category }) {
           size={size}
           onClick={() => history.push(`/detail/${obj.id}`)}
         >
-          <HoverVideoPlayer
-            style={{ width: '100%', height: '100%' /* borderRadius: '1rem' */ }}
-            //videoSrc={obj.VideoInfo.src}
-            pausedOverlayWrapperStyle={{
-              borderRadius: borderValue,
-              overflow: 'hidden',
-            }}
-            pausedOverlay={
-              <img
-                width="100%"
-                height="100%"
-                borderRadius="1rem"
-                src={obj.thumbnailImageUrl}
-              />
-            }
-            loadingOverlay={<div className="loading-spinner-overlay" />}
-            videoStyle={{
-              borderRadius: '1rem',
-            }}
+          <img
+            width="100%"
+            height="100%"
+            borderRadius="1rem"
+            src={obj.thumbnailImageUrl}
           />
+
           <SaveBox saveButton={saveButton} onClick={() => setSave(!save)}>
             <SaveImg size={size} src={save ? SaveClickImage : SaveImage} />
           </SaveBox>
