@@ -63,11 +63,15 @@ const SliderSection = styled.div`
   }
   @media ${props => props.theme.mobile} {
     padding: 0 2rem;
+    padding-right: 0;
     & .swiper-button-prev::after {
       display: none !important;
     }
     & .swiper-button-next::after {
       display: none !important;
+    }
+    & .swiper-slide {
+      height: 26rem;
     }
   }
 

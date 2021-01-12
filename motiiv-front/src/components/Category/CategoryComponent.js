@@ -8,6 +8,8 @@ import UpperArrow from '../../assets/global/upperArrow.svg';
 import AsideModal from '../../pages/Category/sections/AsideModal';
 import AsideMenu from '../../pages/Category/sections/AsideMenu';
 import Loading from '../common/Loading/Loading';
+import DownArrowGray from '../../assets/global/gray_down.svg';
+import UpperArrowGray from '../../assets/global/gray_upper.svg';
 
 const CategoryContainer = styled.div`
   padding: 5rem 5.5rem;
@@ -280,7 +282,7 @@ function CategoryComponent({
                 <TitleTextAndButton onClick={onHandleSortModalStatus}>
                   <SortTitleText>{sortStatus.text}</SortTitleText>
                   <SortButtonImg
-                    src={sortStatus.status ? UpperArrow : DownArrow}
+                    src={sortStatus.status ? UpperArrowGray : DownArrowGray}
                     style={{ fill: '#ffffff' }}
                   />
                 </TitleTextAndButton>

@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import SwiperBanner from './sections/SwiperBanner';
 import AdBanner from './sections/AdBanner';
 import Section from '../../components/common/Section/Section';
-import { getProfile } from '../../modules/user';
-import { useDispatch, useSelector } from 'react-redux';
-import MyNavBar from '../MyMotiiv/sections/MyNavbar';
+import { getMainBanners, getMainRecommend } from '../../modules/video';
+import { createDispatchHook, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import Loading from '../../components/common/Loading/Loading';
 import ImageSlider from '../../components/common/Section/ImageSlider';
 const SliderObject = [
   {
@@ -175,44 +175,100 @@ const HighLight = styled.span`
     transparent 100%
   );
 `;
-function Main({ object }) {
+const YeongJinBackground = styled.div`
+  width: 100%;
+  height: 100%;
+  @media ${props => props.theme.mobile} {
+    background-color: ${({ theme }) => theme.lightGray};
+  }
+  @media ${props => props.theme.tablet} {
+    background-color: white;
+  }
+  background-color: ${({ theme }) => theme.lightGray};
+`;
+function Main() {
   const dispatch = useDispatch();
-  const { userInfo, loading } = useSelector(({ user, loading }) => ({
-    userInfo: user.userInfo,
-    loading: loading['user/GET_PROFILE'],
+  const {
+    banners,
+    recommend,
+    loading_banners,
+    loading_recommend,
+  } = useSelector(({ video, loading }) => ({
+    recommend: video.m_recVideoList,
+    banners: video.m_banners,
+    loading_recommend: loading['video/GET_MAIN_RECOMMENDS'],
+    loading_banners: loading['video/GET_MAIN_BANNERS'],
   }));
+
   useEffect(() => {
-    dispatch(getProfile());
+    dispatch(getMainBanners());
+    dispatch(getMainRecommend());
   }, []);
+
   return (
-    <>
-      <SwiperBanner />
-      <Section
-        object={SliderObject}
-        type="top"
-        size="large"
-        color="gray"
-        text="motiiv top 10"
-      ></Section>
-      {/* <Container>
-          <Wrapper>
-            <Wrap>
-          <Title>motiiv<HighLight>top 10</HighLight></Title>
-          <SubTitle>이 영상을 본 80%가 바로 일을 시작했어요!</SubTitle>
-          </Wrap>
-          <ImageSlider object={SliderObject} type="top"
-        size="large"
-        color="gray"></ImageSlider>
-          </Wrapper>
-        </Container> */}
-      <Section object={SliderObject} nonfix="true"></Section>
-      <Section object={SliderObject} nonfix="true"></Section>
-      <Section object={SliderObject} nonfix="true"></Section>
-      <AdBanner />
-      <Section object={SliderObject} nonfix="true"></Section>
-      <Section object={SliderObject} nonfix="true"></Section>
-      <Section object={SliderObject} nonfix="true"></Section>
-    </>
+    <YeongJinBackground>
+      {Object.keys(banners).length ? (
+        <>
+          <SwiperBanner
+            mostViewVideo={banners.mostViewVideo}
+            mostLikeVideo={banners.mostLikeVideo}
+          />
+          <Section
+            object={banners.toptenVideo}
+            type="top"
+            size="large"
+            color="gray"
+            text="motiiv top 10"
+            subText="이 영상을 본 80%가 바로 일을 시작했어요!"
+          ></Section>
+        </>
+      ) : (
+        <Loading></Loading>
+      )}
+      {Object.keys(recommend).length ? (
+        <>
+          <Section
+            object={recommend.sectionOne.sectionOnes}
+            text={recommend.sectionOne.sectiononeName}
+            subText={recommend.sectionOne.sectiononeNameSub}
+            nonfix="true"
+          ></Section>
+          <Section
+            object={recommend.sectionTwo.sectionTwos}
+            text={recommend.sectionTwo.sectionTwoName}
+            subText={recommend.sectionTwo.sectionTwoNameSub}
+            nonfix="true"
+          ></Section>
+          <Section
+            object={recommend.sectionThree.sectionThrees}
+            text={recommend.sectionThree.sectionThreeName}
+            subText={recommend.sectionThree.sectionThreeNameSub}
+            nonfix="true"
+          ></Section>
+          <AdBanner />
+          <Section
+            object={recommend.sectionFour.sectionFours}
+            text={recommend.sectionFour.sectionFourName}
+            subText={recommend.sectionFour.sectionFourNameSub}
+            nonfix="true"
+          ></Section>
+          <Section
+            object={recommend.sectionFive.sectionFives}
+            text={recommend.sectionFive.sectionFiveName}
+            subText={recommend.sectionFive.sectionFiveNameSub}
+            nonfix="true"
+          ></Section>
+          <Section
+            object={recommend.sectionSix.sectionSixs}
+            text={recommend.sectionSix.sectionSixName}
+            subText={recommend.sectionSix.sectionSixNameSub}
+            nonfix="true"
+          ></Section>
+        </>
+      ) : (
+        <Loading></Loading>
+      )}
+    </YeongJinBackground>
   );
 }
 

@@ -7,6 +7,9 @@ const BannerWrapper = styled.div`
   width: 100%;
   height: 25rem;
   background-color: black;
+  @media ${props => props.theme.maxdesktop} {
+    height: 21.2rem;
+  }
 `;
 const Container = styled.div`
   display: flex;
@@ -19,6 +22,7 @@ const Container = styled.div`
   position: relative;
   @media ${props => props.theme.maxdesktop} {
     padding-left: 5.5rem;
+    height: 21.2rem;
   }
   @media ${props => props.theme.tablet768} {
     padding-left: 3rem;

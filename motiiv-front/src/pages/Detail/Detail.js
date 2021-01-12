@@ -16,7 +16,7 @@ function Detail({ props }) {
   );
   useEffect(() => {
     dispatch(getDetailVideoInfo(props.match.params.id));
-  }, [props.match.params.id]);
+  }, [props.match.params.id, like, save]);
 
   return (
     <DetailComponent

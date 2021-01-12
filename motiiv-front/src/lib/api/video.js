@@ -56,6 +56,24 @@ const changeSave = async videoId => {
     console.log('[FAIL] changeSave', err);
   }
 };
+const getMainBanners = async () => {
+  try {
+    const { data } = await client.get(`/videos/getBanners`);
+    console.log('[SUCCESS] getMainBanners', data);
+    return data;
+  } catch (err) {
+    console.log('[FAIL] getMainBanners', err);
+  }
+};
+const getMainRecommend = async () => {
+  try {
+    const { data } = await client.get(`/videos/getRecommand`);
+    console.log('[SUCCESS] getMainRecommend', data);
+    return data;
+  } catch (err) {
+    console.log('[FAIL] getMainRecommend', err);
+  }
+};
 export {
   getCategoryKeywords,
   getCategoryVideos,
@@ -63,4 +81,6 @@ export {
   getCategoryTagVideos,
   changeLike,
   changeSave,
+  getMainBanners,
+  getMainRecommend,
 };

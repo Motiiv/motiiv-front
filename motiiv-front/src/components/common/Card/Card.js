@@ -20,10 +20,13 @@ const CardWrap = styled.div`
   @media ${props => props.theme.mobile} {
     min-width: 30rem;
     min-height: 24.2rem;
+    box-shadow: none;
   }
   @media ${props => props.theme.tablet} {
     min-width: ${props => (props.size === 'large' ? '21.9rem' : '21.6rem')};
     min-height: 23.2rem;
+    box-shadow: ${props =>
+      props.size === 'large' ? '2px 2px  7px rgba(0, 0, 0, 0.15)' : 'none'};
     //max로 바꿔야하는지 여부
   }
   @media ${props => props.theme.laptop} {
@@ -223,9 +226,17 @@ const TextWrap = styled.div`
   border-radius: 0 0 1rem 1rem;
   @media ${props => props.theme.mobile} {
     height: auto;
+    ${props =>
+      props.size === 'large'
+        ? css`
+            background: none !important;
+          `
+        : null};
   }
   @media ${props => props.theme.tablet} {
     height: auto;
+    background-color: ${props =>
+      props.size === 'large' ? 'white !important' : 'transparent'};
     /* height: 10.9rem; */
   }
   @media ${props => props.theme.desktop} {
@@ -257,6 +268,7 @@ const Title = styled.div`
     margin-top: 1rem;
     max-height: 4.2rem;
     margin-left: ${props => (props.size === 'large' ? '1.5rem' : '0')};
+    margin-right: ${props => (props.size === 'large' ? '1.5rem' : '0')};
   }
   @media ${props => props.theme.desktop} {
     margin-top: ${props => (props.size === 'large' ? '1rem' : '0.8rem')};
@@ -300,6 +312,12 @@ const TagContainer = styled.div`
     display: flex;
     margin-top: 1rem;
     margin-left: ${props => (props.size === 'large' ? '1.5rem' : '0')};
+    ${props =>
+      props.size === 'large'
+        ? css`
+            margin-bottom: 1.5rem;
+          `
+        : css``};
   }
   @media ${props => props.theme.desktop} {
     margin-top: 1rem;
@@ -309,6 +327,7 @@ const TagContainer = styled.div`
 // Tag 컴포넌트 만들어서 불러오기
 function Card({ obj, size, text, history, saveButton, category }) {
   const [save, setSave] = useState(false);
+  const borderValue = size === 'large' ? '1rem 1rem 0 0' : '1rem';
   return (
     <>
       <CardWrap size={size}>
@@ -317,10 +336,10 @@ function Card({ obj, size, text, history, saveButton, category }) {
           onClick={() => history.push(`/detail/${obj.id}`)}
         >
           <HoverVideoPlayer
-            style={{ width: '100%', height: '100%', borderRadius: '1rem' }}
+            style={{ width: '100%', height: '100%' /* borderRadius: '1rem' */ }}
             //videoSrc={obj.VideoInfo.src}
             pausedOverlayWrapperStyle={{
-              borderRadius: '1rem',
+              borderRadius: borderValue,
               overflow: 'hidden',
             }}
             pausedOverlay={
@@ -360,7 +379,7 @@ function Card({ obj, size, text, history, saveButton, category }) {
           <TagContainer size={size} category={category}>
             {obj.VideoTags
               ? obj.VideoTags.map(tag => (
-                  <div style={{ marginRight: '0.7rem', marginTop: '-2.8rem' }}>
+                  <div style={{ marginRight: '0.7rem', marginTop: '-2.5rem' }}>
                     <Tag
                       hashTag={1}
                       color="black"

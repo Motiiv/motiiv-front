@@ -12,6 +12,8 @@ import BlackModal from '../common/Modal/BlackModal';
 import Loading from '../common/Loading/Loading';
 import { changeLikeStatus, changeSaveStatus } from '../../modules/video';
 import { useDispatch, useSelector } from 'react-redux';
+import Like from '../common/Like/Like';
+import Save from '../common/Save/Save';
 
 const DetailContainer = styled.div`
   width: 100%;
@@ -378,6 +380,7 @@ function DetailComponent({
       });
     }
   };
+
   const LikeToggle = () => {
     setLike(!like);
     BlackModalConfirm();
