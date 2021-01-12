@@ -7,7 +7,8 @@ import MyNavBar from './sections/MyNavbar';
 import ImageSlider from '../../components/common/Section/ImageSlider';
 import BlackModal from '../../components/common/Modal/BlackModal';
 import { useDispatch, useSelector } from 'react-redux';
-// import { getMotiiv } from '../../modules/mymotiiv';
+import Loading from '../../components/common/Loading/Loading';
+import {getVideos} from '../../modules/mymotiiv';
 
 const MotiivWrapper = styled.div`
   width: 100%;
@@ -156,22 +157,30 @@ const Title = styled.h2`
 `;
 
 // const textArray = ["내가 자주본 모티브", "내가 저장한 모티브", "최근 재생한 모티브"];
-function MyMotiiv() {
-  // const dispatch = useDispatch();
+function MyMotiiv({showModal}) {
+  const dispatch = useDispatch();
   const saveButton = false;
   const [loginState, setLoginState] = useState({
     isLogin: true,
   });
 
+  const { myvideos, loading} = useSelector(({mymotiiv,loading}) => ({
+    myvideos : mymotiiv.myvideos,
+    loading  : loading['mymotiiv/GET_MYVIDEOS'],
+  }));
 
-  // useEffect(() => {
-  //   dispatch(getMotiiv());
-  // }, []);
 
-  return !loginState.isLogin ?  (
+  useEffect(() => {
+    dispatch(getVideos());
+  }, []);
+
+  return loginState.isLogin ? (
     <>
       <MotiivWrapper isLoggined={loginState.isLogin}>
         <WorkSpace></WorkSpace>
+        { !loading && 
+        myvideos && 
+          <>
         <Container>
           <Wrapper>
             <Title>
@@ -179,7 +188,7 @@ function MyMotiiv() {
             </Title>
             <ImageSlider
               saveButton={saveButton}
-              object={SliderObject}
+              object={myvideos.mostViewSort}
             ></ImageSlider>
           </Wrapper>
         </Container>
@@ -191,7 +200,7 @@ function MyMotiiv() {
             </Title>
             <ImageSlider
               saveButton={saveButton}
-              object={SliderObject}
+              object={myvideos.savedResult}
             ></ImageSlider>
           </Wrapper>
         </Container>
@@ -203,21 +212,22 @@ function MyMotiiv() {
             </Title>
             <ImageSlider
               saveButton={saveButton}
-              object={SliderObject}
+              object={myvideos.recentViewSort}
             ></ImageSlider>
           </Wrapper>
         </Container>
-        {/* <Section object={SliderObject} text="내가 자주 본 모티브"></Section> */}
-        {/* <Section object={SliderObject} text="내가 저장한 모티브"></Section>
-        <Section object={SliderObject} text="최근 재생한 모티브"></Section> */}
+        </>
+} 
+{loading && <Loading/>}
       </MotiivWrapper>
     </>
-      ) : (
-        <>
-          {/* {setShowModal(prev=> !prev)} */}
-          <MyModal />
-          {/* <BlackModal/> */}
-        </>
-  );
+      ) :  <MyModal showModal={showModal}/>;
 }
 export default MyMotiiv;
+
+
+
+
+    {/* <Section object={SliderObject} text="내가 자주 본 모티브"></Section> */}
+        {/* <Section object={SliderObject} text="내가 저장한 모티브"></Section>
+        <Section object={SliderObject} text="최근 재생한 모티브"></Section> */}

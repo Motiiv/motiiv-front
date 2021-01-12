@@ -340,7 +340,8 @@ const MobileButtonBox = styled.div`
   border-bottom: 1px #c4c4c4 solid;
 `;
 
-function DetailComponent({ videoInfo, recVideoList, detailLoading }) {
+
+function DetailComponent({ videoInfo, recVideoList, detailLoading,showModal }) {
   /*   const [toggle, setToggle] = useState(false);
   const [toggleExist, setToggleExist] = useState(false); */
 
@@ -382,6 +383,7 @@ function DetailComponent({ videoInfo, recVideoList, detailLoading }) {
             <BlackModal
               blackModal={blackModal}
               setBlackModal={setBlackModal}
+              showModal = {showModal}
             ></BlackModal>
           )}
           <VideoWrapper>
@@ -410,6 +412,7 @@ function DetailComponent({ videoInfo, recVideoList, detailLoading }) {
                     <Save
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
+                      blackModal={blackModal}
                     ></Save>
                   </ButtonBox>
                 </TitleAndButtonBox>
@@ -450,6 +453,7 @@ function DetailComponent({ videoInfo, recVideoList, detailLoading }) {
                     <Save
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
+                      blackModal = {blackModal}
                     ></Save>
                   </ButtonBox>
                   <ShareBox>
