@@ -63,6 +63,7 @@ const SliderSection = styled.div`
   }
   @media ${props => props.theme.mobile} {
     padding: 0 2rem;
+    padding-right: 0;
     & .swiper-button-prev::after {
       display: none !important;
     }
@@ -70,8 +71,13 @@ const SliderSection = styled.div`
       display: none !important;
     }
     & .swiper-slide {
+<<<<<<< HEAD
       flex : ${props => (props.defaultSpace ? '1' : '1')}!important;
   }
+=======
+      height: 26rem;
+    }
+>>>>>>> 10f58f68edca9af0941496908ab6f75c60f87a2b
   }
 
   @media ${props => props.theme.tablet} {
@@ -132,6 +138,7 @@ function ImageSlider({ object, type, size, text, saveButton }) {
           ref={swiperRef}
           navigation
           scrollbar
+          //loop="true"
           breakpoints={{
             1280 : {
               spaceBetween : space,

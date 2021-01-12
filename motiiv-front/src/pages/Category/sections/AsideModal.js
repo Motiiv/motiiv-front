@@ -7,12 +7,16 @@ import Menu from './Menu';
 const ModalWrapper = styled.div`
   width: 100%;
   border-radius: 0.7rem;
-  overflow: hidden;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    overflow-y: auto;
+    overflow-x: hidden; // 스크롤 있는 경우에만 표시
+  }
   transition: 0.5s;
   ${props =>
     props.active
       ? css`
-          height: fit-content;
+          height: 24.3rem;
           visibility: visible;
           opacity: 1;
         `

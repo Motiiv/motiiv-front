@@ -1,6 +1,6 @@
-import {useSpring,animated} from 'react-spring';
-import {MdClose} from 'react-icons/md';
-import React ,{useState,useEffect,useCallback,useRef}from 'react'
+import { useSpring, animated } from 'react-spring';
+import { MdClose } from 'react-icons/md';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import LikeImage from '../../assets/global/like_icon.svg';
 import SaveImage from '../../assets/global/save_icon.svg';
@@ -12,8 +12,9 @@ import ShareModal from '../../pages/Detail/sections/ShareModal';
 import { withRouter } from 'react-router-dom';
 import BlackModal from '../common/Modal/BlackModal';
 import Loading from '../common/Loading/Loading';
-import { changeLikeStatus, changeSaveStatus } from '../../modules/video';
 import { useDispatch, useSelector } from 'react-redux';
+import Like from '../common/Like/Like';
+import Save from '../common/Save/Save';
 
 const DetailContainer = styled.div`
   width: 100%;
@@ -86,6 +87,9 @@ const RecommendCardBox = styled.div`
       margin-top: 0;
     }
     & :nth-child(6) {
+      display: none;
+    }
+    & :nth-child(5) {
       display: none;
     }
   }
@@ -336,39 +340,29 @@ const MobileButtonBox = styled.div`
   border-bottom: 1px #c4c4c4 solid;
 `;
 
-function DetailComponent({
-  videoInfo,
-  recVideoList,
-  detailLoading,
-  likeStatus,
-  saveStatus,
-  showModal
-}) {
+
+function DetailComponent({ videoInfo, recVideoList, detailLoading,showModal }) {
   /*   const [toggle, setToggle] = useState(false);
   const [toggleExist, setToggleExist] = useState(false); */
 
   const [shareModal, setShareModal] = useState(false);
   const dispatch = useDispatch();
-  const [like, setLike] = useState(likeStatus);
-  const [save, setSave] = useState(saveStatus);
   const [blackModal, setBlackModal] = useState({
     isLogin: false,
     active: false,
   });
   const descRef = useRef();
 
+  const BlackModalConfirm = () => {
+    if (!blackModal.isLogin) {
+      setBlackModal({
+        ...blackModal,
+        active: !blackModal.active,
+      });
+    }
+  };
 
-const BlackModalConfirm = () => {
-  if (!blackModal.isLogin) {
-    setBlackModal({
-      ...blackModal,
-      active: !blackModal.active,
-    });
-  }
-};
-
-
-///////////////
+  ///////////////
   /* 더보기 버튼 모달창 */
   /*   const onHandleToggleButton = () => {
     setToggle(!toggle);
@@ -380,27 +374,17 @@ const BlackModalConfirm = () => {
     } */
   }, []);
 
- // [ Black Modal] 사용하고자 하는 버튼에 blackmodalconfirm 함수 넣어주면 됨
-  const LikeToggle = () => {
-    if(blackModal.isLogin === true){
-    setLike(!like);
-    console.log(videoInfo.id);
-    dispatch(changeLikeStatus(videoInfo.id));
-    }
-    else BlackModalConfirm();
-  };
-  const SaveToggle = () => {
-    if(blackModal.isLogin === true){
-    setSave(!save);
-    dispatch(changeSaveStatus(videoInfo.id));
-    }else BlackModalConfirm();
-  };
- // [blackModal] active 부분 모달띄우게하는 컴퍼넌트
+  // [blackModal] active 부분 모달띄우게하는 컴퍼넌트
   return (
     <>
       {!detailLoading ? (
         <DetailContainer>
-          { blackModal.active && <BlackModal blackModal={blackModal} setBlackModal={setBlackModal} showModal={showModal} ></BlackModal>}  
+          {blackModal.active && (
+            <BlackModal
+              blackModal={blackModal}
+              setBlackModal={setBlackModal}
+            ></BlackModal>
+          )}
           <VideoWrapper>
             <VideoDisplay>
               <iframe
@@ -420,14 +404,14 @@ const BlackModalConfirm = () => {
                 <TitleAndButtonBox>
                   <TitleText>{videoInfo.title}</TitleText>
                   <ButtonBox>
-                    <LikeBox onClick={LikeToggle}>
-                      <LikeText like={like}>좋아요</LikeText>
-                      <LikeImg src={like ? LikeClickImage : LikeImage} />
-                    </LikeBox>
-                    <SaveBox onClick={SaveToggle}>
-                      <SaveText save={save}>저장</SaveText>{' '}
-                      <SaveImg src={save ? SaveClickImage : SaveImage} />
-                    </SaveBox>
+                    <Like
+                      id={videoInfo.id}
+                      BlackModalConfirm={BlackModalConfirm}
+                    ></Like>
+                    <Save
+                      id={videoInfo.id}
+                      BlackModalConfirm={BlackModalConfirm}
+                    ></Save>
                   </ButtonBox>
                 </TitleAndButtonBox>
                 <TagBox>
@@ -460,14 +444,14 @@ const BlackModalConfirm = () => {
                 </TextBox>
                 <MobileButtonBox>
                   <ButtonBox>
-                    <LikeBox onClick={LikeToggle}>
-                      <LikeText like={like}>좋아요</LikeText>
-                      <LikeImg src={like ? LikeClickImage : LikeImage} />
-                    </LikeBox>
-                    <SaveBox onClick={SaveToggle}>
-                      <SaveText save={save}>저장</SaveText>{' '}
-                      <SaveImg src={save ? SaveClickImage : SaveImage} />
-                    </SaveBox>
+                    <Like
+                      id={videoInfo.id}
+                      BlackModalConfirm={BlackModalConfirm}
+                    ></Like>
+                    <Save
+                      id={videoInfo.id}
+                      BlackModalConfirm={BlackModalConfirm}
+                    ></Save>
                   </ButtonBox>
                   <ShareBox>
                     <ShareButton onClick={() => setShareModal(!shareModal)}>
@@ -512,4 +496,4 @@ const BlackModalConfirm = () => {
   );
 }
 
-export default withRouter(DetailComponent);
+export default React.memo(withRouter(DetailComponent));

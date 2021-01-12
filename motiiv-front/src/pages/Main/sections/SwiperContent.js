@@ -176,43 +176,49 @@ const TimeContainer = styled.div`
           `}
   }
 `;
-function SwiperContent({ obj, choice, isNext, isPrev }) {
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+function SwiperContent({ obj, choice, isNext, isPrev, titleText, subText }) {
   return (
     <ContentWrapper
       src="https://i.ytimg.com/vi/XeOfUbLL-7Q/hq720_live.jpg?sqp=CLTkx_8F-oaymwEZCNAFEJQDSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLA65nbGSn5uuIqanAAfgR8uEl9-uA"
       choice={choice}
-      idx={obj.idx}
+      idx={obj.id}
       isNext={isNext}
       isPrev={isPrev}
     >
       <TextCard>
         <HeaderInfo>
-          <HeaderTitleText>{obj.TextInfo.category}</HeaderTitleText>
-          <HeaderSubText>{obj.TextInfo.categoryTxt}</HeaderSubText>
+          <HeaderTitleText>{titleText}</HeaderTitleText>
+          <HeaderSubText>{subText}</HeaderSubText>
         </HeaderInfo>
-        <VideoText>{`${obj.TextInfo.videoTxt}`}</VideoText>
+        <VideoText>{`${obj.description}`}</VideoText>
         <TagBox>
-          {obj.TextInfo.hashTag.map((tag, idx) => (
+          {obj.VideoTags.map((tag, idx) => (
             <Tag
               key={`tag-${idx}`}
               hashTag={1}
               color={({ theme }) => theme.primary}
-              text={obj.TextInfo.hashTag[idx]}
+              text={tag.name}
               fontSize="1.2rem"
+              id={tag.id}
             ></Tag>
           ))}
         </TagBox>
       </TextCard>
       <VideoCard choice={choice} idx={obj.idx}>
-        <iframe
+        <Image src={obj.thumbnailImageUrl}></Image>
+        {/*         <iframe
           width="100%"
           style={{ height: '100%', width: '100%' }}
           src={obj.VideoInfo.src}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-        ></iframe>
-        <TimeContainer size="large">{obj.VideoInfo.runningTime}</TimeContainer>
+        ></iframe> */}
+        <TimeContainer size="large">{obj.videoLength}</TimeContainer>
       </VideoCard>
     </ContentWrapper>
   );

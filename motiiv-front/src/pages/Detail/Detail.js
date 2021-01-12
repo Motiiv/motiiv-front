@@ -9,7 +9,6 @@ function Detail({ props ,showModal}) {
     ({ video, loading }) => ({
       videoInfo: video.d_videoInfo,
       recVideoList: video.d_recVideoList,
-      like: video.like,
       save: video.save,
       detailLoading: loading['video/GET_DETAIL_VIDEO_INFO'],
     }),

@@ -26,6 +26,7 @@ const [
   GET_DETAIL_VIDEO_INFO_SUCCESS,
   GET_DETAIL_VIDEO_INFO_FAILURE,
 ] = createRequestActionTypes('video/GET_DETAIL_VIDEO_INFO');
+/* 공통(좋아요 / 저장) */
 const [
   CHANGE_LIKE_STATUS,
   CHANGE_LIKE_STATUS_SUCCESS,
@@ -36,6 +37,19 @@ const [
   CHANGE_SAVE_STATUS_SUCCESS,
   CHANGE_SAVE_STATUS_FAILURE,
 ] = createRequestActionTypes('video/CHANGE_SAVE_STATUS');
+const CHANGE_LIKE = 'video/CHANGE_LIKE';
+const CHANGE_SAVE = 'video/CHANGE_SAVE';
+/* 메인 뷰 */
+const [
+  GET_MAIN_BANNERS,
+  GET_MAIN_BANNERS_SUCCESS,
+  GET_MAIN_BANNERS_FAILURE,
+] = createRequestActionTypes('video/GET_MAIN_BANNERS');
+const [
+  GET_MAIN_RECOMMENDS,
+  GET_MAIN_RECOMMENDS_SUCCESS,
+  GET_MAIN_RECOMMENDS_FAILURE,
+] = createRequestActionTypes('video/GET_MAIN_RECOMMENDS');
 
 /* ====================Action 호출 함수=================== */
 /* 카테고리 뷰 */
@@ -62,6 +76,9 @@ export const changeSaveStatus = createAction(
   CHANGE_SAVE_STATUS,
   payload => payload,
 );
+/* 메인 뷰 */
+export const getMainBanners = createAction(GET_MAIN_BANNERS);
+export const getMainRecommend = createAction(GET_MAIN_RECOMMENDS);
 
 /* =================Saga선언==================== */
 /* 카테고리 뷰 */
@@ -91,6 +108,21 @@ const changeSaveSaga = createRequestSaga(
   CHANGE_SAVE_STATUS,
   videoAPI.changeSave,
 );
+export const changeLike = createAction(CHANGE_LIKE, like => ({
+  like,
+}));
+export const changeSave = createAction(CHANGE_SAVE, save => ({
+  save,
+}));
+/* 메인 뷰 */
+const getBannersSaga = createRequestSaga(
+  GET_MAIN_BANNERS,
+  videoAPI.getMainBanners,
+);
+const getRecommendSaga = createRequestSaga(
+  GET_MAIN_RECOMMENDS,
+  videoAPI.getMainRecommend,
+);
 
 /* 요청된 것들 중 가장 마지막 요청만 처리 (여러번 클릭시 모두 처리되면 매우 비효율적!) */
 export function* videoSaga() {
@@ -100,6 +132,8 @@ export function* videoSaga() {
   yield takeLatest(GET_CATEGORY_TAG_VIDEOS, getTagVideosSaga);
   yield takeLatest(CHANGE_LIKE_STATUS, changeLikeSaga);
   yield takeLatest(CHANGE_SAVE_STATUS, changeSaveSaga);
+  yield takeLatest(GET_MAIN_BANNERS, getBannersSaga);
+  yield takeLatest(GET_MAIN_RECOMMENDS, getRecommendSaga);
 }
 
 /*===============State 초기화============= */
@@ -116,6 +150,9 @@ const initState = {
   /* 공통 */
   like: false,
   save: false,
+  /* 메인 뷰 */
+  m_banners: {},
+  m_recVideoList: {},
 };
 
 /* 액션을 store에 저장하는 리듀서를 handleActions로 쉽게 처리! */
@@ -152,7 +189,9 @@ const video = handleActions(
     [GET_DETAIL_VIDEO_INFO_SUCCESS]: (state, { payload: data }) => ({
       ...state,
       d_recVideoList: data.recommandVideos,
-      d_videoInfo: data.details,
+      d_videoInfo: data.videoDetailData,
+      like: data.videoDetailData.isLiked,
+      save: data.videoDetailData.isSaved,
     }),
     [GET_DETAIL_VIDEO_INFO_FAILURE]: (state, { payload: error }) => ({
       ...state,
@@ -161,7 +200,7 @@ const video = handleActions(
     /* 공통 */
     [CHANGE_LIKE_STATUS_SUCCESS]: (state, { payload: data }) => ({
       ...state,
-      like: !initState.like,
+      like: data,
     }),
     [CHANGE_LIKE_STATUS_FAILURE]: (state, { payload: error }) => ({
       ...state,
@@ -169,9 +208,34 @@ const video = handleActions(
     }),
     [CHANGE_SAVE_STATUS_SUCCESS]: (state, { payload: data }) => ({
       ...state,
-      save: !initState.save,
+      save: data,
     }),
     [CHANGE_SAVE_STATUS_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      error,
+    }),
+    [CHANGE_LIKE]: (state, { payload: { like } }) => ({
+      ...state,
+      like: like,
+    }),
+    [CHANGE_SAVE]: (state, { payload: { save } }) => ({
+      ...state,
+      save: save,
+    }),
+    /* 메인 뷰 */
+    [GET_MAIN_BANNERS_SUCCESS]: (state, { payload: data }) => ({
+      ...state,
+      m_banners: data,
+    }),
+    [GET_MAIN_BANNERS_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      error,
+    }),
+    [GET_MAIN_RECOMMENDS_SUCCESS]: (state, { payload: data }) => ({
+      ...state,
+      m_recVideoList: data,
+    }),
+    [GET_MAIN_RECOMMENDS_FAILURE]: (state, { payload: error }) => ({
       ...state,
       error,
     }),
