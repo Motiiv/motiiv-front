@@ -10,7 +10,7 @@ const ModalBackgorundWrap = styled.div`
   background: #000000;
   opacity: 0.5;
 
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   left: 0;
@@ -60,7 +60,7 @@ const FinBtn = styled.div`
 
 const ModalWrap = styled.div`
   display: ${props => props.show ? `flex` : `none`};
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
