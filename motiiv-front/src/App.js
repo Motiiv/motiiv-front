@@ -31,14 +31,12 @@ function App({ props }) {
   const [showLoginModalState, setShowLoginModalState] = useState(false);
 
   const location = useLocation();
-  //const { showLoginModal } = useSelector(state => state.user);
   const { onFloatBtn } = useSelector(state => state.mymotiiv);
   const { workspaces } = useSelector(state => state.mymotiiv);
 
   useEffect(() => {
     dispatch(getWorkspaces());
     dispatch(getProfile());
-    //dispatch(showSigninModal());
   }, []);
 
   const hideModal = () => {
@@ -51,7 +49,11 @@ function App({ props }) {
 
   return (
     <>
-      <Navbar showModal={showModal} isloggined={loginState} />
+      <Navbar
+        location={location.pathname}
+        showModal={showModal}
+        isloggined={loginState}
+      />
       <Switch>
         {/* Main & Category & MyMotiiv */}
         <Route

@@ -8,10 +8,10 @@ import star from '../../../assets/global/star.png';
 import SigninModal from '../Login/SignInModal';
 import ProfileModal from './profilemodal/ProfileModal';
 
-const activeStyle = {
-  color: '#2cff2c',
-  borderBottom: '0.2rem solid #2cff2c',
-};
+// const activeStyle = {
+//   color: '#2cff2c',
+//   borderBottom: '0.2rem solid #2cff2c',
+// };
 
 const Header = styled.header`
   width: 100%;
@@ -47,12 +47,15 @@ const TabContainer = styled.div`
 
 const TabElem = styled(NavLink)`
   object-fit: contain;
-  color: white;
+  //color: white;
   text-decoration: none;
   padding: 1.6rem 0.8rem;
   &:nth-child(7) {
     display: ${props => (props.show === 'true' ? 'flex' : 'none')};
   }
+  color: ${props => (props.isActiveNav ? '#2cff2c' : 'white')};
+  border-bottom: ${props =>
+    props.isActiveNav ? '0.2rem solid #2cff2c' : 'none'};
 `;
 
 const Star = styled.img`
@@ -126,7 +129,8 @@ const Profile = styled.div`
   }
 `;
 
-function Navbar({ showModal, isloggined }) {
+function Navbar({ showModal, isloggined, location }) {
+
   //프로필 드롭다운 나타나고 없애기
   const [profileModalState, setProfileModalState] = useState(false);
   const onClickProfileImage = () => {
@@ -146,6 +150,27 @@ function Navbar({ showModal, isloggined }) {
     userInfo: user.userInfo,
   }));
 
+  const [nameLangState, setNamelangState] = useState('kor');
+  const firstletter = userInfo && userInfo.username.substr(0,1);
+/*
+  const onChangeName = () => {
+    firstLetter(firstletter) ? setNameKorState('eng') : setNameKorState('kor');
+  };
+
+  const pattern = new RegExp(
+    '^(https?:\\/\\/)?' + // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+      '(\\#[-a-z\\d_]*)?$',
+    'i',
+  );
+  const firstLetter = str => {
+    return !str || pattern.test(str);
+  };
+*/
+
   return (
     <>
       <Header>
@@ -153,15 +178,15 @@ function Navbar({ showModal, isloggined }) {
           <Logo src={logo} />
         </NavLink>
         <TabContainer>
-          <TabElem exact to="/main" activeStyle={activeStyle}>
+          <TabElem exact to="/main" isActiveNav={location === '/main'}>
             main
           </TabElem>
           <Star src={star} />
-          <TabElem to="/category/0" activeStyle={activeStyle}>
+          <TabElem to="/category/0" isActiveNav={location.includes('category')}>
             category
           </TabElem>
           <Star src={star} />
-          <TabElem exact to="/mymotiiv" activeStyle={activeStyle}>
+          <TabElem exact to="/mymotiiv" isActiveNav={location === '/mymotiiv'}>
             mymotiiv
           </TabElem>
         </TabContainer>

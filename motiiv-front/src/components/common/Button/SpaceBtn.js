@@ -30,7 +30,7 @@ const SpaceTitle = styled.p`
   color: white;
   width: 5.4rem;
   height: 5.4rem;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
 `;
 const SpaceButton = styled.button`
   // 포지션 관련

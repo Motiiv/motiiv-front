@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import FirstPage from './FirstPage';
 import SecondPage from './SecondPage';
@@ -172,16 +172,19 @@ const IndicatorContainer = styled.div`
 function SigninModal({ hideModal, isShow }) {
 
   // 아웃 사이드 클릭
-  // 내부를 클릭할 땐 안 꺼져야 하는데.. 흠
+  const myRef = useRef();
   const handleClickOutside = e => {
-    hideModal();
+    if (!myRef?.current?.contains(e.target)) {
+      hideModal();
+      pageReset();
+    }
   };
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   });
 
-  const [pageState, setPageState] = useState(3);
+  const [pageState, setPageState] = useState(1);
   const pageDown = () => {
     (async () => {
       try {
@@ -193,13 +196,21 @@ function SigninModal({ hideModal, isShow }) {
       }
     })();
   }
-
   const pageUp = () => {
     (async () => {
       try {
         if(pageState<3){
           setPageState(pageState+1);
         }
+      } catch (e) {
+        
+      }
+    })();
+  }
+  const pageReset = () => {
+    (async () => {
+      try {
+        setPageState(1);
       } catch (e) {
         
       }
@@ -223,9 +234,9 @@ function SigninModal({ hideModal, isShow }) {
     return (
       <> 
         <ModalBackgorundWrap show = {isShow}/>
-        <ModalWrap show = {isShow}>
+        <ModalWrap show = {isShow} ref={myRef}>
           <CancelBtn />
-          <FirstPage page = {pageState}/>
+          <FirstPage page = {pageState} pageUp={pageUp}/>
           <SecondPage page = {pageState}/>
           <LastPage page = {pageState}/>
             <PrevBtn page = {pageState} onClick={pageDown}>&#xE000; &nbsp; 이전</PrevBtn>
