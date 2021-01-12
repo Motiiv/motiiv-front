@@ -9,14 +9,13 @@ function Detail({ props }) {
     ({ video, loading }) => ({
       videoInfo: video.d_videoInfo,
       recVideoList: video.d_recVideoList,
-      like: video.like,
       save: video.save,
       detailLoading: loading['video/GET_DETAIL_VIDEO_INFO'],
     }),
   );
   useEffect(() => {
     dispatch(getDetailVideoInfo(props.match.params.id));
-  }, [props.match.params.id, like, save]);
+  }, [props.match.params.id]);
 
   return (
     <DetailComponent

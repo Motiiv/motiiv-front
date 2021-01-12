@@ -26,6 +26,7 @@ const [
   GET_DETAIL_VIDEO_INFO_SUCCESS,
   GET_DETAIL_VIDEO_INFO_FAILURE,
 ] = createRequestActionTypes('video/GET_DETAIL_VIDEO_INFO');
+/* 공통(좋아요 / 저장) */
 const [
   CHANGE_LIKE_STATUS,
   CHANGE_LIKE_STATUS_SUCCESS,
@@ -36,6 +37,8 @@ const [
   CHANGE_SAVE_STATUS_SUCCESS,
   CHANGE_SAVE_STATUS_FAILURE,
 ] = createRequestActionTypes('video/CHANGE_SAVE_STATUS');
+const CHANGE_LIKE = 'video/CHANGE_LIKE';
+const CHANGE_SAVE = 'video/CHANGE_SAVE';
 /* 메인 뷰 */
 const [
   GET_MAIN_BANNERS,
@@ -105,6 +108,12 @@ const changeSaveSaga = createRequestSaga(
   CHANGE_SAVE_STATUS,
   videoAPI.changeSave,
 );
+export const changeLike = createAction(CHANGE_LIKE, like => ({
+  like,
+}));
+export const changeSave = createAction(CHANGE_SAVE, save => ({
+  save,
+}));
 /* 메인 뷰 */
 const getBannersSaga = createRequestSaga(
   GET_MAIN_BANNERS,
@@ -204,6 +213,14 @@ const video = handleActions(
     [CHANGE_SAVE_STATUS_FAILURE]: (state, { payload: error }) => ({
       ...state,
       error,
+    }),
+    [CHANGE_LIKE]: (state, { payload: { like } }) => ({
+      ...state,
+      like: like,
+    }),
+    [CHANGE_SAVE]: (state, { payload: { save } }) => ({
+      ...state,
+      save: save,
     }),
     /* 메인 뷰 */
     [GET_MAIN_BANNERS_SUCCESS]: (state, { payload: data }) => ({

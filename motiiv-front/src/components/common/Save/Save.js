@@ -2,6 +2,8 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import SaveImage from '../../../assets/global/save_icon.svg';
 import SaveClickImage from '../../../assets/global/saveclick_icon.svg';
+import { changeSaveStatus, changeSave } from '../../../modules/video';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SaveBox = styled.div`
   display: flex;
@@ -28,13 +30,23 @@ const SaveImg = styled.img`
   width: 2rem;
   height: 2rem;
 `;
-function Save({ SaveToggle, save }) {
+function Save({ id, BlackModalConfirm }) {
+  const dispatch = useDispatch();
+  const { loading_save, save } = useSelector(({ video, loading }) => ({
+    save: video.save,
+    loading_save: loading['video/CHANGE_SAVE_STATUS'],
+  }));
+  // [ Black Modal] 사용하고자 하는 버튼에 blackmodalconfirm 함수 넣어주면 됨
+  const SaveToggle = () => {
+    //BlackModalConfirm();
+    dispatch(changeSaveStatus(id));
+  };
   return (
     <SaveBox onClick={SaveToggle}>
-      <SaveText save={save}>저장</SaveText>{' '}
+      <SaveText save={save}>저장</SaveText>
       <SaveImg src={save ? SaveClickImage : SaveImage} />
     </SaveBox>
   );
 }
 
-export default Save;
+export default React.memo(Save);

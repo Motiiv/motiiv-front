@@ -112,6 +112,7 @@ function ImageSlider({ object, type, size, text, saveButton }) {
           ref={swiperRef}
           navigation
           scrollbar
+          //loop="true"
           breakpoints={{
             768: {
               spaceBetween: 23,

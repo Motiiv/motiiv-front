@@ -209,10 +209,10 @@ function Main() {
     <YeongJinBackground>
       {Object.keys(banners).length ? (
         <>
-          <SwiperBanner
+          {/*           <SwiperBanner
             mostViewVideo={banners.mostViewVideo}
             mostLikeVideo={banners.mostLikeVideo}
-          />
+          /> */}
           <Section
             object={banners.toptenVideo}
             type="top"
