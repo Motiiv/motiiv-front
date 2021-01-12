@@ -348,7 +348,7 @@ function DetailComponent({ videoInfo, recVideoList, detailLoading,showModal }) {
   const [shareModal, setShareModal] = useState(false);
   const dispatch = useDispatch();
   const [blackModal, setBlackModal] = useState({
-    isLogin: false,
+    isLogin: true,
     active: false,
   });
   const descRef = useRef();
