@@ -149,10 +149,11 @@ function Navbar({ showModal, isloggined, location }) {
   const { userInfo } = useSelector(({ user }) => ({
     userInfo: user.userInfo,
   }));
-
+  
+/*
   const [nameLangState, setNamelangState] = useState('kor');
   const firstletter = userInfo && userInfo.username.substr(0,1);
-/*
+
   const onChangeName = () => {
     firstLetter(firstletter) ? setNameKorState('eng') : setNameKorState('kor');
   };
