@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import Tag from '../Tag/Tag';
 import { withRouter } from 'react-router-dom';
-import HoverVideoPlayer from 'react-hover-video-player';
 import SaveImage from '../../../assets/global/save_icon.svg';
 import SaveClickImage from '../../../assets/global/saveclick_icon.svg';
 import CardSave from '../Save/CardSave';
@@ -10,9 +9,9 @@ import CardSave from '../Save/CardSave';
 const CardWrap = styled.div`
   display: flex;
   width: 100%;
-  min-width: ${props => (props.size === 'large' ? '37.7rem' : '27.4rem')};
+  max-width: ${props => (props.size === 'large' ? '37.7rem' : '27.4rem')};
   height: auto;
-  min-height: ${props => (props.size === 'large' ? '33.5 rem' : '26.7rem')};
+  max-height: ${props => (props.size === 'large' ? '33.5 rem' : '26.7rem')};
   flex-direction: column;
   position: relative;
   box-shadow: ${props =>
@@ -24,6 +23,7 @@ const CardWrap = styled.div`
     min-width: 30rem;
     min-height: 24.2rem;
     box-shadow: none;
+    margin: auto;
   }
   @media ${props => props.theme.tablet} {
     min-width: ${props => (props.size === 'large' ? '21.9rem' : '21.6rem')};
@@ -63,7 +63,9 @@ const VideoWrap = styled.div`
   @media ${props => props.theme.tablet} {
     height: ${props => (props.size === 'large' ? '12.3rem' : '12.2rem')};
   }
-
+  @media ${props => props.theme.laptop} {
+    height: 15.4rem;
+  }
   @media ${props => props.theme.desktop} {
     height: ${props => (props.size === 'large' ? '21.2rem' : '15.4rem')};
   }
@@ -166,13 +168,10 @@ const Views = styled.div`
   font-size: 1.5rem;
   font-family: 'Spoqa-Han-Sans';
   color: ${({ theme }) => theme.darkGray};
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: keep-all;
-  word-wrap: break-word;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  line-height: 0;
+  //overflow: hidden;
+  display: flex;
+  align-items: center;
   @media ${props => props.theme.mobile} {
     font-size: 1.3rem;
   }
@@ -191,10 +190,11 @@ const Channel = styled.div`
   margin-left: 0.9rem;
   padding-left: 0.9rem;
   color: ${({ theme }) => theme.darkGray};
-  overflow: hidden;
+  //overflow: hidden;
   text-overflow: ellipsis;
   word-break: keep-all;
   word-wrap: break-word;
+  width: fit-content;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -281,6 +281,7 @@ const DescriptionContainer = styled.div`
   display: flex;
   margin-left: ${props => (props.size === 'large' ? '2rem' : '0')};
   margin-top: 1rem;
+  align-items: center;
   @media ${props => props.theme.mobile} {
     margin-left: 0;
     margin-top: ${props => (props.text ? '1.3rem' : '1rem')};
@@ -325,9 +326,18 @@ const TagContainer = styled.div`
     margin-left: ${props => (props.size === 'large' ? '2rem' : '1px')};
   }
 `;
+const GImage = styled.img`
+  width: 100%;
+  height: 100%;
+  transition: 0.5s;
+  content: url(${props => props.thumbnail});
+  &:hover {
+    content: url(${props => props.gif});
+  }
+`;
 // Tag 컴포넌트 만들어서 불러오기
 // obj.videoGif
-function Card({ obj, size, text, history, saveButton, category, nonfix }) {
+function Card({ obj, size, text, history, category, nonfix }) {
   const borderValue = size === 'large' ? '1rem 1rem 0 0' : '1rem';
   const BlackModalConfirm = () => {
     if (!blackModal.isLogin) {
@@ -357,12 +367,7 @@ function Card({ obj, size, text, history, saveButton, category, nonfix }) {
           size={size}
           onClick={() => history.push(`/detail/${obj.id}`)}
         >
-          <img
-            width="100%"
-            height="100%"
-            borderRadius="1rem"
-            src={obj.thumbnailImageUrl}
-          />
+          <GImage thumbnail={obj.thumbnailImageUrl} /* gif={obj.videoGif} */ />
           <TimeContainer size={size}>{obj.videoLength}</TimeContainer>
         </VideoWrap>
         <TextWrap size={size}>

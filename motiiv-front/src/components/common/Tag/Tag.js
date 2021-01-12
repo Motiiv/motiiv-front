@@ -60,6 +60,7 @@ function Tag({ hashTag, color, text, fontSize, history, id }) {
   const onClickTag = () => {
     dispatch(getCategoryTagVideos(id));
     history.push('/category/1');
+    window.scrollTo(0, 0);
   };
   return (
     <TagContainer color={color} onClick={onClickTag}>

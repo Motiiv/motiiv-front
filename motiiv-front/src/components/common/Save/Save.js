@@ -13,6 +13,14 @@ const SaveBox = styled.div`
   cursor: pointer;
 `;
 const SaveText = styled.div`
+  ${props =>
+    props.save
+      ? css`
+          color: black;
+        `
+      : css`
+          color: ${({ theme }) => theme.gray};
+        `}
   font-size: 2rem;
   margin-right: 0.5rem;
   line-height: 0 !important;
@@ -22,7 +30,7 @@ const SaveImg = styled.img`
   width: 2rem;
   height: 2rem;
 `;
-function Save({ id, BlackModalConfirm }) {
+function Save({ id, BlackModalConfirm, blackModal }) {
   const dispatch = useDispatch();
   const { loading_save, save } = useSelector(({ video, loading }) => ({
     save: video.save,
@@ -30,9 +38,12 @@ function Save({ id, BlackModalConfirm }) {
   }));
   // [ Black Modal] 사용하고자 하는 버튼에 blackmodalconfirm 함수 넣어주면 됨
   const SaveToggle = () => {
-    //BlackModalConfirm();
-    dispatch(changeSaveStatus(id));
+    //로그인여부 확인 후 로그인 됐으면 save change
+    if (blackModal.isLogin === true) {
+      dispatch(changeSaveStatus(id));
+    } else BlackModalConfirm();
   };
+
   return (
     <SaveBox onClick={SaveToggle}>
       <SaveText save={save}>저장</SaveText>

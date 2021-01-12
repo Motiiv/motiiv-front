@@ -189,7 +189,6 @@ function SwiperBanner({ mostLikeVideo, mostViewVideo, bestVideo }) {
       position: 'relative',
     },
   };
-  console.log(bannerObj);
   return (
     <BannerSection>
       <SliderContainer>

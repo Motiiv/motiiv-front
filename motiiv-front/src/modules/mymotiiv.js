@@ -7,6 +7,7 @@ import {
   deleteMyeWorkSpace,
   createMyeWorkSpace,
   updateMyeWorkSpace,
+  getMyVideos,
 } from '../lib/api/mymotiiv';
 
 /* 성공,실패 액션을 생성 */
@@ -42,6 +43,13 @@ const [
   DELETE_WORKSPACE_FAILURE,
 ] = createRequestActionTypes('mymotiiv/DELETE_WORKSPACE');
 
+//내 비디오들 조회
+const [
+  GET_MYVIDEOS,
+  GET_MYVIDEOS_SUCCESS,
+  GET_MYVIDEOS_FAILURE,
+] = createRequestActionTypes('mymotiiv/GET_MYVIDEOS');
+
 /* 액션 호출 함수 생성 */
 
 // 토글버튼
@@ -53,6 +61,7 @@ export const createWorkspace = createAction(
 );
 // 워크스페이스 조회
 export const getWorkspaces = createAction(GET_WORKSPACES);
+
 // 워크스페이스 수정
 export const updateWorkspace = createAction(
   UPDATE_WORKSPACE,
@@ -60,6 +69,9 @@ export const updateWorkspace = createAction(
 );
 // 워크스페이스 삭제
 export const deleteWorkspace = createAction(DELETE_WORKSPACE);
+
+// 내 비디오 조회
+export const getVideos = createAction(GET_MYVIDEOS);
 
 /* 해당하는 액션 호출시 Saga실행 */
 
@@ -89,6 +101,8 @@ const deleteWorkspaceSaga = createRequestSaga(
   deleteMyeWorkSpace,
 );
 
+// 내 비디오 조회
+const getVideosSaga = createRequestSaga(GET_MYVIDEOS, getMyVideos);
 /* 요청된 것들 중 가장 마지막 요청만 처리 (여러번 클릭시 모두 처리되면 매우 비효율적!) */
 export function* mymotiivSaga() {
   yield takeLatest(TOGGLE_SHOW_FLOAT, toggleShowFloatSaga);
@@ -96,12 +110,14 @@ export function* mymotiivSaga() {
   yield takeLatest(GET_WORKSPACES, getWorkspacesSaga);
   yield takeLatest(UPDATE_WORKSPACE, updateWorkspaceSaga);
   yield takeLatest(DELETE_WORKSPACE, deleteWorkspaceSaga);
+  yield takeLatest(GET_MYVIDEOS, getVideosSaga);
 }
 
 /* State 초기값 */
 const initState = {
   onFloatBtn: true,
   workspaces: [],
+  myvideos: [],
 };
 
 /* 액션을 store에 저장하는 리듀서를 handleActions로 쉽게 처리! */
@@ -152,6 +168,16 @@ const mymotiiv = handleActions(
       ...state,
       error,
     }),
+
+    [GET_MYVIDEOS_SUCCESS]: (state, { payload: myvideos }) => ({
+      ...state,
+      myvideos,
+    }),
+    [GET_MYVIDEOS_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      error,
+  }),
+
   },
   initState,
 );

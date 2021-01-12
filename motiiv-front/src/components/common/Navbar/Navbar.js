@@ -28,6 +28,9 @@ const Header = styled.header`
   & {
     letter-spacing: -0.3px;
   }
+  position: fixed;
+  top: 0;
+  z-index: 444;
 `;
 
 const Logo = styled.img`
@@ -130,7 +133,6 @@ const Profile = styled.div`
 `;
 
 function Navbar({ showModal, isloggined, location }) {
-
   //프로필 드롭다운 나타나고 없애기
   const [profileModalState, setProfileModalState] = useState(false);
   const onClickProfileImage = () => {
@@ -149,8 +151,8 @@ function Navbar({ showModal, isloggined, location }) {
   const { userInfo } = useSelector(({ user }) => ({
     userInfo: user.userInfo,
   }));
-  
-/*
+
+  /*
   const [nameLangState, setNamelangState] = useState('kor');
   const firstletter = userInfo && userInfo.username.substr(0,1);
 

@@ -340,14 +340,19 @@ const MobileButtonBox = styled.div`
   border-bottom: 1px #c4c4c4 solid;
 `;
 
-function DetailComponent({ videoInfo, recVideoList, detailLoading }) {
+function DetailComponent({
+  videoInfo,
+  recVideoList,
+  detailLoading,
+  showModal,
+}) {
   /*   const [toggle, setToggle] = useState(false);
   const [toggleExist, setToggleExist] = useState(false); */
 
   const [shareModal, setShareModal] = useState(false);
   const dispatch = useDispatch();
   const [blackModal, setBlackModal] = useState({
-    isLogin: false,
+    isLogin: true,
     active: false,
   });
   const descRef = useRef();
@@ -382,6 +387,7 @@ function DetailComponent({ videoInfo, recVideoList, detailLoading }) {
             <BlackModal
               blackModal={blackModal}
               setBlackModal={setBlackModal}
+              showModal={showModal}
             ></BlackModal>
           )}
           <VideoWrapper>
@@ -406,10 +412,12 @@ function DetailComponent({ videoInfo, recVideoList, detailLoading }) {
                     <Like
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
+                      blackModal={blackModal}
                     ></Like>
                     <Save
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
+                      blackModal={blackModal}
                     ></Save>
                   </ButtonBox>
                 </TitleAndButtonBox>
@@ -446,10 +454,12 @@ function DetailComponent({ videoInfo, recVideoList, detailLoading }) {
                     <Like
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
+                      blackModal={blackModal}
                     ></Like>
                     <Save
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
+                      blackModal={blackModal}
                     ></Save>
                   </ButtonBox>
                   <ShareBox>
