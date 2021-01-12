@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import FirstPage from './FirstPage';
 import SecondPage from './SecondPage';
 import LastPage from './LastPage';
+import loginCancelBtn from '../../../assets/global/login_cancel.svg';
 
 const ModalBackgorundWrap = styled.div`
   display: ${props => props.show ? `flex` : `none`};
@@ -24,7 +25,10 @@ const ModalBackgorundWrap = styled.div`
 `;
 
 const CancelBtn = styled.div`
-
+  background-image:url(${loginCancelBtn});
+  width:1.5rem;
+  height:1.5rem;
+  cursor:pointer;
 `
 
 const NextBtn = styled.div`
@@ -123,7 +127,9 @@ const ModalWrap = styled.div`
     }
   };
   ${CancelBtn}{
-
+    position:absolute;
+    right:2rem;
+    top:2rem;
   }
 `;
 
@@ -238,13 +244,13 @@ function SigninModal({ hideModal, isShow }) {
       <>
         <ModalBackgorundWrap show = {isShow}/>
         <ModalWrap show = {isShow} ref={myRef}>
-          <CancelBtn />
+          <CancelBtn onClick={hideModal}/>
           <FirstPage page = {pageState} pageUp={pageUp}/>
           <SecondPage page = {pageState}/>
           <LastPage page = {pageState}/>
-            <PrevBtn page = {pageState} onClick={pageDown}>&#xE000; &nbsp; 이전</PrevBtn>
-            <NextBtn page = {pageState} onClick={pageUp}>다음 &nbsp; &#xE001;</NextBtn>
-            <FinBtn page = {pageState} onClick={finishSignup}>완료</FinBtn>
+          <PrevBtn page = {pageState} onClick={pageDown}>&#xE000; &nbsp; 이전</PrevBtn>
+          <NextBtn page = {pageState} onClick={pageUp}>다음 &nbsp; &#xE001;</NextBtn>
+          <FinBtn page = {pageState} onClick={finishSignup}>완료</FinBtn>
         </ModalWrap>
       </>
     );

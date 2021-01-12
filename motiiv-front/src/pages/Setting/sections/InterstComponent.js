@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
 
-const InterstComponent = styled.button`
+const Component = styled.button`
     border: none;
     outline: none;
     border-radius: 3rem;
@@ -128,7 +128,7 @@ function InterestComponent({ type, text }) {
   }
 
     return (
-      <InterstComponent type = {btnState} onClick={selectBtn}>{text}</InterstComponent>
+      <Component type = {btnState} onClick={selectBtn}>{text}</Component>
     );
   }
   export default InterestComponent;

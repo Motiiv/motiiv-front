@@ -57,36 +57,18 @@ function JobModal({ show, jobfunc }) {
   )
 
   const onClickPlanerBtn = () => {
-    (async () => {
-      try {
-        setJobState({planner : 'selected', designer : 'unselected', developer:'unselected'});
-        jobfunc('기획자');
-      } catch (e) {
-        
-      }
-    })();
+    setJobState({planner : 'selected', designer : 'unselected', developer:'unselected'});    
+    jobfunc('기획');
   }
 
   const onClickDesignerBtn = () => {
-    (async () => {
-      try {
-        setJobState({planner : 'unselected', designer : 'selected', developer:'unselected'});
-        jobfunc('디자이너');
-      } catch (e) {
-        
-      }
-    })();
+    setJobState({planner : 'unselected', designer : 'selected', developer:'unselected'});
+    jobfunc('디자인');
   }
 
   const onClickDeveloperBtn = () => {
-    (async () => {
-      try {
-        setJobState({planner : 'unselected', designer : 'unselected', developer:'selected'});
-        jobfunc('개발자');
-      } catch (e) {
-        
-      }
-    })();
+    setJobState({planner : 'unselected', designer : 'unselected', developer:'selected'});
+    jobfunc('개발');
   }
 
     return(

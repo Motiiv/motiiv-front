@@ -363,11 +363,6 @@ function Setting() {
             newKeywordNames: keywordsInput
         };
         dispatch(updateProfile({ user }));
-
-        console.log(nameInput);
-        console.log(profileImageFileInput);
-        console.log(jobInput);
-        console.log(keywordsInput);
     };
 
     const onChangeName = e => {
@@ -404,24 +399,12 @@ function Setting() {
     const [showInterestModalState, setInterestJobModalState] = useState(false);
 
     const onClickJobBtn = () => {
-        (async () => {
-          try {
-            setShowJobModalState(prev => !prev);
-            setInterestJobModalState(false);
-          } catch (e) {
-            
-          }
-        })();
+        setShowJobModalState(prev => !prev);
+        setInterestJobModalState(false);
     }
     const onClickInterstBtn = () => {
-        (async () => {
-          try {
-            setInterestJobModalState(prev => !prev);
-            setShowJobModalState(false);
-          } catch (e) {
-            
-          }
-        })();
+        setInterestJobModalState(prev => !prev);
+        setShowJobModalState(false);
     }
 
     return (
@@ -451,10 +434,9 @@ function Setting() {
                             <PolygonBtn src = {polygon}
                                         show={showJobModalState}
                                         onClick={onClickJobBtn}
-                                        jobfunc={onChangeJob}
                                         style={{marginLeft:"1rem"}}
                             />
-                            <JobModal show={showJobModalState}/>
+                            <JobModal show={showJobModalState} jobfunc={onChangeJob}/>
                         </ChooseJob>
                     </InfoWrapper>
 
