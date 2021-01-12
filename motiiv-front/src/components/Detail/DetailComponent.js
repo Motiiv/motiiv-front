@@ -348,7 +348,7 @@ function DetailComponent({ videoInfo, recVideoList, detailLoading,showModal }) {
   const [shareModal, setShareModal] = useState(false);
   const dispatch = useDispatch();
   const [blackModal, setBlackModal] = useState({
-    isLogin: true,
+    isLogin: false,
     active: false,
   });
   const descRef = useRef();
@@ -408,6 +408,7 @@ function DetailComponent({ videoInfo, recVideoList, detailLoading,showModal }) {
                     <Like
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
+                      blackModal={blackModal}
                     ></Like>
                     <Save
                       id={videoInfo.id}
@@ -449,6 +450,7 @@ function DetailComponent({ videoInfo, recVideoList, detailLoading,showModal }) {
                     <Like
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
+                      blackModal={blackModal}
                     ></Like>
                     <Save
                       id={videoInfo.id}
