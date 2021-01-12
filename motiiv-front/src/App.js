@@ -45,6 +45,7 @@ function App({ props }) {
 
   const showModal = () => {
     setShowLoginModalState(true);
+    document.body.style.overflow = "hidden";
   };
 
   return (
@@ -69,7 +70,7 @@ function App({ props }) {
           <Route
             exact
             path="/mymotiiv"
-            render={props => <MyMotiiv props={props} />}
+            render={props => <MyMotiiv props={props} showModal={showModal} />}
           ></Route>
         }
         <Route
@@ -93,7 +94,7 @@ function App({ props }) {
         <Route
           exact
           path="/detail/:id"
-          render={props => <Detail props={props} />}
+          render={props => <Detail props={props}  showModal={showModal}/>}
         ></Route>
         {/* Upload */}
         <Route
@@ -106,7 +107,7 @@ function App({ props }) {
       <FloatBtn workspaces={workspaces} isShow={onFloatBtn} />
       <BottomBanner isShow={location.pathname !== '/setting'} />
       <Footer isShow={location.pathname !== '/setting'} />
-      <MyNavBar loginState={loginState} tag={location.pathname}></MyNavBar>
+      <MyNavBar loginState={true} tag={location.pathname}></MyNavBar>
     </>
   );
 }

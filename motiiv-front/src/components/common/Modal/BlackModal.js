@@ -3,6 +3,8 @@ import {useSpring,animated} from 'react-spring';
 import {MdClose} from 'react-icons/md';
 import styled, { css } from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import SignInModal from '../../common/Login/SignInModal';
+import toggle from '../../../assets/global/toggle.gif';
 
 // const ModalContainer = styled.div`
 //   display: flex;
@@ -21,6 +23,7 @@ const ModalOverlay = styled.div`
     border : none;
     background-color : rgba(0,0,0,0.5);
     z-index : 10;
+    display : ${props => ( !props.showLogin ? 'block' : 'none')};
 `;
 
 const ModalWrapper = styled.div`
@@ -33,6 +36,7 @@ const ModalWrapper = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+
   @media ${props => props.theme.mobile} {
     width: 27.5rem;
     height: 35.3rem;
@@ -63,13 +67,11 @@ const ModalInner = styled.div`
   border-radius: 1.5rem;
 `;
 
-const ToggleGif = styled.div`
-  background: ${({ theme }) => theme.primary};
-  width: 9rem;
-  height: 3.7rem;
-  border-radius: 3rem;
-  margin-top: 5rem;
-  @media ${props => props.theme.mobile}{
+const ToggleGif = styled.img`
+    background-size: cover;
+    border-radius: 3rem;
+    margin-top : 5rem;
+    @media ${props => props.theme.mobile}{
     width: 8rem;
     hegiht : 3.7rem; 
   }
@@ -142,7 +144,7 @@ const ContentWrapper = styled.div`
   align-items: center;
 `;
 
-const Signup = styled(NavLink)`
+const Signup = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -164,7 +166,7 @@ const Devider = styled.div`
   color: ${({ theme }) => theme.primary};
 `;
 
-const Login = styled(NavLink)`
+const Login = styled.div`
   display: flex;
   align-items: center;
   font-weight: bold;
@@ -174,19 +176,35 @@ const Login = styled(NavLink)`
   color: ${({ theme }) => theme.primary};
   text-decoration: none;
 `;
+const CloseModalButton = styled(MdClose)`
+  cursor: pointer;
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 2.8rem;
+  height: 2.8rem;
+  padding: 0;
+  z-index: 10000;
+  color: #A7A7A7;
+  opacity: 0.5;
+`;
 
-function BlackModal({blackModal,setBlackModal}) {
+function BlackModal({blackModal,setBlackModal,showModal}) {
+  const [showLogin,setShowLogin] = useState(false);
 
+    const showLoginModal = () => {
+        setShowLogin(!showLogin)
+    };
   const modalRef = useRef();
 
 
-  const animation = useSpring({
-    config : {
-      duration : 250
-    },
-    opacity: BlackModal.active ? 1: 0,
-    transform : BlackModal.active ? `translateY(0%)` : `translateY(-100%)`
-  })
+  // const animation = useSpring({
+  //   config : {
+  //     duration : 250
+  //   },
+  //   opacity: BlackModal.active ? 1: 0,
+  //   transform : BlackModal.active ? `translateY(0%)` : `translateY(-100%)`
+  // })
 
   const closeModal = e => {
     if(modalRef.current === e.target) {
@@ -210,6 +228,7 @@ function BlackModal({blackModal,setBlackModal}) {
     },
     [setBlackModal, blackModal]
   );
+  
   useEffect(() => {
     document.addEventListener('keydown', keyPress);
     document.body.style.overflow = "hidden";
@@ -217,14 +236,14 @@ function BlackModal({blackModal,setBlackModal}) {
   }, [keyPress])
   return (
     <>
-    {blackModal.active ? (
+    {blackModal.active &&  (
     // <ModalContainer>
     <>
     {/* <ModalContainer> */}
-    <ModalOverlay onClick={closeModal} ref={modalRef}>
+    <ModalOverlay onClick={closeModal} ref={modalRef} showLogin = {showLogin}>
       <ModalWrapper  showModal={blackModal.active}>
         <ModalInner>
-          <ToggleGif></ToggleGif>
+          <ToggleGif src={toggle}></ToggleGif>
           <Title>회원만 접근할 수 있어요!</Title>
           <Subtitle>
             지금 가입하고
@@ -234,22 +253,35 @@ function BlackModal({blackModal,setBlackModal}) {
           </Subtitle>
           <TagWrapper>
             <ContentWrapper>
-              <Signup exact to="/signup">
+              <Signup  onClick={() => {  showModal();
+                showLoginModal();
+                document.body.style.overflow = "unset"}}>
                 sign up
               </Signup>
               <Devider>&#47;</Devider>
-              <Login exact to="/signin">
+              <Login onClick={() => { showModal();
+              showLoginModal();
+                document.body.style.overflow = "unset"}}>
                 login
               </Login>
             </ContentWrapper>
           </TagWrapper>
         </ModalInner>
+        <CloseModalButton
+                aria-label='Close modal'
+                onClick={() => {  setBlackModal({
+                  ...blackModal,
+                  active: false,
+                  
+                })
+                document.body.style.overflow = "unset"}}
+              />
       </ModalWrapper>
       </ModalOverlay>
       {/* </ModalOverlay> */}
        {/* </ModalContainer> */}
       </>
-    ) : null}
+    )} 
     </>
   );
 }
