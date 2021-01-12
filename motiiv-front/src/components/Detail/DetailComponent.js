@@ -383,6 +383,7 @@ function DetailComponent({ videoInfo, recVideoList, detailLoading,showModal }) {
             <BlackModal
               blackModal={blackModal}
               setBlackModal={setBlackModal}
+              showModal = {showModal}
             ></BlackModal>
           )}
           <VideoWrapper>
@@ -411,6 +412,7 @@ function DetailComponent({ videoInfo, recVideoList, detailLoading,showModal }) {
                     <Save
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
+                      blackModal={blackModal}
                     ></Save>
                   </ButtonBox>
                 </TitleAndButtonBox>
@@ -451,6 +453,7 @@ function DetailComponent({ videoInfo, recVideoList, detailLoading,showModal }) {
                     <Save
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
+                      blackModal = {blackModal}
                     ></Save>
                   </ButtonBox>
                   <ShareBox>
