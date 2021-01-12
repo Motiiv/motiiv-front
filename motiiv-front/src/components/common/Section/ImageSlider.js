@@ -18,6 +18,8 @@ const SliderSection = styled.div`
   padding: 0 5rem;
   justify-content: center;
   & .swiper-button-prev::after {
+    display: flex;
+    justify-content: center;
     position: absolute !important;
     right: 0 !important;
     ${props =>
@@ -37,8 +39,10 @@ const SliderSection = styled.div`
     z-index: 2 !important;
   }
   & .swiper-button-next::after {
+    display: flex;
+    justify-content: center;
     position: absolute !important;
-    left: 2.5rem !important;
+    left: 0.5rem !important;
     ${props =>
       props.size === 'large'
         ? css`
