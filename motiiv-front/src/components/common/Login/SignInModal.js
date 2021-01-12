@@ -14,7 +14,7 @@ const ModalBackgorundWrap = styled.div`
   right: 0;
   left: 0;
   bottom: 0;
-  z-index:30;
+  z-index:100000;
   overflow : hidden;
 
   width: auto;
@@ -60,7 +60,7 @@ const ModalWrap = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index:30;
+  z-index:100000;
 
   padding : 5rem 2.6rem 2.6rem 3rem;
   width: 65rem;
@@ -127,6 +127,7 @@ const ModalWrap = styled.div`
   }
 `;
 
+/*
 const Indicator = styled.div`
   ${props => props.activeBtn =='true' ?
     `
@@ -169,6 +170,7 @@ const IndicatorContainer = styled.div`
   width:3.6rem;
   justify-content:space-between;
 `
+*/
 
 function SigninModal({ hideModal, isShow }) {
 
@@ -218,19 +220,19 @@ function SigninModal({ hideModal, isShow }) {
     })();
   }
 
-  /*
-  const [showState, setShowState] = useState(showModal);
-  //나중에 여기서 api 연결?
-  const finSignUp = () => {
+  //회원 정보 저장
+  
+
+  //회원가입 완료
+  const finishSignup = () => {
     (async () => {
       try {
-        setShowState(false);
+        hideModal();
       } catch (e) {
         
       }
     })();
   }
-  */
 
     return (
       <>
@@ -242,7 +244,7 @@ function SigninModal({ hideModal, isShow }) {
           <LastPage page = {pageState}/>
             <PrevBtn page = {pageState} onClick={pageDown}>&#xE000; &nbsp; 이전</PrevBtn>
             <NextBtn page = {pageState} onClick={pageUp}>다음 &nbsp; &#xE001;</NextBtn>
-            <FinBtn page = {pageState} onclick={hideModal}>완료</FinBtn>
+            <FinBtn page = {pageState} onClick={finishSignup}>완료</FinBtn>
         </ModalWrap>
       </>
     );

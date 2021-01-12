@@ -242,7 +242,7 @@ function ProfileModal({ hideModal, showModal }) {
           ))}
       </TagBox>
 
-      <NavLink exact to="/setting" style={{ textDecoration: 'none' }}>
+      <NavLink exact to="/setting" style={{ textDecoration: 'none' }} onClick={hideModal}>
         <Tag
           color="white"
           text={'계정 관리'}

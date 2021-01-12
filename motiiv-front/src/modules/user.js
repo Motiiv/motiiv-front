@@ -11,52 +11,42 @@ const [
   GET_PROFILE_SUCCESS,
   GET_PROFILE_FAILURE,
 ] = createRequestActionTypes('user/GET_PROFILE');
-//프로필 정보 수정(setting)
+//프로필 정보 수정
 const [
-  CHANGE_PROFILE,
-  CHANGE_PROFILE_SUCCESS,
-  CHANGE_PROFILE_FAILURE,
-] = createRequestActionTypes('user/CHANGE_PROFILE');
-//로그인모달창
-const [
-  SHOW_SIGNIN_MODAL,
-  SHOW_SIGNIN_MODAL_SUCCESS,
-  SHOW_SIGNIN_MODAL_FAILURE,
-] = createRequestActionTypes('user/GET_PROFILE');
+  UPDATE_PROFILE,
+  UPDATE_PROFILE_SUCCESS,
+  UPDATE_PROFILE_FAILURE,
+] = createRequestActionTypes('user/UPDATE_PROFILE');
+
 
 /* 액션 호출 함수 생성 */
-//프로필 정보4 3
+//프로필 정보
 export const getProfile = createAction(GET_PROFILE);
 //프로필 정보 수정
-export const changeProfile = createAction(CHANGE_PROFILE, payload => payload);
-//로그인모달창
-export const showSigninModal = createAction(SHOW_SIGNIN_MODAL);
+export const updateProfile = createAction(
+  UPDATE_PROFILE,
+  payload => payload,
+);
 
 /* ============== 해당하는 액션 호출시 Saga실행 ============== */
 //프로필 정보
 const getUserSaga = createRequestSaga(GET_PROFILE, userAPI.getUserProfile);
 //프로필 정보 수정
+const updateUserSaga = createRequestSaga(UPDATE_PROFILE, userAPI.updateUserProfile);
 
-//로그인 모달창 - 나중에 마이모티브 모달창에서 버튼 클릭 시마다 떠야 함
-const showSigninModalState = () => {
-  return { data: true };
-};
-const showSigninModalSaga = createRequestSaga(
-  SHOW_SIGNIN_MODAL,
-  showSigninModalState,
-);
 
 /* ============== 요청된 것들 중 가장 마지막 요청만 처리 (여러번 클릭시 모두 처리되면 매우 비효율적!) ============== */
 export function* userSaga() {
   yield takeLatest(GET_PROFILE, getUserSaga);
-  yield takeLatest(SHOW_SIGNIN_MODAL, showSigninModalSaga);
+  yield takeLatest(UPDATE_PROFILE, updateUserSaga);
 }
+
 
 /* ============== State 초기값 ============== */
 const initState = {
   userInfo: {
     id: null,
-    name: '',
+    username: '',
     profileImageUrl: '',
     socialType: '',
     snsId: null,
@@ -65,9 +55,7 @@ const initState = {
       name: '',
     },
     UserKeywords: [],
-  },
-
-  showLoginModal: false,
+  }
 };
 
 /* ============== 액션을 store에 저장하는 리듀서를 handleActions로 처리 ============== */
@@ -82,12 +70,12 @@ const user = handleActions(
       ...state,
       error,
     }),
-    //로그인 모달창
-    [SHOW_SIGNIN_MODAL_SUCCESS]: (state, { payload: userInfo }) => ({
+    //유저 정보 수정
+    [UPDATE_PROFILE_SUCCESS]: (state, { payload: userInfo }) => ({
       ...state,
       userInfo,
     }),
-    [SHOW_SIGNIN_MODAL_FAILURE]: (state, { payload: error }) => ({
+    [UPDATE_PROFILE_FAILURE]: (state, { payload: error }) => ({
       ...state,
       error,
     }),

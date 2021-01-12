@@ -9,6 +9,25 @@ const getUserProfile = async () => {
     console.log('[FAIL] getProfile', err);
   }
 };
+
+const updateUserProfile = async ({ user }) => {
+  const payload = {
+    newName: user.newName,
+    imageFile: user.imageFile,
+    newJobName: user.newJobName,
+    newKeywordNames: user.newKeywordNames
+  };
+  
+  try {
+    const { data } = await client.put(`/users`, payload);
+    console.log('[SUCCESS] updateUserProfile', data);
+    return data;
+  } catch (e) {
+    console.log('[FAIL] updateUserProfile', e);
+    throw e;
+  }
+};
+
 /* const IWantCookies = async () => {
   try {
     const data = await client.post(
@@ -26,4 +45,8 @@ const getUserProfile = async () => {
   }
 }; */
 
-export { getUserProfile /* IWantCookies  */ };
+export {
+  getUserProfile,
+  updateUserProfile
+  /* IWantCookies  */
+};
