@@ -226,7 +226,7 @@ function Main() {
       ) : (
         <Loading></Loading>
       )}
-      {Object.keys(recommend).length ? (
+      {/*       {Object.keys(recommend).length ? (
         <>
           <Section
             object={recommend.sectionOne.sectionOnes}
@@ -268,7 +268,7 @@ function Main() {
         </>
       ) : (
         <Loading></Loading>
-      )}
+      )} */}
     </YeongJinBackground>
   );
 }

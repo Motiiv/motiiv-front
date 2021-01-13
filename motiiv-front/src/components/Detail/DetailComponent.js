@@ -329,6 +329,7 @@ const RecommendTitleText = styled.div`
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 2rem;
+  letter-spacing: -1px;
 `;
 const MobileButtonBox = styled.div`
   display: none;
@@ -436,7 +437,7 @@ function DetailComponent({
                 <TextBox>
                   <LeftBox>
                     <ViewCount>조회수 {videoInfo.viewCount}회</ViewCount>
-                    <DateInfo>2021.01.01</DateInfo>
+                    <DateInfo>{videoInfo.createdAt}</DateInfo>
                     <UserName>{videoInfo.channelName}</UserName>
                   </LeftBox>
                   <ShareBox>

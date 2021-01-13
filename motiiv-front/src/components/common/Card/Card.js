@@ -331,9 +331,9 @@ const GImage = styled.img`
   height: 100%;
   transition: 0.5s;
   content: url(${props => props.thumbnail});
-  &:hover {
+  /*   &:hover {
     content: url(${props => props.gif});
-  }
+  } */
 `;
 // Tag 컴포넌트 만들어서 불러오기
 // obj.videoGif

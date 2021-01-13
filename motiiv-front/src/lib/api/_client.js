@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const client = axios.create({
-  baseURL: 'http://52.78.212.95:3004/motiiv/api/v1', // www.motiv.site/motiiv/api/v1
+  baseURL: 'https://www.motiiv.site/motiiv/api/v1', // www.motiv.site/motiiv/api/v1 'http://52.78.212.95:3004/motiiv/api/v1'
   headers: {
     'Content-Type': 'application/json',
     userToken:
