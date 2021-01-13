@@ -47,7 +47,7 @@ function LoginInterestComponent({ type, text }) {
   const selectBtn = () => {
     (async () => {
       try {
-        if(btnState == false){
+        if(btnState === false){
           setBtnState(true);
         }else{
           setBtnState(false);
