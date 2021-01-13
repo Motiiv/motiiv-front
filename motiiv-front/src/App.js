@@ -60,11 +60,11 @@ function App({ props }) {
         <Route
           exact
           path="/main"
-          render={props => <Main props={props} />}
+          render={props => <Main props={props} showModal={showModal}/>}
         ></Route>
         <Route
           path="/category/:hashTag"
-          render={props => <Category props={props} />}
+          render={props => <Category props={props} showModal={showModal}/>}
         ></Route>
         {
           <Route

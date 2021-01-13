@@ -161,7 +161,7 @@ function MyMotiiv({ showModal }) {
   const dispatch = useDispatch();
   const saveButton = false;
   const [loginState, setLoginState] = useState({
-    isLogin: false,
+    isLogin: true,
   });
 
   const { myvideos, loading } = useSelector(({ mymotiiv, loading }) => ({

@@ -194,6 +194,7 @@ function CategoryComponent({
   loading,
   videoCnt,
   tagName,
+  showModal
 }) {
   const [activeStatus, setActiveStatus] = useState({
     status: false,
@@ -298,7 +299,7 @@ function CategoryComponent({
             </TitleAndSort>
             <GridContainer hashTag={hashTag}>
               {videos.map((video, idx) => (
-                <Card key={`Card-${idx}`} obj={video} category={true} />
+                <Card key={`Card-${idx}`} obj={video} category={true} showModal = {showModal} />
               ))}
             </GridContainer>
           </>
