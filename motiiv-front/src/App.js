@@ -40,6 +40,7 @@ function App({ props }) {
 
   const hideModal = () => {
     setShowLoginModalState(false);
+    document.body.style.overflow = 'visible';
   };
 
   const showModal = () => {

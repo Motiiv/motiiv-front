@@ -1,13 +1,12 @@
-import React from 'react'
-import { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateProfile } from '../../modules/user';
 import styled from 'styled-components';
-import profile from '../../assets/profile/sampleImage.png';
 import camera from '../../assets/profile/ic_camera.png';
 import polygon from '../../assets/profile/ic_polygon.png'
 import JobModal from './sections/JobModal'
 import InterestModal from './sections/InterestModal'
 import InterestComponent from './sections/InterstComponent'
-import { useSelector } from 'react-redux';
 import Loading from '../../components/common/Loading/Loading';
 
 /* 타이틀 */
@@ -47,7 +46,6 @@ const Title = styled.div`
     }
 */
 `
-
 
 /*  전체 마진  */
 const Container = styled.div`
@@ -338,37 +336,75 @@ const Button = styled.button`
 
 function Setting() {
 
+    const inputRef = useRef();
+    const dispatch = useDispatch();
     const { userInfo, loading } = useSelector(({ user, loading }) => ({
         userInfo: user.userInfo,
         loading: loading['user/GET_PROFILE'],
-      }));
+    }));
+
+    //바인딩
+    const job = userInfo.Job;
+    const keyword1 = userInfo.UserKeywords[0];
+    const keyword2 = userInfo.UserKeywords[1];
+    const keyword3 = userInfo.UserKeywords[2];
+
+    const [nameInput, SetNameInput] = useState(userInfo.username);
+    const [profileImageInput, SetProfileImageInput] = useState(userInfo.profileImageUrl);
+    const [profileImageFileInput, SetProfileImageFileInput] = useState(userInfo.profileImageUrl);
+    const [jobInput, SetJobInput] = useState(job.name);
+    const [keywordsInput, SetKeywordsInput] = useState([keyword1.name, keyword2.name, keyword3.name]);
+
+    const Updateprofile = () => {
+        const user = {
+            newName: nameInput,
+            imageFile: profileImageFileInput,
+            newJobName: jobInput,
+            newKeywordNames: keywordsInput
+        };
+        dispatch(updateProfile({ user }));
+    };
+
+    const onChangeName = e => {
+        SetNameInput(e.target.value);
+    };
+
+    const onChangeProfileImage = e => {
+        let reader = new FileReader();
+
+        if (e.target.files[0]) {
+          reader.readAsDataURL(e.target.files[0]); // 파일 읽어 버퍼 저장
+          SetProfileImageFileInput(e.target.files[0]); // 파일 상태 업데이트
+        }
+
+        //읽기 완료시 아래코드가 실행
+        reader.onloadend = () => {
+          const profileImg = reader.result;
+          if (profileImg) {
+            SetProfileImageInput(profileImg.toString());
+          }
+        };
+      };
+
+    const onChangeJob = job => {
+        SetJobInput(job);
+    };
+
+    const onChangeKeywords = (keywords) => {
+        SetKeywordsInput(keywords);
+    };
     
     //폴리건 버튼 모달 체크용
     const [showJobModalState, setShowJobModalState] = useState(false);
     const [showInterestModalState, setInterestJobModalState] = useState(false);
 
     const onClickJobBtn = () => {
-        (async () => {
-          try {
-            setShowJobModalState(prev => !prev);
-            setInterestJobModalState(false);
-          } catch (e) {
-            
-          }
-        })();
+        setShowJobModalState(prev => !prev);
+        setInterestJobModalState(false);
     }
     const onClickInterstBtn = () => {
-        (async () => {
-          try {
-            setInterestJobModalState(prev => !prev);
-            setShowJobModalState(false);
-          } catch (e) {
-            
-          }
-        })();
-    }
-    const UpdateProfile = () =>{
-
+        setInterestJobModalState(prev => !prev);
+        setShowJobModalState(false);
     }
 
     return (
@@ -377,10 +413,10 @@ function Setting() {
 
             <Container>
                 <ProfileImageContainer>
-                    <ProfileImage src = {userInfo.profileImageUrl}><FirstLetter src = {userInfo.profileImageUrl}>{userInfo.username && userInfo.username.substr(0,1)}</FirstLetter></ProfileImage>
+                    <ProfileImage src = {profileImageInput}><FirstLetter src = {profileImageInput}>{nameInput && nameInput.substr(0,1)}</FirstLetter></ProfileImage>
                         <InputContainer for="upload">
                             <CameraIcon src = {camera}/>
-                            <PhotoInput type="file" id="upload"/>
+                            <PhotoInput type="file" id="upload" onChange={onChangeProfileImage} ref={inputRef}/>
                         </InputContainer>
                 </ProfileImageContainer>
 
@@ -389,30 +425,30 @@ function Setting() {
                 <InfoContainer>
                     <InfoWrapper>
                         <Text>이름</Text>
-                        <NameInput type='text' value={userInfo.username}></NameInput>
+                        <NameInput type='text' value={nameInput} onChange={onChangeName}></NameInput>
                     </InfoWrapper>
 
                     <InfoWrapper>
                         <Text>직군</Text>
-                        <ChooseJob>{userInfo.Job && userInfo.Job.name}
+                        <ChooseJob>{jobInput}
                             <PolygonBtn src = {polygon}
                                         show={showJobModalState}
                                         onClick={onClickJobBtn}
                                         style={{marginLeft:"1rem"}}
                             />
-                            <JobModal show={showJobModalState}/>
+                            <JobModal show={showJobModalState} jobfunc={onChangeJob}/>
                         </ChooseJob>
                     </InfoWrapper>
 
                     <InfoWrapper>
                         <Text>관심 키워드</Text>
                         <ChooseInterst>
-                            {userInfo.UserKeywords && userInfo.UserKeywords.map((tag, i) => <InterestComponent key = {"interest-" + i} text={tag.name} disabled/>)}
+                            {keywordsInput && keywordsInput.map((tag, i) => <InterestComponent key = {"interest-" + i} text={tag} disabled/>)}
                             <PolygonBtn src = {polygon}
                                         show={showInterestModalState} 
                                         onClick={onClickInterstBtn}
                             />
-                            <InterestModal show={showInterestModalState}/>
+                            <InterestModal show={showInterestModalState} keywordsfunc={onChangeKeywords}/>
                         </ChooseInterst>
                     </InfoWrapper>
                     <InfoText bottom='true'>최대 3개의 관심사 선택이 가능합니다.</InfoText>
@@ -420,7 +456,7 @@ function Setting() {
 
                 <ButtonContainer>
                     <Button bgColor="#F3F3F3">취소</Button>
-                    <Button bgColor="#2CFF2C" onClick={UpdateProfile}>저장</Button>
+                    <Button bgColor="#2CFF2C" onClick={Updateprofile}>저장</Button>
                 </ButtonContainer>
             </Container>
         </>
