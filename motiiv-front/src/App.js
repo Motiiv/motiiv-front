@@ -71,7 +71,7 @@ function App({ props }) {
           exact
           path="/main"
           render={props => (
-            <Main props={props} showModal={showModal} isLoggined={loginState} />
+            <Main props={props} showModal={showModal} isLoggined={isLogged} />
           )}
         ></Route>
         <Route
@@ -80,7 +80,7 @@ function App({ props }) {
             <Category
               props={props}
               showModal={showModal}
-              isLoggined={loginState}
+              isLoggined={isLogged}
             />
           )}
         ></Route>
@@ -92,7 +92,7 @@ function App({ props }) {
               <MyMotiiv
                 props={props}
                 showModal={showModal}
-                isLoggined={loginState}
+                isLoggined={isLogged}
               />
             )}
           ></Route>
@@ -122,7 +122,7 @@ function App({ props }) {
             <Detail
               props={props}
               showModal={showModal}
-              isLoggined={loginState}
+              isLoggined={isLogged}
             />
           )}
         ></Route>
@@ -142,7 +142,7 @@ function App({ props }) {
         }
       />
       <Footer isShow={location.pathname !== '/setting'} />
-      <MyNavBar isLoggined={loginState} tag={location.pathname}></MyNavBar>
+      <MyNavBar isLoggined={isLogged} tag={location.pathname}></MyNavBar>
     </>
   );
 }

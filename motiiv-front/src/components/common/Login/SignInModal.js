@@ -200,6 +200,10 @@ function SigninModal({ hideModal, isShow }) {
     userInfo: user.userInfo
   }));
 
+  const selectJob = (job) => {
+    setJobState(job)
+  }
+
   const setSocialProfile = () => {
     //   setNameState(user && user.username);
     //   setImageState(user && user.profileImageUrl);

@@ -25,23 +25,8 @@ const Component = styled.button`
           font-weight: 700;
           cursor:pointer;
       `
-<<<<<<< HEAD
-    : props.type === "unselected" ?
-      `
-=======
-      : props.type === 'selected-login'
-      ? `
-          width: 8.4rem;
-          height: 3.2rem;
-          background-color : #2CFF2C;
-          color: #4E4E4E;
-          font-size: 1.6rem;
-          font-weight: 700;
-          cursor:pointer;
-      `
-      : props.type === 'unselected'
-      ? `
->>>>>>> 23edce237edc1d99d3b0ee1f041f7a2b7b430336
+      : props.type === "unselected" ?
+        `
           width: 8.4rem;
           height: 3.2rem;
           background-color : #6C6C6C;
@@ -50,23 +35,8 @@ const Component = styled.button`
           font-weight: 100;
           cursor:pointer;
       `
-<<<<<<< HEAD
-    : props.type === "cancel" ?
-      `
-=======
-      : props.type === 'unselected-login'
-      ? `
-          width: 8.4rem;
-          height: 3.2rem;
-          background-color : #F3F3F3;
-          color: #A7A7A7;
-          font-size: 1.6rem;
-          font-weight: 100;
-          cursor:pointer;
-      `
-      : props.type === 'cancel'
-      ? `
->>>>>>> 23edce237edc1d99d3b0ee1f041f7a2b7b430336
+        : props.type === "cancel" ?
+          `
           width: 6.2rem;
           height: 2.8rem;
           background-color : white;
@@ -76,8 +46,8 @@ const Component = styled.button`
           font-weight: 400;
           cursor:pointer;
       `
-      : props.type === 'ok'
-      ? `
+          : props.type === 'ok'
+            ? `
           width: 6.2rem;
           height: 2.8rem;
           background-color : white;
@@ -87,8 +57,8 @@ const Component = styled.button`
           font-weight: 700;
           cursor:pointer;
       `
-      : props.type === 'ok-disabled'
-      ? `
+            : props.type === 'ok-disabled'
+              ? `
           width: 6.2rem;
           height: 2.8rem;
           background-color : #A7A7A7;
@@ -98,7 +68,7 @@ const Component = styled.button`
           font-weight: 700;
           cursor:pointer;
       `
-      : `
+              : `
           width: 8.4rem;
           height: 3.2rem;
           background-color : #2CFF2C;
@@ -109,7 +79,6 @@ const Component = styled.button`
       `};
 `;
 
-<<<<<<< HEAD
 
 function InterestComponent({ type, text, onClickInterestBtn, idx }) {
 
@@ -118,32 +87,12 @@ function InterestComponent({ type, text, onClickInterestBtn, idx }) {
   const selectBtn = () => {
     onClickInterestBtn(idx);
 
-    if(btnState === "selected"){
+    if (btnState === "selected") {
       setBtnState("unselected");
-    }else if(btnState === "unselected"){
+    } else if (btnState === "unselected") {
       setBtnState("selected");
     }
   }
-=======
-function InterestComponent({ type, text }) {
-  const [btnState, setBtnState] = useState(type);
-
-  const selectBtn = () => {
-    (async () => {
-      try {
-        if (btnState === 'selected') {
-          setBtnState('unselected');
-        } else if (btnState === 'unselected') {
-          setBtnState('selected');
-        } else if (btnState === 'selected-login') {
-          setBtnState('unselected-login');
-        } else if (btnState === 'unselected-login') {
-          setBtnState('selected-login');
-        }
-      } catch (e) {}
-    })();
-  };
->>>>>>> 23edce237edc1d99d3b0ee1f041f7a2b7b430336
 
   return (
     <Component type={btnState} onClick={selectBtn}>
