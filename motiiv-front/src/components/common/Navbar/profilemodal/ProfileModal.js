@@ -133,6 +133,10 @@ const SocialImage = styled.img`
   height: 1.6rem;
   margin-left: 0.5rem;
   margin-top: 0.2rem;
+
+  @media ${props => props.theme.mobile} {
+    margin-top: 0;
+  }
 `;
 
 const ProfileName = styled.div`
