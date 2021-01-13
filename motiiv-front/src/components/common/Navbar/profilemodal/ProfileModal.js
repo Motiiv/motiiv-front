@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import Tag from '../../Tag/ProfileTag';
 import ToggleBtn from '../../Button/ToggleBtn';
@@ -7,28 +7,27 @@ import naver from '../../../../assets/profile/naverlink_btn_small.png';
 import kakao from '../../../../assets/profile/kakaolink_btn_small.png';
 import { useSelector } from 'react-redux';
 import Loading from '../../Loading/Loading';
+import { darkColors, whiteColors } from '../../../../style/color';
 
 /* 전체 모달 창 */
 const ModalWrap = styled.div`
   display: ${props => (props.show === true ? 'flex' : 'none')};
-
   position: absolute;
   top: 5rem;
   right: 3.5rem;
   z-index: 10000;
-
   width: 28rem;
   height: 41.3rem;
   border-radius: 1rem;
   background: white;
   box-shadow: 0.2rem 0.3rem 0.7rem rgba(0, 0, 0, 0.15);
-
   justify-content: center;
   align-items: center;
   flex-direction: column;
 
   font-family: 'Spoqa-Han-Sans';
-
+  color: var(--categorytext);
+  background: var(--modalBackground);
   @media ${props => props.theme.maxlaptop} {
     width: 25rem;
     height: 36.8rem;
@@ -214,6 +213,18 @@ function ProfileModal({ hideModal, showModal }) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   });
 
+  // 다크모드
+  const setColorType = colors => {
+    for (const [key, value] of Object.entries(colors)) {
+      document.documentElement.style.setProperty(`--${key}`, `${value}`);
+    }
+  };
+  const onToggle = e => {
+    const isToggledNow = e.target.checked;
+    setIsToggled(isToggledNow);
+    isToggledNow ? setColorType(darkColors) : setColorType(whiteColors);
+  };
+
   return (
     <ModalWrap show={showModal} ref={myRef}>
       {!loading ? (
@@ -257,7 +268,7 @@ function ProfileModal({ hideModal, showModal }) {
         <ToggleBtn
           id="profile-toggle"
           toggled={isToggled}
-          onChange={e => setIsToggled(e.target.checked)}
+          onChange={onToggle}
         />
       </DarkToggleContainer>
 
