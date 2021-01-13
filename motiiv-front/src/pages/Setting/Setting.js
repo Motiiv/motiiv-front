@@ -4,21 +4,44 @@ import { updateProfile } from '../../modules/user';
 import styled from 'styled-components';
 import camera from '../../assets/profile/ic_camera.png';
 import polygon from '../../assets/profile/ic_polygon.png'
+import backBtn from '../../assets/global/ic_setting_back.svg';
 import JobModal from './sections/JobModal'
 import InterestModal from './sections/InterestModal'
 import InterestComponent from './sections/InterstComponent'
 import Loading from '../../components/common/Loading/Loading';
 
+const TitleContainer = styled.div`
+    display:flex;
+    width:auto;
+    align-items:center;
+    position:relative;
+`
+
 /* 타이틀 */
 const Border = styled.div`
     background-color: ${props => props.theme.primary};
-    width: 11.4rem;
+    width: 11.6rem;
     height:1.3rem;
     @media ${props => props.theme.maxdesktop} {
-    
+        width: 8rem;
+        height:1rem;
     }
     @media ${props => props.theme.mobile} {
-    
+        width: 6.2rem;
+        height:0.7rem;
+    }
+`
+
+const BackBtn = styled.div`
+    background-image : url(${backBtn});
+    display:none;
+    @media ${props => props.theme.mobile} {
+        display:flex;
+        width:1.2rem;
+        height:1.2rem;
+        position:absolute;
+        margin-left:1.6rem;
+        cursor:pointer;
     }
 `
 
@@ -37,14 +60,22 @@ const Title = styled.div`
         font-size : 1.6rem;
         margin : 3rem 3.6rem;
     }
-/*
-    {Border}{
+
+    ${Border}{
         position:absolute;
         z-index:-1;
-        top:1rem;
+        top:0.8rem;
         left: 0.2rem;
+        @media ${props => props.theme.maxdesktop} {
+            top:0.6rem;
+            left: 0rem;
+        }
+        @media ${props => props.theme.mobile} {
+            top:0.55rem;
+            left: 0.1rem;
+        }
     }
-*/
+
 `
 
 /*  전체 마진  */
@@ -177,14 +208,14 @@ const InfoText = styled.div`
     font-size : 1.6rem;
     font-weight:100;
     color:${props => props.theme.gray};
-    ${props => props.bottom == 'true' ? 
+    ${props => props.bottom === 'true' ? 
         `
         margin-left : 14.4rem;
         margin-top: -3.5rem;
         `:``};
     @media ${props => props.theme.maxdesktop} {
         font-size : 1.4rem;
-        ${props => props.bottom == 'true' ? 
+        ${props => props.bottom === 'true' ? 
         `
         margin-left : 12.5rem;
         margin-top: -2rem;
@@ -192,7 +223,7 @@ const InfoText = styled.div`
     }
     @media ${props => props.theme.mobile} {
         font-size : 1.2rem;
-        ${props => props.bottom == 'true' ? 
+        ${props => props.bottom === 'true' ? 
         `
         margin-left : 9.5rem;
         margin-top: -5.5rem;
@@ -363,6 +394,11 @@ function Setting() {
             newKeywordNames: keywordsInput
         };
         dispatch(updateProfile({ user }));
+
+        console.log(nameInput);
+        console.log(profileImageFileInput);
+        console.log(jobInput);
+        console.log(keywordsInput);
     };
 
     const onChangeName = e => {
@@ -409,7 +445,7 @@ function Setting() {
 
     return (
         <>
-            <Title>계정 관리</Title>
+            <TitleContainer><BackBtn/><Title><Border/>계정 관리</Title></TitleContainer>
 
             <Container>
                 <ProfileImageContainer>

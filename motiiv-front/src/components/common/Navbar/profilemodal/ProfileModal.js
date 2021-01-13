@@ -43,7 +43,7 @@ const FirstLetter = styled.div`
   color: #2cff2c;
   ${props => (props.src ? `display : none;` : ``)};
   ${props =>
-    props.lang == 'kor'
+    props.lang === 'kor'
       ? `
     font-size : 5.5rem;
   `
@@ -52,7 +52,7 @@ const FirstLetter = styled.div`
   `};
   @media ${props => props.theme.maxlaptop} {
     ${props =>
-      props.lang == 'kor'
+      props.lang === 'kor'
         ? `
     font-size : 4rem;
   `
@@ -62,7 +62,7 @@ const FirstLetter = styled.div`
   }
   @media ${props => props.theme.mobile} {
     ${props =>
-      props.lang == 'kor'
+      props.lang === 'kor'
         ? `
     font-size : 2.8rem;
   `
