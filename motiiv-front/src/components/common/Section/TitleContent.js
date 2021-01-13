@@ -106,7 +106,7 @@ const TitleText = styled.div`
   }
 `;
 
-const TitleContent = ({ object, nonfix, text, subText }) => {
+const TitleContent = ({ nonfix, text, subText }) => {
   return (
     <Wrap text={text} nonfix={nonfix}>
       {text && subText && nonfix ? (

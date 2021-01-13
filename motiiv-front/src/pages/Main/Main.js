@@ -203,11 +203,13 @@ function Main({ showModal, isLoggined }) {
   const {
     banners,
     recommend,
+    recommendText,
     loading_banners,
     loading_recommend,
   } = useSelector(({ video, loading }) => ({
     recommend: video.m_recVideoList,
     banners: video.m_banners,
+    recommendText: video.m_recTextList,
     loading_recommend: loading['video/GET_MAIN_RECOMMENDS'],
     loading_banners: loading['video/GET_MAIN_BANNERS'],
   }));
@@ -255,7 +257,37 @@ function Main({ showModal, isLoggined }) {
           }}
         ></Loading>
       )}
-      {Object.keys(recommend).length ? (
+      {recommend.length ? (
+        recommend.map((rec, idx) =>
+          idx === 3 ? (
+            <>
+              <AdBanner />
+              <Section
+                key={`MainSection-${idx}`}
+                object={rec}
+                text={recommendText[idx].title}
+                subText={recommendText[idx].subtitle}
+                BlackModalConfirm={BlackModalConfirm}
+                isLoggined={isLoggined}
+                nonfix="true"
+              ></Section>
+            </>
+          ) : (
+            <Section
+              key={`MainSection-${idx}`}
+              object={rec}
+              text={recommendText[idx].title}
+              subText={recommendText[idx].subtitle}
+              BlackModalConfirm={BlackModalConfirm}
+              isLoggined={isLoggined}
+              nonfix="true"
+            ></Section>
+          ),
+        )
+      ) : (
+        <Loading></Loading>
+      )}
+      {/*       {Object.keys(recommend).length ? (
         <>
           <Section
             object={recommend.sectionOne.sectionOnes}
@@ -281,7 +313,6 @@ function Main({ showModal, isLoggined }) {
             isLoggined={isLoggined}
             nonfix="true"
           ></Section>
-          <AdBanner />
           <Section
             object={recommend.sectionFour.sectionFours}
             text={recommend.sectionFour.sectionFourName}
@@ -309,7 +340,7 @@ function Main({ showModal, isLoggined }) {
         </>
       ) : (
         <Loading></Loading>
-      )}
+      )} */}
     </YeongJinBackground>
   );
 }

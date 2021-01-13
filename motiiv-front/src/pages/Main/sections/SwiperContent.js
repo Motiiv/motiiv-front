@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css, ThemeConsumer, ThemeProvider } from 'styled-components';
 import Tag from '../../../components/common/Tag/Tag';
+import { withRouter } from 'react-router-dom';
 
 const TextCard = styled.div`
   width: 32.5rem;
@@ -22,6 +23,7 @@ const VideoCard = styled.div`
   width: 34.5rem;
   height: 18.5rem;
   position: relative;
+  cursor: pointer;
   @media ${props => props.theme.tablet768} {
     display: none;
   }
@@ -188,7 +190,15 @@ const Image = styled.img`
   height: 100%;
   border-radius: 1rem;
 `;
-function SwiperContent({ obj, choice, isNext, isPrev, titleText, subText }) {
+function SwiperContent({
+  obj,
+  choice,
+  isNext,
+  isPrev,
+  titleText,
+  subText,
+  history,
+}) {
   return (
     <ContentWrapper
       src={obj.thumbnailImageUrl}
@@ -216,7 +226,11 @@ function SwiperContent({ obj, choice, isNext, isPrev, titleText, subText }) {
           ))}
         </TagBox>
       </TextCard>
-      <VideoCard choice={choice} idx={obj.idx}>
+      <VideoCard
+        choice={choice}
+        idx={obj.idx}
+        onClick={() => history.push(`/detail/${obj.id}`)}
+      >
         <Image src={obj.thumbnailImageUrl}></Image>
         {/*         <iframe
           width="100%"
@@ -231,4 +245,4 @@ function SwiperContent({ obj, choice, isNext, isPrev, titleText, subText }) {
     </ContentWrapper>
   );
 }
-export default SwiperContent;
+export default withRouter(SwiperContent);

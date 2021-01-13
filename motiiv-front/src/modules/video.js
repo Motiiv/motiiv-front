@@ -152,7 +152,8 @@ const initState = {
   save: false,
   /* 메인 뷰 */
   m_banners: {},
-  m_recVideoList: {},
+  m_recVideoList: [],
+  m_recTextList: [],
 };
 
 /* 액션을 store에 저장하는 리듀서를 handleActions로 쉽게 처리! */
@@ -233,7 +234,8 @@ const video = handleActions(
     }),
     [GET_MAIN_RECOMMENDS_SUCCESS]: (state, { payload: data }) => ({
       ...state,
-      m_recVideoList: data,
+      m_recVideoList: [data[0], data[1], data[2], data[3], data[4], data[5]],
+      m_recTextList: data[6],
     }),
     [GET_MAIN_RECOMMENDS_FAILURE]: (state, { payload: error }) => ({
       ...state,
