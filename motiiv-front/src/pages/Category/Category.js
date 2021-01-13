@@ -3,7 +3,7 @@ import CategoryComponent from '../../components/Category/CategoryComponent';
 import { getCategoryKeywords, getCategoryVideos } from '../../modules/video';
 import { useDispatch, useSelector } from 'react-redux';
 
-function Category({ props }) {
+function Category({ props,showModal,isLoggined }) {
   const dispatch = useDispatch();
 
   const {
@@ -35,6 +35,8 @@ function Category({ props }) {
       keywords={keywords}
       videos={props.match.params.hashTag === '1' ? c_tagVideos : videos}
       hashTag={props.match.params.hashTag}
+      showModal={showModal}
+      isLoggined = {isLoggined}
     ></CategoryComponent>
   );
 }

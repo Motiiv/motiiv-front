@@ -42,7 +42,7 @@ const FirstLetter = styled.div`
   color: #2cff2c;
   ${props => (props.src ? `display : none;` : ``)};
   ${props =>
-    props.lang == 'kor'
+    props.lang === 'kor'
       ? `
     font-size : 5.5rem;
   `
@@ -51,7 +51,7 @@ const FirstLetter = styled.div`
   `};
   @media ${props => props.theme.maxlaptop} {
     ${props =>
-      props.lang == 'kor'
+      props.lang === 'kor'
         ? `
     font-size : 4rem;
   `
@@ -61,7 +61,7 @@ const FirstLetter = styled.div`
   }
   @media ${props => props.theme.mobile} {
     ${props =>
-      props.lang == 'kor'
+      props.lang === 'kor'
         ? `
     font-size : 2.8rem;
   `
@@ -132,6 +132,10 @@ const SocialImage = styled.img`
   height: 1.6rem;
   margin-left: 0.5rem;
   margin-top: 0.2rem;
+
+  @media ${props => props.theme.mobile} {
+    margin-top: 0;
+  }
 `;
 
 const ProfileName = styled.div`
@@ -253,7 +257,7 @@ function ProfileModal({ hideModal, showModal }) {
           ))}
       </TagBox>
 
-      <NavLink exact to="/setting" style={{ textDecoration: 'none' }}>
+      <NavLink exact to="/setting" style={{ textDecoration: 'none' }} onClick={hideModal}>
         <Tag
           color="white"
           text={'계정 관리'}

@@ -12,7 +12,7 @@ const ModalWrap = styled.div`
   z-index:3;
 
   width: 29.6rem;
-  height:13.8rem;
+  height:18rem;
   border-radius: 1rem;
   background: ${props => props.theme.darkGray};
   padding: 2rem;
@@ -24,12 +24,12 @@ const ModalWrap = styled.div`
   font-family : 'Spoqa-Han-Sans';
   @media ${props => props.theme.maxdesktop} {
     width: 23rem;
-    height:13.8rem;
+    height:16rem;
 
   }
   @media ${props => props.theme.mobile} {
     width: 22.4rem;
-    height:13.8rem;
+    height:15rem;
   }
 `;
 
@@ -47,54 +47,42 @@ const JobButton = styled.button`
   color: ${props => props.type === "selected"? '#2CFF2C' : '#A7A7A7'};
 `
 
-function JobModal({show}) {
+function JobModal({ show, jobfunc }) {
 
-  //함수랑 state 하나로 줄이고 싶은데 끙
-  const [planerState, setPlanerState] = useState('unselected');
-  const [designerState, setDesignerState] = useState('unselected');
-  const [developerState, setDeveloperState] = useState('unselected');
+  const [jobState, setJobState] = useState({
+      planner: 'unselected',
+      designer: 'unselected',
+      developer: 'unselected',
+      youknow: 'unselected'
+    }
+  )
 
   const onClickPlanerBtn = () => {
-    (async () => {
-      try {
-        setPlanerState('selected');
-        setDesignerState('unselected');
-        setDeveloperState('unselected');
-      } catch (e) {
-        
-      }
-    })();
+    setJobState({planner : 'selected', designer : 'unselected', developer:'unselected', youknow: 'unselected'});    
+    jobfunc('기획');
   }
 
   const onClickDesignerBtn = () => {
-    (async () => {
-      try {
-        setPlanerState('unselected');
-        setDesignerState('selected');
-        setDeveloperState('unselected');
-      } catch (e) {
-        
-      }
-    })();
+    setJobState({planner : 'unselected', designer : 'selected', developer:'unselected', youknow: 'unselected'});
+    jobfunc('디자인');
   }
 
   const onClickDeveloperBtn = () => {
-    (async () => {
-      try {
-        setPlanerState('unselected');
-        setDesignerState('unselected');
-        setDeveloperState('selected');
-      } catch (e) {
-        
-      }
-    })();
+    setJobState({planner : 'unselected', designer : 'unselected', developer:'selected', youknow: 'unselected'});
+    jobfunc('개발');
+  }
+  
+  const onClickYouknowBtn = () => {
+    setJobState({planner : 'unselected', designer : 'unselected', developer:'unselected', youknow: 'selected'});
+    jobfunc('유노윤호');
   }
 
     return(
         <ModalWrap show = {show}>
-          <JobButton type = {planerState} onClick={onClickPlanerBtn}>기획</JobButton>
-          <JobButton type = {designerState} onClick={onClickDesignerBtn}>디자인</JobButton>
-          <JobButton type = {developerState} onClick={onClickDeveloperBtn}>개발</JobButton>
+          <JobButton type = {jobState.planner} onClick={onClickPlanerBtn}>기획자</JobButton>
+          <JobButton type = {jobState.designer} onClick={onClickDesignerBtn}>디자이너</JobButton>
+          <JobButton type = {jobState.developer} onClick={onClickDeveloperBtn}>개발자</JobButton>
+          <JobButton type = {jobState.youknow} onClick={onClickYouknowBtn}>유노윤호</JobButton>
         </ModalWrap>
     );
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import SwiperBanner from './sections/SwiperBanner';
 import AdBanner from './sections/AdBanner';
 import Section from '../../components/common/Section/Section';
@@ -7,6 +7,7 @@ import { createDispatchHook, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Loading from '../../components/common/Loading/Loading';
 import ImageSlider from '../../components/common/Section/ImageSlider';
+import BlackModal from '../../components/common/Modal/BlackModal';
 const SliderObject = [
   {
     idx: 0,
@@ -186,16 +187,29 @@ const YeongJinBackground = styled.div`
   }
   background-color: ${({ theme }) => theme.lightGray};
 `;
-function Main() {
+function Main({ showModal, isLoggined }) {
   const dispatch = useDispatch();
+  const [blackModal, setBlackModal] = useState({
+    active: false,
+  });
+  const BlackModalConfirm = () => {
+    if (!isLoggined) {
+      setBlackModal({
+        ...blackModal,
+        active: !blackModal.active,
+      });
+    }
+  };
   const {
     banners,
     recommend,
+    recommendText,
     loading_banners,
     loading_recommend,
   } = useSelector(({ video, loading }) => ({
     recommend: video.m_recVideoList,
     banners: video.m_banners,
+    recommendText: video.m_recTextList,
     loading_recommend: loading['video/GET_MAIN_RECOMMENDS'],
     loading_banners: loading['video/GET_MAIN_BANNERS'],
   }));
@@ -207,6 +221,13 @@ function Main() {
 
   return (
     <YeongJinBackground>
+      {blackModal.active && (
+        <BlackModal
+          blackModal={blackModal}
+          setBlackModal={setBlackModal}
+          showModal={showModal}
+        ></BlackModal>
+      )}
       {Object.keys(banners).length ? (
         <>
           <SwiperBanner
@@ -220,55 +241,106 @@ function Main() {
             size="large"
             color="gray"
             text="motiiv top 10"
+            BlackModalConfirm={BlackModalConfirm}
+            isLoggined={isLoggined}
             subText="이 영상을 본 80%가 바로 일을 시작했어요!"
           ></Section>
         </>
       ) : (
+        <Loading
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            height: '100%',
+          }}
+        ></Loading>
+      )}
+      {recommend.length ? (
+        recommend.map((rec, idx) =>
+          idx === 3 ? (
+            <>
+              <AdBanner />
+              <Section
+                key={`MainSection-${idx}`}
+                object={rec}
+                text={recommendText[idx].title}
+                subText={recommendText[idx].subtitle}
+                BlackModalConfirm={BlackModalConfirm}
+                isLoggined={isLoggined}
+                nonfix="true"
+              ></Section>
+            </>
+          ) : (
+            <Section
+              key={`MainSection-${idx}`}
+              object={rec}
+              text={recommendText[idx].title}
+              subText={recommendText[idx].subtitle}
+              BlackModalConfirm={BlackModalConfirm}
+              isLoggined={isLoggined}
+              nonfix="true"
+            ></Section>
+          ),
+        )
+      ) : (
         <Loading></Loading>
       )}
-      {Object.keys(recommend).length ? (
+      {/*       {Object.keys(recommend).length ? (
         <>
           <Section
             object={recommend.sectionOne.sectionOnes}
             text={recommend.sectionOne.sectiononeName}
             subText={recommend.sectionOne.sectiononeNameSub}
+            BlackModalConfirm={BlackModalConfirm}
+            isLoggined={isLoggined}
             nonfix="true"
           ></Section>
           <Section
             object={recommend.sectionTwo.sectionTwos}
             text={recommend.sectionTwo.sectionTwoName}
             subText={recommend.sectionTwo.sectionTwoNameSub}
+            BlackModalConfirm={BlackModalConfirm}
+            isLoggined={isLoggined}
             nonfix="true"
           ></Section>
           <Section
             object={recommend.sectionThree.sectionThrees}
             text={recommend.sectionThree.sectionThreeName}
             subText={recommend.sectionThree.sectionThreeNameSub}
+            BlackModalConfirm={BlackModalConfirm}
+            isLoggined={isLoggined}
             nonfix="true"
           ></Section>
-          <AdBanner />
           <Section
             object={recommend.sectionFour.sectionFours}
             text={recommend.sectionFour.sectionFourName}
             subText={recommend.sectionFour.sectionFourNameSub}
+            BlackModalConfirm={BlackModalConfirm}
+            isLoggined={isLoggined}
             nonfix="true"
           ></Section>
           <Section
             object={recommend.sectionFive.sectionFives}
             text={recommend.sectionFive.sectionFiveName}
             subText={recommend.sectionFive.sectionFiveNameSub}
+            BlackModalConfirm={BlackModalConfirm}
+            isLoggined={isLoggined}
             nonfix="true"
           ></Section>
           <Section
             object={recommend.sectionSix.sectionSixs}
             text={recommend.sectionSix.sectionSixName}
             subText={recommend.sectionSix.sectionSixNameSub}
+            BlackModalConfirm={BlackModalConfirm}
+            isLoggined={isLoggined}
             nonfix="true"
           ></Section>
         </>
       ) : (
         <Loading></Loading>
-      )}
+      )} */}
     </YeongJinBackground>
   );
 }

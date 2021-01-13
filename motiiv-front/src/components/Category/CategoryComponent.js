@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import Card from '../common/Card/Card';
 import DropDownMenu from '../../pages/Category/sections/DropDownMenu';
 import SortModal from '../../pages/Category/sections/SortModal';
-import DownArrow from '../../assets/global/downArrow.svg';
-import UpperArrow from '../../assets/global/upperArrow.svg';
 import AsideModal from '../../pages/Category/sections/AsideModal';
 import AsideMenu from '../../pages/Category/sections/AsideMenu';
 import Loading from '../common/Loading/Loading';
 import DownArrowGray from '../../assets/global/gray_down.svg';
 import UpperArrowGray from '../../assets/global/gray_upper.svg';
+import BlackModal from '../../components/common/Modal/BlackModal';
 import { useLocation } from 'react-router-dom';
 
 const CategoryContainer = styled.div`
@@ -202,6 +201,8 @@ function CategoryComponent({
   loading,
   videoCnt,
   tagName,
+  showModal,
+  isLoggined,
 }) {
   const [activeStatus, setActiveStatus] = useState({
     status: false,
@@ -241,9 +242,27 @@ function CategoryComponent({
       id: id,
     });
   };
+  const [blackModal, setBlackModal] = useState({
+    active: false,
+  });
 
+  const BlackModalConfirm = () => {
+    if (!isLoggined) {
+      setBlackModal({
+        ...blackModal,
+        active: !blackModal.active,
+      });
+    }
+  };
   return (
     <CategoryContainer>
+      {blackModal.active && (
+        <BlackModal
+          blackModal={blackModal}
+          setBlackModal={setBlackModal}
+          showModal={showModal}
+        ></BlackModal>
+      )}
       <Aside hashTag={hashTag}>
         <AsideModal
           keywords={keywords}
@@ -261,6 +280,7 @@ function CategoryComponent({
           filters={sortStatus.id}
           onHandleMenuChoice={onHandleMenuChoice}
         ></AsideMenu>
+        {/*  Drop Down 코드 */}
         {/* <DropDownMenu
           text={activeStatus.text}
           choice={activeStatus.choice}
@@ -287,7 +307,7 @@ function CategoryComponent({
             <TitleAndSort>
               <TitleText
                 hashTag={hashTag}
-                tagName={tagName}
+                tagName={tagName ? tagName : 'category로 이동 후 tag를 클릭'}
                 videoCnt={videoCnt}
               ></TitleText>
               <SortButtonWrapper>
@@ -307,7 +327,15 @@ function CategoryComponent({
             </TitleAndSort>
             <GridContainer hashTag={hashTag}>
               {videos.map((video, idx) => (
-                <Card key={`Card-${idx}`} obj={video} category={true} />
+                <Card
+                  key={`Card-${idx}`}
+                  obj={video}
+                  category={true}
+                  showModal={showModal}
+                  BlackModalConfirm={BlackModalConfirm}
+                  isLoggined={isLoggined}
+                  showModal={showModal}
+                />
               ))}
             </GridContainer>
           </>
