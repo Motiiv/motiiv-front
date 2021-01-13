@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import Tag from '../Tag/Tag';
 import { withRouter } from 'react-router-dom';
-import HoverVideoPlayer from 'react-hover-video-player';
+
 import SaveImage from '../../../assets/global/save_icon.svg';
 import SaveClickImage from '../../../assets/global/saveclick_icon.svg';
 const CardWrap = styled.div`
   display: flex;
   width: 100%;
-  min-width: ${props => (props.size === 'large' ? '37.7rem' : '27.4rem')};
+  max-width: ${props => (props.size === 'large' ? '37.7rem' : '27.4rem')};
   height: auto;
-  min-height: ${props => (props.size === 'large' ? '33.5 rem' : '26.7rem')};
+  max-height: ${props => (props.size === 'large' ? '33.5 rem' : '26.7rem')};
   flex-direction: column;
   box-shadow: ${props =>
     props.size === 'large' ? '2px 2px  7px rgba(0, 0, 0, 0.15)' : 'none'};
@@ -20,10 +20,14 @@ const CardWrap = styled.div`
   @media ${props => props.theme.mobile} {
     min-width: 30rem;
     min-height: 24.2rem;
+    box-shadow: none;
+    margin: auto;
   }
   @media ${props => props.theme.tablet} {
     min-width: ${props => (props.size === 'large' ? '21.9rem' : '21.6rem')};
     min-height: 23.2rem;
+    box-shadow: ${props =>
+      props.size === 'large' ? '2px 2px  7px rgba(0, 0, 0, 0.15)' : 'none'};
     //max로 바꿔야하는지 여부
   }
   @media ${props => props.theme.laptop} {
@@ -57,7 +61,10 @@ const VideoWrap = styled.div`
   @media ${props => props.theme.tablet} {
     height: ${props => (props.size === 'large' ? '12.3rem' : '12.2rem')};
   }
- 
+  @media ${props => props.theme.laptop} {
+    height: 15.4rem;
+  }
+
   @media ${props => props.theme.desktop} {
     height: ${props => (props.size === 'large' ? '21.2rem' : '15.4rem')};
   }
@@ -115,7 +122,7 @@ const TimeContainer = styled.div`
   position: absolute;
   right: 1.5rem;
   bottom: 1.4rem;
-  z-index: 1000;
+  z-index: 1;
   font-size: 1.2rem;
   padding: 0.3rem 0.5rem;
   padding-top: 0.4rem;
@@ -221,9 +228,17 @@ const TextWrap = styled.div`
   border-radius: 0 0 1rem 1rem;
   @media ${props => props.theme.mobile} {
     height: auto;
+    ${props =>
+      props.size === 'large'
+        ? css`
+            background: none !important;
+          `
+        : null};
   }
   @media ${props => props.theme.tablet} {
     height: auto;
+    background-color: ${props =>
+      props.size === 'large' ? 'white !important' : 'transparent'};
     /* height: 10.9rem; */
   }
   @media ${props => props.theme.desktop} {
@@ -255,6 +270,7 @@ const Title = styled.div`
     margin-top: 1rem;
     max-height: 4.2rem;
     margin-left: ${props => (props.size === 'large' ? '1.5rem' : '0')};
+    margin-right: ${props => (props.size === 'large' ? '1.5rem' : '0')};
   }
   @media ${props => props.theme.desktop} {
     margin-top: ${props => (props.size === 'large' ? '1rem' : '0.8rem')};
@@ -298,6 +314,12 @@ const TagContainer = styled.div`
     display: flex;
     margin-top: 1rem;
     margin-left: ${props => (props.size === 'large' ? '1.5rem' : '0')};
+    ${props =>
+      props.size === 'large'
+        ? css`
+            margin-bottom: 1.5rem;
+          `
+        : css``};
   }
   @media ${props => props.theme.desktop} {
     margin-top: 1rem;
@@ -307,6 +329,7 @@ const TagContainer = styled.div`
 // Tag 컴포넌트 만들어서 불러오기
 function Card({ obj, size, text, history, saveButton, category }) {
   const [save, setSave] = useState(false);
+  const borderValue = size === 'large' ? '1rem 1rem 0 0' : '1rem';
   return (
     <>
       <CardWrap size={size}>
@@ -314,26 +337,13 @@ function Card({ obj, size, text, history, saveButton, category }) {
           size={size}
           onClick={() => history.push(`/detail/${obj.id}`)}
         >
-          <HoverVideoPlayer
-            style={{ width: '100%', height: '100%', borderRadius: '1rem' }}
-            //videoSrc={obj.VideoInfo.src}
-            pausedOverlayWrapperStyle={{
-              borderRadius: '1rem',
-              overflow: 'hidden',
-            }}
-            pausedOverlay={
-              <img
-                width="100%"
-                height="100%"
-                borderRadius="1rem"
-                src={obj.thumbnailImageUrl}
-              />
-            }
-            loadingOverlay={<div className="loading-spinner-overlay" />}
-            videoStyle={{
-              borderRadius: '1rem',
-            }}
+          <img
+            width="100%"
+            height="100%"
+            borderRadius="1rem"
+            src={obj.thumbnailImageUrl}
           />
+
           <SaveBox saveButton={saveButton} onClick={() => setSave(!save)}>
             <SaveImg size={size} src={save ? SaveClickImage : SaveImage} />
           </SaveBox>
@@ -358,7 +368,7 @@ function Card({ obj, size, text, history, saveButton, category }) {
           <TagContainer size={size} category={category}>
             {obj.VideoTags
               ? obj.VideoTags.map(tag => (
-                  <div style={{ marginRight: '0.7rem', marginTop: '-2.8rem' }}>
+                  <div style={{ marginRight: '0.7rem', marginTop: '-2.5rem' }}>
                     <Tag
                       hashTag={1}
                       color="black"

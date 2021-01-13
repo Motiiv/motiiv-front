@@ -8,18 +8,26 @@ const Wrap = styled.div`
   font-weight: 700;
   letter-spacing: -0.8px;
   margin-bottom: ${props => (props.text ? '5.1rem' : '3rem')};
+  padding-left: 1rem;
   @media ${props => props.theme.mobile} {
     margin-left: 2rem;
     margin-top: 1.5rem;
     margin-bottom: ${props => (props.text ? '2rem' : '1rem')};
+    ${props =>
+      !props.nonfix
+        ? css`
+            padding-top: 3.5rem;
+          `
+        : null}
   }
   @media ${props => props.theme.tablet} {
     margin-left: 4rem;
-    margin-bottom: ${props => (props.text ? '5.1rem' : '3 .4rem')};
+    margin-bottom: ${props => (props.text ? '3.1rem' : '3 .4rem')};
+    padding-top: 0;
   }
   @media ${props => props.theme.desktop} {
     margin-left: 5.5rem;
-    margin-bottom: ${props => (props.text ? '5.1rem' : '3rem')};
+    margin-bottom: ${props => (props.text ? '3.1rem' : '3rem')};
   }
 `;
 const Title = styled.div`
@@ -82,30 +90,36 @@ const SubTitle = styled.div`
 `;
 
 const TitleText = styled.div`
+  margin-bottom: 1rem;
   font-size: 3rem;
+  margin-top: 2rem;
   font-weight: bold; // 여기 props처리
   color: black;
   @media ${props => props.theme.mobile} {
     font-size: 1.8rem;
   }
   @media ${props => props.theme.tablet} {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
   @media ${props => props.theme.desktop} {
     font-size: 3rem;
   }
 `;
 
-const TitleContent = ({ object, text, nonfix }) => {
+const TitleContent = ({ object, nonfix, text, subText }) => {
   return (
-    <Wrap text={text}>
-      {!text ? (
+    <Wrap text={text} nonfix={nonfix}>
+      {text && subText && nonfix ? (
         <>
-          <Title nonfix={nonfix}>{object[0].TextInfo.category}</Title>
-          <SubTitle>{object[0].TextInfo.categoryTxt}</SubTitle>
+          <Title nonfix={nonfix}>{text}</Title>
+          {/* <Title>{text}</Title> */}
+          <SubTitle>{subText}</SubTitle>
         </>
       ) : (
-        <TitleText>{text}</TitleText>
+        <>
+          <TitleText nonfix={nonfix}>{text}</TitleText>
+          <SubTitle>{subText}</SubTitle>
+        </>
       )}
     </Wrap>
   );

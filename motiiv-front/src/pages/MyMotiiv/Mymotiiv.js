@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import MyModal from './sections/MyModal';
 import Section from '../../components/common/Section/Section';
@@ -7,7 +7,8 @@ import MyNavBar from './sections/MyNavbar';
 import ImageSlider from '../../components/common/Section/ImageSlider';
 import BlackModal from '../../components/common/Modal/BlackModal';
 import { useDispatch, useSelector } from 'react-redux';
-// import { getMotiiv } from '../../modules/mymotiiv';
+import Loading from '../../components/common/Loading/Loading';
+import { getVideos } from '../../modules/mymotiiv';
 
 const MotiivWrapper = styled.div`
   width: 100%;
@@ -156,68 +157,78 @@ const Title = styled.h2`
 `;
 
 // const textArray = ["내가 자주본 모티브", "내가 저장한 모티브", "최근 재생한 모티브"];
-function MyMotiiv() {
-  // const dispatch = useDispatch();
+function MyMotiiv({ showModal }) {
+  const dispatch = useDispatch();
   const saveButton = false;
   const [loginState, setLoginState] = useState({
-    isLogin: false,
+    isLogin: true,
   });
 
+  const { myvideos, loading } = useSelector(({ mymotiiv, loading }) => ({
+    myvideos: mymotiiv.myvideos,
+    loading: loading['mymotiiv/GET_MYVIDEOS'],
+  }));
 
-  // useEffect(() => {
-  //   dispatch(getMotiiv());
-  // }, []);
+  useEffect(() => {
+    dispatch(getVideos());
+  }, []);
 
-  return !loginState.isLogin ?  (
+  return loginState.isLogin ? (
     <>
       <MotiivWrapper isLoggined={loginState.isLogin}>
         <WorkSpace></WorkSpace>
-        <Container>
-          <Wrapper>
-            <Title>
-              내가 <HighLight>자주 본</HighLight>모티브
-            </Title>
-            <ImageSlider
-              saveButton={saveButton}
-              object={SliderObject}
-            ></ImageSlider>
-          </Wrapper>
-        </Container>
+        {!loading && myvideos && (
+          <>
+            <Container>
+              <Wrapper>
+                <Title>
+                  내가 <HighLight>자주 본</HighLight>모티브
+                </Title>
+                <ImageSlider
+                  saveButton={saveButton}
+                  object={myvideos.mostViewSort}
+                ></ImageSlider>
+              </Wrapper>
+            </Container>
 
-        <Container>
-          <Wrapper>
-            <Title>
-              내가 <HighLight>저장 한</HighLight>모티브
-            </Title>
-            <ImageSlider
-              saveButton={saveButton}
-              object={SliderObject}
-            ></ImageSlider>
-          </Wrapper>
-        </Container>
+            <Container>
+              <Wrapper>
+                <Title>
+                  내가 <HighLight>저장 한</HighLight>모티브
+                </Title>
+                <ImageSlider
+                  saveButton={saveButton}
+                  object={myvideos.savedResult}
+                ></ImageSlider>
+              </Wrapper>
+            </Container>
 
-        <Container>
-          <Wrapper>
-            <Title>
-              최근 <HighLight>재생한</HighLight>모티브
-            </Title>
-            <ImageSlider
-              saveButton={saveButton}
-              object={SliderObject}
-            ></ImageSlider>
-          </Wrapper>
-        </Container>
-        {/* <Section object={SliderObject} text="내가 자주 본 모티브"></Section> */}
-        {/* <Section object={SliderObject} text="내가 저장한 모티브"></Section>
-        <Section object={SliderObject} text="최근 재생한 모티브"></Section> */}
+            <Container>
+              <Wrapper>
+                <Title>
+                  최근 <HighLight>재생한</HighLight>모티브
+                </Title>
+                <ImageSlider
+                  saveButton={saveButton}
+                  object={myvideos.recentViewSort}
+                ></ImageSlider>
+              </Wrapper>
+            </Container>
+          </>
+        )}
+        {loading && <Loading />}
       </MotiivWrapper>
     </>
-      ) : (
-        <>
-          {/* {setShowModal(prev=> !prev)} */}
-          <MyModal />
-          {/* <BlackModal/> */}
-        </>
+  ) : (
+    <MyModal showModal={showModal} />
   );
 }
 export default MyMotiiv;
+
+{
+  /* <Section object={SliderObject} text="내가 자주 본 모티브"></Section> */
+}
+{
+  /* <Section object={SliderObject} text="내가 저장한 모티브"></Section>
+        <Section object={SliderObject} text="최근 재생한 모티브"></Section> */
+}
