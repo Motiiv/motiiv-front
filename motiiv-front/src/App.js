@@ -24,7 +24,6 @@ import FloatBtn from './components/common/Button/FloatBtn';
 import { getProfile, showSigninModal } from './modules/user';
 import { getWorkspaces } from './modules/mymotiiv';
 
-
 function App({ props }) {
   const dispatch = useDispatch();
   const [loginState, setLoginState] = useState(false);
@@ -41,11 +40,12 @@ function App({ props }) {
 
   const hideModal = () => {
     setShowLoginModalState(false);
+    document.body.style.overflow = 'visible';
   };
 
   const showModal = () => {
     setShowLoginModalState(true);
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = 'hidden';
   };
 
   return (
@@ -94,7 +94,7 @@ function App({ props }) {
         <Route
           exact
           path="/detail/:id"
-          render={props => <Detail props={props}  showModal={showModal}/>}
+          render={props => <Detail props={props} showModal={showModal} />}
         ></Route>
         {/* Upload */}
         <Route
@@ -105,7 +105,12 @@ function App({ props }) {
       </Switch>
       <SigninModal hideModal={hideModal} isShow={showLoginModalState} />
       <FloatBtn workspaces={workspaces} isShow={onFloatBtn} />
-      <BottomBanner isShow={location.pathname !== '/setting'} />
+      <BottomBanner
+        isShow={
+          location.pathname !== '/setting' &&
+          location.pathname !== '/category/0'
+        }
+      />
       <Footer isShow={location.pathname !== '/setting'} />
       <MyNavBar loginState={true} tag={location.pathname}></MyNavBar>
     </>

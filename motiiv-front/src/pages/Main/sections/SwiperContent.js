@@ -10,11 +10,20 @@ const TextCard = styled.div`
   font-family: 'Spoqa-Han-Sans';
   font-weight: 700;
   @media ${props => props.theme.tablet768} {
-    padding-right: 2.5rem;
+    width: 34.5rem;
+    padding-right: 4.4rem;
+  }
+  @media ${props => props.theme.laptop} {
+    width: 34.5rem;
+    padding-right: 4.4rem;
+  }
+  @media ${props => props.theme.desktop} {
+    width: 32.5rem;
+    padding-right: 6.4rem;
   }
 `;
 const VideoCard = styled.div`
-  width: 32.5rem;
+  width: 34.5rem;
   height: 18.5rem;
   position: relative;
   @media ${props => props.theme.mobile375} {
@@ -179,6 +188,7 @@ const TimeContainer = styled.div`
 const Image = styled.img`
   width: 100%;
   height: 100%;
+  border-radius: 1rem;
 `;
 function SwiperContent({ obj, choice, isNext, isPrev, titleText, subText }) {
   return (

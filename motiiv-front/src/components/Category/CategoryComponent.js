@@ -10,6 +10,7 @@ import AsideMenu from '../../pages/Category/sections/AsideMenu';
 import Loading from '../common/Loading/Loading';
 import DownArrowGray from '../../assets/global/gray_down.svg';
 import UpperArrowGray from '../../assets/global/gray_upper.svg';
+import { useLocation } from 'react-router-dom';
 
 const CategoryContainer = styled.div`
   padding: 5rem 5.5rem;
@@ -45,6 +46,8 @@ const CategoryContainer = styled.div`
 `;
 const Aside = styled.div`
   min-width: 19.4rem;
+  //margin-top: 20rem;
+  position: relative;
   ${props =>
     props.hashTag !== '0'
       ? css`
@@ -69,6 +72,8 @@ const Aside = styled.div`
   }
   @media ${props => props.theme.desktop} {
     margin-right: 10.5rem;
+    position: fixed;
+    top: 10rem;
   }
 `;
 const BodyContainer = styled.div`
@@ -79,15 +84,18 @@ const BodyContainer = styled.div`
 
   @media ${props => props.theme.mobile} {
     padding: 0 0.1rem;
+    //margin-top: 3rem;
   }
   @media ${props => props.theme.tablet} {
     //max-width: 45.2rem;
+    margin-top: 0;
   }
   @media ${props => props.theme.laptop} {
     //max-width: 87.1rem;
   }
   @media ${props => props.theme.desktop} {
     max-width: none;
+    margin-left: ${props => (props.isMargin ? '30rem' : 0)};
   }
 `;
 const TitleTextAndButton = styled.div`
@@ -200,6 +208,7 @@ function CategoryComponent({
     choice: 0,
     text: '전체',
   });
+  const location = useLocation();
   const [sortStatus, setSortStatus] = useState({
     text: '최신순',
     status: false,
@@ -272,7 +281,7 @@ function CategoryComponent({
           active={activeStatus.interest}
         /> */}
       </Aside>
-      <BodyContainer>
+      <BodyContainer isMargin={location.pathname === '/category/0'}>
         {!loading ? (
           <>
             <TitleAndSort>

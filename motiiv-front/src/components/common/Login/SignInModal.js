@@ -25,6 +25,7 @@ const ModalBackgorundWrap = styled.div`
 `;
 
 const CancelBtn = styled.div`
+  display: ${props=>props.page === 1 ? 'display' : 'none'};
   background-image:url(${loginCancelBtn});
   width:1.5rem;
   height:1.5rem;
@@ -32,7 +33,7 @@ const CancelBtn = styled.div`
 `
 
 const NextBtn = styled.div`
-  ${props => props.page != 2 ?
+  ${props => props.page !== 2 ?
     `display:none;` : 
     `opacity: 100; cursor:pointer;`
   };
@@ -41,7 +42,7 @@ const NextBtn = styled.div`
 `
 
 const PrevBtn = styled.div`
-    ${props => props.page != 3 ?
+    ${props => props.page !== 3 ?
     `display:none;` :
     `display:flex; cursor:pointer;`
   };
@@ -244,7 +245,7 @@ function SigninModal({ hideModal, isShow }) {
       <>
         <ModalBackgorundWrap show = {isShow}/>
         <ModalWrap show = {isShow} ref={myRef}>
-          <CancelBtn onClick={hideModal}/>
+          <CancelBtn onClick={hideModal} page={pageState}/>
           <FirstPage page = {pageState} pageUp={pageUp}/>
           <SecondPage page = {pageState}/>
           <LastPage page = {pageState}/>

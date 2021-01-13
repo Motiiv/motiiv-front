@@ -39,12 +39,10 @@ function Save({ id, BlackModalConfirm, blackModal }) {
   // [ Black Modal] 사용하고자 하는 버튼에 blackmodalconfirm 함수 넣어주면 됨
   const SaveToggle = () => {
     //로그인여부 확인 후 로그인 됐으면 save change
-    if(blackModal.isLogin === true){
+    if (blackModal.isLogin === true) {
       dispatch(changeSaveStatus(id));
-      }
-      else BlackModalConfirm();
-    };
-
+    } else BlackModalConfirm();
+  };
 
   return (
     <SaveBox onClick={SaveToggle}>
@@ -55,4 +53,3 @@ function Save({ id, BlackModalConfirm, blackModal }) {
 }
 
 export default React.memo(Save);
-

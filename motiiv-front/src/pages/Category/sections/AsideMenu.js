@@ -5,6 +5,8 @@ import styled from 'styled-components';
 const AsideMenuContainer = styled.div`
   display: flex;
   flex-direction: column;
+  position: fixed;
+  width: 19.4rem;
   cursor: pointer;
   @media ${props => props.theme.mobile} {
     display: none;
