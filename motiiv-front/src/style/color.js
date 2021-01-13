@@ -21,6 +21,7 @@ const whiteColors = {
   camera: 'white',
   settingtxt: theme.darkGray,
   backbtn: 'invert(0)',
+  loginbg: 'white',
 };
 const darkColors = {
   background: 'black',
@@ -43,6 +44,7 @@ const darkColors = {
   camera: theme.keyWordGray,
   settingtxt: theme.primary,
   backbtn: 'invert(1)',
+  loginbg: 'rgba(0,0,0,0.8)',
 };
 
 export { whiteColors, darkColors };
