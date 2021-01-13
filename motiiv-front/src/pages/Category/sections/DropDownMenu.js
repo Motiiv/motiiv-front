@@ -123,4 +123,4 @@ function DropDownMenu({
   );
 }
 
-export default DropDownMenu;
+export default React.memo(DropDownMenu);

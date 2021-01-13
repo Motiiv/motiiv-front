@@ -29,12 +29,9 @@ const VideoCard = styled.div`
   }
 `;
 const ContentWrapper = styled.div`
-  //width:100%;
   width: 62rem;
   display: flex;
-  //overflow:hidden;
-  //margin-right: 12.7rem;
-  //justify-content: center;
+  cursor: pointer;
   margin-top: 3rem;
   ${props =>
     props.choice
@@ -64,6 +61,10 @@ const ContentWrapper = styled.div`
                 display:none;
             }`
       : null}
+  @media ${props => props.theme.mobile365} {
+    margin-top: 0;
+    height: 85% !important;
+  }
   @media ${props => props.theme.tablet768} {
     width: 100%;
     height: 75%;
@@ -206,6 +207,7 @@ function SwiperContent({
       idx={obj.id}
       isNext={isNext}
       isPrev={isPrev}
+      onClick={() => history.push(`/detail/${obj.id}`)}
     >
       <TextCard>
         <HeaderInfo>
@@ -245,4 +247,4 @@ function SwiperContent({
     </ContentWrapper>
   );
 }
-export default withRouter(SwiperContent);
+export default withRouter(React.memo(SwiperContent));

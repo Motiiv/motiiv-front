@@ -35,20 +35,18 @@ const MenuWrapper = styled.div`
     background-color: ${({ theme }) => theme.lightGray};
   }
 `;
-const TitleIconBox = styled.img`
+/* const TitleIconBox = styled.img`
   width: 2rem;
   height: 2rem;
   display: flex;
   align-items: center;
   margin: 0.7rem 0;
   border-radius: 0.5rem;
-`;
+`; */
 function Menu({ word, choice, idx, onHandleMenuChoice, filters }) {
   const dispatch = useDispatch();
 
   const onClickHandle = evt => {
-    //console.log(evt.currentTarget.attributes.name.value);
-    //console.log(idx);
     onHandleMenuChoice(idx, evt.currentTarget.attributes.name.value);
     console.log(filters);
     dispatch(getCategoryVideos({ keyword: idx, filters: filters }));
@@ -65,4 +63,4 @@ function Menu({ word, choice, idx, onHandleMenuChoice, filters }) {
   );
 }
 
-export default Menu;
+export default React.memo(Menu);

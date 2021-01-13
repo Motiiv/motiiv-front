@@ -246,7 +246,12 @@ function ProfileModal({ hideModal, showModal }) {
           ))}
       </TagBox>
 
-      <NavLink exact to="/setting" style={{ textDecoration: 'none' }} onClick={hideModal}>
+      <NavLink
+        exact
+        to="/setting"
+        style={{ textDecoration: 'none' }}
+        onClick={hideModal}
+      >
         <Tag
           color="white"
           text={'계정 관리'}
@@ -277,4 +282,4 @@ function ProfileModal({ hideModal, showModal }) {
   );
 }
 
-export default ProfileModal;
+export default React.memo(ProfileModal);

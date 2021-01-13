@@ -247,4 +247,4 @@ function SwiperBanner({ mostLikeVideo, mostViewVideo, bestVideo }) {
   );
 }
 
-export default SwiperBanner;
+export default React.memo(SwiperBanner);
