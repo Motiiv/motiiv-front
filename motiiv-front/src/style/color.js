@@ -3,12 +3,12 @@ import theme from './theme';
 const whiteColors = {
   background: 'white',
   categorytext: 'black',
-  modalBackground: 'white',
+  modalbackground: 'white',
 };
 const darkColors = {
   background: 'black',
   categorytext: 'white',
-  modalBackground: 'rgba(0, 0, 0, 0.8)',
+  modalbackground: theme.darkBg2,
 };
 
 export { whiteColors, darkColors };

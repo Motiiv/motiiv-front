@@ -19,7 +19,6 @@ const ModalWrap = styled.div`
   width: 28rem;
   height: 41.3rem;
   border-radius: 1rem;
-  background: white;
   box-shadow: 0.2rem 0.3rem 0.7rem rgba(0, 0, 0, 0.15);
   justify-content: center;
   align-items: center;
@@ -27,7 +26,8 @@ const ModalWrap = styled.div`
 
   font-family: 'Spoqa-Han-Sans';
   color: var(--categorytext);
-  background: var(--modalBackground);
+  background: var(--modalbackground);
+  //background: white;
   @media ${props => props.theme.maxlaptop} {
     width: 25rem;
     height: 36.8rem;
@@ -257,7 +257,12 @@ function ProfileModal({ hideModal, showModal }) {
           ))}
       </TagBox>
 
-      <NavLink exact to="/setting" style={{ textDecoration: 'none' }} onClick={hideModal}>
+      <NavLink
+        exact
+        to="/setting"
+        style={{ textDecoration: 'none' }}
+        onClick={hideModal}
+      >
         <Tag
           color="white"
           text={'계정 관리'}
