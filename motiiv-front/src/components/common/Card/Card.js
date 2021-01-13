@@ -338,7 +338,6 @@ const GImage = styled.img`
 // Tag 컴포넌트 만들어서 불러오기
 // obj.videoGif
 function Card({ obj, size, text, history, category, nonfix }) {
-  const borderValue = size === 'large' ? '1rem 1rem 0 0' : '1rem';
   const BlackModalConfirm = () => {
     if (!blackModal.isLogin) {
       setBlackModal({

@@ -224,7 +224,15 @@ function Main() {
           ></Section>
         </>
       ) : (
-        <Loading></Loading>
+        <Loading
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            height: '100%',
+          }}
+        ></Loading>
       )}
       {Object.keys(recommend).length ? (
         <>
