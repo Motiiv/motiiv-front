@@ -25,6 +25,7 @@ const CardWrap = styled.div`
   }
   @media ${props => props.theme.tablet} {
     min-width: ${props => (props.size === 'large' ? '21.9rem' : '21.6rem')};
+    max-width : ${props => (props.defaultSpace === true ? '21.6rem' : 'none')};
     min-height: 23.2rem;
     box-shadow: ${props =>
       props.size === 'large' ? '2px 2px  7px rgba(0, 0, 0, 0.15)' : 'none'};
@@ -323,23 +324,13 @@ const TagContainer = styled.div`
     margin-left: ${props => (props.size === 'large' ? '2rem' : '1px')};
   }
 `;
-
-function Card({
-  obj,
-  size,
-  text,
-  history,
-  category,
-  nonfix,
-  showModal,
-  isLoggined,
-  BlackModalConfirm,
-  saveButton,
-}) {
+function Card({ obj, size, text, history, category, nonfix,showModal,isLoggined ,BlackModalConfirm, saveButton, defaultSpace}) {
+  const borderValue = size === 'large' ? '1rem 1rem 0 0' : '1rem';
+ 
   return (
     <>
-      <CardWrap size={size}>
-        <CardSave
+      <CardWrap size={size} defaultSpace = {defaultSpace}>
+      <CardSave
           id={obj.id}
           BlackModalConfirm={BlackModalConfirm}
           isLoggined={isLoggined}

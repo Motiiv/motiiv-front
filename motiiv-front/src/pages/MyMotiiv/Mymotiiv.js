@@ -30,6 +30,7 @@ const HighLight = styled.span`
     transparent 55%,
     transparent 100%
   );
+  padding-bottom : 1.5rem;
 `;
 const Container = styled.div`
   width: 100%;
