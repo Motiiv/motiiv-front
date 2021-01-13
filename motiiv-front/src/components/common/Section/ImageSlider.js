@@ -76,11 +76,13 @@ const SliderSection = styled.div`
     }
     & .swiper-slide {
       flex: ${props => (props.defaultSpace ? '1' : '1')}!important;
+      max-width : ${props => (props.defaultSpace ? '300px' : 'none')}!important;
     }
   }
 
   @media ${props => props.theme.tablet} {
     padding: 0 4rem;
+    max-width: 1024px;
     & .swiper-button-prev::after {
       display: flex !important;
     }
@@ -88,11 +90,13 @@ const SliderSection = styled.div`
       display: flex !important;
     }
     & .swiper-slide {
-      flex: ${props => (props.defaultSpace ? 'none' : '1')}!important;
+      flex: ${props => (props.defaultSpace ? '1' : '1')}!important;
+      max-width : ${props => (props.defaultSpace ? '216px' : 'none')}!important;
     }
   }
 
   @media ${props => props.theme.laptop} {
+    max-width: 1280px;
     padding: 0 4rem;
     & .swiper-button-prev::after {
       display: flex !important;
@@ -102,10 +106,12 @@ const SliderSection = styled.div`
     }
     & .swiper-slide {
       flex: ${props => (props.defaultSpace ? 'none' : '1')}!important;
+      max-width : none !important;
     }
   }
 
   @media ${props => props.theme.desktop} {
+    max-width: 1280px;
     ${props =>
       props.size === 'large'
         ? css`
@@ -115,6 +121,11 @@ const SliderSection = styled.div`
         : css`
             padding: 0 5.5rem;
           `}
+          & .swiper-slide {
+         max-width : none !important;
+    }
+
+          
   }
 `;
 
@@ -127,6 +138,7 @@ function ImageSlider({ object, type, size, text, saveButton, nonfix,BlackModalCo
   if (object && (object.length === 2 || object.length === 3)) {
     defaultSpace = true;
   }
+  const defaultNum = defaultSpace === true ? 2 : 3;
   return (
     <>
       <SliderSection size={size} defaultSpace={defaultSpace}>
@@ -198,6 +210,7 @@ function ImageSlider({ object, type, size, text, saveButton, nonfix,BlackModalCo
                   nonfix={nonfix}
                   BlackModalConfirm ={BlackModalConfirm}
                   isLoggined = {isLoggined}
+                  defaultSpace = {defaultSpace}
                 ></Card>
               </SwiperSlide>
             ))}

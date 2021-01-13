@@ -94,7 +94,7 @@ function App({ props }) {
         <Route
           exact
           path="/detail/:id"
-          render={props => <Detail props={props} showModal={showModal} isloggined={loginState} />}
+          render={props => <Detail props={props} showModal={showModal} isLoggined={loginState} />}
         ></Route>
         {/* Upload */}
         <Route
