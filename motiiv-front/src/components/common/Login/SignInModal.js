@@ -7,7 +7,7 @@ import LastPage from './LastPage';
 import loginCancelBtn from '../../../assets/global/login_cancel.svg';
 
 const ModalBackgorundWrap = styled.div`
-  display: ${props => props.show ? `flex` : `none`};
+  display: ${props => (props.show ? `flex` : `none`)};
   background: #000000;
   opacity: 0.5;
 
@@ -16,7 +16,7 @@ const ModalBackgorundWrap = styled.div`
   right: 0;
   left: 0;
   bottom: 0;
-  z-index:100000;
+  z-index: 100000;
 
   width: auto;
   height: auto;
@@ -42,95 +42,91 @@ const NextBtn = styled.div`
 `
 
 const PrevBtn = styled.div`
-    ${props => props.page !== 3 ?
-    `display:none;` :
-    `display:flex; cursor:pointer;`
-  };
-  font-weight:400;
-  font-size:1.5rem;
-`
+  ${props =>
+    props.page !== 3 ? `display:none;` : `display:flex; cursor:pointer;`};
+  font-weight: 400;
+  font-size: 1.5rem;
+`;
 
 const FinBtn = styled.div`
-    ${props => props.page === 3 ?
-    `display:flex; cursor:pointer;` :
-    `display:none;`
-  };
-  font-weight:400;
-  font-size:1.5rem;
-`
+  ${props =>
+    props.page === 3 ? `display:flex; cursor:pointer;` : `display:none;`};
+  font-weight: 400;
+  font-size: 1.5rem;
+`;
 
 const ModalWrap = styled.div`
-  display: ${props => props.show ? `flex` : `none`};
+  display: ${props => (props.show ? `flex` : `none`)};
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index:100000;
+  z-index: 100000;
 
-  padding : 5rem 2.6rem 2.6rem 3rem;
+  padding: 5rem 2.6rem 2.6rem 3rem;
   width: 65rem;
-  height:38rem;
+  height: 38rem;
   border-radius: 2rem;
-  background: white;
+  background: var(--loginbg);
   box-shadow: 0.2rem 0.3rem 0.7rem rgba(0, 0, 0, 0.15);
 
   justify-content: center;
-  align-items:center;
+  align-items: center;
   flex-direction: column;
-  font-family : 'Spoqa-Han-Sans';
-  color:black;
+  font-family: 'Spoqa-Han-Sans';
+  color: black;
 
   @media ${props => props.theme.maxlaptop} {
     width: 59rem;
     height: 35.3rem;
-    padding : 4.5rem 2.5rem 2.5rem 3.3rem;
+    padding: 4.5rem 2.5rem 2.5rem 3.3rem;
   }
   @media ${props => props.theme.mobile} {
     width: 31.1rem;
     height: 44.2rem;
-    padding : 5rem 2rem 2rem 2rem;
+    padding: 5rem 2rem 2rem 2rem;
   }
 
-  ${NextBtn}{
-    position:absolute;
-    right:2.5rem;
-    bottom:2.5rem;
+  ${NextBtn} {
+    position: absolute;
+    right: 2.5rem;
+    bottom: 2.5rem;
     @media ${props => props.theme.maxlaptop} {
-      bottom:3.3rem;
+      bottom: 3.3rem;
     }
     @media ${props => props.theme.mobile} {
-      right:2rem;
-      bottom:2rem;
+      right: 2rem;
+      bottom: 2rem;
     }
-  };
-  ${PrevBtn}{
-    position:absolute;
-    left:2.5rem;
-    bottom:2.5rem;
+  }
+  ${PrevBtn} {
+    position: absolute;
+    left: 2.5rem;
+    bottom: 2.5rem;
     @media ${props => props.theme.maxlaptop} {
-      bottom:3.3rem;
+      bottom: 3.3rem;
     }
     @media ${props => props.theme.mobile} {
-      left:2rem;
-      bottom:2rem;
+      left: 2rem;
+      bottom: 2rem;
     }
-  };
-  ${FinBtn}{
-    position:absolute;
-    right:2.5rem;
-    bottom:2.5rem;
+  }
+  ${FinBtn} {
+    position: absolute;
+    right: 2.5rem;
+    bottom: 2.5rem;
     @media ${props => props.theme.maxlaptop} {
-      bottom:3.3rem;
+      bottom: 3.3rem;
     }
     @media ${props => props.theme.mobile} {
-      right:2rem;
-      bottom:2rem;
+      right: 2rem;
+      bottom: 2rem;
     }
-  };
-  ${CancelBtn}{
-    position:absolute;
-    right:2rem;
-    top:2rem;
+  }
+  ${CancelBtn} {
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
   }
 `;
 
@@ -180,7 +176,6 @@ const IndicatorContainer = styled.div`
 */
 
 function SigninModal({ hideModal, isShow }) {
-
   // 아웃 사이드 클릭
   const myRef = useRef();
   const handleClickOutside = e => {

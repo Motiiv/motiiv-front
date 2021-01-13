@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import Card from '../Card/Card';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import styled, { css } from 'styled-components';
@@ -34,7 +34,7 @@ const SliderSection = styled.div`
     width: 3rem !important;
     height: 3rem !important;
     font-size: 1.5rem !important;
-    color: ${({ theme }) => theme.darkGray};
+    color: var(--swiperafter);
     cursor: pointer !important;
     z-index: 2 !important;
   }
@@ -55,18 +55,19 @@ const SliderSection = styled.div`
     width: 3rem !important;
     height: 3rem !important;
     font-size: 1.5rem !important;
-    color: ${({ theme }) => theme.darkGray};
+    color: var(--swiperafter);
     cursor: pointer !important;
     z-index: 2 !important;
   }
   & .swiper-slide {
-    flex : ${props => (props.defaultSpace ? 'none' : '1')};
+    flex: ${props => (props.defaultSpace ? 'none' : '1')};
   }
   & .swiper-scrollbar {
     display: none !important;
   }
   @media ${props => props.theme.mobile} {
     padding: 0 2rem;
+    padding-right: 0;
     & .swiper-button-prev::after {
       display: none !important;
     }
@@ -74,12 +75,14 @@ const SliderSection = styled.div`
       display: none !important;
     }
     & .swiper-slide {
-      flex : ${props => (props.defaultSpace ? '1' : '1')}!important;
-  }
+      flex: ${props => (props.defaultSpace ? '1' : '1')}!important;
+      max-width : ${props => (props.defaultSpace ? '300px' : 'none')}!important;
+    }
   }
 
   @media ${props => props.theme.tablet} {
     padding: 0 4rem;
+    max-width: 1024px;
     & .swiper-button-prev::after {
       display: flex !important;
     }
@@ -87,11 +90,13 @@ const SliderSection = styled.div`
       display: flex !important;
     }
     & .swiper-slide {
-      flex : ${props => (props.defaultSpace ? 'none' : '1')}!important;
-  }
+      flex: ${props => (props.defaultSpace ? '1' : '1')}!important;
+      max-width : ${props => (props.defaultSpace ? '216px' : 'none')}!important;
+    }
   }
 
   @media ${props => props.theme.laptop} {
+    max-width: 1280px;
     padding: 0 4rem;
     & .swiper-button-prev::after {
       display: flex !important;
@@ -100,12 +105,13 @@ const SliderSection = styled.div`
       display: flex !important;
     }
     & .swiper-slide {
-      flex : ${props => (props.defaultSpace ? 'none' : '1')}!important;
-  }
-    
+      flex: ${props => (props.defaultSpace ? 'none' : '1')}!important;
+      max-width : none !important;
+    }
   }
 
   @media ${props => props.theme.desktop} {
+    max-width: 1280px;
     ${props =>
       props.size === 'large'
         ? css`
@@ -115,21 +121,36 @@ const SliderSection = styled.div`
         : css`
             padding: 0 5.5rem;
           `}
+          & .swiper-slide {
+         max-width : none !important;
+    }
+
+          
   }
 `;
 
-function ImageSlider({ object, type, size, text, saveButton, nonfix }) {
+function ImageSlider({
+  object,
+  type,
+  size,
+  text,
+  saveButton,
+  nonfix,
+  BlackModalConfirm,
+  isLoggined,
+}) {
   const swiperRef = useRef();
-  const num =  type === 'top' ? 3 : 4;
+  const num = type === 'top' ? 3 : 4;
   const space = type === 'top' ? 20 : 25;
   const largeHeight = size === 'large' ? '36rem' : 'auto';
   let defaultSpace = false;
-  if(object && (object.length === 2 || object.length === 3)) {
-      defaultSpace = true;
+  if (object && (object.length < 4)) {
+    defaultSpace = true;
   }
+  const defaultNum = defaultSpace === true ? 2 : 3;
   return (
     <>
-      <SliderSection size={size} defaultSpace = {defaultSpace}>
+      <SliderSection size={size} defaultSpace={defaultSpace}>
         <Swiper
           spaceBetween={space}
           slidesPerView={num}
@@ -137,13 +158,13 @@ function ImageSlider({ object, type, size, text, saveButton, nonfix }) {
           navigation
           scrollbar
           breakpoints={{
-            1280 : {
-              spaceBetween : space,
-              slidesPerView : num
+            1280: {
+              spaceBetween: space,
+              slidesPerView: num,
             },
             1024: {
-              spaceBetween: 20,
-              slidesPerView: 3,
+              spaceBetween: 16,
+              slidesPerView: num,
             },
             768: {
               spaceBetween: 20,
@@ -186,22 +207,26 @@ function ImageSlider({ object, type, size, text, saveButton, nonfix }) {
             paddingRight: '0.7rem',
           }}
         >
-        {object && object.map((obj, idx) => (
-            <SwiperSlide>
-              <Card
-                size={size}
-                text={text}
-                key={`card-${idx}`}
-                obj={obj}
-                saveButton={saveButton}
-                nonfix={nonfix}
-              ></Card>
-            </SwiperSlide>
-          ))}
+          {object &&
+            object.map((obj, idx) => (
+              <SwiperSlide>
+                <Card
+                  size={size}
+                  text={text}
+                  key={`card-${idx}`}
+                  obj={obj}
+                  saveButton={saveButton}
+                  nonfix={nonfix}
+                  BlackModalConfirm ={BlackModalConfirm}
+                  isLoggined = {isLoggined}
+                  defaultSpace = {defaultSpace}
+                ></Card>
+              </SwiperSlide>
+            ))}
         </Swiper>
       </SliderSection>
     </>
-  ); 
+  );
 }
 
-export default ImageSlider;
+export default React.memo(ImageSlider);

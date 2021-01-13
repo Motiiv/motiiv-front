@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import React from 'react';
 
 const Wrap = styled.div`
   margin-left: 5.5rem;
@@ -34,7 +35,7 @@ const Title = styled.div`
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  color: black;
+  color: var(--categorytext);
   ${props =>
     props.nonfix
       ? css`
@@ -77,7 +78,7 @@ const Title = styled.div`
 
 const SubTitle = styled.div`
   font-size: 1.6rem;
-  color: black;
+  color: var(--categorytext);
   @media ${props => props.theme.mobile} {
     font-size: 1.2rem;
   }
@@ -94,7 +95,7 @@ const TitleText = styled.div`
   font-size: 3rem;
   margin-top: 2rem;
   font-weight: bold; // 여기 props처리
-  color: black;
+  color: var(--keywordtag);
   @media ${props => props.theme.mobile} {
     font-size: 1.8rem;
   }
@@ -106,7 +107,7 @@ const TitleText = styled.div`
   }
 `;
 
-const TitleContent = ({ object, nonfix, text, subText }) => {
+const TitleContent = ({ nonfix, text, subText }) => {
   return (
     <Wrap text={text} nonfix={nonfix}>
       {text && subText && nonfix ? (
@@ -125,4 +126,4 @@ const TitleContent = ({ object, nonfix, text, subText }) => {
   );
 };
 
-export default TitleContent;
+export default React.memo(TitleContent);

@@ -7,10 +7,15 @@ const size = {
 
 const theme = {
   primary: '#2cff2c',
-  darkGray: '#4e4e4e',
-  gray: '#a7a7a7',
-  lightGray: '#f3f3f3',
+  darkGray: '#4e4e4e', // motiiv_gray
+  gray: '#a7a7a7', // motiiv_gray_2
+  lightGray: '#f3f3f3', // motiiv_gray_bg
+  // 다크모드 컬러
+  keyWordGray: '#6c6c6c',
+  darkBg: '#2f2f2f',
+  darkBg2: '#161616',
 
+  // 브레이크 포인트
   mobile375: `(max-width: ${size.mobile})`,
   mobile: `(max-width: ${size.tablet})`,
   tablet768: `(max-width: ${size.tablet})`,

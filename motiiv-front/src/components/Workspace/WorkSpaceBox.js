@@ -113,4 +113,4 @@ function WorkSpaceBox({ idx, space, hasToShift }) {
   );
 }
 
-export default WorkSpaceBox;
+export default React.memo(WorkSpaceBox);

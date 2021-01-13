@@ -23,6 +23,7 @@ import { useEffect } from 'react';
 import FloatBtn from './components/common/Button/FloatBtn';
 import { getProfile, isLoggedIn } from './modules/user';
 import { getWorkspaces } from './modules/mymotiiv';
+import { whiteColors } from './style/color';
 
 function App({ props }) {
   const dispatch = useDispatch();
@@ -33,7 +34,15 @@ function App({ props }) {
   const { onFloatBtn } = useSelector(state => state.mymotiiv);
   const { workspaces } = useSelector(state => state.mymotiiv);
 
+  // 다크모드
+  const setColorType = colors => {
+    for (const [key, value] of Object.entries(colors)) {
+      document.documentElement.style.setProperty(`--${key}`, `${value}`);
+    }
+  };
+
   useEffect(() => {
+    setColorType(whiteColors);
     dispatch(getWorkspaces());
     dispatch(getProfile());
     hideModal();
@@ -61,17 +70,31 @@ function App({ props }) {
         <Route
           exact
           path="/main"
-          render={props => <Main props={props} />}
+          render={props => (
+            <Main props={props} showModal={showModal} isLoggined={loginState} />
+          )}
         ></Route>
         <Route
           path="/category/:hashTag"
-          render={props => <Category props={props} />}
+          render={props => (
+            <Category
+              props={props}
+              showModal={showModal}
+              isLoggined={loginState}
+            />
+          )}
         ></Route>
         {
           <Route
             exact
             path="/mymotiiv"
-            render={props => <MyMotiiv props={props} showModal={showModal} />}
+            render={props => (
+              <MyMotiiv
+                props={props}
+                showModal={showModal}
+                isLoggined={loginState}
+              />
+            )}
           ></Route>
         }
         <Route
@@ -95,7 +118,13 @@ function App({ props }) {
         <Route
           exact
           path="/detail/:id"
-          render={props => <Detail props={props} showModal={showModal} />}
+          render={props => (
+            <Detail
+              props={props}
+              showModal={showModal}
+              isLoggined={loginState}
+            />
+          )}
         ></Route>
         {/* Upload */}
         <Route
@@ -113,9 +142,9 @@ function App({ props }) {
         }
       />
       <Footer isShow={location.pathname !== '/setting'} />
-      <MyNavBar loginState={true} tag={location.pathname}></MyNavBar>
+      <MyNavBar isLoggined={loginState} tag={location.pathname}></MyNavBar>
     </>
   );
 }
 
-export default App;
+export default React.memo(App);

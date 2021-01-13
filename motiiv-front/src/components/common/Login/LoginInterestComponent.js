@@ -3,20 +3,20 @@ import styled from 'styled-components';
 import { useState } from 'react';
 
 const InterestComponent = styled.button`
-    border: none;
-    outline: none;
-    border-radius: 3rem;
-    font-family:'Spoqa-Han-Sans';
+  border: none;
+  outline: none;
+  border-radius: 3rem;
+  font-family: 'Spoqa-Han-Sans';
 
-    @media ${props => props.theme.mobile} {
-            width: 7.8rem;
-            height: 3rem;
-            font-size: 1.4rem;
-    }
+  @media ${props => props.theme.mobile} {
+    width: 7.8rem;
+    height: 3rem;
+    font-size: 1.4rem;
+  }
 
-${props =>
-    props.type === true ?
-      `
+  ${props =>
+    props.type === true
+      ? `
           width: 8.4rem;
           height: 3.2rem;
           background-color : #2CFF2C;
@@ -26,8 +26,7 @@ ${props =>
           font-weight: 700;
           cursor:pointer;
       `
-      :
-      `
+      : `
           width: 8.4rem;
           height: 3.2rem;
           background-color : #F3F3F3;
@@ -36,30 +35,28 @@ ${props =>
           font-size: 1.6rem;
           font-weight: 100;
           cursor:pointer;
-      `
-  };
-`
+      `};
+`;
 
 function LoginInterestComponent({ type, text }) {
-
   const [btnState, setBtnState] = useState(type);
 
   const selectBtn = () => {
     (async () => {
       try {
-        if(btnState === false){
+        if (btnState === false) {
           setBtnState(true);
-        }else{
+        } else {
           setBtnState(false);
         }
-      } catch (e) {
-        
-      }
+      } catch (e) {}
     })();
-  }
+  };
 
-    return (
-      <InterestComponent type = {btnState} onClick={selectBtn}>{text}</InterestComponent>
-    );
-  }
-  export default LoginInterestComponent;
+  return (
+    <InterestComponent type={btnState} onClick={selectBtn}>
+      {text}
+    </InterestComponent>
+  );
+}
+export default React.memo(LoginInterestComponent);

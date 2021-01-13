@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css, ThemeConsumer, ThemeProvider } from 'styled-components';
 import Tag from '../../../components/common/Tag/Tag';
+import { withRouter } from 'react-router-dom';
 
 const TextCard = styled.div`
   width: 32.5rem;
@@ -9,13 +10,9 @@ const TextCard = styled.div`
   padding-right: 6.4rem;
   font-family: 'Spoqa-Han-Sans';
   font-weight: 700;
-  @media ${props => props.theme.tablet768} {
+  @media ${props => props.theme.maxdesktop} {
     width: 34.5rem;
-    padding-right: 4.4rem;
-  }
-  @media ${props => props.theme.laptop} {
-    width: 34.5rem;
-    padding-right: 4.4rem;
+    padding-right: 2.4rem;
   }
   @media ${props => props.theme.desktop} {
     width: 32.5rem;
@@ -26,17 +23,15 @@ const VideoCard = styled.div`
   width: 34.5rem;
   height: 18.5rem;
   position: relative;
-  @media ${props => props.theme.mobile375} {
+  cursor: pointer;
+  @media ${props => props.theme.tablet768} {
     display: none;
   }
 `;
 const ContentWrapper = styled.div`
-  //width:100%;
   width: 62rem;
   display: flex;
-  //overflow:hidden;
-  //margin-right: 12.7rem;
-  //justify-content: center;
+  cursor: pointer;
   margin-top: 3rem;
   ${props =>
     props.choice
@@ -66,7 +61,11 @@ const ContentWrapper = styled.div`
                 display:none;
             }`
       : null}
-  @media ${props => props.theme.mobile375} {
+  @media ${props => props.theme.mobile365} {
+    margin-top: 0;
+    height: 85% !important;
+  }
+  @media ${props => props.theme.tablet768} {
     width: 100%;
     height: 75%;
     background-size: cover;
@@ -80,22 +79,12 @@ const ContentWrapper = styled.div`
       ${props => 'url(' + props.src + ')'};
   }
 `;
-const VideoRunningTime = styled.div`
-  color: white;
-  background-color: black;
-  padding: 0.5rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-  position: absolute;
-  right: 0.5rem;
-  bottom: 0.5rem;
-`;
 const HeaderInfo = styled.div`
   font-size: 2rem;
   color: ${({ theme }) => theme.primary};
   display: flex;
   flex-direction: column;
-  @media ${props => props.theme.mobile375} {
+  @media ${props => props.theme.tablet768} {
     padding-left: 2rem;
     padding-top: 2rem;
   }
@@ -125,20 +114,32 @@ const VideoText = styled.div`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   padding-top: 0.2rem;
-  @media ${props => props.theme.tablet768} {
+  @media ${props => props.theme.maxdesktop} {
     font-size: 2.5rem;
+    margin-top: 1rem;
   }
-  @media ${props => props.theme.mobile375} {
+  @media ${props => props.theme.tablet768} {
     display: none;
+  }
+  @media ${props => props.theme.maxdesktop} {
+    margin-top: 1.5rem;
   }
 `;
 const TagBox = styled.div`
   display: flex;
   width: 100%;
   margin-top: auto;
-  @media ${props => props.theme.mobile375} {
+  @media ${props => props.theme.tablet768} {
     margin-bottom: 1rem;
     margin-left: 2rem;
+  }
+  @media ${props => props.theme.maxdesktop} {
+    margin-bottom: 1rem;
+  }
+  @media ${props => props.theme.maxdesktop} {
+    & div {
+      margin-top: 0rem;
+    }
   }
 `;
 const TimeContainer = styled.div`
@@ -190,14 +191,23 @@ const Image = styled.img`
   height: 100%;
   border-radius: 1rem;
 `;
-function SwiperContent({ obj, choice, isNext, isPrev, titleText, subText }) {
+function SwiperContent({
+  obj,
+  choice,
+  isNext,
+  isPrev,
+  titleText,
+  subText,
+  history,
+}) {
   return (
     <ContentWrapper
-      src="https://i.ytimg.com/vi/XeOfUbLL-7Q/hq720_live.jpg?sqp=CLTkx_8F-oaymwEZCNAFEJQDSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLA65nbGSn5uuIqanAAfgR8uEl9-uA"
+      src={obj.thumbnailImageUrl}
       choice={choice}
       idx={obj.id}
       isNext={isNext}
       isPrev={isPrev}
+      onClick={() => history.push(`/detail/${obj.id}`)}
     >
       <TextCard>
         <HeaderInfo>
@@ -218,7 +228,11 @@ function SwiperContent({ obj, choice, isNext, isPrev, titleText, subText }) {
           ))}
         </TagBox>
       </TextCard>
-      <VideoCard choice={choice} idx={obj.idx}>
+      <VideoCard
+        choice={choice}
+        idx={obj.idx}
+        onClick={() => history.push(`/detail/${obj.id}`)}
+      >
         <Image src={obj.thumbnailImageUrl}></Image>
         {/*         <iframe
           width="100%"
@@ -233,4 +247,4 @@ function SwiperContent({ obj, choice, isNext, isPrev, titleText, subText }) {
     </ContentWrapper>
   );
 }
-export default SwiperContent;
+export default withRouter(React.memo(SwiperContent));

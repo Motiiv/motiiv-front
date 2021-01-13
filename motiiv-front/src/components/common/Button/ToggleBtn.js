@@ -76,4 +76,4 @@ const ToggleBtn = ({ id, toggled, onChange }) => {
   );
 };
 
-export default ToggleBtn;
+export default React.memo(ToggleBtn);

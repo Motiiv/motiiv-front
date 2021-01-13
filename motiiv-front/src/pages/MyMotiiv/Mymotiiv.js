@@ -9,6 +9,7 @@ import BlackModal from '../../components/common/Modal/BlackModal';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../components/common/Loading/Loading';
 import { getVideos } from '../../modules/mymotiiv';
+import { useLocation } from 'react-router-dom';
 
 const MotiivWrapper = styled.div`
   width: 100%;
@@ -19,86 +20,8 @@ const MotiivWrapper = styled.div`
   z-index: 0;
 `;
 const HighLight = styled.span`
-  background: ${({ theme }) => theme.primary};
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    transparent 20%,
-    ${({ theme }) => theme.primary} 20%,
-    ${({ theme }) => theme.primary} 55%,
-    transparent 55%,
-    transparent 100%
-  );
+  background: var(--highlight);
 `;
-const SliderObject = [
-  {
-    idx: 0,
-    TextInfo: {
-      category: 'Hot Motiiv',
-      categoryTxt: '어제 하루 조회수가 가장 높았던 모티브',
-      videoTxt:
-        '유재석이 꿈도 없이 성공할 수 있었던 자기관리.목표나 계획을 세우지 않는 유느님 명언 모음',
-      hashTag: ['movie', 'pride'],
-    },
-    VideoInfo: {
-      src: 'https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4',
-      runningTime: '02:09',
-    },
-  },
-  {
-    idx: 1,
-    TextInfo: {
-      category: 'Best Motiiv',
-      categoryTxt: '어제 하루 좋아요가 가장 많았던 모티브',
-      videoTxt: '특별하지 않아도 특별한 콘텐츠를 만들 수 있습니다',
-      hashTag: ['무무', '프라'],
-    },
-    VideoInfo: {
-      src: 'https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4',
-      runningTime: '03:32',
-    },
-  },
-  {
-    idx: 2,
-    TextInfo: {
-      category: 'Most motivated motiiv',
-      categoryTxt: '어제 워크스페이스로 가장 많이 이동한 모티브',
-      videoTxt:
-        '일론머스크의 기묘한 비전 (Vision) I 그의 지치지 않는 원동력의 5가지 비밀',
-      hashTag: ['movie', 'pride'],
-    },
-    VideoInfo: {
-      src: 'https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4',
-      runningTime: '22:01',
-    },
-  },
-  {
-    idx: 3,
-    TextInfo: {
-      category: 'Most motivated motiiv',
-      categoryTxt: '어제 워크스페이스로 가장 많이 이동한 모티브',
-      videoTxt: 'The Devil Wears Prada final scene',
-      hashTag: ['movie', 'pride'],
-    },
-    VideoInfo: {
-      src: 'https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4',
-      runningTime: '22:01',
-    },
-  },
-  {
-    idx: 4,
-    TextInfo: {
-      category: 'Most motivated motiiv',
-      categoryTxt: '어제 워크스페이스로 가장 많이 이동한 모티브',
-      videoTxt: 'The Devil Wears Prada final scene',
-      hashTag: ['movie', 'pride'],
-    },
-    VideoInfo: {
-      src: 'https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4',
-      runningTime: '22:01',
-    },
-  },
-];
 const Container = styled.div`
   width: 100%;
   height: 42rem;
@@ -128,6 +51,9 @@ const Wrapper = styled.div`
   @media ${props => props.theme.tablet} {
     min-width: 768px;
   }
+  @media ${props => props.theme.laptop} {
+    max-width: 1024px;
+  }
   @media ${props => props.theme.desktop} {
     min-width: 1280px;
   }
@@ -137,7 +63,7 @@ const Title = styled.h2`
   margin-left: 5.5rem;
   font-size: 3rem;
   font-weight: bold;
-  color: black;
+  color: var(--categorytext);
   margin-bottom: 3rem;
   @media ${props => props.theme.mobile} {
     font-size: 1.8rem;
@@ -157,12 +83,10 @@ const Title = styled.h2`
 `;
 
 // const textArray = ["내가 자주본 모티브", "내가 저장한 모티브", "최근 재생한 모티브"];
-function MyMotiiv({ showModal }) {
+function MyMotiiv({ showModal, isLoggined }) {
   const dispatch = useDispatch();
   const saveButton = false;
-  const [loginState, setLoginState] = useState({
-    isLogin: false,
-  });
+  const { pathname } = useLocation();
 
   const { myvideos, loading } = useSelector(({ mymotiiv, loading }) => ({
     myvideos: mymotiiv.myvideos,
@@ -173,16 +97,19 @@ function MyMotiiv({ showModal }) {
     dispatch(getVideos());
   }, []);
 
-  return loginState.isLogin ? (
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return isLoggined === true ? (
     <>
-      <MotiivWrapper isLoggined={loginState.isLogin}>
+      <MotiivWrapper>
         <WorkSpace></WorkSpace>
         {!loading && myvideos && (
           <>
             <Container>
               <Wrapper>
                 <Title>
-                  내가 <HighLight>자주 본</HighLight>모티브
+                  내가 <HighLight>자주 본 </HighLight>모티브
                 </Title>
                 <ImageSlider
                   saveButton={saveButton}
@@ -194,7 +121,7 @@ function MyMotiiv({ showModal }) {
             <Container>
               <Wrapper>
                 <Title>
-                  내가 <HighLight>저장 한</HighLight>모티브
+                  내가 <HighLight>저장한 </HighLight>모티브
                 </Title>
                 <ImageSlider
                   saveButton={saveButton}
@@ -206,12 +133,13 @@ function MyMotiiv({ showModal }) {
             <Container>
               <Wrapper>
                 <Title>
-                  최근 <HighLight>재생한</HighLight>모티브
+                  최근 <HighLight>재생한 </HighLight>모티브
                 </Title>
                 <ImageSlider
                   saveButton={saveButton}
                   object={myvideos.recentViewSort}
                 ></ImageSlider>
+                l
               </Wrapper>
             </Container>
           </>
@@ -223,7 +151,7 @@ function MyMotiiv({ showModal }) {
     <MyModal showModal={showModal} />
   );
 }
-export default MyMotiiv;
+export default React.memo(MyMotiiv);
 
 {
   /* <Section object={SliderObject} text="내가 자주 본 모티브"></Section> */

@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { getCategoryVideos } from '../../../modules/video';
 import { useDispatch } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 const TitleText = styled.div`
   font-size: 1.6rem;
@@ -18,6 +19,7 @@ const TitleText = styled.div`
         `};
 `;
 const MenuWrapper = styled.div`
+  transition: 0.3s;
   width: 100%;
   height: 3.4rem;
   display: flex;
@@ -25,6 +27,7 @@ const MenuWrapper = styled.div`
   align-items: center;
   border-radius: 0.5rem;
   padding-right: 1.1rem;
+  color: var(--categorytext);
   ${props =>
     props.choice === props.idx
       ? css`
@@ -32,26 +35,25 @@ const MenuWrapper = styled.div`
         `
       : null};
   &:hover {
-    background-color: ${({ theme }) => theme.lightGray};
+    background-color: var(--sortbg);
+    color: black;
   }
 `;
-const TitleIconBox = styled.img`
+/* const TitleIconBox = styled.img`
   width: 2rem;
   height: 2rem;
   display: flex;
   align-items: center;
   margin: 0.7rem 0;
   border-radius: 0.5rem;
-`;
-function Menu({ word, choice, idx, onHandleMenuChoice, filters }) {
+`; */
+function Menu({ word, choice, idx, onHandleMenuChoice, filters, history }) {
   const dispatch = useDispatch();
 
   const onClickHandle = evt => {
-    //console.log(evt.currentTarget.attributes.name.value);
-    //console.log(idx);
     onHandleMenuChoice(idx, evt.currentTarget.attributes.name.value);
-    console.log(filters);
     dispatch(getCategoryVideos({ keyword: idx, filters: filters }));
+    history.push(`/category/0`);
   };
   return (
     <MenuWrapper idx={idx} choice={choice} name={word} onClick={onClickHandle}>
@@ -65,4 +67,4 @@ function Menu({ word, choice, idx, onHandleMenuChoice, filters }) {
   );
 }
 
-export default Menu;
+export default withRouter(React.memo(Menu));

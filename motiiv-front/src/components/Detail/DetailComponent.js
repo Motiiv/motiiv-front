@@ -1,18 +1,13 @@
-import { useSpring, animated } from 'react-spring';
-import { MdClose } from 'react-icons/md';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import LikeImage from '../../assets/global/like_icon.svg';
 import SaveImage from '../../assets/global/save_icon.svg';
-import LikeClickImage from '../../assets/global/likeclick_icon.svg';
-import SaveClickImage from '../../assets/global/saveclick_icon.svg';
 import Tag from '../common/Tag/Tag';
 import RecommendCard from '../../pages/Detail/sections/RecommendCard';
 import ShareModal from '../../pages/Detail/sections/ShareModal';
 import { withRouter } from 'react-router-dom';
 import BlackModal from '../common/Modal/BlackModal';
 import Loading from '../common/Loading/Loading';
-import { useDispatch, useSelector } from 'react-redux';
 import Like from '../common/Like/Like';
 import Save from '../common/Save/Save';
 
@@ -22,6 +17,7 @@ const DetailContainer = styled.div`
   padding: 4.5rem 5.5rem;
   display: flex;
   margin-bottom: 10rem;
+  color: var(--categorytext);
   @media ${props => props.theme.mobile} {
     flex-direction: column;
     padding: 0;
@@ -55,15 +51,12 @@ const RecommendWrapper = styled.div`
     margin-left: 0;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-    //max-width: 50rem;
     margin-left: auto;
     margin-right: auto;
   }
   @media ${props => props.theme.tablet} {
     width: 100%;
     margin-left: 0;
-    /*     padding-left: 4rem;
-    padding-right: 4rem; */
   }
   @media ${props => props.theme.desktop} {
     width: 19%;
@@ -74,10 +67,8 @@ const RecommendCardBox = styled.div`
   display: grid;
   width: 100%;
   @media ${props => props.theme.mobile} {
-    //flex-direction: column;
   }
   @media ${props => props.theme.tablet} {
-    //flex-direction: row;
     grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
     grid-gap: 2rem;
   }
@@ -203,12 +194,12 @@ const TextBox = styled.div`
   display: flex;
   margin-top: 3.5rem;
   justify-content: space-between;
-  border-bottom: 1px #c4c4c4 solid;
+  border-bottom: ${props => `1px ${props.theme.gray} solid`};
   padding-bottom: 2rem;
   align-items: center;
   & div {
     font-size: 1.5rem;
-    color: #686868;
+    color: ${props => props.theme.gray};
   }
   @media ${props => props.theme.mobile} {
     margin-top: 1.5rem;
@@ -329,6 +320,7 @@ const RecommendTitleText = styled.div`
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 2rem;
+  letter-spacing: -1px;
 `;
 const MobileButtonBox = styled.div`
   display: none;
@@ -345,20 +337,19 @@ function DetailComponent({
   recVideoList,
   detailLoading,
   showModal,
+  isLoggined,
 }) {
   /*   const [toggle, setToggle] = useState(false);
   const [toggleExist, setToggleExist] = useState(false); */
 
   const [shareModal, setShareModal] = useState(false);
-  const dispatch = useDispatch();
   const [blackModal, setBlackModal] = useState({
-    isLogin: true,
     active: false,
   });
   const descRef = useRef();
 
   const BlackModalConfirm = () => {
-    if (!blackModal.isLogin) {
+    if (!isLoggined) {
       setBlackModal({
         ...blackModal,
         active: !blackModal.active,
@@ -366,7 +357,6 @@ function DetailComponent({
     }
   };
 
-  ///////////////
   /* 더보기 버튼 모달창 */
   /*   const onHandleToggleButton = () => {
     setToggle(!toggle);
@@ -413,11 +403,12 @@ function DetailComponent({
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
                       blackModal={blackModal}
+                      isLoggined={isLoggined}
                     ></Like>
                     <Save
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
-                      blackModal={blackModal}
+                      isLoggined={isLoggined}
                     ></Save>
                   </ButtonBox>
                 </TitleAndButtonBox>
@@ -436,7 +427,7 @@ function DetailComponent({
                 <TextBox>
                   <LeftBox>
                     <ViewCount>조회수 {videoInfo.viewCount}회</ViewCount>
-                    <DateInfo>2021.01.01</DateInfo>
+                    <DateInfo>{videoInfo.createdAt}</DateInfo>
                     <UserName>{videoInfo.channelName}</UserName>
                   </LeftBox>
                   <ShareBox>
@@ -455,11 +446,12 @@ function DetailComponent({
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
                       blackModal={blackModal}
+                      isLoggined={isLoggined}
                     ></Like>
                     <Save
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
-                      blackModal={blackModal}
+                      isLoggined={isLoggined}
                     ></Save>
                   </ButtonBox>
                   <ShareBox>

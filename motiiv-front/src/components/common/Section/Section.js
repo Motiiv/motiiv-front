@@ -7,7 +7,7 @@ const Container = styled.div`
   width: 100%;
   height: ${props => (props.type === 'top' ? '51rem' : '42rem')};
   background-color: ${props =>
-    props.color === 'gray' ? ({ theme }) => theme.lightGray : 'none'};
+    props.color === 'gray' ? 'var(--topbg)' : 'var(--bodybg)'};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,34 +46,57 @@ const Wrapper = styled.div`
   @media ${props => props.theme.tablet} {
     min-width: 768px;
   }
+  @media ${props => props.theme.laptop} {
+    max-width: 1024px;
+  }
   @media ${props => props.theme.desktop} {
     min-width: 1280px;
   }
 `;
 
-const Section = ({ type, size, color, object, text, nonfix, subText }) => {
+const Section = ({
+  type,
+  size,
+  color,
+  object,
+  text,
+  nonfix,
+  subText,
+  isLoggined,
+  showModal,
+  BlackModalConfirm,
+}) => {
+  useEffect(() => {
+    console.log('section object', object);
+  }, []);
   return (
     <>
       <Container type={type} color={color}>
         <Wrapper type={type} color={color}>
           <TitleContent
             nonfix={nonfix}
-            object={object}
             text={text}
             subText={subText}
           ></TitleContent>
-          <ImageSlider
-            object={object}
-            type={type}
-            size={size}
-            color={color}
-            text={text}
-            nonfix={nonfix}
-          ></ImageSlider>
+          {object.length ? (
+            <ImageSlider
+              object={object}
+              type={type}
+              size={size}
+              color={color}
+              text={text}
+              nonfix={nonfix}
+              BlackModalConfirm={BlackModalConfirm}
+              isLoggined={isLoggined}
+              showModal={showModal}
+            ></ImageSlider>
+          ) : (
+            <div></div>
+          )}
         </Wrapper>
       </Container>
     </>
   );
 };
 
-export default Section;
+export default React.memo(Section);

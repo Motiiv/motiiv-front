@@ -12,7 +12,7 @@ const WorkSpaceWrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 38rem;
-  background-color: ${({ theme }) => theme.lightGray};
+  background-color: var(--topbg);
   @media ${props => props.theme.mobile} {
     display: none !important;
   }
@@ -25,19 +25,11 @@ const Container = styled.div`
 
 const HighLight = styled.span`
   background: ${({ theme }) => theme.primary};
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    transparent 20%,
-    ${({ theme }) => theme.primary} 20%,
-    ${({ theme }) => theme.primary} 55%,
-    transparent 55%,
-    transparent 100%
-  );
+  background: var(--highlight);
 `;
 
 const Title = styled.h2`
-  color: black;
+  color: var(--categorytext);
   font-weight: 700;
   font-size: 3rem;
   font-family: 'Campton';
@@ -47,7 +39,7 @@ const Title = styled.h2`
   }
 `;
 const SubText = styled.p`
-  color: black;
+  color: var(--categorytext);
   font-size: 1.6rem;
   margin-right: 1rem;
   @media ${props => props.theme.maxdesktop} {
@@ -79,6 +71,7 @@ const InfoIcon = styled.div`
   margin-bottom: 0.4rem;
   cursor: pointer;
   margin-right: 2rem;
+  filter: var(--backbtn);
 `;
 
 const InfoBox = styled.div`
@@ -93,9 +86,7 @@ const InfoBox = styled.div`
   position: absolute;
   z-index: 3;
   background: rgba(78, 78, 78, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.5);
   box-sizing: border-box;
-  backdrop-filter: blur(4px);
   border-radius: 1rem;
   color: white;
   line-height: 1.5rem;
@@ -148,4 +139,4 @@ function WorkSpace() {
   );
 }
 
-export default WorkSpace;
+export default React.memo(WorkSpace);

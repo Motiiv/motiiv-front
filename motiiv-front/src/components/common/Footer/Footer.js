@@ -9,6 +9,7 @@ const FooterWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 6rem;
+  background: var(--cardbody);
 `;
 
 const Text = styled.h6`
@@ -17,14 +18,17 @@ const Text = styled.h6`
   font-weight: 400;
   margin: 1.5rem 0;
   text-align: center;
+  filter: var(--footercontent);
 `;
 const FooterLogo = styled.img`
   height: 2rem;
+  filter: var(--footercontent);
 `;
 const GoPrivacy = styled.a`
   color: ${props => props.theme.gray};
   font-size: 1.6rem;
   text-decoration: underline;
+  filter: var(--footercontent);
   /* cursor: pointer; */
 `;
 
@@ -46,4 +50,4 @@ function Footer({ history, isShow }) {
   );
 }
 
-export default withRouter(Footer);
+export default withRouter(React.memo(Footer));

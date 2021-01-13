@@ -62,4 +62,4 @@ function PlusBtn({ hasToShift }) {
   );
 }
 
-export default PlusBtn;
+export default React.memo(PlusBtn);

@@ -1,187 +1,179 @@
-import React ,{useState,useEffect,useCallback,useRef}from 'react'
-import {useSpring,animated} from 'react-spring';
-import styled, {css} from 'styled-components';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useSpring, animated } from 'react-spring';
+import styled, { css } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import ModalCoverImage from '../../../assets/global/0109_mymotiiv_login_mockup.png';
 import ModalMobileImage from '../../../assets/global/0109_mobile_mymotiiv_mockup.png';
 import toggle from '../../../assets/global/toggle.gif';
 import SignInModal from '../../../components/common/Login/SignInModal';
 import MyNavBar from '../sections/MyNavbar';
-import {MdClose} from 'react-icons/md';
+import { MdClose } from 'react-icons/md';
 const ModalContainer = styled.div`
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center; 
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const ModalOverlay = styled.div`
-    position: fixed;
-    z-index: 999;
-    width: 100%; 
-    height: 100%;
-    background-size: cover;
-    border : none;
-    overflow : hidden;
-    /* background-color : black;
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  border: none;
+  overflow: hidden;
+  /* background-color : black;
     opacity: 0.7; */
-    background-image: url(${ModalCoverImage});
-    @media ${props => props.theme.mobile}{
-    background-image : url(${ModalMobileImage});
+  background-image: url(${ModalCoverImage});
+  @media ${props => props.theme.mobile} {
+    background-image: url(${ModalMobileImage});
 
     max-width: 76.8rem;
     max-height: 64.3rem;
   }
-
 `;
 const ModalWrapper = styled.div`
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.8);
-    width: 35rem;
-    height: 43.6rem;
-    border-radius: 1.5rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display : ${props => ( !props.showLogin ? 'block' : 'none')};
-    @media ${props => props.theme.mobile}{
-    width : 27.5rem;
-    height : 35.3rem;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 35rem;
+  height: 43.6rem;
+  border-radius: 1.5rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  transform: translate(-50%, -50%);
+  @media ${props => props.theme.mobile} {
+    width: 27.5rem;
+    height: 35.3rem;
   }
 
-  @media ${props => props.theme.tablet}{
-    width : 30rem;
-    height : 38rem;
+  @media ${props => props.theme.tablet} {
+    width: 30rem;
+    height: 38rem;
   }
-  @media ${props => props.theme.desktop}{
+  @media ${props => props.theme.desktop} {
     width: 35rem;
     height: 43.6rem;
   }
 `;
 
 const ModalInner = styled.div`
-    display: flex;
-    flex-direction : column;
-    justify-content: center;
-    align-items: center;
-`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 const ToggleGif = styled.img`
-    background-size: cover;
-    border-radius: 3rem;
-    margin-top : 5rem;
-    @media ${props => props.theme.mobile}{
+  background-size: cover;
+  border-radius: 3rem;
+  margin-top: 5rem;
+  @media ${props => props.theme.mobile} {
     width: 8rem;
-    hegiht : 3.7rem; 
+    hegiht: 3.7rem;
   }
-  @media ${props => props.theme.tablet}{
+  @media ${props => props.theme.tablet} {
     width: 6.5rem;
-    hegiht : 3rem; 
+    hegiht: 3rem;
   }
-  @media ${props => props.theme.desktop}{
+  @media ${props => props.theme.desktop} {
     width: 9rem;
-    height : 3.7rem;
+    height: 3.7rem;
   }
 `;
 
 const Title = styled.div`
-    font-family: SpoqaHanSans;
-    font-weight: bold;
-    font-size : 2rem;
-    color : ${({theme}) => theme.primary};
-    margin-top : 6rem;
-    @media ${props => props.theme.mobile}{
-    margin-top : 3.5rem;
-    font-size : 1.6rem;
+  font-family: SpoqaHanSans;
+  font-weight: bold;
+  font-size: 2rem;
+  color: ${({ theme }) => theme.primary};
+  margin-top: 6rem;
+  @media ${props => props.theme.mobile} {
+    margin-top: 3.5rem;
+    font-size: 1.6rem;
   }
-  @media ${props => props.theme.tablet}{
-    font-size : 2rem;
+  @media ${props => props.theme.tablet} {
+    font-size: 2rem;
   }
-  @media ${props => props.theme.desktop}{
-    font-size : 2rem;
+  @media ${props => props.theme.desktop} {
+    font-size: 2rem;
   }
 `;
 
 const Subtitle = styled.div`
-    font-family: SpoqaHanSans;
-    font-size : 1.6rem;
-    color : white;
-    line-height: 150%;
-    margin-top : 4.5rem;
-    text-align: center;
-    @media ${props => props.theme.mobile}{
-    margin-top : 3rem;
-    font-size : 1.4rem;
+  font-family: SpoqaHanSans;
+  font-size: 1.6rem;
+  color: white;
+  line-height: 150%;
+  margin-top: 4.5rem;
+  text-align: center;
+  @media ${props => props.theme.mobile} {
+    margin-top: 3rem;
+    font-size: 1.4rem;
   }
-  @media ${props => props.theme.tablet}{
-    font-size : 1.6rem;
+  @media ${props => props.theme.tablet} {
+    font-size: 1.6rem;
   }
-    
 `;
-
 
 const TagWrapper = styled.div`
-    width : 13.8rem;
-    height: 3.2rem;
-    border: solid ${({theme}) => theme.primary} 1px;
-    border-radius: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top : 7rem;
-    @media ${props => props.theme.mobile}{
-    margin-top : 4rem;
+  width: 13.8rem;
+  height: 3.2rem;
+  border: solid ${({ theme }) => theme.primary} 1px;
+  border-radius: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 7rem;
+  @media ${props => props.theme.mobile} {
+    margin-top: 4rem;
   }
-  @media ${props => props.theme.tablet}{
-    margin-top : 6.1rem;
+  @media ${props => props.theme.tablet} {
+    margin-top: 6.1rem;
   }
-  @media ${props => props.theme.desktop}{
-    margin-top : 7rem;
+  @media ${props => props.theme.desktop} {
+    margin-top: 7rem;
   }
-  
-  
-    
-    
 `;
 const ContentWrapper = styled.div`
-    display : flex;
-    justify-content: center;
-    align-items : center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Signup = styled.div`
-    display : flex;
-    align-items : center;
-    cursor : pointer;
-    font-weight: bold;
-    font-size : 1.4rem;
-    font-family: Campton;
-    color : ${({theme}) => theme.primary};
-    text-decoration: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.4rem;
+  font-family: Campton;
+  color: ${({ theme }) => theme.primary};
+  text-decoration: none;
 `;
 
 const Devider = styled.div`
-    display : flex;
-    align-items : center;
-    font-family: Cantarell;
-    font-weight : bold;
-    margin : 0.5rem;
-    width: 0.5rem;
-    height: 1.2rem;
-    color : ${({theme}) => theme.primary};
+  display: flex;
+  align-items: center;
+  font-family: Cantarell;
+  font-weight: bold;
+  margin: 0.5rem;
+  width: 0.5rem;
+  height: 1.2rem;
+  color: ${({ theme }) => theme.primary};
 `;
 
 const Login = styled.div`
-    display : flex;
-    align-items : center;
-    font-weight: bold; 
-    font-size : 1.4rem;
-    cursor : pointer;
-    font-family: Campton;
-    color : ${({theme}) => theme.primary};
-    text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.4rem;
+  cursor: pointer;
+  font-family: Campton;
+  color: ${({ theme }) => theme.primary};
+  text-decoration: none;
 `;
-
 
 // const Background = styled.div`
 //   width: 100%;
@@ -190,7 +182,7 @@ const Login = styled.div`
 //   position : fixed;
 //   display: flex;
 //   justify-content: center;
-//   align-items : center; 
+//   align-items : center;
 // `;
 
 // const ModalWrapper = styled.div`
@@ -240,52 +232,53 @@ const Login = styled.div`
 //   padding: 0;
 //   z-index: 10;
 // `;
-function MyModal({showModal}) {
-    const [showLogin,setShowLogin] = useState(false);
+function MyModal({ showModal }) {
+  const [showLogin, setShowLogin] = useState(false);
 
-    const showLoginModal = () => {
-        setShowLogin(!showLogin)
-    };
-    // document.body.style.overflow = "hidden";
-    // document.body.style.overflow = "unset"
+  const showLoginModal = () => {
+    setShowLogin(!showLogin);
+  };
+  // document.body.style.overflow = "hidden";
+  // document.body.style.overflow = "unset"
 
-    return (
-         <> 
-          {/* {
-             ? <Background ref={modalRef} onClick={closeModal}>
-            <animated.div style = {animation}>
-            <ModalWrapper showModal={showModal}>
-            <ModalContent>
-              <h1>Are you ready?</h1>
-              </ModalContent>
-              <CloseModalButton aria-label="Close modal" onClick={() => setShowModal(prev=> !prev)}></CloseModalButton>
-            </ModalWrapper>
-            </animated.div>
-          </Background> : null} */}
-          {/* <ModalContainer> */}
-            <ModalOverlay />
-            {/* <animated.div style={animation}> */}
-           { !showLogin && (<> <ModalWrapper showLogin = {showLogin}>
-                <ModalInner>
-                    <ToggleGif src = {toggle}></ToggleGif>
-                    <Title>회원만 접근할 수 있어요!</Title> 
-                    <Subtitle>지금 가입하고<br /><b>나만을 위한 작업 공간</b>을<br/>구성해보세요</Subtitle>
-                    <TagWrapper>
-                        <ContentWrapper> 
-                            <Signup  onClick={() => {  showModal();
-                showLoginModal(); }} >sign up</Signup>
-                            <Devider>&#47;</Devider>
-                            <Login  onClick={() => {  showModal();
-                showLoginModal(); }}>login</Login>
-                        </ContentWrapper>
-                    </TagWrapper>
-                </ModalInner>
-            </ModalWrapper> </>)
-} 
-            {/* </animated.div> */}
-            {/* </ModalContainer> */}
-        </>
-    )
+  return (
+    <>
+      <ModalOverlay />
+      <ModalWrapper showLogin={showLogin}>
+        <ModalInner>
+          <ToggleGif src={toggle}></ToggleGif>
+          <Title>회원만 접근할 수 있어요!</Title>
+          <Subtitle>
+            지금 가입하고
+            <br />
+            <b>나만을 위한 작업 공간</b>을<br />
+            구성해보세요
+          </Subtitle>
+          <TagWrapper>
+            <ContentWrapper>
+              <Signup
+                onClick={() => {
+                  showModal();
+                  showLoginModal();
+                }}
+              >
+                sign up
+              </Signup>
+              <Devider>&#47;</Devider>
+              <Login
+                onClick={() => {
+                  showModal();
+                  showLoginModal();
+                }}
+              >
+                login
+              </Login>
+            </ContentWrapper>
+          </TagWrapper>
+        </ModalInner>
+      </ModalWrapper>
+    </>
+  );
 }
 
-export default MyModal;
+export default React.memo(MyModal);
