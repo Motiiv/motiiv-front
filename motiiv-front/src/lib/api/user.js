@@ -45,7 +45,8 @@ const login = async (user) => {
     const { data } = await client.post(`/users/login`, user);
     console.log('[SUCCESS] login', data);
     // api 토큰 바꿔치기
-    client.defaults.headers.userToken = data.userToken;
+    client.defaults.headers.userToken = data.data.userToken;
+    console.log(data.success);
     return data;
   } catch (e) {
     console.log('[FAIL] login', e);

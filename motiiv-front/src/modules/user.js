@@ -114,6 +114,7 @@ const user = handleActions(
     [CREATE_PROFILE_SUCCESS]: (state, { payload: userInfo }) => ({
       ...state,
       userInfo,
+      isLogged: true
     }),
     [CREATE_PROFILE_FAILURE]: (state, { payload: error }) => ({
       ...state,

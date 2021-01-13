@@ -4,7 +4,7 @@ import { useState } from 'react';
 import img from '../../../assets/profile/sampleImage.png';
 
 const Container = styled.div`
-  display: ${props => props.page === 2 ? 'flex' : 'none' };
+  display: ${props => props.page === 2 ? 'flex' : 'none'};
   justify-content: center;
   align-items:center;
   flex-direction: column;
@@ -65,10 +65,10 @@ const Text = styled.div`
     font-size:1.8rem;
     font-weight:400;
     color:white;
-    ${props => props.click === true? 
-      `
+    ${props => props.click === true ?
+    `
       -webkit-text-stroke: 1px #000
-      `:``};
+      `: ``};
   @media ${props => props.theme.maxlaptop} {
     font-size:1.5rem;
     width:10rem;
@@ -97,10 +97,10 @@ const ImageBtn = styled.div`
         transform: translate(-50%, -50%);
     };
 
-    ${props => props.click === true ? 
+    ${props => props.click === true ?
     `
       border : 1.5px solid #2CFF2C;
-    `:``};
+    `: ``};
 
   @media ${props => props.theme.maxlaptop} {
     width:11rem;
@@ -113,25 +113,59 @@ const ImageBtn = styled.div`
   }
 `
 
-function SecondPage({page}) {
+function SecondPage({ page }) {
 
-  const [selectedState, setSelectedStateState] = useState(false);
+  const [selectedState, setSelectedStateState] = useState({
+    planner: false,
+    designer: false,
+    developer: false,
+    youknow: false,
+  });
 
-  //버튼 눌린 것만 활성화 되도록
+  const onClickBtn = i => {
+    if (i === 0) {
+      setSelectedStateState({
+        planner: true,
+        designer: false,
+        developer: false,
+        youknow: false
+      })
+    } else if (i === 1) {
+      setSelectedStateState({
+        planner: false,
+        designer: true,
+        developer: false,
+        youknow: false
+      })
+    } else if (i === 2) {
+      setSelectedStateState({
+        planner: false,
+        designer: false,
+        developer: true,
+        youknow: false
+      })
+    } else if (i === 3) {
+      setSelectedStateState({
+        planner: false,
+        designer: false,
+        developer: false,
+        youknow: true
+      })
+    }
+  }
 
-
-    return (
-      <Container page={page}>
-          <Title>어떤 일을 하고 계세요?</Title>
-          <SubTitle>일하고 있는 분야에 맞는 동기부여 영상을 추천드려요!</SubTitle>
-          <ImageContainer>
-            <ImageBtn img = {img} click={selectedState}><Text click={selectedState}>기획자</Text></ImageBtn>
-            <ImageBtn img = {img} click={selectedState}><Text click={selectedState}>디자이너</Text></ImageBtn>
-            <ImageBtn img = {img} click={selectedState}><Text click={selectedState}>개발자</Text></ImageBtn>
-            <ImageBtn img = {img} click={selectedState}><Text click={selectedState}>유노윤호</Text></ImageBtn>
-          </ImageContainer>
-      </Container>
-    );
+  return (
+    <Container page={page}>
+      <Title>어떤 일을 하고 계세요?</Title>
+      <SubTitle>일하고 있는 분야에 맞는 동기부여 영상을 추천드려요!</SubTitle>
+      <ImageContainer>
+        <ImageBtn img={img} onClick={onClickBtn[0]} click={selectedState.planner}><Text click={selectedState.planner}>기획자</Text></ImageBtn>
+        <ImageBtn img={img} onClick={onClickBtn[1]} click={selectedState.designer}><Text click={selectedState.designer}>디자이너</Text></ImageBtn>
+        <ImageBtn img={img} onClick={onClickBtn[2]} click={selectedState.developer}><Text click={selectedState.developer}>개발자</Text></ImageBtn>
+        <ImageBtn img={img} onClick={onClickBtn[3]} click={selectedState.youknow}><Text click={selectedState.youknow}>유노윤호</Text></ImageBtn>
+      </ImageContainer>
+    </Container>
+  );
 }
-  
+
 export default SecondPage;
