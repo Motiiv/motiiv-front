@@ -60,17 +60,31 @@ function App({ props }) {
         <Route
           exact
           path="/main"
-          render={props => <Main props={props} showModal={showModal} isLoggined={loginState}/>}
+          render={props => (
+            <Main props={props} showModal={showModal} isLoggined={loginState} />
+          )}
         ></Route>
         <Route
           path="/category/:hashTag"
-          render={props => <Category props={props} showModal={showModal} isLoggined={loginState}/>}
+          render={props => (
+            <Category
+              props={props}
+              showModal={showModal}
+              isLoggined={loginState}
+            />
+          )}
         ></Route>
         {
           <Route
             exact
             path="/mymotiiv"
-            render={props => <MyMotiiv props={props} showModal={showModal} isLoggined={loginState} />}
+            render={props => (
+              <MyMotiiv
+                props={props}
+                showModal={showModal}
+                isLoggined={loginState}
+              />
+            )}
           ></Route>
         }
         <Route
@@ -94,7 +108,13 @@ function App({ props }) {
         <Route
           exact
           path="/detail/:id"
-          render={props => <Detail props={props} showModal={showModal} isLoggined={loginState} />}
+          render={props => (
+            <Detail
+              props={props}
+              showModal={showModal}
+              isLoggined={loginState}
+            />
+          )}
         ></Route>
         {/* Upload */}
         <Route
@@ -112,7 +132,7 @@ function App({ props }) {
         }
       />
       <Footer isShow={location.pathname !== '/setting'} />
-      <MyNavBar isLoggined = {loginState} tag={location.pathname}></MyNavBar>
+      <MyNavBar isLoggined={loginState} tag={location.pathname}></MyNavBar>
     </>
   );
 }

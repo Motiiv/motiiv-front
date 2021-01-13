@@ -12,7 +12,7 @@ function Loading({ margin }) {
         alignItems: 'center',
         justifyContent: 'center',
         margin: margin,
-        color: '#999',
+        color: '#2cff2c',
       }}
     />
   );

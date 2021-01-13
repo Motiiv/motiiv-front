@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import SaveImage from '../../../assets/global/save_icon.svg';
 import SaveClickImage from '../../../assets/global/saveclick_icon.svg';
@@ -37,21 +37,30 @@ const SaveImg = styled.img`
             height: 3rem;
           `}
   }
+  &:hover {
+    fill: black;
+  }
 `;
-function CardSave({ isSave, id, BlackModalConfirm, isLoggined, size, saveButton }) {
+function CardSave({
+  isSave,
+  id,
+  BlackModalConfirm,
+  isLoggined,
+  size,
+  saveButton,
+}) {
   // const [save, setSave] = useState(isSave);
   const [save, setSave] = useState(isSave ? true : false);
   const dispatch = useDispatch();
 
   const SaveToggle = () => {
-    //BlackModalConfirm();
-    console.log("로그인이 됬냐?", isLoggined);
-    if (isLoggined === true) { 
+    if (isLoggined === true) {
       dispatch(changeSaveStatus(id));
-    }else BlackModalConfirm();
+      setSave(!save);
+    } else BlackModalConfirm();
   };
   return (
-    <SaveBox onClick={SaveToggle} saveButton = {saveButton}>
+    <SaveBox onClick={SaveToggle} saveButton={saveButton}>
       <SaveImg size={size} src={save ? SaveClickImage : SaveImage} />
     </SaveBox>
   );

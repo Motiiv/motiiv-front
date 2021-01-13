@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import Card from '../Card/Card';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import styled, { css } from 'styled-components';
@@ -129,7 +129,16 @@ const SliderSection = styled.div`
   }
 `;
 
-function ImageSlider({ object, type, size, text, saveButton, nonfix,BlackModalConfirm,isLoggined}) {
+function ImageSlider({
+  object,
+  type,
+  size,
+  text,
+  saveButton,
+  nonfix,
+  BlackModalConfirm,
+  isLoggined,
+}) {
   const swiperRef = useRef();
   const num = type === 'top' ? 3 : 4;
   const space = type === 'top' ? 20 : 25;
