@@ -31,18 +31,16 @@ const LikeImg = styled.img`
   width: 2rem;
   height: 2rem;
 `;
-function Like({ BlackModalConfirm, id, blackModal}) {
+function Like({ BlackModalConfirm, id, blackModal, isLoggined }) {
   const dispatch = useDispatch();
   const { loading_like, like } = useSelector(({ video, loading }) => ({
     like: video.like,
     loading_like: loading['video/CHANGE_LIKE_STATUS'],
   }));
   const LikeToggle = () => {
-    if(blackModal.isLogin === true){
+    if (isLoggined === true) {
       dispatch(changeLikeStatus(id));
-      }
-      else BlackModalConfirm();
-    
+    } else BlackModalConfirm();
   };
   return (
     <LikeBox onClick={LikeToggle}>

@@ -118,7 +118,16 @@ const SliderSection = styled.div`
   }
 `;
 
-function ImageSlider({ object, type, size, text, saveButton, nonfix,BlackModalConfirm,isLoggined}) {
+function ImageSlider({
+  object,
+  type,
+  size,
+  text,
+  saveButton,
+  nonfix,
+  BlackModalConfirm,
+  isLoggined,
+}) {
   const swiperRef = useRef();
   const num = type === 'top' ? 3 : 4;
   const space = type === 'top' ? 20 : 25;
@@ -196,8 +205,8 @@ function ImageSlider({ object, type, size, text, saveButton, nonfix,BlackModalCo
                   obj={obj}
                   saveButton={saveButton}
                   nonfix={nonfix}
-                  BlackModalConfirm ={BlackModalConfirm}
-                  isLoggined = {isLoggined}
+                  BlackModalConfirm={BlackModalConfirm}
+                  isLoggined={isLoggined}
                 ></Card>
               </SwiperSlide>
             ))}

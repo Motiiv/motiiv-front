@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SwiperBanner from './sections/SwiperBanner';
 import AdBanner from './sections/AdBanner';
 import Section from '../../components/common/Section/Section';
@@ -187,13 +187,13 @@ const YeongJinBackground = styled.div`
   }
   background-color: ${({ theme }) => theme.lightGray};
 `;
-function Main({showModal,isLoggined}) {
+function Main({ showModal, isLoggined }) {
   const dispatch = useDispatch();
   const [blackModal, setBlackModal] = useState({
     active: false,
   });
   const BlackModalConfirm = () => {
-    if ( !isLoggined ) {
+    if (!isLoggined) {
       setBlackModal({
         ...blackModal,
         active: !blackModal.active,
@@ -219,10 +219,13 @@ function Main({showModal,isLoggined}) {
 
   return (
     <YeongJinBackground>
-       {blackModal.active && (
-            <BlackModal blackModal = {blackModal} setBlackModal = {setBlackModal} showModal = {showModal}
-            ></BlackModal>
-          )}
+      {blackModal.active && (
+        <BlackModal
+          blackModal={blackModal}
+          setBlackModal={setBlackModal}
+          showModal={showModal}
+        ></BlackModal>
+      )}
       {Object.keys(banners).length ? (
         <>
           <SwiperBanner
@@ -237,12 +240,20 @@ function Main({showModal,isLoggined}) {
             color="gray"
             text="motiiv top 10"
             BlackModalConfirm={BlackModalConfirm}
-            isLoggined= {isLoggined}
+            isLoggined={isLoggined}
             subText="이 영상을 본 80%가 바로 일을 시작했어요!"
           ></Section>
         </>
       ) : (
-        <Loading></Loading>
+        <Loading
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            height: '100%',
+          }}
+        ></Loading>
       )}
       {Object.keys(recommend).length ? (
         <>
@@ -251,7 +262,7 @@ function Main({showModal,isLoggined}) {
             text={recommend.sectionOne.sectiononeName}
             subText={recommend.sectionOne.sectiononeNameSub}
             BlackModalConfirm={BlackModalConfirm}
-            isLoggined= {isLoggined}
+            isLoggined={isLoggined}
             nonfix="true"
           ></Section>
           <Section
@@ -259,7 +270,7 @@ function Main({showModal,isLoggined}) {
             text={recommend.sectionTwo.sectionTwoName}
             subText={recommend.sectionTwo.sectionTwoNameSub}
             BlackModalConfirm={BlackModalConfirm}
-            isLoggined= {isLoggined}
+            isLoggined={isLoggined}
             nonfix="true"
           ></Section>
           <Section
@@ -267,7 +278,7 @@ function Main({showModal,isLoggined}) {
             text={recommend.sectionThree.sectionThreeName}
             subText={recommend.sectionThree.sectionThreeNameSub}
             BlackModalConfirm={BlackModalConfirm}
-            isLoggined= {isLoggined}
+            isLoggined={isLoggined}
             nonfix="true"
           ></Section>
           <AdBanner />
@@ -276,7 +287,7 @@ function Main({showModal,isLoggined}) {
             text={recommend.sectionFour.sectionFourName}
             subText={recommend.sectionFour.sectionFourNameSub}
             BlackModalConfirm={BlackModalConfirm}
-            isLoggined= {isLoggined}
+            isLoggined={isLoggined}
             nonfix="true"
           ></Section>
           <Section
@@ -284,7 +295,7 @@ function Main({showModal,isLoggined}) {
             text={recommend.sectionFive.sectionFiveName}
             subText={recommend.sectionFive.sectionFiveNameSub}
             BlackModalConfirm={BlackModalConfirm}
-            isLoggined= {isLoggined}
+            isLoggined={isLoggined}
             nonfix="true"
           ></Section>
           <Section
@@ -292,7 +303,7 @@ function Main({showModal,isLoggined}) {
             text={recommend.sectionSix.sectionSixName}
             subText={recommend.sectionSix.sectionSixNameSub}
             BlackModalConfirm={BlackModalConfirm}
-            isLoggined= {isLoggined}
+            isLoggined={isLoggined}
             nonfix="true"
           ></Section>
         </>

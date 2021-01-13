@@ -54,7 +54,18 @@ const Wrapper = styled.div`
   }
 `;
 
-const Section = ({ type, size, color, object, text, nonfix, subText,isLoggined,showModal,BlackModalConfirm}) => {
+const Section = ({
+  type,
+  size,
+  color,
+  object,
+  text,
+  nonfix,
+  subText,
+  isLoggined,
+  showModal,
+  BlackModalConfirm,
+}) => {
   return (
     <>
       <Container type={type} color={color}>
@@ -73,7 +84,7 @@ const Section = ({ type, size, color, object, text, nonfix, subText,isLoggined,s
             text={text}
             nonfix={nonfix}
             BlackModalConfirm={BlackModalConfirm}
-            isLoggined= {isLoggined}
+            isLoggined={isLoggined}
             showModal={showModal}
           ></ImageSlider>
         </Wrapper>
