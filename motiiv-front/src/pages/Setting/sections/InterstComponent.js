@@ -9,9 +9,9 @@ const Component = styled.button`
     font-family:'Spoqa-Han-Sans';
 
     @media ${props => props.theme.mobile} {
-            width: 5.3rem;
-            height: 2rem;
-            font-size: 1.1rem;
+            width: 5.7rem;
+            height: 2.2rem;
+            font-size: 1.2rem;
     }
 
 ${props =>
@@ -20,7 +20,6 @@ ${props =>
           width: 8.4rem;
           height: 3.2rem;
           background-color : #2CFF2C;
-          margin-right: 1rem;
           color: #4E4E4E;
           font-size: 1.6rem;
           font-weight: 700;
@@ -31,7 +30,6 @@ ${props =>
           width: 8.4rem;
           height: 3.2rem;
           background-color : #2CFF2C;
-          margin-right: 1rem;
           color: #4E4E4E;
           font-size: 1.6rem;
           font-weight: 700;
@@ -42,7 +40,6 @@ ${props =>
           width: 8.4rem;
           height: 3.2rem;
           background-color : #6C6C6C;
-          margin-right: 1rem;
           color: #F3F3F3;
           font-size: 1.6rem;
           font-weight: 100;
@@ -53,7 +50,6 @@ ${props =>
           width: 8.4rem;
           height: 3.2rem;
           background-color : #F3F3F3;
-          margin-right: 1rem;
           color: #A7A7A7;
           font-size: 1.6rem;
           font-weight: 100;

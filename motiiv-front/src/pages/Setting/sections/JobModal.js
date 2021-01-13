@@ -12,7 +12,7 @@ const ModalWrap = styled.div`
   z-index:3;
 
   width: 29.6rem;
-  height:13.8rem;
+  height:18rem;
   border-radius: 1rem;
   background: ${props => props.theme.darkGray};
   padding: 2rem;
@@ -24,12 +24,12 @@ const ModalWrap = styled.div`
   font-family : 'Spoqa-Han-Sans';
   @media ${props => props.theme.maxdesktop} {
     width: 23rem;
-    height:13.8rem;
+    height:16rem;
 
   }
   @media ${props => props.theme.mobile} {
     width: 22.4rem;
-    height:13.8rem;
+    height:15rem;
   }
 `;
 
@@ -52,23 +52,29 @@ function JobModal({ show, jobfunc }) {
   const [jobState, setJobState] = useState({
       planner: 'unselected',
       designer: 'unselected',
-      developer: 'unselected'
+      developer: 'unselected',
+      youknow: 'unselected'
     }
   )
 
   const onClickPlanerBtn = () => {
-    setJobState({planner : 'selected', designer : 'unselected', developer:'unselected'});    
+    setJobState({planner : 'selected', designer : 'unselected', developer:'unselected', youknow: 'unselected'});    
     jobfunc('기획');
   }
 
   const onClickDesignerBtn = () => {
-    setJobState({planner : 'unselected', designer : 'selected', developer:'unselected'});
+    setJobState({planner : 'unselected', designer : 'selected', developer:'unselected', youknow: 'unselected'});
     jobfunc('디자인');
   }
 
   const onClickDeveloperBtn = () => {
-    setJobState({planner : 'unselected', designer : 'unselected', developer:'selected'});
+    setJobState({planner : 'unselected', designer : 'unselected', developer:'selected', youknow: 'unselected'});
     jobfunc('개발');
+  }
+  
+  const onClickYouknowBtn = () => {
+    setJobState({planner : 'unselected', designer : 'unselected', developer:'unselected', youknow: 'selected'});
+    jobfunc('유노윤호');
   }
 
     return(
@@ -76,6 +82,7 @@ function JobModal({ show, jobfunc }) {
           <JobButton type = {jobState.planner} onClick={onClickPlanerBtn}>기획자</JobButton>
           <JobButton type = {jobState.designer} onClick={onClickDesignerBtn}>디자이너</JobButton>
           <JobButton type = {jobState.developer} onClick={onClickDeveloperBtn}>개발자</JobButton>
+          <JobButton type = {jobState.youknow} onClick={onClickYouknowBtn}>유노윤호</JobButton>
         </ModalWrap>
     );
 }

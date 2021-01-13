@@ -26,7 +26,7 @@ import { getWorkspaces } from './modules/mymotiiv';
 
 function App({ props }) {
   const dispatch = useDispatch();
-  const [loginState, setLoginState] = useState(false);
+  const [loginState, setLoginState] = useState(true);
   const [showLoginModalState, setShowLoginModalState] = useState(false);
 
   const location = useLocation();

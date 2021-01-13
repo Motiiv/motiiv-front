@@ -38,7 +38,8 @@ const InterestGrid = styled.div`
   max-width:60.4rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(8.4rem, 1fr));
-  gap: 1rem;
+  column-gap: 1rem;
+  row-gap:2rem;
 
   @media ${props => props.theme.maxdesktop} {
     gap: 2rem;
@@ -46,7 +47,7 @@ const InterestGrid = styled.div`
   }
   @media ${props => props.theme.mobile} {
     grid-template-columns: repeat(auto-fill, minmax(5.3rem, 1fr));
-    column-gap: 0.5rem;
+    column-gap: 1rem;
     row-gap:1.2rem;
   }
 `
