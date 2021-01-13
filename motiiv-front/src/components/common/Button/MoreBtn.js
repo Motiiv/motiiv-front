@@ -34,4 +34,4 @@ function MoreBtn({ color, linkUrl, type, text }) {
     </RoundBtn>
   );
 }
-export default MoreBtn;
+export default React.memo(MoreBtn);

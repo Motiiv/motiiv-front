@@ -292,4 +292,4 @@ function ProfileModal({ hideModal, showModal }) {
   );
 }
 
-export default ProfileModal;
+export default React.memo(ProfileModal);

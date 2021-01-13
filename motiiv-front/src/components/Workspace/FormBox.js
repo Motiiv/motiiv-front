@@ -274,4 +274,4 @@ function FormBox({
   );
 }
 
-export default FormBox;
+export default React.memo(FormBox);

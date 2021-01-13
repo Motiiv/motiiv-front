@@ -99,4 +99,4 @@ const Section = ({
   );
 };
 
-export default Section;
+export default React.memo(Section);

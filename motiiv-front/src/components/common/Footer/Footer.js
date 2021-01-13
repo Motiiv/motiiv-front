@@ -50,4 +50,4 @@ function Footer({ history, isShow }) {
   );
 }
 
-export default withRouter(Footer);
+export default withRouter(React.memo(Footer));

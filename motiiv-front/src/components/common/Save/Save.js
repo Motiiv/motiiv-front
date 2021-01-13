@@ -11,6 +11,7 @@ const SaveBox = styled.div`
   margin-right: 2rem;
   line-height: 0 !important;
   cursor: pointer;
+  z-index: 2;
 `;
 const SaveText = styled.div`
   ${props =>

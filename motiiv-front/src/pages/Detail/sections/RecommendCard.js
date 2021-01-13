@@ -12,6 +12,9 @@ const VideoWrapper = styled.div`
   /*   & + & {
     margin-top: 2rem;
   } */
+  @media ${props => props.theme.mobile} {
+    margin-bottom: 3rem;
+  }
 `;
 const VideoContent = styled.img`
   border-radius: 0.7rem;
@@ -35,4 +38,4 @@ function RecommendCard({ video, history }) {
   );
 }
 
-export default withRouter(RecommendCard);
+export default withRouter(React.memo(RecommendCard));

@@ -1,18 +1,13 @@
-import { useSpring, animated } from 'react-spring';
-import { MdClose } from 'react-icons/md';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import LikeImage from '../../assets/global/like_icon.svg';
 import SaveImage from '../../assets/global/save_icon.svg';
-import LikeClickImage from '../../assets/global/likeclick_icon.svg';
-import SaveClickImage from '../../assets/global/saveclick_icon.svg';
 import Tag from '../common/Tag/Tag';
 import RecommendCard from '../../pages/Detail/sections/RecommendCard';
 import ShareModal from '../../pages/Detail/sections/ShareModal';
 import { withRouter } from 'react-router-dom';
 import BlackModal from '../common/Modal/BlackModal';
 import Loading from '../common/Loading/Loading';
-import { useDispatch, useSelector } from 'react-redux';
 import Like from '../common/Like/Like';
 import Save from '../common/Save/Save';
 
@@ -55,15 +50,12 @@ const RecommendWrapper = styled.div`
     margin-left: 0;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-    //max-width: 50rem;
     margin-left: auto;
     margin-right: auto;
   }
   @media ${props => props.theme.tablet} {
     width: 100%;
     margin-left: 0;
-    /*     padding-left: 4rem;
-    padding-right: 4rem; */
   }
   @media ${props => props.theme.desktop} {
     width: 19%;
@@ -74,10 +66,8 @@ const RecommendCardBox = styled.div`
   display: grid;
   width: 100%;
   @media ${props => props.theme.mobile} {
-    //flex-direction: column;
   }
   @media ${props => props.theme.tablet} {
-    //flex-direction: row;
     grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
     grid-gap: 2rem;
   }
@@ -455,11 +445,12 @@ function DetailComponent({
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
                       blackModal={blackModal}
+                      isLoggined={isLoggined}
                     ></Like>
                     <Save
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
-                      blackModal={blackModal}
+                      isLoggined={isLoggined}
                     ></Save>
                   </ButtonBox>
                   <ShareBox>

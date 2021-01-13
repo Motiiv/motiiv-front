@@ -1,5 +1,6 @@
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import React from 'react';
 
 const antIcon = <LoadingOutlined style={{ fontSize: 40 }} spin />;
 
@@ -18,4 +19,4 @@ function Loading({ margin }) {
   );
 }
 
-export default Loading;
+export default React.memo(Loading);

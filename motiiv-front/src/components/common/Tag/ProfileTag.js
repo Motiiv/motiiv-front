@@ -92,4 +92,4 @@ function Tag({
     </TagContainer>
   );
 }
-export default Tag;
+export default React.memo(Tag);
