@@ -10,13 +10,12 @@ const ModalBackgorundWrap = styled.div`
   background: #000000;
   opacity: 0.5;
 
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
   z-index:100000;
-  overflow : hidden;
 
   width: auto;
   height: auto;
