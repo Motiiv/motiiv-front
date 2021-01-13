@@ -149,7 +149,8 @@ const GridContainer = styled.div`
     props.hashTag !== '0'
       ? css`
           @media ${props => props.theme.mobile} {
-            grid-template-columns: repeat(1, 1fr);
+            //grid-template-columns: repeat(1, 1fr);
+            justify-content: center;
           }
           @media ${props => props.theme.tablet} {
             grid-template-columns: repeat(3, 1fr);
@@ -163,7 +164,8 @@ const GridContainer = styled.div`
         `
       : css`
           @media ${props => props.theme.mobile} {
-            grid-template-columns: repeat(1, 1fr);
+            //grid-template-columns: repeat(1, 1fr);
+            justify-content: center;
           }
           @media ${props => props.theme.tablet} {
             grid-template-columns: repeat(2, 1fr);
