@@ -222,4 +222,4 @@ function Navbar({ showModal, isloggined, location }) {
   );
 }
 
-export default Navbar;
+export default React.memo(Navbar);

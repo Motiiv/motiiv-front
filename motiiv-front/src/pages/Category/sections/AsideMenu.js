@@ -39,4 +39,4 @@ function AsideMenu({ choice, onHandleMenuChoice, keywords, filters }) {
   );
 }
 
-export default AsideMenu;
+export default React.memo(AsideMenu);

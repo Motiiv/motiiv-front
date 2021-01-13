@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import Card from '../common/Card/Card';
-import DropDownMenu from '../../pages/Category/sections/DropDownMenu';
+//import DropDownMenu from '../../pages/Category/sections/DropDownMenu';
 import SortModal from '../../pages/Category/sections/SortModal';
 import AsideModal from '../../pages/Category/sections/AsideModal';
 import AsideMenu from '../../pages/Category/sections/AsideMenu';
@@ -17,7 +17,6 @@ const CategoryContainer = styled.div`
   width: 100%;
   max-width: 1280px;
   display: flex;
-  //justify-content: center;
   margin-bottom: 10rem;
   min-height: 100rem;
 
@@ -45,7 +44,6 @@ const CategoryContainer = styled.div`
 `;
 const Aside = styled.div`
   min-width: 19.4rem;
-  //margin-top: 20rem;
   position: relative;
   ${props =>
     props.hashTag !== '0'
@@ -83,14 +81,11 @@ const BodyContainer = styled.div`
 
   @media ${props => props.theme.mobile} {
     padding: 0 0.1rem;
-    //margin-top: 3rem;
   }
   @media ${props => props.theme.tablet} {
-    //max-width: 45.2rem;
     margin-top: 0;
   }
   @media ${props => props.theme.laptop} {
-    //max-width: 87.1rem;
   }
   @media ${props => props.theme.desktop} {
     max-width: none;
@@ -124,7 +119,6 @@ const TitleText = styled.div`
       : css`
           font-size: 1.6rem;
           @media ${props => props.theme.mobile} {
-            //font-size: 2rem;
           }
           &:after {
             ${props =>
@@ -141,7 +135,6 @@ const SortButtonWrapper = styled.div`
 const SortTitleText = styled.div`
   font-size: 1.5rem;
   margin-right: 0.7rem;
-  //font-weight: 700;
 `;
 const SortButtonImg = styled.img`
   width: 1.5rem;
@@ -160,7 +153,6 @@ const GridContainer = styled.div`
           }
           @media ${props => props.theme.tablet} {
             grid-template-columns: repeat(3, 1fr);
-            //max-width: 65.8rem;
           }
           @media ${props => props.theme.laptop} {
             grid-template-columns: repeat(4, 1fr);
@@ -204,16 +196,16 @@ function CategoryComponent({
   showModal,
   isLoggined,
 }) {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  /* Aside menu 관리하기 위한 state */
   const [activeStatus, setActiveStatus] = useState({
     status: false,
     choice: 0,
     text: '전체',
-  });
-  const location = useLocation();
-  const [sortStatus, setSortStatus] = useState({
-    text: '최신순',
-    status: false,
-    id: 'new',
   });
   const onChangeActiveStatus = () => {
     setActiveStatus({
@@ -228,7 +220,15 @@ function CategoryComponent({
       text: text,
     });
   };
-  /* 최신순, 인기순 정렬  */
+
+  /* 스크롤 위로 올리기 위한 ref */
+  const location = useLocation();
+  /* 최신순/인기순 등 sort모달 관련 state */
+  const [sortStatus, setSortStatus] = useState({
+    text: '최신순',
+    status: false,
+    id: 'new',
+  });
   const onHandleSortModalStatus = () => {
     setSortStatus({
       ...sortStatus,
@@ -242,6 +242,7 @@ function CategoryComponent({
       id: id,
     });
   };
+  /* 비-로그인 시 모달을 띄우기 위한 state */
   const [blackModal, setBlackModal] = useState({
     active: false,
   });
@@ -254,6 +255,7 @@ function CategoryComponent({
       });
     }
   };
+
   return (
     <CategoryContainer>
       {blackModal.active && (
@@ -347,4 +349,4 @@ function CategoryComponent({
   );
 }
 
-export default CategoryComponent;
+export default React.memo(CategoryComponent);

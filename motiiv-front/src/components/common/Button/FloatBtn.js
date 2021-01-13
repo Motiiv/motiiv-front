@@ -124,4 +124,4 @@ function FloatBtn({ isShow, workspaces }) {
     )
   );
 }
-export default FloatBtn;
+export default React.memo(FloatBtn);

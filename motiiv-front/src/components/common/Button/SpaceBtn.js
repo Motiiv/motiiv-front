@@ -93,4 +93,4 @@ function SpaceBtn({ isActive, transPosition, space, delay }) {
     </SpaceButton>
   );
 }
-export default SpaceBtn;
+export default React.memo(SpaceBtn);

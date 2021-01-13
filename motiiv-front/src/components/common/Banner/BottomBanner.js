@@ -75,4 +75,4 @@ function BottomBanner({ isShow }) {
   );
 }
 
-export default BottomBanner;
+export default React.memo(BottomBanner);

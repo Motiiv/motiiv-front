@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import React from 'react';
 
 const Wrap = styled.div`
   margin-left: 5.5rem;
@@ -125,4 +126,4 @@ const TitleContent = ({ nonfix, text, subText }) => {
   );
 };
 
-export default TitleContent;
+export default React.memo(TitleContent);

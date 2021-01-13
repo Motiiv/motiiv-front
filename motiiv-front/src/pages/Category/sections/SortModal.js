@@ -109,4 +109,4 @@ function SortModal({ sortModal, onHandleSortText, keyword }) {
   );
 }
 
-export default SortModal;
+export default React.memo(SortModal);

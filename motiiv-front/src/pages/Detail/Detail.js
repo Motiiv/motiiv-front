@@ -3,7 +3,7 @@ import DetailComponent from '../../components/Detail/DetailComponent';
 import { getDetailVideoInfo } from '../../modules/video';
 import { useDispatch, useSelector } from 'react-redux';
 
-function Detail({ props ,showModal,isLoggined}) {
+function Detail({ props, showModal, isLoggined }) {
   const dispatch = useDispatch();
   const { videoInfo, recVideoList, detailLoading, like, save } = useSelector(
     ({ video, loading }) => ({
@@ -25,9 +25,9 @@ function Detail({ props ,showModal,isLoggined}) {
       recVideoList={recVideoList}
       detailLoading={detailLoading}
       showModal={showModal}
-      isLoggined = {isLoggined}
+      isLoggined={isLoggined}
     ></DetailComponent>
   );
 }
 
-export default Detail;
+export default React.memo(Detail);

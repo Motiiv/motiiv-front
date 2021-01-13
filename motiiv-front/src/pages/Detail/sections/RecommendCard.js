@@ -35,4 +35,4 @@ function RecommendCard({ video, history }) {
   );
 }
 
-export default withRouter(RecommendCard);
+export default withRouter(React.memo(RecommendCard));

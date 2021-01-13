@@ -50,4 +50,4 @@ function WorkSpaceContainer() {
   );
 }
 
-export default WorkSpaceContainer;
+export default React.memo(WorkSpaceContainer);

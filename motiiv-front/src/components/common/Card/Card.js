@@ -399,4 +399,4 @@ function Card({
   );
 }
 
-export default withRouter(Card);
+export default withRouter(React.memo(Card));

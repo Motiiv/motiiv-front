@@ -129,4 +129,4 @@ function LastPage({ page }) {
   );
 }
 
-export default LastPage;
+export default React.memo(LastPage);

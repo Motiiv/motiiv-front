@@ -97,4 +97,4 @@ function AdBanner() {
   );
 }
 
-export default AdBanner;
+export default React.memo(AdBanner);
