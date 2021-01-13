@@ -375,16 +375,11 @@ function Setting() {
     }));
 
     //바인딩
-    const job = userInfo.Job;
-    const keyword1 = userInfo.UserKeywords[0];
-    const keyword2 = userInfo.UserKeywords[1];
-    const keyword3 = userInfo.UserKeywords[2];
-
-    const [nameInput, SetNameInput] = useState(userInfo.username);
-    const [profileImageInput, SetProfileImageInput] = useState(userInfo.profileImageUrl);
-    const [profileImageFileInput, SetProfileImageFileInput] = useState(userInfo.profileImageUrl);
-    const [jobInput, SetJobInput] = useState(job.name);
-    const [keywordsInput, SetKeywordsInput] = useState([keyword1.name, keyword2.name, keyword3.name]);
+    const [nameInput, SetNameInput] = useState(userInfo && userInfo.username);
+    const [profileImageInput, SetProfileImageInput] = useState(userInfo && userInfo.profileImageUrl);
+    const [profileImageFileInput, SetProfileImageFileInput] = useState(userInfo && userInfo.profileImageUrl);
+    const [jobInput, SetJobInput] = useState(userInfo && userInfo.Job.name);
+    const [keywordsInput, SetKeywordsInput] = useState(userInfo && userInfo.UserKeywords);
 
     const Updateprofile = () => {
         const user = {

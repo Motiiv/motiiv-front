@@ -21,22 +21,24 @@ import {
 } from 'react-router-dom';
 import { useEffect } from 'react';
 import FloatBtn from './components/common/Button/FloatBtn';
-import { getProfile, showSigninModal } from './modules/user';
+import { getProfile, isLoggedIn } from './modules/user';
 import { getWorkspaces } from './modules/mymotiiv';
 
 function App({ props }) {
   const dispatch = useDispatch();
-  const [loginState, setLoginState] = useState(true);
+  //const [loginState, setLoginState] = useState(false);
   const [showLoginModalState, setShowLoginModalState] = useState(false);
 
   const location = useLocation();
+  const { isLogged } = useSelector(state => state.user);
   const { onFloatBtn } = useSelector(state => state.mymotiiv);
   const { workspaces } = useSelector(state => state.mymotiiv);
 
   useEffect(() => {
     dispatch(getWorkspaces());
     dispatch(getProfile());
-  }, []);
+    hideModal();
+  }, [isLogged]);
 
   const hideModal = () => {
     setShowLoginModalState(false);
@@ -53,7 +55,7 @@ function App({ props }) {
       <Navbar
         location={location.pathname}
         showModal={showModal}
-        isloggined={loginState}
+        isloggined={isLogged}
       />
       <Switch>
         {/* Main & Category & MyMotiiv */}

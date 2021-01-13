@@ -142,7 +142,7 @@ function Navbar({ showModal, isloggined, location }) {
     (async () => {
       try {
         setProfileModalState(prev => !prev);
-      } catch (e) {}
+      } catch (e) { }
     })();
   };
   const hideModal = () => {
@@ -203,18 +203,18 @@ function Navbar({ showModal, isloggined, location }) {
 
           {!loading ? (
             <Profile
-              src={userInfo.profileImageUrl}
+              src={userInfo && userInfo.profileImageUrl}
               login={isloggined}
               onClick={onClickProfileImage}
               onclick={profileModalState}
             >
-              <FirstLetter src={userInfo.profileImageUrl}>
-                {userInfo.username && userInfo.username.substr(0, 1)}
+              <FirstLetter src={userInfo && userInfo.profileImageUrl}>
+                {userInfo && userInfo.username.substr(0, 1)}
               </FirstLetter>
             </Profile>
           ) : (
-            <Loading></Loading>
-          )}
+              <Loading></Loading>
+            )}
           <ProfileModal hideModal={hideModal} showModal={profileModalState} />
         </LoginContainer>
       </Header>

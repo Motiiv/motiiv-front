@@ -73,31 +73,30 @@ const BottomContianer = styled.div`
 function InterestModal({ show, keywordsfunc }) {
 
   const interest = ['자기계발','성장','목표','도전','인물','스타트업','변화','위로','조언','개발','디자인','기획']
-  var chosenInterest = [];
 
   const [selectedBtnCountState, setSelectedBtnCountState] = useState(0);
-  const [okBtnState, setOkBtnState] = useState("ok-disabled");
+  const [okBtnState, setOkBtnState] = useState('ok-disabled');
+  const [chosenInterestState, setChosenInterestState] = useState('');
   
   //selectedBtnCountState가 3이 되는 순간 기존 버튼 삭제 말고는 다른 버튼은 눌리지 않아야 함. 이 처리는 어떻게 할까?
   
-  const onClickInterestBtn = () => {
-    console.log("들어와지니?");
+  const onClickInterestBtn = (i) => {
 
     //이미 배열에 해당 태그가 포함되어 있다면 삭제
-    if(chosenInterest.includes()){
-      const idx = chosenInterest.indexOf('버튼을 클릭했을 때 그 내용을 여기에 어떻게 담을까? e.target.value..?')
-      chosenInterest.splice(idx, 1);
+    if(chosenInterestState.includes(interest[i])){
+      const clicked = interest[i];
+      setChosenInterestState(chosenInterestState.filter(interest => interest !== clicked));
       setSelectedBtnCountState(selectedBtnCountState-1);
     }else{
       //배열에 없다면 선택된게 2개 이하일 때만 배열에 삽입
-      if(chosenInterest.length<=2){
-        chosenInterest.append('버튼을 클릭했을 때 그 내용을 여기에 어떻게 담을까? e.target.value..?');
+      if(chosenInterestState.length<=2){
+        setChosenInterestState([...chosenInterestState, interest[i]]);
         setSelectedBtnCountState(selectedBtnCountState+1);
       }
     }
 
     //해당 내용을 state에 업데이트
-    keywordsfunc(chosenInterest);
+    keywordsfunc(chosenInterestState);
 
     //선택된게 1개 이상일 때 완료 버튼 활성화
     if(selectedBtnCountState>=1){
@@ -105,18 +104,17 @@ function InterestModal({ show, keywordsfunc }) {
     }else{
       setOkBtnState('ok-disabled');
     }
-
-    console.log(chosenInterest);
   }
 
     return(
         <ModalWrap show = {show}>
           <InterestGrid>
             {interest.map((tag, i) => <InterestComponent
-                                        key = {"interest-" + i}
+                                        key = {i}
+                                        idx = {i}
                                         type={'unselected'}
                                         text={tag}
-                                        onClick={onClickInterestBtn}
+                                        onClickInterestBtn={onClickInterestBtn}
                                         />)}
           </InterestGrid>
 

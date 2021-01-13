@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import FirstPage from './FirstPage';
 import SecondPage from './SecondPage';
@@ -24,7 +25,7 @@ const ModalBackgorundWrap = styled.div`
 `;
 
 const CancelBtn = styled.div`
-  display: ${props=>props.page === 1 ? 'display' : 'none'};
+  display: ${props => props.page === 1 ? 'display' : 'none'};
   background-image:url(${loginCancelBtn});
   width:1.5rem;
   height:1.5rem;
@@ -33,7 +34,7 @@ const CancelBtn = styled.div`
 
 const NextBtn = styled.div`
   ${props => props.page !== 2 ?
-    `display:none;` : 
+    `display:none;` :
     `opacity: 100; cursor:pointer;`
   };
   font-weight:400;
@@ -193,67 +194,67 @@ function SigninModal({ hideModal, isShow }) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   });
 
-  const [pageState, setPageState] = useState(1);
-  const pageDown = () => {
-    (async () => {
-      try {
-        if(pageState>1){
-          setPageState(pageState-1);
-        }
-      } catch (e) {
-        
-      }
-    })();
-  }
-  const pageUp = () => {
-    (async () => {
-      try {
-        if(pageState<3){
-          setPageState(pageState+1);
-        }
-      } catch (e) {
-        
-      }
-    })();
-  }
-  const pageReset = () => {
-    (async () => {
-      try {
-        setPageState(1);
-      } catch (e) {
-        
-      }
-    })();
+  const [nameState, setNameState] = useState("");
+  const [imageState, setImageState] = useState("");
+  const [snsIdState, setSnsIdState] = useState("");
+  const [socialState, setSocialState] = useState("");
+  const [jobState, setJobState] = useState("");
+  const [keywordState, setKeywordState] = useState("");
+
+  const { userInfo } = useSelector(({ user }) => ({
+    userInfo: user.userInfo
+  }));
+
+  const setSocialProfile = () => {
+    //   setNameState(user && user.username);
+    //   setImageState(user && user.profileImageUrl);
+    //   setSnsIdState(user && user.snsId);
+    //   setSocialState(user && user.socialType);
+    //   setJobState(user && user.Job);
+    //   setKeywordState(user && user.UserKeywords);
+
+    //   console.log(nameState);
+    //   console.log(imageState);
+    //   console.log(snsIdState);
+    //   console.log(socialState);
+    //   console.log(jobState);
+    //   console.log(keywordState);
   }
 
-  //회원 정보 저장
-  
+  const [pageState, setPageState] = useState(1);
+  const pageDown = () => {
+    if (pageState > 1) {
+      setPageState(pageState - 1);
+    }
+  }
+  const pageUp = () => {
+    if (pageState < 3) {
+      setPageState(pageState + 1);
+    }
+  }
+  const pageReset = () => {
+    setPageState(1);
+  }
 
   //회원가입 완료
   const finishSignup = () => {
-    (async () => {
-      try {
-        hideModal();
-      } catch (e) {
-        
-      }
-    })();
+    hideModal();
   }
 
-    return (
-      <>
-        <ModalBackgorundWrap show = {isShow}/>
-        <ModalWrap show = {isShow} ref={myRef}>
-          <CancelBtn onClick={hideModal} page={pageState}/>
-          <FirstPage page = {pageState} pageUp={pageUp}/>
-          <SecondPage page = {pageState}/>
-          <LastPage page = {pageState}/>
-          <PrevBtn page = {pageState} onClick={pageDown}>&#xE000; &nbsp; 이전</PrevBtn>
-          <NextBtn page = {pageState} onClick={pageUp}>다음 &nbsp; &#xE001;</NextBtn>
-          <FinBtn page = {pageState} onClick={finishSignup}>완료</FinBtn>
-        </ModalWrap>
-      </>
-    );
-  }
-  
+  return (
+    <>
+      <ModalBackgorundWrap show={isShow} />
+      <ModalWrap show={isShow} ref={myRef}>
+        <CancelBtn onClick={hideModal} page={pageState} />
+        <FirstPage page={pageState} pageUp={pageUp} socialfunc={setSocialProfile} hideModal={hideModal} />
+        <SecondPage page={pageState} />
+        <LastPage page={pageState} />
+        <PrevBtn page={pageState} onClick={pageDown}>&#xE000; &nbsp; 이전</PrevBtn>
+        <NextBtn page={pageState} onClick={pageUp}>다음 &nbsp; &#xE001;</NextBtn>
+        <FinBtn page={pageState} onClick={finishSignup}>완료</FinBtn>
+      </ModalWrap>
+    </>
+  );
+}
+
 export default SigninModal;

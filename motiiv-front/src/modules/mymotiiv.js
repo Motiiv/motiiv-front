@@ -176,7 +176,7 @@ const mymotiiv = handleActions(
     [GET_MYVIDEOS_FAILURE]: (state, { payload: error }) => ({
       ...state,
       error,
-  }),
+    }),
 
   },
   initState,

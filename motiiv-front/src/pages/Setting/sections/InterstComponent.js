@@ -25,32 +25,12 @@ ${props =>
           font-weight: 700;
           cursor:pointer;
       `
-    :  props.type === "selected-login" ?
-      `
-          width: 8.4rem;
-          height: 3.2rem;
-          background-color : #2CFF2C;
-          color: #4E4E4E;
-          font-size: 1.6rem;
-          font-weight: 700;
-          cursor:pointer;
-      `
     : props.type === "unselected" ?
       `
           width: 8.4rem;
           height: 3.2rem;
           background-color : #6C6C6C;
           color: #F3F3F3;
-          font-size: 1.6rem;
-          font-weight: 100;
-          cursor:pointer;
-      `
-      : props.type === "unselected-login" ?
-      `
-          width: 8.4rem;
-          height: 3.2rem;
-          background-color : #F3F3F3;
-          color: #A7A7A7;
           font-size: 1.6rem;
           font-weight: 100;
           cursor:pointer;
@@ -101,26 +81,19 @@ ${props =>
   };
 `
 
-function InterestComponent({ type, text }) {
+
+function InterestComponent({ type, text, onClickInterestBtn, idx }) {
 
   const [btnState, setBtnState] = useState(type);
 
   const selectBtn = () => {
-    (async () => {
-      try {
-        if(btnState === "selected"){
-          setBtnState("unselected");
-        }else if(btnState === "unselected"){
-          setBtnState("selected");
-        }else if(btnState === "selected-login"){
-          setBtnState("unselected-login");
-        }else if(btnState === "unselected-login"){
-          setBtnState("selected-login");
-        }
-      } catch (e) {
-        
-      }
-    })();
+    onClickInterestBtn(idx);
+
+    if(btnState === "selected"){
+      setBtnState("unselected");
+    }else if(btnState === "unselected"){
+      setBtnState("selected");
+    }
   }
 
     return (
