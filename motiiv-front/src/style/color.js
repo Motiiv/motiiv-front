@@ -15,6 +15,7 @@ const whiteColors = {
   bodybg: 'white',
   swiperafter: 'black',
   footercontent: 'none',
+  sortbg: theme.lightGray,
 };
 const darkColors = {
   background: 'black',
@@ -31,6 +32,7 @@ const darkColors = {
   bodybg: theme.darkBg,
   swiperafter: theme.lightGray,
   footercontent: 'opacity(0.5)',
+  sortbg: theme.primary,
 };
 
 export { whiteColors, darkColors };

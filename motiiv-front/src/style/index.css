@@ -197,4 +197,5 @@ code {
 
 #root {
   padding-top: 5rem;
+  background: var(--cardbody);
 }

@@ -19,7 +19,6 @@ const CategoryContainer = styled.div`
   display: flex;
   margin-bottom: 10rem;
   min-height: 100rem;
-
   @media ${props => props.theme.mobile} {
     flex-direction: column;
     max-width: 37.8rem;
@@ -117,6 +116,7 @@ const TitleText = styled.div`
           }
         `
       : css`
+          color: var(--tag);
           font-size: 1.6rem;
           @media ${props => props.theme.mobile} {
           }
@@ -133,6 +133,7 @@ const SortButtonWrapper = styled.div`
   position: relative;
 `;
 const SortTitleText = styled.div`
+  color: var(--tag);
   font-size: 1.5rem;
   margin-right: 0.7rem;
 `;
