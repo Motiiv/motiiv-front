@@ -156,7 +156,7 @@ const TimeContainer = styled.div`
 const Views = styled.div`
   font-size: 1.5rem;
   font-family: 'Spoqa-Han-Sans';
-  color: ${({ theme }) => theme.darkGray};
+  color: var(--cardsub);
   line-height: 0;
   //overflow: hidden;
   display: flex;
@@ -181,7 +181,7 @@ const Channel = styled.div`
   border-left: 0.15rem solid;
   margin-left: 0.9rem;
   padding-left: 0.9rem;
-  color: ${({ theme }) => theme.darkGray};
+  color: var(--cardsub);
 
   text-overflow: ellipsis;
   word-break: keep-all;
@@ -234,7 +234,7 @@ const TextWrap = styled.div`
   @media ${props => props.theme.tablet} {
     height: auto;
     background-color: ${props =>
-      props.size === 'large' ? 'white !important' : 'transparent'};
+      props.size === 'large' ? 'var(--cardbody)' : 'transparent'};
     /* height: 10.9rem; */
   }
   @media ${props => props.theme.desktop} {
@@ -243,7 +243,7 @@ const TextWrap = styled.div`
 `;
 const Title = styled.div`
   margin-left: ${props => (props.size === 'large' ? '2rem' : '0')};
-  color: black;
+  color: var(--categorytext);
   font-size: 1.5rem;
   font-family: 'Spoqa-Han-Sans';
   overflow: hidden;

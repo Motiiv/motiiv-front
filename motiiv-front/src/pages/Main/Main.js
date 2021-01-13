@@ -153,7 +153,7 @@ const Title = styled.h2`
 `;
 const SubTitle = styled.div`
   font-size: 1.6rem;
-  color: black;
+  color: primary;
   @media ${props => props.theme.mobile} {
     font-size: 1.2rem;
   }

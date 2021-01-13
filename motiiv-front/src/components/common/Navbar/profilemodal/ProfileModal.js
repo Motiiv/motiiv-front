@@ -23,7 +23,6 @@ const ModalWrap = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
   font-family: 'Spoqa-Han-Sans';
   color: var(--categorytext);
   background: var(--modalbackground);
@@ -252,7 +251,7 @@ function ProfileModal({ hideModal, showModal }) {
             <Tag
               key={'interest-' + i}
               text={tag.name}
-              padding="0.4rem 0.8rem"
+              padding="0.45rem 0.8rem 0.2rem 0.8rem"
             />
           ))}
       </TagBox>
@@ -268,7 +267,7 @@ function ProfileModal({ hideModal, showModal }) {
           text={'계정 관리'}
           fontWeight="100"
           bgColor="#A7A7A7"
-          padding="0.4rem 0.8rem"
+          padding="0.45rem 0.8rem 0.2rem 0.8rem"
         />
       </NavLink>
 

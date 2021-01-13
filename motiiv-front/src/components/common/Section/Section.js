@@ -7,7 +7,7 @@ const Container = styled.div`
   width: 100%;
   height: ${props => (props.type === 'top' ? '51rem' : '42rem')};
   background-color: ${props =>
-    props.color === 'gray' ? ({ theme }) => theme.lightGray : 'none'};
+    props.color === 'gray' ? 'var(--topbg)' : 'var(--bodybg)'};
   display: flex;
   justify-content: center;
   align-items: center;

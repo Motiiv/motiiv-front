@@ -34,7 +34,7 @@ const Title = styled.div`
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  color: black;
+  color: var(--categorytext);
   ${props =>
     props.nonfix
       ? css`
@@ -77,7 +77,7 @@ const Title = styled.div`
 
 const SubTitle = styled.div`
   font-size: 1.6rem;
-  color: black;
+  color: var(--categorytext);
   @media ${props => props.theme.mobile} {
     font-size: 1.2rem;
   }
@@ -94,7 +94,7 @@ const TitleText = styled.div`
   font-size: 3rem;
   margin-top: 2rem;
   font-weight: bold; // 여기 props처리
-  color: black;
+  color: var(--keywordtag);
   @media ${props => props.theme.mobile} {
     font-size: 1.8rem;
   }
