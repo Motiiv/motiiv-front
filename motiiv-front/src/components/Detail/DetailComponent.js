@@ -346,20 +346,19 @@ function DetailComponent({
   recVideoList,
   detailLoading,
   showModal,
+  isLoggined,
 }) {
   /*   const [toggle, setToggle] = useState(false);
   const [toggleExist, setToggleExist] = useState(false); */
 
   const [shareModal, setShareModal] = useState(false);
-  const dispatch = useDispatch();
   const [blackModal, setBlackModal] = useState({
-    isLogin: true,
     active: false,
   });
   const descRef = useRef();
 
   const BlackModalConfirm = () => {
-    if (!blackModal.isLogin) {
+    if (!isLoggined) {
       setBlackModal({
         ...blackModal,
         active: !blackModal.active,
@@ -367,7 +366,6 @@ function DetailComponent({
     }
   };
 
-  ///////////////
   /* 더보기 버튼 모달창 */
   /*   const onHandleToggleButton = () => {
     setToggle(!toggle);
@@ -414,11 +412,12 @@ function DetailComponent({
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
                       blackModal={blackModal}
+                      isLoggined={isLoggined}
                     ></Like>
                     <Save
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
-                      blackModal={blackModal}
+                      isLoggined={isLoggined}
                     ></Save>
                   </ButtonBox>
                 </TitleAndButtonBox>
