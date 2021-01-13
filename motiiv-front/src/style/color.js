@@ -16,6 +16,11 @@ const whiteColors = {
   swiperafter: 'black',
   footercontent: 'none',
   sortbg: theme.lightGray,
+  setting: theme.lightGray,
+  inputTxt: theme.darkGray,
+  camera: 'white',
+  settingtxt: theme.darkGray,
+  backbtn: 'invert(0)',
 };
 const darkColors = {
   background: 'black',
@@ -33,6 +38,11 @@ const darkColors = {
   swiperafter: theme.lightGray,
   footercontent: 'opacity(0.5)',
   sortbg: theme.primary,
+  setting: theme.keyWordGray,
+  inputTxt: 'white',
+  camera: theme.keyWordGray,
+  settingtxt: theme.primary,
+  backbtn: 'invert(1)',
 };
 
 export { whiteColors, darkColors };

@@ -35,6 +35,8 @@ const Border = styled.div`
 const BackBtn = styled.div`
   background-image: url(${backBtn});
   display: none;
+  margin-bottom: 0.5rem;
+  filter: var(--backbtn);
   @media ${props => props.theme.mobile} {
     display: flex;
     width: 1.2rem;
@@ -53,6 +55,7 @@ const Title = styled.div`
   position: relative;
 
   @media ${props => props.theme.maxdesktop} {
+    color: var(--categorytext);
     font-size: 2rem;
     margin: 5rem 4rem;
   }
@@ -136,13 +139,12 @@ const InputContainer = styled.label`
 
   width: 5rem;
   height: 5rem;
-
   display: flex;
   justify-content: center;
   align-items: center;
 
   border-radius: 100%;
-  background-color: white;
+  background-color: var(--camera);
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
 
   cursor: pointer;
@@ -262,6 +264,7 @@ const InfoWrapper = styled.div`
 //왼쪽 타이틀
 const Text = styled.div`
   font-size: 2rem;
+  color: var(--categorytext);
   @media ${props => props.theme.maxdesktop} {
     font-size: 1.8rem;
   }
@@ -273,15 +276,14 @@ const Text = styled.div`
 const NameInput = styled.input`
   width: 40rem;
   height: 5rem;
-  background-color: #f3f3f3;
+  background-color: var(--setting);
   border: none;
   outline: none;
   border-radius: 1rem;
   padding-left: 2rem;
   margin-left: 10.7rem;
-
   font-size: 1.6rem;
-  color: ${props => props.theme.darkGray};
+  color: var(--inputTxt);
   font-family: 'Spoqa-Han-Sans';
   font-weight: 700;
 
@@ -301,7 +303,7 @@ const NameInput = styled.input`
 const ChooseJob = styled.div`
   margin-left: 10.7rem;
   font-size: 1.6rem;
-  color: ${props => props.theme.darkGray};
+  color: var(--settingtxt);
   position: relative;
   @media ${props => props.theme.maxdesktop} {
     margin-left: 9.2rem;
