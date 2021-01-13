@@ -42,8 +42,8 @@ const ModalWrapper = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
+    display : block;
     transform: translate(-50%, -50%);
-    display : ${props => ( !props.showLogin ? 'block' : 'none')};
     @media ${props => props.theme.mobile}{
     width : 27.5rem;
     height : 35.3rem;
@@ -251,21 +251,8 @@ function MyModal({showModal}) {
 
     return (
          <> 
-          {/* {
-             ? <Background ref={modalRef} onClick={closeModal}>
-            <animated.div style = {animation}>
-            <ModalWrapper showModal={showModal}>
-            <ModalContent>
-              <h1>Are you ready?</h1>
-              </ModalContent>
-              <CloseModalButton aria-label="Close modal" onClick={() => setShowModal(prev=> !prev)}></CloseModalButton>
-            </ModalWrapper>
-            </animated.div>
-          </Background> : null} */}
-          {/* <ModalContainer> */}
             <ModalOverlay />
-            {/* <animated.div style={animation}> */}
-           { !showLogin && (<> <ModalWrapper showLogin = {showLogin}>
+          <ModalWrapper showLogin = {showLogin}>
                 <ModalInner>
                     <ToggleGif src = {toggle}></ToggleGif>
                     <Title>회원만 접근할 수 있어요!</Title> 
@@ -280,10 +267,7 @@ function MyModal({showModal}) {
                         </ContentWrapper>
                     </TagWrapper>
                 </ModalInner>
-            </ModalWrapper> </>)
-} 
-            {/* </animated.div> */}
-            {/* </ModalContainer> */}
+            </ModalWrapper>
         </>
     )
 }

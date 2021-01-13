@@ -346,6 +346,7 @@ function DetailComponent({
   recVideoList,
   detailLoading,
   showModal,
+  isLoggined
 }) {
   /*   const [toggle, setToggle] = useState(false);
   const [toggleExist, setToggleExist] = useState(false); */
@@ -353,13 +354,12 @@ function DetailComponent({
   const [shareModal, setShareModal] = useState(false);
   const dispatch = useDispatch();
   const [blackModal, setBlackModal] = useState({
-    isLogin: true,
     active: false,
   });
   const descRef = useRef();
 
   const BlackModalConfirm = () => {
-    if (!blackModal.isLogin) {
+    if ( !isLoggined ) {
       setBlackModal({
         ...blackModal,
         active: !blackModal.active,
@@ -418,7 +418,7 @@ function DetailComponent({
                     <Save
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
-                      blackModal={blackModal}
+                      isLoggined={isLoggined}
                     ></Save>
                   </ButtonBox>
                 </TitleAndButtonBox>
