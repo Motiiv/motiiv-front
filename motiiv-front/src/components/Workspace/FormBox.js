@@ -37,7 +37,7 @@ const WorkSpaceInputBox = styled.div`
   align-items: flex-end;
   width: 42rem;
   padding: 3.5rem 3.2rem;
-  background: white;
+  background: var(--formbox);
   border-radius: 1rem;
   position: absolute;
   cursor: auto;
@@ -53,7 +53,7 @@ const WorkSpaceInputBox = styled.div`
 const Triangle = styled.div`
   z-index: 3;
   position: absolute;
-  background-color: white;
+  background-color: var(--formbox);
   text-align: left;
   top: 12.7rem;
   left: calc(50% - 2.3rem);
@@ -89,40 +89,47 @@ const LineInput = styled.input`
   width: 100%;
   height: 5rem;
   padding: 1rem 2rem;
-  background: ${({ theme }) => theme.lightGray};
+  background: var(--inputline);
   border-radius: 1rem;
   border: none;
   margin-bottom: 2rem;
   outline: none;
+  color: var(--categorytext);
   &:nth-child(2) {
     margin-bottom: 1rem;
     &.warning {
       box-shadow: 0 0 1.5pt 1pt #ff0202;
     }
   }
+  &::placeholder {
+    color: var(--placeholder);
+  }
 `;
 
 const RoundBtn = styled.button`
+  transition: 0.4s;
   display: flex;
   justify-content: center;
   align-items: center;
   white-space: nowrap;
   font-size: 1.6rem;
   padding: 1.2rem 3rem;
-  background: white;
+  background: transparent;
   border-radius: 3rem;
-  border: 1px solid black;
+  border: var(--roundbtn);
+  color: var(--swiperafter);
   cursor: pointer;
   &:nth-child(1) {
     margin-right: 1.5rem;
     &:hover {
       color: white;
+      border: 1px solid transparent;
       background-color: black;
       font-weight: 700;
     }
   }
   &:nth-child(2) {
-    color: white;
+    color: var(--formbox);
     background: ${({ theme }) => theme.gray};
     cursor: auto;
     border: none;

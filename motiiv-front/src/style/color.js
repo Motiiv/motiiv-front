@@ -1,3 +1,4 @@
+import BlackModal from '../components/common/Modal/BlackModal';
 import theme from './theme';
 //console.log('t', theme);
 const whiteColors = {
@@ -22,6 +23,12 @@ const whiteColors = {
   settingtxt: theme.darkGray,
   backbtn: 'invert(0)',
   loginbg: 'white',
+  highlight:
+    'linear-gradient( 180deg, transparent 0%, transparent 20%, #2cff2c 20%, #2cff2c 55%, transparent 55%, transparent 100% )',
+  inputline: theme.lightGray,
+  formbox: 'white',
+  placeholder: theme.gray,
+  roundbtn: '1px solid black',
 };
 const darkColors = {
   background: 'black',
@@ -45,6 +52,11 @@ const darkColors = {
   settingtxt: theme.primary,
   backbtn: 'invert(1)',
   loginbg: 'rgba(0,0,0,0.8)',
+  highlight: 'none',
+  inputline: theme.keyWordGray,
+  formbox: theme.darkGray,
+  placeholder: theme.lightGray,
+  roundbtn: '1px solid #f3f3f3',
 };
 
 export { whiteColors, darkColors };

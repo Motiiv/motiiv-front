@@ -20,17 +20,7 @@ const MotiivWrapper = styled.div`
   z-index: 0;
 `;
 const HighLight = styled.span`
-  background: ${({ theme }) => theme.primary};
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    transparent 20%,
-    ${({ theme }) => theme.primary} 20%,
-    ${({ theme }) => theme.primary} 55%,
-    transparent 55%,
-    transparent 100%
-  );
-  padding-bottom : 1.5rem;
+  background: var(--highlight);
 `;
 const Container = styled.div`
   width: 100%;
@@ -73,7 +63,7 @@ const Title = styled.h2`
   margin-left: 5.5rem;
   font-size: 3rem;
   font-weight: bold;
-  color: black;
+  color: var(--categorytext);
   margin-bottom: 3rem;
   @media ${props => props.theme.mobile} {
     font-size: 1.8rem;
@@ -119,7 +109,7 @@ function MyMotiiv({ showModal, isLoggined }) {
             <Container>
               <Wrapper>
                 <Title>
-                  내가 <HighLight>자주 본</HighLight>모티브
+                  내가 <HighLight>자주 본 </HighLight>모티브
                 </Title>
                 <ImageSlider
                   saveButton={saveButton}
@@ -131,7 +121,7 @@ function MyMotiiv({ showModal, isLoggined }) {
             <Container>
               <Wrapper>
                 <Title>
-                  내가 <HighLight>저장 한</HighLight>모티브
+                  내가 <HighLight>저장한 </HighLight>모티브
                 </Title>
                 <ImageSlider
                   saveButton={saveButton}
@@ -143,7 +133,7 @@ function MyMotiiv({ showModal, isLoggined }) {
             <Container>
               <Wrapper>
                 <Title>
-                  최근 <HighLight>재생한</HighLight>모티브
+                  최근 <HighLight>재생한 </HighLight>모티브
                 </Title>
                 <ImageSlider
                   saveButton={saveButton}
