@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import SaveImage from '../../../assets/global/save_icon.svg';
 import SaveClickImage from '../../../assets/global/saveclick_icon.svg';
@@ -6,7 +6,7 @@ import { changeSaveStatus, changeSave } from '../../../modules/video';
 import { useDispatch, useSelector } from 'react-redux';
 
 const SaveBox = styled.div`
-  display: flex;
+  display: ${props => (props.saveButton === false ? 'none' : 'flex')};
   align-items: center;
   margin-right: 2rem;
   line-height: 0 !important;
@@ -38,19 +38,20 @@ const SaveImg = styled.img`
           `}
   }
 `;
-function CardSave({ isSave, id, BlackModalConfirm,blackModal, size }) {
-  const [save, setSave] = useState(isSave ? true : false);
+function CardSave({ isSave, id, BlackModalConfirm, isLoggined, size,saveButton }) {
+  // const [save, setSave] = useState(isSave);
   const dispatch = useDispatch();
+
   const SaveToggle = () => {
     //BlackModalConfirm();
-    if (blackModal.isLogin === true) {
+    console.log("로그인이 됬냐?", isLoggined);
+    if (isLoggined === true) { 
       dispatch(changeSaveStatus(id));
-    }
-     else BlackModalConfirm();
+    }else BlackModalConfirm();
   };
   return (
-    <SaveBox onClick={SaveToggle}>
-      <SaveImg size={size} src={save ? SaveClickImage : SaveImage} />
+    <SaveBox onClick={SaveToggle} saveButton = {saveButton}>
+      <SaveImg size={size} src={isSave ? SaveClickImage : SaveImage} />
     </SaveBox>
   );
 }

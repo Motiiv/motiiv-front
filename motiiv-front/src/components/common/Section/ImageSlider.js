@@ -118,7 +118,7 @@ const SliderSection = styled.div`
   }
 `;
 
-function ImageSlider({ object, type, size, text, saveButton, nonfix,BlackModalConfirm,blackModal}) {
+function ImageSlider({ object, type, size, text, saveButton, nonfix,BlackModalConfirm,isLoggined}) {
   const swiperRef = useRef();
   const num =  type === 'top' ? 3 : 4;
   const space = type === 'top' ? 20 : 25;
@@ -142,8 +142,8 @@ function ImageSlider({ object, type, size, text, saveButton, nonfix,BlackModalCo
               slidesPerView : num
             },
             1024: {
-              spaceBetween: 20,
-              slidesPerView: 3,
+              spaceBetween: 16,
+              slidesPerView: num,
             },
             768: {
               spaceBetween: 20,
@@ -195,7 +195,7 @@ function ImageSlider({ object, type, size, text, saveButton, nonfix,BlackModalCo
                 obj={obj}
                 saveButton={saveButton}
                 BlackModalConfirm={BlackModalConfirm}
-                blackModal={blackModal}
+                isLoggined= {isLoggined}
                 nonfix={nonfix}
               ></Card>
             </SwiperSlide>

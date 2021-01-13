@@ -46,12 +46,15 @@ const Wrapper = styled.div`
   @media ${props => props.theme.tablet} {
     min-width: 768px;
   }
+  @media ${props => props.theme.laptop} {
+    max-width: 1024px;
+  }
   @media ${props => props.theme.desktop} {
     min-width: 1280px;
   }
 `;
 
-const Section = ({ type, size, color, object, text, nonfix, subText, blackModal,showModal,BlackModalConfirm}) => {
+const Section = ({ type, size, color, object, text, nonfix, subText,isLoggined,showModal,BlackModalConfirm}) => {
   return (
     <>
       <Container type={type} color={color}>
@@ -70,7 +73,7 @@ const Section = ({ type, size, color, object, text, nonfix, subText, blackModal,
             text={text}
             nonfix={nonfix}
             BlackModalConfirm={BlackModalConfirm}
-            blackModal={blackModal}
+            isLoggined= {isLoggined}
             showModal={showModal}
           ></ImageSlider>
         </Wrapper>

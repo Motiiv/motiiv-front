@@ -31,7 +31,7 @@ const CardWrap = styled.div`
     //max로 바꿔야하는지 여부
   }
   @media ${props => props.theme.laptop} {
-    min-width: ${props => (props.size === 'large' ? '30rem' : '21.6rem')};
+    min-width: ${props => (props.size === 'large' ? '30rem' : '22.7rem')};
   }
   @media ${props => props.theme.desktop} {
     min-width: ${props => (props.size === 'large' ? '37.7rem' : '27.4rem')};
@@ -57,22 +57,57 @@ const VideoWrap = styled.div`
   }
   @media ${props => props.theme.mobile} {
     height: 16.8rem;
+    border-radius: 1rem;
   }
   @media ${props => props.theme.tablet} {
     height: ${props => (props.size === 'large' ? '12.3rem' : '12.2rem')};
+    border-radius: ${props =>
+    props.size === 'large' ? '1rem 1rem 0 0' : '1rem'};
   }
  // laptop
  @media ${props => props.theme.laptop} {
-    height: ${props => (props.size === 'large' ? '15.6rem' : '13rem')};
+     height: 15.4rem;
+     border-radius: ${props =>
+    props.size === 'large' ? '1rem 1rem 0 0' : '1rem'};
   }
   @media ${props => props.theme.desktop} {
     height: ${props => (props.size === 'large' ? '21.2rem' : '15.4rem')};
+    border-radius: ${props =>
+    props.size === 'large' ? '1rem 1rem 0 0' : '1rem'};
   }
 `;
 // const Video = styled.div`
 //     position : absolute;
 //     width: 100%;
 // `;
+
+const GImage = styled.img`
+  width: 100%;
+  height: 100%;
+  transition: 0.5s;
+  border-radius :  ${props =>
+    props.size === 'large' ? '1rem 1rem 0 0' : '1rem'};
+  content: url(${props => props.thumbnail});
+  &:hover {
+    content: url(${props => props.gif});
+  }
+  @media ${props => props.theme.mobile} {
+    border-radius: 1rem;
+  }
+  @media ${props => props.theme.tablet} {
+    border-radius: ${props =>
+    props.size === 'large' ? '1rem 1rem 0 0' : '1rem'};
+  }
+ // laptop
+ @media ${props => props.theme.laptop} {
+     border-radius: ${props =>
+    props.size === 'large' ? '1rem 1rem 0 0' : '1rem'};
+  }
+  @media ${props => props.theme.desktop} {
+    border-radius: ${props =>
+    props.size === 'large' ? '1rem 1rem 0 0' : '1rem'};
+  }
+  `;
 
 const SaveBox = styled.div`
   display: ${props => (props.saveButton === false ? 'none' : 'flex')};
@@ -208,7 +243,7 @@ const Channel = styled.div`
     margin-left: 0.5rem;
     padding-left: 0.5rem;
   }
-  @media ${props => props.theme.tablet} {
+  @media ${props => props.theme.tablet} { 
     font-size: 1.3rem;
     margin-left: 0.9rem;
     padding-left: 0.8rem;
@@ -333,16 +368,7 @@ const TagContainer = styled.div`
     margin-left: ${props => (props.size === 'large' ? '2rem' : '1px')};
   }
 `;
-const GImage = styled.img`
-  width: 100%;
-  height: 100%;
-  transition: 0.5s;
-  content: url(${props => props.thumbnail});
-  &:hover {
-    content: url(${props => props.gif});
-  }
-  `;
-function Card({ obj, size, text, history, category, nonfix,showModal,blackModal,BlackModalConfirm}) {
+function Card({ obj, size, text, history, category, nonfix,showModal,isLoggined ,BlackModalConfirm, saveButton}) {
   const borderValue = size === 'large' ? '1rem 1rem 0 0' : '1rem';
  
   return (
@@ -351,17 +377,18 @@ function Card({ obj, size, text, history, category, nonfix,showModal,blackModal,
       <CardSave
           id={obj.id}
           BlackModalConfirm={BlackModalConfirm}
-          blackModal = {blackModal}
+          isLoggined= {isLoggined}
           card="true"
           size={size}
           nonfix={nonfix}
           isSave={obj.isSave}
+          saveButton = {saveButton}
         ></CardSave>
         <VideoWrap
           size={size}
           onClick={() => history.push(`/detail/${obj.id}`)}
         >
-                <GImage thumbnail={obj.thumbnailImageUrl}/>
+                <GImage size={size} thumbnail={obj.thumbnailImageUrl} gif={obj.videoGif}/>
           
           <TimeContainer size={size}>{obj.videoLength}</TimeContainer>
         </VideoWrap>

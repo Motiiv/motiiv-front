@@ -30,7 +30,7 @@ const SaveImg = styled.img`
   width: 2rem;
   height: 2rem;
 `;
-function Save({ id, BlackModalConfirm, blackModal }) {
+function Save({ id, BlackModalConfirm,isLoggined}) {
   const dispatch = useDispatch();
   const { loading_save, save } = useSelector(({ video, loading }) => ({
     save: video.save,
@@ -39,9 +39,9 @@ function Save({ id, BlackModalConfirm, blackModal }) {
   // [ Black Modal] 사용하고자 하는 버튼에 blackmodalconfirm 함수 넣어주면 됨
   const SaveToggle = () => {
     //로그인여부 확인 후 로그인 됐으면 save change
-    if (blackModal.isLogin === true) {
+    if (isLoggined) {
       dispatch(changeSaveStatus(id));
-    } else BlackModalConfirm();
+    } else BlackModalConfirm(); // 블랙모달에 상태를 active로 바꿔서 가져오는 함수
   };
 
   return (

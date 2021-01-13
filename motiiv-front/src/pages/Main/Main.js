@@ -187,14 +187,13 @@ const YeongJinBackground = styled.div`
   }
   background-color: ${({ theme }) => theme.lightGray};
 `;
-function Main({showModal}) {
+function Main({showModal,isLoggined}) {
   const dispatch = useDispatch();
   const [blackModal, setBlackModal] = useState({
-    isLogin: true,
     active: false,
   });
   const BlackModalConfirm = () => {
-    if (!blackModal.isLogin) {
+    if ( !isLoggined ) {
       setBlackModal({
         ...blackModal,
         active: !blackModal.active,
@@ -221,7 +220,7 @@ function Main({showModal}) {
   return (
     <YeongJinBackground>
        {blackModal.active && (
-            <BlackModal blackModal = {blackModal} setBlackModal = {setBlackModal}
+            <BlackModal blackModal = {blackModal} setBlackModal = {setBlackModal} showModal = {showModal}
             ></BlackModal>
           )}
       {Object.keys(banners).length ? (
@@ -238,7 +237,7 @@ function Main({showModal}) {
             color="gray"
             text="motiiv top 10"
             BlackModalConfirm={BlackModalConfirm}
-            blackModal={blackModal}
+            isLoggined= {isLoggined}
             subText="이 영상을 본 80%가 바로 일을 시작했어요!"
           ></Section>
         </>
@@ -252,7 +251,7 @@ function Main({showModal}) {
             text={recommend.sectionOne.sectiononeName}
             subText={recommend.sectionOne.sectiononeNameSub}
             BlackModalConfirm={BlackModalConfirm}
-            blackModal={blackModal}
+            isLoggined= {isLoggined}
             nonfix="true"
           ></Section>
           <Section
@@ -260,7 +259,7 @@ function Main({showModal}) {
             text={recommend.sectionTwo.sectionTwoName}
             subText={recommend.sectionTwo.sectionTwoNameSub}
             BlackModalConfirm={BlackModalConfirm}
-            blackModal={blackModal}
+            isLoggined= {isLoggined}
             nonfix="true"
           ></Section>
           <Section
@@ -268,7 +267,7 @@ function Main({showModal}) {
             text={recommend.sectionThree.sectionThreeName}
             subText={recommend.sectionThree.sectionThreeNameSub}
             BlackModalConfirm={BlackModalConfirm}
-            blackModal={blackModal}
+            isLoggined= {isLoggined}
             nonfix="true"
           ></Section>
           <AdBanner />
@@ -277,7 +276,7 @@ function Main({showModal}) {
             text={recommend.sectionFour.sectionFourName}
             subText={recommend.sectionFour.sectionFourNameSub}
             BlackModalConfirm={BlackModalConfirm}
-            blackModal={blackModal}
+            isLoggined= {isLoggined}
             nonfix="true"
           ></Section>
           <Section
@@ -285,7 +284,7 @@ function Main({showModal}) {
             text={recommend.sectionFive.sectionFiveName}
             subText={recommend.sectionFive.sectionFiveNameSub}
             BlackModalConfirm={BlackModalConfirm}
-            blackModal={blackModal}
+            isLoggined= {isLoggined}
             nonfix="true"
           ></Section>
           <Section
@@ -293,7 +292,7 @@ function Main({showModal}) {
             text={recommend.sectionSix.sectionSixName}
             subText={recommend.sectionSix.sectionSixNameSub}
             BlackModalConfirm={BlackModalConfirm}
-            blackModal={blackModal}
+            isLoggined= {isLoggined}
             nonfix="true"
           ></Section>
         </>
