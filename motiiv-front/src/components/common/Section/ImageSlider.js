@@ -118,7 +118,7 @@ const SliderSection = styled.div`
   }
 `;
 
-function ImageSlider({ object, type, size, text, saveButton }) {
+function ImageSlider({ object, type, size, text, saveButton, nonfix,BlackModalConfirm,blackModal}) {
   const swiperRef = useRef();
   const num =  type === 'top' ? 3 : 4;
   const space = type === 'top' ? 20 : 25;
@@ -194,6 +194,9 @@ function ImageSlider({ object, type, size, text, saveButton }) {
                 key={`card-${idx}`}
                 obj={obj}
                 saveButton={saveButton}
+                BlackModalConfirm={BlackModalConfirm}
+                blackModal={blackModal}
+                nonfix={nonfix}
               ></Card>
             </SwiperSlide>
           ))}

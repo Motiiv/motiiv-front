@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import SwiperBanner from './sections/SwiperBanner';
 import AdBanner from './sections/AdBanner';
 import Section from '../../components/common/Section/Section';
@@ -7,6 +7,7 @@ import { createDispatchHook, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Loading from '../../components/common/Loading/Loading';
 import ImageSlider from '../../components/common/Section/ImageSlider';
+import BlackModal from '../../components/common/Modal/BlackModal';
 const SliderObject = [
   {
     idx: 0,
@@ -186,8 +187,20 @@ const YeongJinBackground = styled.div`
   }
   background-color: ${({ theme }) => theme.lightGray};
 `;
-function Main() {
+function Main({showModal}) {
   const dispatch = useDispatch();
+  const [blackModal, setBlackModal] = useState({
+    isLogin: true,
+    active: false,
+  });
+  const BlackModalConfirm = () => {
+    if (!blackModal.isLogin) {
+      setBlackModal({
+        ...blackModal,
+        active: !blackModal.active,
+      });
+    }
+  };
   const {
     banners,
     recommend,
@@ -207,18 +220,25 @@ function Main() {
 
   return (
     <YeongJinBackground>
+       {blackModal.active && (
+            <BlackModal blackModal = {blackModal} setBlackModal = {setBlackModal}
+            ></BlackModal>
+          )}
       {Object.keys(banners).length ? (
         <>
-          {/*           <SwiperBanner
+          <SwiperBanner
             mostViewVideo={banners.mostViewVideo}
             mostLikeVideo={banners.mostLikeVideo}
-          /> */}
+            bestVideo={banners.thirdVideos}
+          />
           <Section
             object={banners.toptenVideo}
             type="top"
             size="large"
             color="gray"
             text="motiiv top 10"
+            BlackModalConfirm={BlackModalConfirm}
+            blackModal={blackModal}
             subText="이 영상을 본 80%가 바로 일을 시작했어요!"
           ></Section>
         </>
@@ -231,18 +251,24 @@ function Main() {
             object={recommend.sectionOne.sectionOnes}
             text={recommend.sectionOne.sectiononeName}
             subText={recommend.sectionOne.sectiononeNameSub}
+            BlackModalConfirm={BlackModalConfirm}
+            blackModal={blackModal}
             nonfix="true"
           ></Section>
           <Section
             object={recommend.sectionTwo.sectionTwos}
             text={recommend.sectionTwo.sectionTwoName}
             subText={recommend.sectionTwo.sectionTwoNameSub}
+            BlackModalConfirm={BlackModalConfirm}
+            blackModal={blackModal}
             nonfix="true"
           ></Section>
           <Section
             object={recommend.sectionThree.sectionThrees}
             text={recommend.sectionThree.sectionThreeName}
             subText={recommend.sectionThree.sectionThreeNameSub}
+            BlackModalConfirm={BlackModalConfirm}
+            blackModal={blackModal}
             nonfix="true"
           ></Section>
           <AdBanner />
@@ -250,18 +276,24 @@ function Main() {
             object={recommend.sectionFour.sectionFours}
             text={recommend.sectionFour.sectionFourName}
             subText={recommend.sectionFour.sectionFourNameSub}
+            BlackModalConfirm={BlackModalConfirm}
+            blackModal={blackModal}
             nonfix="true"
           ></Section>
           <Section
             object={recommend.sectionFive.sectionFives}
             text={recommend.sectionFive.sectionFiveName}
             subText={recommend.sectionFive.sectionFiveNameSub}
+            BlackModalConfirm={BlackModalConfirm}
+            blackModal={blackModal}
             nonfix="true"
           ></Section>
           <Section
             object={recommend.sectionSix.sectionSixs}
             text={recommend.sectionSix.sectionSixName}
             subText={recommend.sectionSix.sectionSixNameSub}
+            BlackModalConfirm={BlackModalConfirm}
+            blackModal={blackModal}
             nonfix="true"
           ></Section>
         </>

@@ -51,7 +51,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const Section = ({ type, size, color, object, text, nonfix, subText }) => {
+const Section = ({ type, size, color, object, text, nonfix, subText, blackModal,showModal,BlackModalConfirm}) => {
   return (
     <>
       <Container type={type} color={color}>
@@ -68,6 +68,10 @@ const Section = ({ type, size, color, object, text, nonfix, subText }) => {
             size={size}
             color={color}
             text={text}
+            nonfix={nonfix}
+            BlackModalConfirm={BlackModalConfirm}
+            blackModal={blackModal}
+            showModal={showModal}
           ></ImageSlider>
         </Wrapper>
       </Container>

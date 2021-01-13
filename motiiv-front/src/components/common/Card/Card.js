@@ -4,6 +4,7 @@ import Tag from '../Tag/Tag';
 import { withRouter } from 'react-router-dom';
 import SaveImage from '../../../assets/global/save_icon.svg';
 import SaveClickImage from '../../../assets/global/saveclick_icon.svg';
+import CardSave from '../Save/CardSave';
 const CardWrap = styled.div`
   display: flex;
   width: 100%;
@@ -11,6 +12,7 @@ const CardWrap = styled.div`
   height: auto;
   max-height: ${props => (props.size === 'large' ? '33.5 rem' : '26.7rem')};
   flex-direction: column;
+  position: relative;
   box-shadow: ${props =>
     props.size === 'large' ? '2px 2px  7px rgba(0, 0, 0, 0.15)' : 'none'};
   //border-radius: 1rem;
@@ -165,13 +167,10 @@ const Views = styled.div`
   font-size: 1.5rem;
   font-family: 'Spoqa-Han-Sans';
   color: ${({ theme }) => theme.darkGray};
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: keep-all;
-  word-wrap: break-word;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  line-height: 0;
+  //overflow: hidden;
+  display: flex;
+  align-items: center;
   @media ${props => props.theme.mobile} {
     font-size: 1.3rem;
   }
@@ -193,10 +192,11 @@ const Channel = styled.div`
   margin-left: 0.9rem;
   padding-left: 0.9rem;
   color: ${({ theme }) => theme.darkGray};
-  overflow: hidden;
+
   text-overflow: ellipsis;
   word-break: keep-all;
   word-wrap: break-word;
+  width: fit-content;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -288,6 +288,7 @@ const DescriptionContainer = styled.div`
   display: flex;
   margin-left: ${props => (props.size === 'large' ? '2rem' : '0')};
   margin-top: 1rem;
+  align-items: center;
   @media ${props => props.theme.mobile} {
     margin-left: 0;
     margin-top: ${props => (props.text ? '1.3rem' : '1rem')};
@@ -332,27 +333,36 @@ const TagContainer = styled.div`
     margin-left: ${props => (props.size === 'large' ? '2rem' : '1px')};
   }
 `;
-// Tag 컴포넌트 만들어서 불러오기
-function Card({ obj, size, text, history, saveButton, category }) {
-  const [save, setSave] = useState(false);
+const GImage = styled.img`
+  width: 100%;
+  height: 100%;
+  transition: 0.5s;
+  content: url(${props => props.thumbnail});
+  &:hover {
+    content: url(${props => props.gif});
+  }
+  `;
+function Card({ obj, size, text, history, category, nonfix,showModal,blackModal,BlackModalConfirm}) {
   const borderValue = size === 'large' ? '1rem 1rem 0 0' : '1rem';
+ 
   return (
     <>
       <CardWrap size={size}>
+      <CardSave
+          id={obj.id}
+          BlackModalConfirm={BlackModalConfirm}
+          blackModal = {blackModal}
+          card="true"
+          size={size}
+          nonfix={nonfix}
+          isSave={obj.isSave}
+        ></CardSave>
         <VideoWrap
           size={size}
           onClick={() => history.push(`/detail/${obj.id}`)}
         >
-              <img
-                width="100%"
-                height="100%"
-                borderRadius="1rem"
-                src={obj.thumbnailImageUrl}
-              />
-  
-          <SaveBox saveButton={saveButton} onClick={() => setSave(!save)}>
-            <SaveImg size={size} src={save ? SaveClickImage : SaveImage} />
-          </SaveBox>
+                <GImage thumbnail={obj.thumbnailImageUrl}/>
+          
           <TimeContainer size={size}>{obj.videoLength}</TimeContainer>
         </VideoWrap>
         <TextWrap size={size}>
