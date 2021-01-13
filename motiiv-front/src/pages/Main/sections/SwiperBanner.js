@@ -31,34 +31,37 @@ const ContentContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  @media ${props => props.theme.tablet768} {
+    max-width: 50rem;
+  }
   & .swiper-slide-active {
     width: 48.43% !important;
-    @media ${props => props.theme.tablet768} {
+    @media ${props => props.theme.maxdesktop} {
       width: 65% !important;
       margin-right: 8rem !important;
     }
-    @media ${props => props.theme.mobile375} {
+    @media ${props => props.theme.tablet768} {
       width: 100% !important;
     }
   }
   & .swiper-slide-prev {
     width: 15.89% !important;
     overflow: hidden !important;
-    @media ${props => props.theme.tablet768} {
+    @media ${props => props.theme.maxdesktop} {
       width: 7% !important;
       margin-right: 8rem !important;
     }
-    @media ${props => props.theme.mobile375} {
+    @media ${props => props.theme.tablet768} {
       display: none !important;
     }
   }
   /*   & .swiper-slide {
-    @media ${props => props.theme.tablet768} {
+    @media ${props => props.theme.maxdesktop} {
       margin-right: 8rem !important;
     }
   } */
   & .swiper-slide-duplicate-next {
-    @media ${props => props.theme.mobile375} {
+    @media ${props => props.theme.tablet768} {
       & div {
         display: none;
       }
@@ -67,7 +70,7 @@ const ContentContainer = styled.div`
   & .swiper-slide-next {
     width: 15.89% !important;
     overflow: hidden !important;
-    @media ${props => props.theme.mobile375} {
+    @media ${props => props.theme.tablet768} {
       display: none !important;
     }
   }
@@ -95,10 +98,10 @@ const LeftButton = styled.div`
   background-size: contain;
   position: absolute;
   left: calc(15.89% + 47px);
-  @media ${props => props.theme.tablet768} {
+  @media ${props => props.theme.maxdesktop} {
     left: calc(15.89% - 47px);
   }
-  @media ${props => props.theme.mobile375} {
+  @media ${props => props.theme.tablet768} {
     display: none;
   }
   bottom: 50%;
@@ -114,10 +117,10 @@ const RightButton = styled.div`
   height: 3.3rem;
   position: absolute;
   left: calc(64.32% + 174px);
-  @media ${props => props.theme.tablet768} {
+  @media ${props => props.theme.maxdesktop} {
     left: calc(64.32% + 167px);
   }
-  @media ${props => props.theme.mobile375} {
+  @media ${props => props.theme.tablet768} {
     display: none;
   }
   bottom: 50%;
