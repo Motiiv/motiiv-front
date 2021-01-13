@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import Card from '../common/Card/Card';
 import DropDownMenu from '../../pages/Category/sections/DropDownMenu';
 import SortModal from '../../pages/Category/sections/SortModal';
-import DownArrow from '../../assets/global/downArrow.svg';
-import UpperArrow from '../../assets/global/upperArrow.svg';
 import AsideModal from '../../pages/Category/sections/AsideModal';
 import AsideMenu from '../../pages/Category/sections/AsideMenu';
 import Loading from '../common/Loading/Loading';
@@ -287,7 +285,7 @@ function CategoryComponent({
             <TitleAndSort>
               <TitleText
                 hashTag={hashTag}
-                tagName={tagName}
+                tagName={tagName ? tagName : 'category로 이동 후 tag를 클릭'}
                 videoCnt={videoCnt}
               ></TitleText>
               <SortButtonWrapper>
