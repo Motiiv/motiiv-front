@@ -37,6 +37,9 @@ const SaveImg = styled.img`
             height: 3rem;
           `}
   }
+  &:hover {
+    fill: black;
+  }
 `;
 function CardSave({
   isSave,

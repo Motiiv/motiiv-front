@@ -66,27 +66,33 @@ const Section = ({
   showModal,
   BlackModalConfirm,
 }) => {
+  useEffect(() => {
+    console.log('section object', object);
+  }, []);
   return (
     <>
       <Container type={type} color={color}>
         <Wrapper type={type} color={color}>
           <TitleContent
             nonfix={nonfix}
-            object={object}
             text={text}
             subText={subText}
           ></TitleContent>
-          <ImageSlider
-            object={object}
-            type={type}
-            size={size}
-            color={color}
-            text={text}
-            nonfix={nonfix}
-            BlackModalConfirm={BlackModalConfirm}
-            isLoggined={isLoggined}
-            showModal={showModal}
-          ></ImageSlider>
+          {object.length ? (
+            <ImageSlider
+              object={object}
+              type={type}
+              size={size}
+              color={color}
+              text={text}
+              nonfix={nonfix}
+              BlackModalConfirm={BlackModalConfirm}
+              isLoggined={isLoggined}
+              showModal={showModal}
+            ></ImageSlider>
+          ) : (
+            <div></div>
+          )}
         </Wrapper>
       </Container>
     </>
