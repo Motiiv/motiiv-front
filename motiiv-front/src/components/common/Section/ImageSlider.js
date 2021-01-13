@@ -196,6 +196,8 @@ function ImageSlider({ object, type, size, text, saveButton, nonfix,BlackModalCo
                   obj={obj}
                   saveButton={saveButton}
                   nonfix={nonfix}
+                  BlackModalConfirm ={BlackModalConfirm}
+                  isLoggined = {isLoggined}
                 ></Card>
               </SwiperSlide>
             ))}

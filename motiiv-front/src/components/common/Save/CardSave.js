@@ -38,7 +38,7 @@ const SaveImg = styled.img`
           `}
   }
 `;
-function CardSave({ isSave, id, BlackModalConfirm, isLoggined, size,saveButton }) {
+function CardSave({ isSave, id, BlackModalConfirm, isLoggined, size, saveButton }) {
   // const [save, setSave] = useState(isSave);
   const [save, setSave] = useState(isSave ? true : false);
   const dispatch = useDispatch();
