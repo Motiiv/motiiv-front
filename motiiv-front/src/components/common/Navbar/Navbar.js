@@ -5,13 +5,8 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import logo from '../../../assets/global/motiiv_logo.png';
 import star from '../../../assets/global/star.png';
-import SigninModal from '../Login/SignInModal';
+import Loading from '../Loading/Loading';
 import ProfileModal from './profilemodal/ProfileModal';
-
-// const activeStyle = {
-//   color: '#2cff2c',
-//   borderBottom: '0.2rem solid #2cff2c',
-// };
 
 const Header = styled.header`
   width: 100%;
@@ -24,7 +19,6 @@ const Header = styled.header`
   font-size: 1.6rem;
   font-family: 'Campton';
   font-weight: 700;
-  /* z-index: 1001; */
   & {
     letter-spacing: -0.3px;
   }
@@ -37,6 +31,9 @@ const Logo = styled.img`
   height: 1.8rem;
   z-index: 3;
   padding-left: 5rem;
+  @media ${props => props.theme.mobile} {
+    padding-left: 1.6rem;
+  }
 `;
 
 /*  중앙 네비게이션  */
@@ -78,6 +75,9 @@ const LoginContainer = styled.div`
   align-self: flex-end;
   justify-content: end;
   padding-right: 5rem;
+  @media ${props => props.theme.mobile} {
+    padding-right: 1.6rem;
+  }
 `;
 
 const Login = styled.div`
@@ -130,6 +130,9 @@ const Profile = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
   }
+  @media ${props => props.theme.mobile} {
+    padding-right: 1.6rem;
+  }
 `;
 
 function Navbar({ showModal, isloggined, location }) {
@@ -146,10 +149,9 @@ function Navbar({ showModal, isloggined, location }) {
     setProfileModalState(false);
   };
 
-  //로그인 모달창 나타내기
-
-  const { userInfo } = useSelector(({ user }) => ({
+  const { userInfo, loading } = useSelector(({ user, loading }) => ({
     userInfo: user.userInfo,
+    loading: loading['user/GET_PROFILE'],
   }));
 
   /*
@@ -198,16 +200,21 @@ function Navbar({ showModal, isloggined, location }) {
           <Login login={isloggined} onClick={showModal}>
             login
           </Login>
-          <Profile
-            src={userInfo.profileImageUrl}
-            login={isloggined}
-            onClick={onClickProfileImage}
-            onclick={profileModalState}
-          >
-            <FirstLetter src={userInfo.profileImageUrl}>
-              {userInfo.username && userInfo.username.substr(0, 1)}
-            </FirstLetter>
-          </Profile>
+
+          {!loading ? (
+            <Profile
+              src={userInfo.profileImageUrl}
+              login={isloggined}
+              onClick={onClickProfileImage}
+              onclick={profileModalState}
+            >
+              <FirstLetter src={userInfo.profileImageUrl}>
+                {userInfo.username && userInfo.username.substr(0, 1)}
+              </FirstLetter>
+            </Profile>
+          ) : (
+            <Loading></Loading>
+          )}
           <ProfileModal hideModal={hideModal} showModal={profileModalState} />
         </LoginContainer>
       </Header>

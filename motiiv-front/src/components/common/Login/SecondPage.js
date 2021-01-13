@@ -125,9 +125,9 @@ function SecondPage({page}) {
           <Title>어떤 일을 하고 계세요?</Title>
           <SubTitle>일하고 있는 분야에 맞는 동기부여 영상을 추천드려요!</SubTitle>
           <ImageContainer>
-            <ImageBtn img = {img} click={selectedState}><Text click={selectedState}>기획</Text></ImageBtn>
-            <ImageBtn img = {img} click={selectedState}><Text click={selectedState}>디자인</Text></ImageBtn>
-            <ImageBtn img = {img} click={selectedState}><Text click={selectedState}>개발</Text></ImageBtn>
+            <ImageBtn img = {img} click={selectedState}><Text click={selectedState}>기획자</Text></ImageBtn>
+            <ImageBtn img = {img} click={selectedState}><Text click={selectedState}>디자이너</Text></ImageBtn>
+            <ImageBtn img = {img} click={selectedState}><Text click={selectedState}>개발자</Text></ImageBtn>
             <ImageBtn img = {img} click={selectedState}><Text click={selectedState}>유노윤호</Text></ImageBtn>
           </ImageContainer>
       </Container>
