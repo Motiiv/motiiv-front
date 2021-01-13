@@ -48,7 +48,7 @@ const TagText = styled.div`
 
   @media ${props => props.theme.maxlaptop} {
     ${props =>
-      props.text == 'logout'?
+      props.text === 'logout'?
     `
       font-size:1.4rem;
     `
@@ -56,7 +56,7 @@ const TagText = styled.div`
   }
   @media ${props => props.theme.mobile} {
     ${props =>
-      props.text == 'logout'?
+      props.text === 'logout'?
       `
         font-size:1rem;
         margin-top:0.2rem;

@@ -72,37 +72,41 @@ const BottomContianer = styled.div`
 
 function InterestModal({ show, keywordsfunc }) {
 
-  console.log(keywordsfunc);
-
   const interest = ['자기계발','성장','목표','도전','인물','스타트업','변화','위로','조언','개발','디자인','기획']
   var chosenInterest = [];
 
   const [selectedBtnCountState, setSelectedBtnCountState] = useState(0);
   const [okBtnState, setOkBtnState] = useState("ok-disabled");
   
+  //selectedBtnCountState가 3이 되는 순간 기존 버튼 삭제 말고는 다른 버튼은 눌리지 않아야 함. 이 처리는 어떻게 할까?
+  
   const onClickInterestBtn = () => {
-        if(chosenInterest.length<=2){
-          //선택된게 2개 이하일 때만 정보 받아와서 배열에 넣고
-          if(chosenInterest.includes()){
-            const idx = chosenInterest.indexOf('어쩌구')
-            chosenInterest.splice(idx, 1);
-            setSelectedBtnCountState(selectedBtnCountState-1);
-          }else{
-            chosenInterest.append('어쩌구');
-            setSelectedBtnCountState(selectedBtnCountState+1);
-          }
-        }
+    console.log("들어와지니?");
 
-        keywordsfunc(chosenInterest);
+    //이미 배열에 해당 태그가 포함되어 있다면 삭제
+    if(chosenInterest.includes()){
+      const idx = chosenInterest.indexOf('버튼을 클릭했을 때 그 내용을 여기에 어떻게 담을까? e.target.value..?')
+      chosenInterest.splice(idx, 1);
+      setSelectedBtnCountState(selectedBtnCountState-1);
+    }else{
+      //배열에 없다면 선택된게 2개 이하일 때만 배열에 삽입
+      if(chosenInterest.length<=2){
+        chosenInterest.append('버튼을 클릭했을 때 그 내용을 여기에 어떻게 담을까? e.target.value..?');
+        setSelectedBtnCountState(selectedBtnCountState+1);
+      }
+    }
 
-        //선택된게 1개 이상일 때 완료 버튼 활성화
-        if(selectedBtnCountState>=1){
-          setOkBtnState('ok');
-        }else{
-          setOkBtnState('ok-disabled');
-        }
+    //해당 내용을 state에 업데이트
+    keywordsfunc(chosenInterest);
 
-        console.log(chosenInterest);
+    //선택된게 1개 이상일 때 완료 버튼 활성화
+    if(selectedBtnCountState>=1){
+      setOkBtnState('ok');
+    }else{
+      setOkBtnState('ok-disabled');
+    }
+
+    console.log(chosenInterest);
   }
 
     return(

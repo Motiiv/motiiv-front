@@ -31,6 +31,9 @@ const Logo = styled.img`
   height: 1.8rem;
   z-index: 3;
   padding-left: 5rem;
+  @media ${props => props.theme.mobile} {
+    padding-left: 1.6rem;
+  }
 `;
 
 /*  중앙 네비게이션  */
@@ -72,6 +75,9 @@ const LoginContainer = styled.div`
   align-self: flex-end;
   justify-content: end;
   padding-right: 5rem;
+  @media ${props => props.theme.mobile} {
+    padding-right: 1.6rem;
+  }
 `;
 
 const Login = styled.div`
@@ -123,6 +129,9 @@ const Profile = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+  @media ${props => props.theme.mobile} {
+    padding-right: 1.6rem;
   }
 `;
 
