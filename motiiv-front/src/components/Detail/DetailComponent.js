@@ -445,11 +445,12 @@ function DetailComponent({
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
                       blackModal={blackModal}
+                      isLoggined={isLoggined}
                     ></Like>
                     <Save
                       id={videoInfo.id}
                       BlackModalConfirm={BlackModalConfirm}
-                      blackModal={blackModal}
+                      isLoggined={isLoggined}
                     ></Save>
                   </ButtonBox>
                   <ShareBox>
