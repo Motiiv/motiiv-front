@@ -40,6 +40,7 @@ const SaveImg = styled.img`
 `;
 function CardSave({ isSave, id, BlackModalConfirm, isLoggined, size,saveButton }) {
   // const [save, setSave] = useState(isSave);
+  const [save, setSave] = useState(isSave ? true : false);
   const dispatch = useDispatch();
 
   const SaveToggle = () => {
@@ -51,7 +52,7 @@ function CardSave({ isSave, id, BlackModalConfirm, isLoggined, size,saveButton }
   };
   return (
     <SaveBox onClick={SaveToggle} saveButton = {saveButton}>
-      <SaveImg size={size} src={isSave ? SaveClickImage : SaveImage} />
+      <SaveImg size={size} src={save ? SaveClickImage : SaveImage} />
     </SaveBox>
   );
 }
