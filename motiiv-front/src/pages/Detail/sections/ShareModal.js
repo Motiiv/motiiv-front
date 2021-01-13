@@ -76,4 +76,4 @@ function ShareModal({ pageURL, shareModal }) {
   );
 }
 
-export default ShareModal;
+export default React.memo(ShareModal);

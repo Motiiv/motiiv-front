@@ -75,4 +75,4 @@ function Tag({ hashTag, color, text, fontSize, history, id }) {
     </TagContainer>
   );
 }
-export default withRouter(Tag);
+export default withRouter(React.memo(Tag));

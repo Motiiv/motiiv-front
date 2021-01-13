@@ -9,6 +9,7 @@ import BlackModal from '../../components/common/Modal/BlackModal';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../components/common/Loading/Loading';
 import { getVideos } from '../../modules/mymotiiv';
+import { useLocation } from 'react-router-dom';
 
 const MotiivWrapper = styled.div`
   width: 100%;
@@ -92,9 +93,10 @@ const Title = styled.h2`
 `;
 
 // const textArray = ["내가 자주본 모티브", "내가 저장한 모티브", "최근 재생한 모티브"];
-function MyMotiiv({ showModal, isLoggined}) {
+function MyMotiiv({ showModal, isLoggined }) {
   const dispatch = useDispatch();
   const saveButton = false;
+  const { pathname } = useLocation();
 
   const { myvideos, loading } = useSelector(({ mymotiiv, loading }) => ({
     myvideos: mymotiiv.myvideos,
@@ -105,6 +107,9 @@ function MyMotiiv({ showModal, isLoggined}) {
     dispatch(getVideos());
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return isLoggined === true ? (
     <>
       <MotiivWrapper>
@@ -143,7 +148,8 @@ function MyMotiiv({ showModal, isLoggined}) {
                 <ImageSlider
                   saveButton={saveButton}
                   object={myvideos.recentViewSort}
-                ></ImageSlider>l
+                ></ImageSlider>
+                l
               </Wrapper>
             </Container>
           </>
@@ -155,7 +161,7 @@ function MyMotiiv({ showModal, isLoggined}) {
     <MyModal showModal={showModal} />
   );
 }
-export default MyMotiiv;
+export default React.memo(MyMotiiv);
 
 {
   /* <Section object={SliderObject} text="내가 자주 본 모티브"></Section> */

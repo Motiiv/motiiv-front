@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { getCategoryVideos } from '../../../modules/video';
 import { useDispatch } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 const TitleText = styled.div`
   font-size: 1.6rem;
@@ -35,23 +36,21 @@ const MenuWrapper = styled.div`
     background-color: ${({ theme }) => theme.lightGray};
   }
 `;
-const TitleIconBox = styled.img`
+/* const TitleIconBox = styled.img`
   width: 2rem;
   height: 2rem;
   display: flex;
   align-items: center;
   margin: 0.7rem 0;
   border-radius: 0.5rem;
-`;
-function Menu({ word, choice, idx, onHandleMenuChoice, filters }) {
+`; */
+function Menu({ word, choice, idx, onHandleMenuChoice, filters, history }) {
   const dispatch = useDispatch();
 
   const onClickHandle = evt => {
-    //console.log(evt.currentTarget.attributes.name.value);
-    //console.log(idx);
     onHandleMenuChoice(idx, evt.currentTarget.attributes.name.value);
-    console.log(filters);
     dispatch(getCategoryVideos({ keyword: idx, filters: filters }));
+    history.push(`/category/0`);
   };
   return (
     <MenuWrapper idx={idx} choice={choice} name={word} onClick={onClickHandle}>
@@ -65,4 +64,4 @@ function Menu({ word, choice, idx, onHandleMenuChoice, filters }) {
   );
 }
 
-export default Menu;
+export default withRouter(React.memo(Menu));

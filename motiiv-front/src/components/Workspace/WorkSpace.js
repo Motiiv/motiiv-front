@@ -148,4 +148,4 @@ function WorkSpace() {
   );
 }
 
-export default WorkSpace;
+export default React.memo(WorkSpace);

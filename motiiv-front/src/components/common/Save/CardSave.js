@@ -66,4 +66,4 @@ function CardSave({
   );
 }
 
-export default CardSave;
+export default React.memo(CardSave);

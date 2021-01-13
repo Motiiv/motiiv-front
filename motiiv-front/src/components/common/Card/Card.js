@@ -390,4 +390,4 @@ function Card({ obj, size, text, history, category, nonfix,showModal,isLoggined 
   );
 }
 
-export default withRouter(Card);
+export default withRouter(React.memo(Card));

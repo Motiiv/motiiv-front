@@ -142,4 +142,4 @@ function AsideModal({
   );
 }
 
-export default AsideModal;
+export default React.memo(AsideModal);
