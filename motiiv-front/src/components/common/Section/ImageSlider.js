@@ -144,7 +144,7 @@ function ImageSlider({
   const space = type === 'top' ? 20 : 25;
   const largeHeight = size === 'large' ? '36rem' : 'auto';
   let defaultSpace = false;
-  if (object && (object.length === 2 || object.length === 3)) {
+  if (object && (object.length < 4)) {
     defaultSpace = true;
   }
   const defaultNum = defaultSpace === true ? 2 : 3;
