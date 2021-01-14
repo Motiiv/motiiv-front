@@ -27,6 +27,7 @@ const TitleText = styled.div`
   font-weight: 700;
   margin-bottom: 1rem;
   margin-left: 1.5rem;
+  color: black !important;
 `;
 const InputBox = styled.div`
   width: 90%;

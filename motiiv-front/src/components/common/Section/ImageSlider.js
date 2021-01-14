@@ -34,7 +34,7 @@ const SliderSection = styled.div`
     width: 3rem !important;
     height: 3rem !important;
     font-size: 1.5rem !important;
-    color: ${({ theme }) => theme.darkGray};
+    color: var(--swiperafter);
     cursor: pointer !important;
     z-index: 2 !important;
   }
@@ -55,7 +55,7 @@ const SliderSection = styled.div`
     width: 3rem !important;
     height: 3rem !important;
     font-size: 1.5rem !important;
-    color: ${({ theme }) => theme.darkGray};
+    color: var(--swiperafter);
     cursor: pointer !important;
     z-index: 2 !important;
   }

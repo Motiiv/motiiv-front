@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 const TagContainer = styled.div`
-  border: solid ${props => (props.color ? props.color : 'black')} 1.5px;
-  background-color: ${props => (props.bgColor ? props.bgColor : 'none')};
+  border: solid ${props => (props.color ? 'none' : 'var(--keywordtag)')} 1.5px;
+  background-color: ${props =>
+    props.bgColor ? 'var(--settingbtnbg)' : 'transparent'};
   border-radius: 3rem;
   display: flex;
   justify-content: center;
@@ -38,7 +39,7 @@ const TagContainer = styled.div`
 
 const TagText = styled.div`
   font-size: ${props => (props.fontSize ? props.fontSize : '1.2rem')};
-  color: ${props => (props.color ? props.color : 'black')};
+  color: ${props => (props.color ? 'white' : 'var(--keywordtag)')};
   text-align: center;
   font-family: ${props =>
     props.fontFamily ? props.fontFamily : 'Spoqa-Han-Sans'};
@@ -86,8 +87,7 @@ function Tag({
         padding={padding}
         text={text}
       >
-        {' '}
-        {text}{' '}
+        {text}
       </TagText>
     </TagContainer>
   );

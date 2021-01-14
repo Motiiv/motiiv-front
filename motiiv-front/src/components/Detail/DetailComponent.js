@@ -17,6 +17,7 @@ const DetailContainer = styled.div`
   padding: 4.5rem 5.5rem;
   display: flex;
   margin-bottom: 10rem;
+  color: var(--categorytext);
   @media ${props => props.theme.mobile} {
     flex-direction: column;
     padding: 0;
@@ -193,12 +194,12 @@ const TextBox = styled.div`
   display: flex;
   margin-top: 3.5rem;
   justify-content: space-between;
-  border-bottom: 1px #c4c4c4 solid;
+  border-bottom: ${props => `1px ${props.theme.gray} solid`};
   padding-bottom: 2rem;
   align-items: center;
   & div {
     font-size: 1.5rem;
-    color: #686868;
+    color: ${props => props.theme.gray};
   }
   @media ${props => props.theme.mobile} {
     margin-top: 1.5rem;

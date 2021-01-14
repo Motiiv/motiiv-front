@@ -24,14 +24,14 @@ const ModalWrapper = styled.div`
   flex-direction: column;
   z-index: 3;
   position: absolute;
-  background-color: white;
+  background: var(--modalbackground);
   top: 2.5rem;
   right: 0;
   justify-content: center;
-  box-shadow: 0 0 0 2px ${({ theme }) => theme.lightGray};
   padding: 1.4rem;
 `;
 const SortText = styled.div`
+  color: var(--categorytext);
   font-size: 1.4rem;
   width: 100%;
   padding: 0.4rem 0.6rem;
@@ -42,7 +42,8 @@ const SortText = styled.div`
   }
   &:hover {
     font-weight: 700;
-    background-color: ${({ theme }) => theme.lightGray};
+    background-color: var(--sortbg);
+    color: black !important;
   }
   ${props =>
     props.sortModal

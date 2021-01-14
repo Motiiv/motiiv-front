@@ -23,6 +23,7 @@ import { useEffect } from 'react';
 import FloatBtn from './components/common/Button/FloatBtn';
 import { getProfile, showSigninModal } from './modules/user';
 import { getWorkspaces } from './modules/mymotiiv';
+import { whiteColors } from './style/color';
 
 function App({ props }) {
   const dispatch = useDispatch();
@@ -33,7 +34,15 @@ function App({ props }) {
   const { onFloatBtn } = useSelector(state => state.mymotiiv);
   const { workspaces } = useSelector(state => state.mymotiiv);
 
+  // 다크모드
+  const setColorType = colors => {
+    for (const [key, value] of Object.entries(colors)) {
+      document.documentElement.style.setProperty(`--${key}`, `${value}`);
+    }
+  };
+
   useEffect(() => {
+    setColorType(whiteColors);
     dispatch(getWorkspaces());
     dispatch(getProfile());
   }, []);

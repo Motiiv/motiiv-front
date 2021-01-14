@@ -19,6 +19,7 @@ const TitleText = styled.div`
         `};
 `;
 const MenuWrapper = styled.div`
+  transition: 0.3s;
   width: 100%;
   height: 3.4rem;
   display: flex;
@@ -26,6 +27,7 @@ const MenuWrapper = styled.div`
   align-items: center;
   border-radius: 0.5rem;
   padding-right: 1.1rem;
+  color: var(--categorytext);
   ${props =>
     props.choice === props.idx
       ? css`
@@ -33,7 +35,8 @@ const MenuWrapper = styled.div`
         `
       : null};
   &:hover {
-    background-color: ${({ theme }) => theme.lightGray};
+    background-color: var(--sortbg);
+    color: black;
   }
 `;
 /* const TitleIconBox = styled.img`

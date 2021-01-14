@@ -64,7 +64,7 @@ const ModalWrap = styled.div`
   width: 65rem;
   height: 38rem;
   border-radius: 2rem;
-  background: white;
+  background: var(--loginbg);
   box-shadow: 0.2rem 0.3rem 0.7rem rgba(0, 0, 0, 0.15);
 
   justify-content: center;
