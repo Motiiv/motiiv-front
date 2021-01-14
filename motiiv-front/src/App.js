@@ -21,16 +21,17 @@ import {
 } from 'react-router-dom';
 import { useEffect } from 'react';
 import FloatBtn from './components/common/Button/FloatBtn';
-import { getProfile, showSigninModal } from './modules/user';
+import { getProfile, isLoggedIn, changeIsLogged } from './modules/user';
 import { getWorkspaces } from './modules/mymotiiv';
 import { whiteColors } from './style/color';
+import { authToken } from './lib/api/auth';
 
 function App({ props }) {
   const dispatch = useDispatch();
-  const [loginState, setLoginState] = useState(true);
   const [showLoginModalState, setShowLoginModalState] = useState(false);
 
   const location = useLocation();
+  const { isLogged } = useSelector(state => state.user);
   const { onFloatBtn } = useSelector(state => state.mymotiiv);
   const { workspaces } = useSelector(state => state.mymotiiv);
 
@@ -42,10 +43,27 @@ function App({ props }) {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem('userToken')
+      ? JSON.parse(localStorage.getItem('userToken'))
+      : null;
+    authToken(token).then(res => {
+      if (res.success) {
+        setColorType(whiteColors);
+        dispatch(getWorkspaces());
+        dispatch(getProfile());
+        dispatch(changeIsLogged());
+      } else {
+        // ?
+      }
+    });
+  }, []);
+
+  /*   useEffect(() => {
     setColorType(whiteColors);
     dispatch(getWorkspaces());
     dispatch(getProfile());
-  }, []);
+    hideModal();
+  }, [isLogged]); */
 
   const hideModal = () => {
     setShowLoginModalState(false);
@@ -56,13 +74,12 @@ function App({ props }) {
     setShowLoginModalState(true);
     document.body.style.overflow = 'hidden';
   };
-
   return (
     <>
       <Navbar
         location={location.pathname}
         showModal={showModal}
-        isloggined={loginState}
+        isloggined={isLogged}
       />
       <Switch>
         {/* Main & Category & MyMotiiv */}
@@ -70,7 +87,7 @@ function App({ props }) {
           exact
           path="/main"
           render={props => (
-            <Main props={props} showModal={showModal} isLoggined={loginState} />
+            <Main props={props} showModal={showModal} isLoggined={isLogged} />
           )}
         ></Route>
         <Route
@@ -79,7 +96,7 @@ function App({ props }) {
             <Category
               props={props}
               showModal={showModal}
-              isLoggined={loginState}
+              isLoggined={isLogged}
             />
           )}
         ></Route>
@@ -91,7 +108,7 @@ function App({ props }) {
               <MyMotiiv
                 props={props}
                 showModal={showModal}
-                isLoggined={loginState}
+                isLoggined={isLogged}
               />
             )}
           ></Route>
@@ -118,11 +135,7 @@ function App({ props }) {
           exact
           path="/detail/:id"
           render={props => (
-            <Detail
-              props={props}
-              showModal={showModal}
-              isLoggined={loginState}
-            />
+            <Detail props={props} showModal={showModal} isLoggined={isLogged} />
           )}
         ></Route>
         {/* Upload */}
@@ -141,7 +154,7 @@ function App({ props }) {
         }
       />
       <Footer isShow={location.pathname !== '/setting'} />
-      <MyNavBar isLoggined={loginState} tag={location.pathname}></MyNavBar>
+      <MyNavBar isLoggined={isLogged} tag={location.pathname}></MyNavBar>
     </>
   );
 }

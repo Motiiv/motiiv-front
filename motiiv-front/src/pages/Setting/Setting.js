@@ -216,22 +216,22 @@ const InfoText = styled.div`
   @media ${props => props.theme.maxdesktop} {
     font-size: 1.4rem;
     ${props =>
-      props.bottom === 'true'
-        ? `
+    props.bottom === 'true'
+      ? `
         margin-left : 12.5rem;
         margin-top: -2rem;
         `
-        : ``};
+      : ``};
   }
   @media ${props => props.theme.mobile} {
     font-size: 1.2rem;
     ${props =>
-      props.bottom === 'true'
-        ? `
+    props.bottom === 'true'
+      ? `
         margin-left : 9.5rem;
         margin-top: -5.5rem;
         `
-        : ``};
+      : ``};
   }
 `;
 
@@ -369,6 +369,7 @@ const Button = styled.button`
 `;
 
 function Setting() {
+
   const inputRef = useRef();
   const dispatch = useDispatch();
   const { userInfo, loading } = useSelector(({ user, loading }) => ({
@@ -377,31 +378,18 @@ function Setting() {
   }));
 
   //바인딩
-  const job = userInfo.Job;
-  const keyword1 = userInfo.UserKeywords[0];
-  const keyword2 = userInfo.UserKeywords[1];
-  const keyword3 = userInfo.UserKeywords[2];
-
-  const [nameInput, SetNameInput] = useState(userInfo.username);
-  const [profileImageInput, SetProfileImageInput] = useState(
-    userInfo.profileImageUrl,
-  );
-  const [profileImageFileInput, SetProfileImageFileInput] = useState(
-    userInfo.profileImageUrl,
-  );
-  const [jobInput, SetJobInput] = useState(job.name);
-  const [keywordsInput, SetKeywordsInput] = useState([
-    keyword1.name,
-    keyword2.name,
-    keyword3.name,
-  ]);
+  const [nameInput, SetNameInput] = useState(userInfo && userInfo.username);
+  const [profileImageInput, SetProfileImageInput] = useState(userInfo && userInfo.profileImageUrl);
+  const [profileImageFileInput, SetProfileImageFileInput] = useState(userInfo && userInfo.profileImageUrl);
+  const [jobInput, SetJobInput] = useState(userInfo && userInfo.Job.name);
+  const [keywordsInput, SetKeywordsInput] = useState(userInfo && userInfo.UserKeywords);
 
   const Updateprofile = () => {
     const user = {
       newName: nameInput,
       imageFile: profileImageFileInput,
       newJobName: jobInput,
-      newKeywordNames: keywordsInput,
+      newKeywordNames: keywordsInput
     };
     dispatch(updateProfile({ user }));
 
