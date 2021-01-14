@@ -41,7 +41,6 @@ function App({ props }) {
       document.documentElement.style.setProperty(`--${key}`, `${value}`);
     }
   };
-
   useEffect(() => {
     const token = localStorage.getItem('userToken')
       ? JSON.parse(localStorage.getItem('userToken'))
@@ -54,7 +53,6 @@ function App({ props }) {
           dispatch(getProfile());
           dispatch(changeIsLogged());
         } else {
-          // ?
         }
       });
     }

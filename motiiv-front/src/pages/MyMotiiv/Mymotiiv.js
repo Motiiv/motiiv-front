@@ -20,22 +20,7 @@ const MotiivWrapper = styled.div`
   z-index: 0;
 `;
 const HighLight = styled.span`
-<<<<<<< HEAD
-  background: ${({ theme }) => theme.primary};
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    transparent 20%,
-    ${({ theme }) => theme.primary} 20%,
-    ${({ theme }) => theme.primary} 55%,
-    transparent 55%,
-    transparent 100%
-  );
-  padding-bottom : 1.5rem;
-
-=======
   background: var(--highlight);
->>>>>>> 23edce237edc1d99d3b0ee1f041f7a2b7b430336
 `;
 const Container = styled.div`
   width: 100%;
