@@ -43,13 +43,13 @@ function App({ props }) {
   };
 
   useEffect(() => {
+    setColorType(whiteColors);
     const token = localStorage.getItem('userToken')
       ? JSON.parse(localStorage.getItem('userToken'))
       : null;
     if (token !== null) {
       authToken(token).then(res => {
         if (res.success) {
-          setColorType(whiteColors);
           dispatch(getWorkspaces());
           dispatch(getProfile());
           dispatch(changeIsLogged());
