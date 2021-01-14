@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
 import LoginInterestComponent from './LoginInterestComponent';
+import { useDispatch, useSelector } from 'react-redux';
+import { signUpKeywords } from '../../../modules/user';
 
 const Container = styled.div`
   display: ${props => (props.page === 3 ? 'flex' : 'none')};
@@ -62,7 +64,7 @@ const InterestGrid = styled.div`
   }
 `;
 
-function LastPage({ page, selectKeywords }) {
+function LastPage({ page }) {
   const interest = [
     '자기계발',
     '성장',
@@ -77,38 +79,10 @@ function LastPage({ page, selectKeywords }) {
     '디자인',
     '기획',
   ];
-  const [countState, setCountState] = useState(0);
-  const [chosenInterestState, setChosenInterestState] = useState('');
 
-  /*
-  //selectedBtnCountState가 3이 되는 순간 기존 버튼 삭제 말고는 다른 버튼은 눌리지 않아야 함.
-
-  const onClickInterestBtn = (i) => {
-
-    //이미 배열에 해당 태그가 포함되어 있다면 삭제
-    if (chosenInterestState.includes(interest[i])) {
-      const clicked = interest[i];
-      setChosenInterestState(chosenInterestState.filter(interest => interest !== clicked));
-      setSelectedBtnCountState(selectedBtnCountState - 1);
-    } else {
-      //배열에 없다면 선택된게 2개 이하일 때만 배열에 삽입
-      if (chosenInterestState.length <= 2) {
-        setChosenInterestState([...chosenInterestState, interest[i]]);
-        setSelectedBtnCountState(selectedBtnCountState + 1);
-      }
-    }
-
-    //해당 내용을 state에 업데이트
-    keywordsfunc(chosenInterestState);
-
-    //선택된게 1개 이상일 때 완료 버튼 활성화
-    if (selectedBtnCountState >= 1) {
-      setOkBtnState('ok');
-    } else {
-      setOkBtnState('ok-disabled');
-    }
-  }
-  */
+  const { keywordNames } = useSelector(({ user }) => ({
+    keywordNames: user.keywordNames
+  }));
 
   return (
     <Container page={page}>
@@ -119,7 +93,7 @@ function LastPage({ page, selectKeywords }) {
         {interest.map((tag, i) => (
           <LoginInterestComponent
             key={'interest-' + i}
-            type={false}
+            type={keywordNames.indexOf(tag) === -1 ? false : true}
             text={tag}
           />
         ))}

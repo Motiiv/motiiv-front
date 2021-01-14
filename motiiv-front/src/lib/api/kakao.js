@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import btnKakao from '../../assets/global/btn_kakao.png';
-import { createProfile, login } from '../../modules/user';
+import { createProfile, signUpKakao, login } from '../../modules/user';
 //import KaKaoLogin from "react-kakao-login";
 //import axios from "axios";
 
@@ -15,13 +15,16 @@ const LoginBtn = styled.button`
   border:none;
 `
 
-function KaKao({ props, pageUp, saveUserInfo }) {
+function KaKao({ props }) {
 
   const dispatch = useDispatch();
 
   const Login = (user) => {
     dispatch(login(user));
-    pageUp();
+  }
+
+  const saveKakaoInfo = (user) => {
+    dispatch(signUpKakao(user));
   }
 
   const onHandleLoginKaKao = () => {
@@ -48,7 +51,7 @@ function KaKao({ props, pageUp, saveUserInfo }) {
               snsId: response.id,
               socialType: 'kakao'
             }
-            saveUserInfo(signin);
+            saveKakaoInfo(signin);
           },
           fail: function (error) {
             console.log(error);

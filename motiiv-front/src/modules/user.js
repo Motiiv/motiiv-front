@@ -29,6 +29,13 @@ const [
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
 ] = createRequestActionTypes('user/LOGIN');
+//회원가입 정보 저장(카카오)
+const SIGNUP_KAKAO = createRequestActionTypes('user/SIGNUP_KAKAO');
+//회원가입 정보 저장(직업)
+const SIGNUP_JOB = createRequestActionTypes('user/SIGNUP_JOB');
+//회원가입 정보 저장(관심사)
+const SIGNUP_KEYWORDS = createRequestActionTypes('user/SIGNUP_KEYWORDS');
+
 
 
 /* ============== 액션 호출 함수 생성 ============== */
@@ -49,6 +56,12 @@ export const login = createAction(
   LOGIN,
   payload => payload,
 );
+//회원가입 정보 저장(카카오)
+export const signUpKakao = createAction(SIGNUP_KAKAO);
+//회원가입 정보 저장(직업)
+export const signUpJob = createAction(SIGNUP_JOB);
+//회원가입 정보 저장(관심사)
+export const signUpKeywords = createAction(SIGNUP_KEYWORDS);
 
 
 /* ============== 해당하는 액션 호출시 Saga실행 ============== */
@@ -73,6 +86,8 @@ export function* userSaga() {
 
 /* ============== State 초기값 ============== */
 const initState = {
+  isSignedUp: null,
+
   userInfo: {
     id: null,
     username: '',
@@ -86,7 +101,19 @@ const initState = {
     UserKeywords: [],
     userToken: '',
   },
+
   isLogged: false,
+
+  signUpKakao: {
+    username: '',
+    profileImageUrl: '',
+    socialType: '',
+    snsId: ''
+  },
+
+  jobName: '',
+
+  keywordNames: []
 };
 
 /* ============== 액션을 store에 저장하는 리듀서를 handleActions로 처리 ============== */
@@ -121,16 +148,32 @@ const user = handleActions(
       error,
       isLogged: false
     }),
-    //로그인 - 와 근데 생각해보니까 success는 다 여기로 받잖아
-    [LOGIN_SUCCESS]: (state, { payload: userInfo }) => ({
+    //로그인
+    [LOGIN_SUCCESS]: (state, { payload: payload }) => ({
       ...state,
-      userInfo,
-      isLogged: false
+      userInfo: payload.userInfo ? payload.userInfo : null,
+      isLogged: payload.isSignedUp ? true : false,
+      isSignedUp: payload.isSignedUp
     }),
     [LOGIN_FAILURE]: (state, { payload: data }) => ({
       ...state,
       data,
       isLogged: false
+    }),
+    //회원가입 정보 저장(카카오)
+    [SIGNUP_KAKAO]: (state, { payload: signUpKakao }) => ({
+      ...state,
+      signUpKakao
+    }),
+    //회원가입 정보 저장(직업)
+    [SIGNUP_JOB]: (state, { payload: jobName }) => ({
+      ...state,
+      jobName
+    }),
+    //회원가입 정보 저장(관심사)
+    [SIGNUP_KEYWORDS]: (state, { payload: payload }) => ({
+      ...state,
+      keywordNames: state.keywordNames.concat(payload)
     }),
   },
   initState,

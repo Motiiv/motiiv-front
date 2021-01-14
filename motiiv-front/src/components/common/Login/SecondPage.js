@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { signUpJob } from '../../../modules/user';
 import img from '../../../assets/profile/sampleImage.png';
 
 const Container = styled.div`
@@ -110,7 +112,13 @@ const ImageBtn = styled.div`
   }
 `
 
-function SecondPage({ page, selectJob }) {
+function SecondPage({ page }) {
+
+  const dispatch = useDispatch();
+
+  const chooseJob = (job) => {
+    dispatch(signUpJob(job));
+  }
 
   const [selectedState, setSelectedStateState] = useState({
     planner: false,
@@ -126,7 +134,7 @@ function SecondPage({ page, selectJob }) {
       developer: false,
       youknow: false
     })
-    selectJob('기획');
+    chooseJob('기획');
   }
 
   const onClickDesignerBtn = () => {
@@ -136,7 +144,7 @@ function SecondPage({ page, selectJob }) {
       developer: false,
       youknow: false
     })
-    selectJob('디자인');
+    chooseJob('디자인');
   }
 
   const onClickDeveloperBtn = () => {
@@ -146,7 +154,7 @@ function SecondPage({ page, selectJob }) {
       developer: true,
       youknow: false
     })
-    selectJob('개발');
+    chooseJob('개발');
   }
 
   const onClickYouknowBtn = () => {
@@ -156,7 +164,7 @@ function SecondPage({ page, selectJob }) {
       developer: false,
       youknow: true
     })
-    selectJob('유노윤호');
+    chooseJob('유노윤호');
   }
   return (
     <Container page={page}>
