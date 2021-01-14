@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled, { css } from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import Tag from '../../Tag/ProfileTag';
 import ToggleBtn from '../../Button/ToggleBtn';
 import naver from '../../../../assets/profile/naverlink_btn_small.png';
@@ -50,21 +50,21 @@ const FirstLetter = styled.div`
   `};
   @media ${props => props.theme.maxlaptop} {
     ${props =>
-    props.lang === 'kor'
-      ? `
+      props.lang === 'kor'
+        ? `
     font-size : 4rem;
   `
-      : `
+        : `
     font-size : 5.3rem;
   `};
   }
   @media ${props => props.theme.mobile} {
     ${props =>
-    props.lang === 'kor'
-      ? `
+      props.lang === 'kor'
+        ? `
     font-size : 2.8rem;
   `
-      : `
+        : `
     font-size : 3.5rem;
   `};
   }
@@ -196,7 +196,7 @@ const ToggleText = styled.div`
   }
 `;
 
-function ProfileModal({ hideModal, showModal }) {
+function ProfileModal({ hideModal, showModal, history }) {
   const [isToggled, setIsToggled] = useState(false); //추후 isToggled 여부로 다크모드 설정
   const [langState, setLangState] = useState('kor');
   const myRef = useRef();
@@ -228,21 +228,32 @@ function ProfileModal({ hideModal, showModal }) {
     isToggledNow ? setColorType(darkColors) : setColorType(whiteColors);
   };
 
+  const onHandleLogout = () => {
+    localStorage.removeItem('userToken');
+    window.location.reload();
+    hideModal();
+  };
+
   return (
     <ModalWrap show={showModal} ref={myRef}>
       {!loading ? (
         <ProfileImage src={userInfo && userInfo.profileImageUrl}>
-          <FirstLetter lang={langState} src={userInfo && userInfo.profileImageUrl}>
+          <FirstLetter
+            lang={langState}
+            src={userInfo && userInfo.profileImageUrl}
+          >
             {userInfo && userInfo.username.substr(0, 1)}
           </FirstLetter>
         </ProfileImage>
       ) : (
-          <Loading></Loading>
-        )}
+        <Loading></Loading>
+      )}
 
       <FirstDiv>
         <ProfileName>{userInfo && userInfo.username}</ProfileName>
-        <SocialImage src={userInfo && userInfo.socialType === 'kakao' ? kakao : naver} />
+        <SocialImage
+          src={userInfo && userInfo.socialType === 'kakao' ? kakao : naver}
+        />
       </FirstDiv>
 
       <TagBox>
@@ -286,10 +297,11 @@ function ProfileModal({ hideModal, showModal }) {
           fontSize="1.6rem"
           fontFamily="Campton"
           padding="0.7rem 1.5rem"
+          onHandleLogout={onHandleLogout}
         />
       </div>
     </ModalWrap>
   );
 }
 
-export default React.memo(ProfileModal);
+export default withRouter(React.memo(ProfileModal));

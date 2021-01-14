@@ -11,6 +11,7 @@ const TagContainer = styled.div`
   align-items: center;
   margin-left: 0.4rem;
   margin-right: 0.4rem;
+  cursor: pointer;
   @media ${props => props.theme.maxlaptop} {
     ${props =>
       props.text === 'logout'
@@ -76,9 +77,15 @@ function Tag({
   fontWeight,
   bgColor,
   padding,
+  onHandleLogout,
 }) {
   return (
-    <TagContainer color={color} bgColor={bgColor} text={text}>
+    <TagContainer
+      color={color}
+      bgColor={bgColor}
+      text={text}
+      onClick={onHandleLogout}
+    >
       <TagText
         fontSize={fontSize}
         color={color}

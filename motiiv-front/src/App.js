@@ -21,7 +21,7 @@ import {
 } from 'react-router-dom';
 import { useEffect } from 'react';
 import FloatBtn from './components/common/Button/FloatBtn';
-import { getProfile, isLoggedIn, changeIsLogged } from './modules/user';
+import { getProfile, changeIsLogged } from './modules/user';
 import { getWorkspaces } from './modules/mymotiiv';
 import { whiteColors } from './style/color';
 import { authToken } from './lib/api/auth';
@@ -54,7 +54,8 @@ function App({ props }) {
           dispatch(getProfile());
           dispatch(changeIsLogged());
         } else {
-          // ?
+          // 토큰은 있는데 유효한 토큰이 아닐 때 localstorage삭제
+          localStorage.removeItem('userToken');
         }
       });
     }

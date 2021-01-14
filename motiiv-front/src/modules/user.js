@@ -92,7 +92,7 @@ const initState = {
     UserKeywords: [],
     userToken: '',
   },
-
+  userToken: '',
   isLogged: false,
 
   signUpKakao: {
@@ -142,9 +142,21 @@ const user = handleActions(
     //로그인
     [LOGIN_SUCCESS]: (state, { payload: payload }) => ({
       ...state,
-      userInfo: payload.userInfo ? payload.userInfo : null,
+      userInfo: payload.userToken
+        ? {
+            id: payload.id,
+            username: payload.username,
+            snsId: payload.snsId,
+            socialType: payload.socialType,
+            Job: payload.Job,
+            UserKeywords: payload.UserKeywords,
+            profileImageUrl: payload.profileImageUrl,
+          }
+        : null,
+      userToken: payload.userToken,
       isLogged: payload.isSignedUp ? true : false,
       isSignedUp: payload.isSignedUp,
+      profileImageUrl: payload.profileImageUrl,
     }),
     [LOGIN_FAILURE]: (state, { payload: data }) => ({
       ...state,
