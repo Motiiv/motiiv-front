@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import btnNaver from '../../../assets/global/btn_naver.png';
-import btnKakao from '../../../assets/global/btn_kakao.png';
+import Kakao from '../../../lib/api/kakao';
 
 const Container = styled.div`
   display: ${props => (props.page === 1 ? 'flex' : 'none')};
@@ -12,6 +13,7 @@ const Container = styled.div`
   font-family: 'Spoqa-Han-Sans';
   color: black;
   @media ${props => props.theme.maxlaptop} {
+
   }
 `;
 
@@ -72,29 +74,33 @@ const LinkText = styled.div`
   }
 `;
 
-function FirstPage({ page, pageUp }) {
-  //버튼에 소셜로그인 함수 달기
+function FirstPage({ page, hideModal, pageUp }) {
+
+  const { data } = useSelector(({ user }) => ({
+    data: user.isSignedUp
+  }));
+
+  useEffect(() => {
+    console.log(data);
+    if (data === true) {
+      hideModal();
+    } else {
+      pageUp();
+    }
+  }, [data]);
 
   return (
     <Container page={page}>
       <Title>모티브에 오신걸 환영해요!</Title>
-      <SubTitle>
-        로그인을 하고 나의 하루가 달라지는 동기부여 서비스를 경험해보세요.
-      </SubTitle>
-      <LoginBtn style={{ marginBottom: '1.6rem' }}>
-        <img src={btnNaver} />
-      </LoginBtn>
-      <LoginBtn src={btnKakao} onClick={pageUp}>
-        <img src={btnKakao} />
-      </LoginBtn>
+      <SubTitle>로그인을 하고 나의 하루가 달라지는 동기부여 서비스를 경험해보세요.</SubTitle>
+      <LoginBtn style={{ marginBottom: "1.6rem" }}><img src={btnNaver} /></LoginBtn>
+      <Kakao hideModal={hideModal} />
       <LinkText>
-        <Link exact to="/main" style={{ color: '#A7A7A7' }}>
-          개인정보처리방침
-        </Link>
-        을 확인하였으며 이에 동의합니다.
-      </LinkText>
+        <Link exact to="/main" style={{ color: '#A7A7A7' }}>개인정보처리방침</Link>
+            을 확인하였으며 이에 동의합니다.
+          </LinkText>
     </Container>
   );
 }
 
-export default React.memo(FirstPage);
+export default FirstPage;

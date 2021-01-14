@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { createUser, signUpKeywords } from '../../../modules/user';
 import styled from 'styled-components';
 import FirstPage from './FirstPage';
 import SecondPage from './SecondPage';
@@ -24,19 +26,21 @@ const ModalBackgorundWrap = styled.div`
 `;
 
 const CancelBtn = styled.div`
-  display: ${props => (props.page === 1 ? 'display' : 'none')};
-  background-image: url(${loginCancelBtn});
-  width: 1.5rem;
-  height: 1.5rem;
-  cursor: pointer;
-`;
+  display: ${props => props.page === 1 ? 'display' : 'none'};
+  background-image:url(${loginCancelBtn});
+  width:1.5rem;
+  height:1.5rem;
+  cursor:pointer;
+`
 
 const NextBtn = styled.div`
-  ${props =>
-    props.page !== 2 ? `display:none;` : `opacity: 100; cursor:pointer;`};
-  font-weight: 400;
-  font-size: 1.5rem;
-`;
+  ${props => props.page !== 2 ?
+    `display:none;` :
+    `opacity: 100; cursor:pointer;`
+  };
+  font-weight:400;
+  font-size:1.5rem;
+`
 
 const PrevBtn = styled.div`
   ${props =>
@@ -173,6 +177,16 @@ const IndicatorContainer = styled.div`
 */
 
 function SigninModal({ hideModal, isShow }) {
+  const dispatch = useDispatch();
+
+  const { data } = useSelector(({ user }) => ({
+    data: {
+      ...user.signUpKakao,
+      jobName: user.jobName,
+      keywordNames: user.keywordNames
+    }
+  }));
+
   // 아웃 사이드 클릭
   const myRef = useRef();
   const handleClickOutside = e => {
@@ -188,62 +202,39 @@ function SigninModal({ hideModal, isShow }) {
 
   const [pageState, setPageState] = useState(1);
   const pageDown = () => {
-    (async () => {
-      try {
-        if (pageState > 1) {
-          setPageState(pageState - 1);
-        }
-      } catch (e) {}
-    })();
-  };
+    if (pageState > 1) {
+      setPageState(pageState - 1);
+    }
+  }
   const pageUp = () => {
-    (async () => {
-      try {
-        if (pageState < 3) {
-          setPageState(pageState + 1);
-        }
-      } catch (e) {}
-    })();
-  };
+    if (pageState < 3) {
+      setPageState(pageState + 1);
+    }
+  }
   const pageReset = () => {
-    (async () => {
-      try {
-        setPageState(1);
-      } catch (e) {}
-    })();
-  };
-
-  //회원 정보 저장
+    setPageState(1);
+  }
 
   //회원가입 완료
   const finishSignup = () => {
-    (async () => {
-      try {
-        hideModal();
-      } catch (e) {}
-    })();
-  };
+    dispatch(createUser(data));
+    hideModal();
+  }
 
   return (
     <>
       <ModalBackgorundWrap show={isShow} />
       <ModalWrap show={isShow} ref={myRef}>
         <CancelBtn onClick={hideModal} page={pageState} />
-        <FirstPage page={pageState} pageUp={pageUp} />
+        <FirstPage page={pageState} pageUp={pageUp} hideModal={hideModal} />
         <SecondPage page={pageState} />
         <LastPage page={pageState} />
-        <PrevBtn page={pageState} onClick={pageDown}>
-          &#xE000; &nbsp; 이전
-        </PrevBtn>
-        <NextBtn page={pageState} onClick={pageUp}>
-          다음 &nbsp; &#xE001;
-        </NextBtn>
-        <FinBtn page={pageState} onClick={finishSignup}>
-          완료
-        </FinBtn>
+        <PrevBtn page={pageState} onClick={pageDown}>&#xE000; &nbsp; 이전</PrevBtn>
+        <NextBtn page={pageState} onClick={pageUp}>다음 &nbsp; &#xE001;</NextBtn>
+        <FinBtn page={pageState} onClick={finishSignup}>완료</FinBtn>
       </ModalWrap>
     </>
   );
 }
 
-export default React.memo(SigninModal);
+export default SigninModal;

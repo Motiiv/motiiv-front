@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { signUpJob } from '../../../modules/user';
 import img from '../../../assets/profile/sampleImage.png';
 
 const Container = styled.div`
-  display: ${props => (props.page === 2 ? 'flex' : 'none')};
+  display: ${props => props.page === 2 ? 'flex' : 'none'};
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -60,17 +62,12 @@ const ImageContainer = styled.div`
   }
 `;
 const Text = styled.div`
-  width: 12rem;
-  text-align: center;
-  font-size: 1.8rem;
-  font-weight: 400;
-  color: white;
-  ${props =>
-    props.click === true
-      ? `
-      -webkit-text-stroke: 1px #000
-      `
-      : ``};
+    width:12rem;
+    text-align:center;
+    font-size:1.8rem;
+    font-weight:400;
+    color:white;
+    ${props => props.click === true ? `font-weight:700` : ``};
   @media ${props => props.theme.maxlaptop} {
     font-size: 1.5rem;
     width: 10rem;
@@ -99,12 +96,10 @@ const ImageBtn = styled.div`
     transform: translate(-50%, -50%);
   }
 
-  ${props =>
-    props.click === true
-      ? `
-      border : 1.5px solid #2CFF2C;
+    ${props => props.click === true ?
     `
-      : ``};
+      border : 1.5px solid #2CFF2C;
+    `: ``};
 
   @media ${props => props.theme.maxlaptop} {
     width: 11rem;
@@ -115,33 +110,74 @@ const ImageBtn = styled.div`
     width: 10.5rem;
     height: 10.5rem;
   }
-`;
+`
 
 function SecondPage({ page }) {
-  const [selectedState, setSelectedStateState] = useState(false);
 
-  //버튼 눌린 것만 활성화 되도록
+  const dispatch = useDispatch();
 
+  const chooseJob = (job) => {
+    dispatch(signUpJob(job));
+  }
+
+  const [selectedState, setSelectedStateState] = useState({
+    planner: false,
+    designer: false,
+    developer: false,
+    youknow: false,
+  });
+
+  const onClickPlannerBtn = () => {
+    setSelectedStateState({
+      planner: true,
+      designer: false,
+      developer: false,
+      youknow: false
+    })
+    chooseJob('기획');
+  }
+
+  const onClickDesignerBtn = () => {
+    setSelectedStateState({
+      planner: false,
+      designer: true,
+      developer: false,
+      youknow: false
+    })
+    chooseJob('디자인');
+  }
+
+  const onClickDeveloperBtn = () => {
+    setSelectedStateState({
+      planner: false,
+      designer: false,
+      developer: true,
+      youknow: false
+    })
+    chooseJob('개발');
+  }
+
+  const onClickYouknowBtn = () => {
+    setSelectedStateState({
+      planner: false,
+      designer: false,
+      developer: false,
+      youknow: true
+    })
+    chooseJob('유노윤호');
+  }
   return (
     <Container page={page}>
       <Title>어떤 일을 하고 계세요?</Title>
       <SubTitle>일하고 있는 분야에 맞는 동기부여 영상을 추천드려요!</SubTitle>
       <ImageContainer>
-        <ImageBtn img={img} click={selectedState}>
-          <Text click={selectedState}>기획자</Text>
-        </ImageBtn>
-        <ImageBtn img={img} click={selectedState}>
-          <Text click={selectedState}>디자이너</Text>
-        </ImageBtn>
-        <ImageBtn img={img} click={selectedState}>
-          <Text click={selectedState}>개발자</Text>
-        </ImageBtn>
-        <ImageBtn img={img} click={selectedState}>
-          <Text click={selectedState}>유노윤호</Text>
-        </ImageBtn>
+        <ImageBtn img={img} onClick={onClickPlannerBtn} click={selectedState.planner}><Text click={selectedState.planner}>기획자</Text></ImageBtn>
+        <ImageBtn img={img} onClick={onClickDesignerBtn} click={selectedState.designer}><Text click={selectedState.designer}>디자이너</Text></ImageBtn>
+        <ImageBtn img={img} onClick={onClickDeveloperBtn} click={selectedState.developer}><Text click={selectedState.developer}>개발자</Text></ImageBtn>
+        <ImageBtn img={img} onClick={onClickYouknowBtn} click={selectedState.youknow}><Text click={selectedState.youknow}>유노윤호</Text></ImageBtn>
       </ImageContainer>
     </Container>
   );
 }
 
-export default React.memo(SecondPage);
+export default SecondPage;
