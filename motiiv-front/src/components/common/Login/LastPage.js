@@ -81,7 +81,7 @@ function LastPage({ page }) {
   ];
 
   const { keywordNames } = useSelector(({ user }) => ({
-    keywordNames: user.keywordNames
+    keywordNames: user.keywordNames,
   }));
 
   return (

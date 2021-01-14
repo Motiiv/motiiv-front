@@ -10,4 +10,16 @@ const getInfoNaver = async () => {
   }
 };
 
-export { getInfoNaver };
+const authToken = async token => {
+  try {
+    const { data } = await client.post(`/users/token`, null, {
+      headers: { userToken: token },
+    });
+    console.log('[SUCCESS] authToken', data);
+    client.defaults.headers.userToken = token;
+    return data;
+  } catch (err) {
+    console.log('[FAIL] authToken', err);
+  }
+};
+export { getInfoNaver, authToken };

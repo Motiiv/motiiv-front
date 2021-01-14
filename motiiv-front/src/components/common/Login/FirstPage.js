@@ -13,7 +13,6 @@ const Container = styled.div`
   font-family: 'Spoqa-Han-Sans';
   color: black;
   @media ${props => props.theme.maxlaptop} {
-
   }
 `;
 
@@ -75,13 +74,12 @@ const LinkText = styled.div`
 `;
 
 function FirstPage({ page, hideModal, pageUp }) {
-
   const { data } = useSelector(({ user }) => ({
-    data: user.isSignedUp
+    data: user.isSignedUp,
   }));
 
   useEffect(() => {
-    console.log(data);
+    //console.log(data);
     if (data === true) {
       hideModal();
     } else {
@@ -92,8 +90,12 @@ function FirstPage({ page, hideModal, pageUp }) {
   return (
     <Container page={page}>
       <Title>모티브에 오신걸 환영해요!</Title>
-      <SubTitle>로그인을 하고 나의 하루가 달라지는 동기부여 서비스를 경험해보세요.</SubTitle>
-      <LoginBtn style={{ marginBottom: "1.6rem" }}><img src={btnNaver} /></LoginBtn>
+      <SubTitle>
+        로그인을 하고 나의 하루가 달라지는 동기부여 서비스를 경험해보세요.
+      </SubTitle>
+      <LoginBtn style={{ marginBottom: '1.6rem' }}>
+        <img src={btnNaver} />
+      </LoginBtn>
       <Kakao hideModal={hideModal} />
       <LinkText>
         <Link exact to="/privacy" onClick={hideModal} style={{ color: '#A7A7A7' }}>개인정보처리방침</Link>

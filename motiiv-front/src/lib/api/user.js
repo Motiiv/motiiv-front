@@ -16,9 +16,8 @@ const updateUserProfile = async ({ user }) => {
     newName: user.newName,
     imageFile: user.imageFile,
     newJobName: user.newJobName,
-    newKeywordNames: user.newKeywordNames
+    newKeywordNames: user.newKeywordNames,
   };
-
   try {
     const { data } = await client.put(`/users`, payload);
     console.log('[SUCCESS] updateUserProfile', data);
@@ -29,7 +28,7 @@ const updateUserProfile = async ({ user }) => {
   }
 };
 
-const createUser = async (user) => {
+const createUser = async user => {
   try {
     console.log(user);
     const { data } = await client.post(`/users/signup`, user);
@@ -41,13 +40,14 @@ const createUser = async (user) => {
   }
 };
 
-const login = async (user) => {
+const login = async user => {
   try {
     const { data } = await client.post(`/users/login`, user);
     console.log('[SUCCESS] login', data);
     if (data.data.isSignedUp === true) {
       // api 토큰 바꿔치기
       client.defaults.headers.userToken = data.data.userToken;
+      localStorage.setItem('userToken', JSON.stringify(data.data.userToken));
     }
     return data;
   } catch (e) {
@@ -77,6 +77,6 @@ export {
   getUserProfile,
   updateUserProfile,
   createUser,
-  login
+  login,
   /* IWantCookies  */
 };
