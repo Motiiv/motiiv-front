@@ -76,7 +76,6 @@ const TagContainer = styled.div`
   }
 `;
 function Tag({ hashTag, color, text, fontSize, history, id }) {
-  console.log('c', color === 'black');
   const dispatch = useDispatch();
   const onClickTag = () => {
     dispatch(getCategoryTagVideos(id));
