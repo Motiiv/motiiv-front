@@ -65,10 +65,7 @@ const Text = styled.div`
     font-size:1.8rem;
     font-weight:400;
     color:white;
-    ${props => props.click === true ?
-    `
-      -webkit-text-stroke: 1px #000
-      `: ``};
+    ${props => props.click === true ? `font-weight:700` : ``};
   @media ${props => props.theme.maxlaptop} {
     font-size: 1.5rem;
     width: 10rem;
@@ -113,7 +110,7 @@ const ImageBtn = styled.div`
   }
 `
 
-function SecondPage({ page }) {
+function SecondPage({ page, selectJob }) {
 
   const [selectedState, setSelectedStateState] = useState({
     planner: false,
@@ -122,47 +119,54 @@ function SecondPage({ page }) {
     youknow: false,
   });
 
-  const onClickBtn = i => {
-    if (i === 0) {
-      setSelectedStateState({
-        planner: true,
-        designer: false,
-        developer: false,
-        youknow: false
-      })
-    } else if (i === 1) {
-      setSelectedStateState({
-        planner: false,
-        designer: true,
-        developer: false,
-        youknow: false
-      })
-    } else if (i === 2) {
-      setSelectedStateState({
-        planner: false,
-        designer: false,
-        developer: true,
-        youknow: false
-      })
-    } else if (i === 3) {
-      setSelectedStateState({
-        planner: false,
-        designer: false,
-        developer: false,
-        youknow: true
-      })
-    }
+  const onClickPlannerBtn = () => {
+    setSelectedStateState({
+      planner: true,
+      designer: false,
+      developer: false,
+      youknow: false
+    })
+    selectJob('기획');
   }
 
+  const onClickDesignerBtn = () => {
+    setSelectedStateState({
+      planner: false,
+      designer: true,
+      developer: false,
+      youknow: false
+    })
+    selectJob('디자인');
+  }
+
+  const onClickDeveloperBtn = () => {
+    setSelectedStateState({
+      planner: false,
+      designer: false,
+      developer: true,
+      youknow: false
+    })
+    selectJob('개발');
+  }
+
+  const onClickYouknowBtn = () => {
+    setSelectedStateState({
+      planner: false,
+      designer: false,
+      developer: false,
+      youknow: true
+    })
+    selectJob('유노윤호');
+  }
   return (
     <Container page={page}>
       <Title>어떤 일을 하고 계세요?</Title>
       <SubTitle>일하고 있는 분야에 맞는 동기부여 영상을 추천드려요!</SubTitle>
       <ImageContainer>
-        <ImageBtn img={img} onClick={onClickBtn[0]} click={selectedState.planner}><Text click={selectedState.planner}>기획자</Text></ImageBtn>
-        <ImageBtn img={img} onClick={onClickBtn[1]} click={selectedState.designer}><Text click={selectedState.designer}>디자이너</Text></ImageBtn>
-        <ImageBtn img={img} onClick={onClickBtn[2]} click={selectedState.developer}><Text click={selectedState.developer}>개발자</Text></ImageBtn>
-        <ImageBtn img={img} onClick={onClickBtn[3]} click={selectedState.youknow}><Text click={selectedState.youknow}>유노윤호</Text></ImageBtn>
+        <ImageBtn img={img} onClick={onClickPlannerBtn} click={selectedState.planner}><Text click={selectedState.planner}>기획자</Text></ImageBtn>
+        <ImageBtn img={img} onClick={onClickDesignerBtn} click={selectedState.designer}><Text click={selectedState.designer}>디자이너</Text></ImageBtn>
+        <ImageBtn img={img} onClick={onClickDeveloperBtn} click={selectedState.developer}><Text click={selectedState.developer}>개발자</Text></ImageBtn>
+        <ImageBtn img={img} onClick={onClickYouknowBtn} click={selectedState.youknow}><Text click={selectedState.youknow}>유노윤호</Text></ImageBtn>
       </ImageContainer>
     </Container>
   );

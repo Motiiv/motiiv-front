@@ -31,10 +31,13 @@ const updateUserProfile = async ({ user }) => {
 
 const createUser = async ({ user }) => {
   try {
+    console.log("1");
     const { data } = await client.post(`/users/signup`, user);
+    console.log("2");
     console.log('[SUCCESS] createUser', data);
     return data;
   } catch (e) {
+    console.log("3");
     console.log('[FAIL] createUser', e);
     throw e;
   }
@@ -44,10 +47,13 @@ const login = async (user) => {
   try {
     const { data } = await client.post(`/users/login`, user);
     console.log('[SUCCESS] login', data);
-    // api 토큰 바꿔치기
-    client.defaults.headers.userToken = data.data.userToken;
-    console.log(data.success);
-    return data;
+    if (data.success === true) {
+      // api 토큰 바꿔치기
+      client.defaults.headers.userToken = data.data.userToken;
+      return data;
+    } else {
+      return data.success;
+    }
   } catch (e) {
     console.log('[FAIL] login', e);
     throw e;

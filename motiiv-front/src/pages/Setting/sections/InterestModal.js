@@ -77,7 +77,7 @@ function InterestModal({ show, keywordsfunc }) {
   const [okBtnState, setOkBtnState] = useState('ok-disabled');
   const [chosenInterestState, setChosenInterestState] = useState('');
 
-  //selectedBtnCountState가 3이 되는 순간 기존 버튼 삭제 말고는 다른 버튼은 눌리지 않아야 함. 이 처리는 어떻게 할까?
+  //selectedBtnCountState가 3이 되는 순간 기존 버튼 삭제 말고는 다른 버튼은 눌리지 않아야 함.
 
   const onClickInterestBtn = (i) => {
 
@@ -114,6 +114,7 @@ function InterestModal({ show, keywordsfunc }) {
           type={'unselected'}
           text={tag}
           onClickInterestBtn={onClickInterestBtn}
+          count={selectedBtnCountState}
         />)}
       </InterestGrid>
 

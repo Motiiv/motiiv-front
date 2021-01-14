@@ -15,14 +15,14 @@ const LoginBtn = styled.button`
   border:none;
 `
 
-function KaKao({ props, pageUp }) {
+function KaKao({ props, pageUp, saveUserInfo }) {
 
   const dispatch = useDispatch();
 
   const Login = (user) => {
     dispatch(login(user));
+    pageUp();
   }
-
 
   const onHandleLoginKaKao = () => {
 
@@ -41,15 +41,14 @@ function KaKao({ props, pageUp }) {
             //로그인 시도
             Login(user);
 
-            //로그인 정보 없을 시 회원가입으로 이동
+            //로그인 정보 없을 시 회원가입을 위해 정보 넘겨주기
             const signin = {
               username: response.kakao_account.profile.nickname,
               profileImageUrl: response.kakao_account.profile.profile_image_url,
               snsId: response.id,
               socialType: 'kakao'
             }
-
-
+            saveUserInfo(signin);
           },
           fail: function (error) {
             console.log(error);

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { createUser } from '../../../modules/user';
 import styled from 'styled-components';
 import FirstPage from './FirstPage';
 import SecondPage from './SecondPage';
@@ -176,6 +177,8 @@ const IndicatorContainer = styled.div`
 */
 
 function SigninModal({ hideModal, isShow }) {
+  const dispatch = useDispatch();
+
   // 아웃 사이드 클릭
   const myRef = useRef();
   const handleClickOutside = e => {
@@ -189,35 +192,30 @@ function SigninModal({ hideModal, isShow }) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   });
 
-  const [nameState, setNameState] = useState("");
-  const [imageState, setImageState] = useState("");
-  const [snsIdState, setSnsIdState] = useState("");
-  const [socialState, setSocialState] = useState("");
-  const [jobState, setJobState] = useState("");
-  const [keywordState, setKeywordState] = useState("");
+  const [userState, setUserState] = useState({
+    'username': '',
+    'profileImageUrl': '',
+    'snsId': '',
+    'socialType': ''
+  });
+  const [jobState, setJobState] = useState('');
+  const [keywordNamesState, setKeywordNamesState] = useState(['기획', '위로', '조언']);
 
-  const { userInfo } = useSelector(({ user }) => ({
-    userInfo: user.userInfo
-  }));
-
-  const selectJob = (job) => {
-    setJobState(job)
+  const saveUserInfo = (user) => {
+    setUserState({
+      'username': user.username,
+      'profileImageUrl': user.profileImageUrl,
+      'snsId': user.snsId.toString(),
+      'socialType': user.socialType
+    });
   }
 
-  const setSocialProfile = () => {
-    //   setNameState(user && user.username);
-    //   setImageState(user && user.profileImageUrl);
-    //   setSnsIdState(user && user.snsId);
-    //   setSocialState(user && user.socialType);
-    //   setJobState(user && user.Job);
-    //   setKeywordState(user && user.UserKeywords);
+  const selectJob = (job) => {
+    setJobState(job);
+  }
 
-    //   console.log(nameState);
-    //   console.log(imageState);
-    //   console.log(snsIdState);
-    //   console.log(socialState);
-    //   console.log(jobState);
-    //   console.log(keywordState);
+  const selectKeywords = (str) => {
+    setKeywordNamesState(str);
   }
 
   const [pageState, setPageState] = useState(1);
@@ -237,6 +235,18 @@ function SigninModal({ hideModal, isShow }) {
 
   //회원가입 완료
   const finishSignup = () => {
+
+    const user = {
+      username: userState.username,
+      profileImageUrl: userState.profileImageUrl,
+      snsId: userState.snsId,
+      socialType: userState.socialType,
+      jobName: jobState,
+      keywordNames: keywordNamesState
+    }
+
+    console.log(user);
+    dispatch(createUser(user));
     hideModal();
   }
 
@@ -245,9 +255,9 @@ function SigninModal({ hideModal, isShow }) {
       <ModalBackgorundWrap show={isShow} />
       <ModalWrap show={isShow} ref={myRef}>
         <CancelBtn onClick={hideModal} page={pageState} />
-        <FirstPage page={pageState} pageUp={pageUp} socialfunc={setSocialProfile} hideModal={hideModal} />
-        <SecondPage page={pageState} />
-        <LastPage page={pageState} />
+        <FirstPage page={pageState} pageUp={pageUp} saveUserInfo={saveUserInfo} hideModal={hideModal} />
+        <SecondPage page={pageState} selectJob={selectJob} />
+        <LastPage page={pageState} selectKeywords={selectKeywords} />
         <PrevBtn page={pageState} onClick={pageDown}>&#xE000; &nbsp; 이전</PrevBtn>
         <NextBtn page={pageState} onClick={pageUp}>다음 &nbsp; &#xE001;</NextBtn>
         <FinBtn page={pageState} onClick={finishSignup}>완료</FinBtn>

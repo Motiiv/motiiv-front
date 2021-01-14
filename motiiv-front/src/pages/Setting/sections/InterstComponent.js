@@ -80,17 +80,22 @@ const Component = styled.button`
 `;
 
 
-function InterestComponent({ type, text, onClickInterestBtn, idx }) {
+function InterestComponent({ type, text, onClickInterestBtn, idx, count }) {
 
   const [btnState, setBtnState] = useState(type);
 
   const selectBtn = () => {
     onClickInterestBtn(idx);
-
-    if (btnState === "selected") {
-      setBtnState("unselected");
-    } else if (btnState === "unselected") {
-      setBtnState("selected");
+    if (count >= 3) {
+      if (btnState === "selected") {
+        setBtnState("unselected");
+      }
+    } else {
+      if (btnState === "selected") {
+        setBtnState("unselected");
+      } else if (btnState === "unselected") {
+        setBtnState("selected");
+      }
     }
   }
 

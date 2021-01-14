@@ -19,10 +19,10 @@ const [
 ] = createRequestActionTypes('user/UPDATE_PROFILE');
 //회원가입
 const [
-  CREATE_PROFILE,
-  CREATE_PROFILE_SUCCESS,
-  CREATE_PROFILE_FAILURE,
-] = createRequestActionTypes('user/CREATE_PROFILE');
+  CREATE_USER,
+  CREATE_USER_SUCCESS,
+  CREATE_USER_FAILURE,
+] = createRequestActionTypes('user/CREATE_USER');
 //로그인
 const [
   LOGIN,
@@ -40,8 +40,8 @@ export const updateProfile = createAction(
   payload => payload,
 );
 //회원가입
-export const createProfile = createAction(
-  CREATE_PROFILE,
+export const createUser = createAction(
+  CREATE_USER,
   payload => payload,
 );
 //로그인
@@ -57,7 +57,7 @@ const getUserSaga = createRequestSaga(GET_PROFILE, userAPI.getUserProfile);
 //프로필 정보 수정
 const updateUserSaga = createRequestSaga(UPDATE_PROFILE, userAPI.updateUserProfile);
 //회원가입
-const createUserSaga = createRequestSaga(CREATE_PROFILE, userAPI.createUser);
+const createUserSaga = createRequestSaga(CREATE_USER, userAPI.createUser);
 //로그인
 const loginSaga = createRequestSaga(LOGIN, userAPI.login);
 
@@ -66,7 +66,7 @@ const loginSaga = createRequestSaga(LOGIN, userAPI.login);
 export function* userSaga() {
   yield takeLatest(GET_PROFILE, getUserSaga);
   yield takeLatest(UPDATE_PROFILE, updateUserSaga);
-  yield takeLatest(CREATE_PROFILE, createUserSaga);
+  yield takeLatest(CREATE_USER, createUserSaga);
   yield takeLatest(LOGIN, loginSaga);
 }
 
@@ -111,24 +111,26 @@ const user = handleActions(
       error,
     }),
     //회원가입
-    [CREATE_PROFILE_SUCCESS]: (state, { payload: userInfo }) => ({
+    [CREATE_USER_SUCCESS]: (state, { payload: userInfo }) => ({
       ...state,
       userInfo,
       isLogged: true
     }),
-    [CREATE_PROFILE_FAILURE]: (state, { payload: error }) => ({
+    [CREATE_USER_FAILURE]: (state, { payload: error }) => ({
       ...state,
       error,
+      isLogged: false
     }),
-    //로그인
+    //로그인 - 와 근데 생각해보니까 success는 다 여기로 받잖아
     [LOGIN_SUCCESS]: (state, { payload: userInfo }) => ({
       ...state,
       userInfo,
-      isLogged: true
+      isLogged: false
     }),
-    [LOGIN_FAILURE]: (state, { payload: error }) => ({
+    [LOGIN_FAILURE]: (state, { payload: data }) => ({
       ...state,
-      error,
+      data,
+      isLogged: false
     }),
   },
   initState,
