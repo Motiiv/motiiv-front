@@ -31,6 +31,7 @@ const HighLight = styled.span`
     transparent 100%
   );
   padding-bottom : 1.5rem;
+
 `;
 const Container = styled.div`
   width: 100%;
@@ -119,7 +120,7 @@ function MyMotiiv({ showModal, isLoggined }) {
             <Container>
               <Wrapper>
                 <Title>
-                  내가 <HighLight>자주 본</HighLight>모티브
+                  내가 <HighLight>자주 본</HighLight> 모티브
                 </Title>
                 <ImageSlider
                   saveButton={saveButton}
@@ -131,7 +132,7 @@ function MyMotiiv({ showModal, isLoggined }) {
             <Container>
               <Wrapper>
                 <Title>
-                  내가 <HighLight>저장 한</HighLight>모티브
+                  내가 <HighLight>저장 한</HighLight> 모티브
                 </Title>
                 <ImageSlider
                   saveButton={saveButton}
@@ -143,7 +144,7 @@ function MyMotiiv({ showModal, isLoggined }) {
             <Container>
               <Wrapper>
                 <Title>
-                  최근 <HighLight>재생한</HighLight>모티브
+                  최근 <HighLight>재생한</HighLight> 모티브
                 </Title>
                 <ImageSlider
                   saveButton={saveButton}
