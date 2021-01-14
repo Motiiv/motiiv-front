@@ -66,9 +66,6 @@ const Section = ({
   showModal,
   BlackModalConfirm,
 }) => {
-  useEffect(() => {
-    console.log('section object', object);
-  }, []);
   return (
     <>
       <Container type={type} color={color}>

@@ -29,7 +29,6 @@ const getDetailVideoInfo = async videoId => {
 };
 const getCategoryTagVideos = async tagId => {
   try {
-    console.log('tagId', tagId);
     const { data } = await client.get(`/videos/category/${tagId}`);
     console.log('[SUCCESS] getCategoryTagVideos', data);
     return data;

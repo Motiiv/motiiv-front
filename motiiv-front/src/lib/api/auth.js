@@ -12,7 +12,6 @@ const getInfoNaver = async () => {
 
 const authToken = async token => {
   try {
-    console.log(token);
     const { data } = await client.post(`/users/token`, null, {
       headers: { userToken: token },
     });
