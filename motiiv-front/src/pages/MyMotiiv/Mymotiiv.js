@@ -154,7 +154,6 @@ function MyMotiiv({ showModal, isLoggined }) {
                   saveButton={saveButton}
                   object={myvideos.recentViewSort}
                 ></ImageSlider>
-                l
               </Wrapper>
             </Container>
           </>

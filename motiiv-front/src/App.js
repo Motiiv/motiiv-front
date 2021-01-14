@@ -27,7 +27,7 @@ import { whiteColors } from './style/color';
 
 function App({ props }) {
   const dispatch = useDispatch();
-  const [loginState, setLoginState] = useState(true);
+  const [loginState, setLoginState] = useState(false);
   const [showLoginModalState, setShowLoginModalState] = useState(false);
 
   const location = useLocation();
