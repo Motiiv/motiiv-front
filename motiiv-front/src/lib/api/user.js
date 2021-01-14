@@ -15,9 +15,8 @@ const updateUserProfile = async ({ user }) => {
     newName: user.newName,
     imageFile: user.imageFile,
     newJobName: user.newJobName,
-    newKeywordNames: user.newKeywordNames
+    newKeywordNames: user.newKeywordNames,
   };
-  
   try {
     const { data } = await client.put(`/users`, payload);
     console.log('[SUCCESS] updateUserProfile', data);
@@ -47,6 +46,6 @@ const updateUserProfile = async ({ user }) => {
 
 export {
   getUserProfile,
-  updateUserProfile
+  updateUserProfile,
   /* IWantCookies  */
 };
