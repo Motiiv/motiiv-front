@@ -50,21 +50,21 @@ const FirstLetter = styled.div`
   `};
   @media ${props => props.theme.maxlaptop} {
     ${props =>
-      props.lang === 'kor'
-        ? `
+    props.lang === 'kor'
+      ? `
     font-size : 4rem;
   `
-        : `
+      : `
     font-size : 5.3rem;
   `};
   }
   @media ${props => props.theme.mobile} {
     ${props =>
-      props.lang === 'kor'
-        ? `
+    props.lang === 'kor'
+      ? `
     font-size : 2.8rem;
   `
-        : `
+      : `
     font-size : 3.5rem;
   `};
   }
@@ -231,22 +231,22 @@ function ProfileModal({ hideModal, showModal }) {
   return (
     <ModalWrap show={showModal} ref={myRef}>
       {!loading ? (
-        <ProfileImage src={userInfo.profileImageUrl}>
-          <FirstLetter lang={langState} src={userInfo.profileImageUrl}>
-            {userInfo.username && userInfo.username.substr(0, 1)}
+        <ProfileImage src={userInfo && userInfo.profileImageUrl}>
+          <FirstLetter lang={langState} src={userInfo && userInfo.profileImageUrl}>
+            {userInfo && userInfo.username.substr(0, 1)}
           </FirstLetter>
         </ProfileImage>
       ) : (
-        <Loading></Loading>
-      )}
+          <Loading></Loading>
+        )}
 
       <FirstDiv>
-        <ProfileName>{userInfo.username}</ProfileName>
-        <SocialImage src={userInfo.socialType === 'kakao' ? kakao : naver} />
+        <ProfileName>{userInfo && userInfo.username}</ProfileName>
+        <SocialImage src={userInfo && userInfo.socialType === 'kakao' ? kakao : naver} />
       </FirstDiv>
 
       <TagBox>
-        {userInfo.UserKeywords &&
+        {userInfo &&
           userInfo.UserKeywords.map((tag, i) => (
             <Tag
               key={'interest-' + i}
