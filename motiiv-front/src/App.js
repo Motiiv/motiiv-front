@@ -1,5 +1,5 @@
 import Detail from './pages/Detail/Detail';
-import SignUp from './pages/SignUp/SignUp';
+import Privacy from './pages/Privacy/Privacy';
 import Upload from './pages/Upload/Upload';
 import Main from './pages/Main/Main';
 import Category from './pages/Category/Category';
@@ -99,8 +99,8 @@ function App({ props }) {
         }
         <Route
           exact
-          path="/signup"
-          render={props => <SignUp props={props} />}
+          path="/privacy"
+          render={props => <Privacy props={props} />}
         ></Route>
         {/* Setting */}
         <Route
