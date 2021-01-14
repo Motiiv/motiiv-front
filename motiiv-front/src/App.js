@@ -46,16 +46,18 @@ function App({ props }) {
     const token = localStorage.getItem('userToken')
       ? JSON.parse(localStorage.getItem('userToken'))
       : null;
-    authToken(token).then(res => {
-      if (res.success) {
-        setColorType(whiteColors);
-        dispatch(getWorkspaces());
-        dispatch(getProfile());
-        dispatch(changeIsLogged());
-      } else {
-        // ?
-      }
-    });
+    if (token !== null) {
+      authToken(token).then(res => {
+        if (res.success) {
+          setColorType(whiteColors);
+          dispatch(getWorkspaces());
+          dispatch(getProfile());
+          dispatch(changeIsLogged());
+        } else {
+          // ?
+        }
+      });
+    }
   }, []);
 
   /*   useEffect(() => {
