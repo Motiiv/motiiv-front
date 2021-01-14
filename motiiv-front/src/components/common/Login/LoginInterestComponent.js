@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { signUpKeywords } from '../../../modules/user';
 
 const InterestComponent = styled.button`
   border: none;
@@ -39,22 +41,14 @@ const InterestComponent = styled.button`
 `;
 
 function LoginInterestComponent({ type, text }) {
-  const [btnState, setBtnState] = useState(type);
+  const dispatch = useDispatch();
 
   const selectBtn = () => {
-    (async () => {
-      try {
-        if (btnState === false) {
-          setBtnState(true);
-        } else {
-          setBtnState(false);
-        }
-      } catch (e) {}
-    })();
-  };
+    dispatch(signUpKeywords(text));
+  }
 
   return (
-    <InterestComponent type={btnState} onClick={selectBtn}>
+    <InterestComponent type={type} onClick={selectBtn}>
       {text}
     </InterestComponent>
   );

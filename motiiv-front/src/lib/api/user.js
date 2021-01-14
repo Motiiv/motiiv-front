@@ -1,3 +1,4 @@
+import axios from 'axios';
 import client from './_client';
 
 const getUserProfile = async () => {
@@ -17,13 +18,40 @@ const updateUserProfile = async ({ user }) => {
     newJobName: user.newJobName,
     newKeywordNames: user.newKeywordNames
   };
-  
+
   try {
     const { data } = await client.put(`/users`, payload);
     console.log('[SUCCESS] updateUserProfile', data);
     return data;
   } catch (e) {
     console.log('[FAIL] updateUserProfile', e);
+    throw e;
+  }
+};
+
+const createUser = async (user) => {
+  try {
+    console.log(user);
+    const { data } = await client.post(`/users/signup`, user);
+    console.log('[SUCCESS] createUser', data);
+    return data;
+  } catch (e) {
+    console.log('[FAIL] createUser', e);
+    throw e;
+  }
+};
+
+const login = async (user) => {
+  try {
+    const { data } = await client.post(`/users/login`, user);
+    console.log('[SUCCESS] login', data);
+    if (data.data.isSignedUp === true) {
+      // api 토큰 바꿔치기
+      client.defaults.headers.userToken = data.data.userToken;
+    }
+    return data;
+  } catch (e) {
+    console.log('[FAIL] login', e);
     throw e;
   }
 };
@@ -47,6 +75,8 @@ const updateUserProfile = async ({ user }) => {
 
 export {
   getUserProfile,
-  updateUserProfile
+  updateUserProfile,
+  createUser,
+  login
   /* IWantCookies  */
 };

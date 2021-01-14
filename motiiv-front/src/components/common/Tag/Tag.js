@@ -11,9 +11,9 @@ const HashTag = styled.div`
     props.color !== 'black' ? props.theme.primary : 'var(--tag)'} !important;
   &:hover {
     color: ${props =>
-      props.color !== 'black'
-        ? props.theme.primary
-        : 'var(--taghover)'} !important;
+    props.color !== 'black'
+      ? props.theme.primary
+      : 'var(--taghover)'} !important;
   }
   padding: 0.4rem 0.9rem;
   padding-top: 0.3rem;
@@ -36,9 +36,9 @@ const TagText = styled.div`
   font-weight: 700 !important;
   &:hover {
     color: ${props =>
-      props.color !== 'black'
-        ? props.theme.primary
-        : 'var(--taghover)'} !important;
+    props.color !== 'black'
+      ? props.theme.primary
+      : 'var(--taghover)'} !important;
   }
 `;
 const TagContainer = styled.div`
@@ -58,25 +58,24 @@ const TagContainer = styled.div`
   cursor: pointer;
   &:hover {
     border: ${props =>
-      props.color !== 'black'
-        ? `solid ${props.theme.primary} 1px`
-        : 'solid var(--taghover) 1px'} !important;
+    props.color !== 'black'
+      ? `solid ${props.theme.primary} 1px`
+      : 'solid var(--taghover) 1px'} !important;
     ${HashTag} {
       color: ${props =>
-        props.color !== 'black'
-          ? props.theme.primary
-          : 'var(--taghover)'} !important;
+    props.color !== 'black'
+      ? props.theme.primary
+      : 'var(--taghover)'} !important;
     }
     ${TagText} {
       color: ${props =>
-        props.color !== 'black'
-          ? props.theme.primary
-          : 'var(--taghover)'} !important;
+    props.color !== 'black'
+      ? props.theme.primary
+      : 'var(--taghover)'} !important;
     }
   }
 `;
 function Tag({ hashTag, color, text, fontSize, history, id }) {
-  console.log('c', color === 'black');
   const dispatch = useDispatch();
   const onClickTag = () => {
     dispatch(getCategoryTagVideos(id));

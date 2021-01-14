@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
 import LoginInterestComponent from './LoginInterestComponent';
+import { useDispatch, useSelector } from 'react-redux';
+import { signUpKeywords } from '../../../modules/user';
 
 const Container = styled.div`
   display: ${props => (props.page === 3 ? 'flex' : 'none')};
@@ -63,8 +65,6 @@ const InterestGrid = styled.div`
 `;
 
 function LastPage({ page }) {
-  //처음 버튼 state는 모두 false
-  const flag = false;
   const interest = [
     '자기계발',
     '성장',
@@ -79,37 +79,10 @@ function LastPage({ page }) {
     '디자인',
     '기획',
   ];
-  const [countState, setCountState] = useState(0);
 
-  /*
-  const onClickBtn = () => {
-    (async () => {
-      try {
-        var count = 0;
-        for(var i = 0; i<btnstate.length; i++){
-          if(btnstate[i] == 'selected-login'){
-            count ++;
-            console.log(count);
-          }
-        }
-        setCountState(count);
-
-      } catch (e) {}
-    })();
-  };
-  */
-
-  const checkBtnCount = () => {
-    (async () => {
-      try {
-        if (countState !== 0) {
-          //완료 버튼 활성화
-        } else {
-          //완료 버튼 비활성화
-        }
-      } catch (e) {}
-    })();
-  };
+  const { keywordNames } = useSelector(({ user }) => ({
+    keywordNames: user.keywordNames
+  }));
 
   return (
     <Container page={page}>
@@ -120,7 +93,7 @@ function LastPage({ page }) {
         {interest.map((tag, i) => (
           <LoginInterestComponent
             key={'interest-' + i}
-            type={false}
+            type={keywordNames.indexOf(tag) === -1 ? false : true}
             text={tag}
           />
         ))}
