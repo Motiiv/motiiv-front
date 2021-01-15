@@ -30,11 +30,11 @@ const ModalWrapper = styled.div`
   flex-direction: column;
   z-index: 3;
   position: absolute;
-  background-color: white;
+  background: var(--modalbackground);
+  box-shadow: var(--boxshadow);
   top: 4.5rem;
   right: 0;
   justify-content: center;
-  box-shadow: 0 0 0 2px ${({ theme }) => theme.lightGray};
   padding: 1rem;
   & :nth-child(n) {
     font-size: 1.4rem;
@@ -52,6 +52,7 @@ const ModalWrapper = styled.div`
 const AsideText = styled.div`
   font-size: 1.5rem;
   margin-left: 2rem;
+  color: var(--categorytext);
 `;
 const AsideTitleBox = styled.div`
   display: flex;

@@ -225,6 +225,7 @@ const LeftBox = styled.div`
   display: flex;
 `;
 const ShareButton = styled.div`
+  white-space: nowrap;
   font-size: 1.5rem;
   width: 8rem;
   height: 2.8rem;

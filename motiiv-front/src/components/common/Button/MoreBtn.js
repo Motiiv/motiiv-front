@@ -1,5 +1,5 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 const RoundBtn = styled.button`
@@ -23,10 +23,14 @@ const RoundBtn = styled.button`
   }
 `;
 
-function MoreBtn({ color, linkUrl, type, text,history, adId }) {
-
+function MoreBtn({ color, linkUrl, type, text, history, adId }) {
+  const onClickMore = () => {
+    linkUrl === 'detail'
+      ? history.push(`/detail/${adId}`)
+      : window.open(linkUrl);
+  };
   return (
-    <RoundBtn color={color}  onClick={() => history.push(`/detail/${adId}`)}>
+    <RoundBtn color={color} onClick={onClickMore}>
       {text} &nbsp; &#xE001;
     </RoundBtn>
   );

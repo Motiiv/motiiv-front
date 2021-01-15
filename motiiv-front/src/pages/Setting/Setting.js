@@ -529,7 +529,9 @@ function Setting({ props }) {
                     : userInfo.profileImageUrl
                 }
               >
-                {/* <FirstLetter>{nameInput && nameInput.substr(0, 1)}</FirstLetter> */}
+                <FirstLetter src={userInfo && userInfo.profileImageUrl}>
+                  {userInfo && userInfo.username.substr(0, 1)}
+                </FirstLetter>
               </ProfileImage>
               <InputContainer for="upload">
                 <CameraIcon src={camera} />

@@ -29,6 +29,7 @@ const whiteColors = {
   formbox: 'white',
   placeholder: theme.gray,
   roundbtn: '1px solid black',
+  boxShadow: '0 0 0 2px #f3f3f3',
 };
 const darkColors = {
   background: 'black',
@@ -57,6 +58,7 @@ const darkColors = {
   formbox: theme.darkGray,
   placeholder: theme.lightGray,
   roundbtn: '1px solid #f3f3f3',
+  boxshadow: 'none',
 };
 
 export { whiteColors, darkColors };
