@@ -42,7 +42,6 @@ function App({ props }) {
     }
   };
 
-  setColorType(whiteColors);
   useEffect(() => {
     setColorType(whiteColors);
     const token = localStorage.getItem('userToken')
