@@ -48,7 +48,7 @@ const JobButton = styled.button`
 
 function JobModal({ show, jobfunc, job }) {
   const [jobState, setJobState] = useState({
-    planner: true,
+    planner: false,
     designer: false,
     developer: true,
     youknow: false,

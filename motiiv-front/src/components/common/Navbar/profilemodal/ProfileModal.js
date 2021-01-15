@@ -233,7 +233,10 @@ function ProfileModal({ hideModal, showModal, history }) {
     window.location.reload();
     hideModal();
   };
-
+  const onMoveSetting = () => {
+    hideModal();
+    history.push('/setting');
+  };
   return (
     <ModalWrap show={showModal} ref={myRef}>
       {!loading ? (
@@ -271,7 +274,7 @@ function ProfileModal({ hideModal, showModal, history }) {
         exact
         to="/setting"
         style={{ textDecoration: 'none' }}
-        onClick={hideModal}
+        onClick={onMoveSetting}
       >
         <Tag
           color="white"
