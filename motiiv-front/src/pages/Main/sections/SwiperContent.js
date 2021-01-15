@@ -10,7 +10,7 @@ const TextCard = styled.div`
   padding-right: 6.4rem;
   font-family: 'Spoqa-Han-Sans';
   font-weight: 700;
-  @media ${props => props.theme.maxdesktop} {
+  @media ${props => props.theme.maxlaptop} {
     width: 34.5rem;
     padding-right: 2.4rem;
   }
@@ -114,14 +114,14 @@ const VideoText = styled.div`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   padding-top: 0.2rem;
-  @media ${props => props.theme.maxdesktop} {
+  @media ${props => props.theme.maxlaptop} {
     font-size: 2.5rem;
     margin-top: 1rem;
   }
   @media ${props => props.theme.tablet768} {
     display: none;
   }
-  @media ${props => props.theme.maxdesktop} {
+  @media ${props => props.theme.maxlaptop} {
     margin-top: 1.5rem;
   }
 `;
