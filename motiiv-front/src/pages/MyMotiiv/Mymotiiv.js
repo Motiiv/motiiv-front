@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../components/common/Loading/Loading';
 import { getVideos } from '../../modules/mymotiiv';
 import { useLocation } from 'react-router-dom';
+import ToggleBtn from '../../components/common/Button/ToggleBtn';
 
 const MotiivWrapper = styled.div`
   width: 100%;
@@ -29,6 +30,7 @@ const Container = styled.div`
   justify-content: center;
   padding-top: 5rem;
   padding-bottom: 3.4rem;
+  margin-bottom: 6rem;
   @media ${props => props.theme.mobile} {
     /* height: 33rem; */
     margin-bottom: 1.6rem;
@@ -89,6 +91,29 @@ const Title = styled.h2`
   }
 `;
 
+const BlankBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.25;
+  font-size: 2rem;
+  padding: 4rem;
+  & label {
+    cursor: auto;
+    margin-bottom: 2rem;
+  }
+  & input {
+    cursor: auto;
+  }
+  @media ${props => props.theme.tablet768} {
+    font-size: 1.2rem;
+  }
+  @media ${props => props.theme.tablet} {
+    font-size: 1.4rem;
+  }
+`;
+
 // const textArray = ["내가 자주본 모티브", "내가 저장한 모티브", "최근 재생한 모티브"];
 function MyMotiiv({ showModal, isLoggined }) {
   const dispatch = useDispatch();
@@ -121,10 +146,17 @@ function MyMotiiv({ showModal, isLoggined }) {
                 <Title>
                   내가 <HighLight>자주 본</HighLight> 모티브
                 </Title>
-                <ImageSlider
-                  saveButton={saveButton}
-                  object={myvideos.mostViewSort}
-                ></ImageSlider>
+                {myvideos.mostViewSort && myvideos.mostViewSort.length !== 0 ? (
+                  <ImageSlider
+                    saveButton={saveButton}
+                    object={myvideos.mostViewSort}
+                  ></ImageSlider>
+                ) : (
+                  <BlankBox>
+                    <ToggleBtn></ToggleBtn>
+                    아직 자주본 모티브가 없어요
+                  </BlankBox>
+                )}
               </Wrapper>
             </Container>
 
@@ -133,10 +165,17 @@ function MyMotiiv({ showModal, isLoggined }) {
                 <Title>
                   내가 <HighLight>저장 한</HighLight> 모티브
                 </Title>
-                <ImageSlider
-                  saveButton={saveButton}
-                  object={myvideos.savedResult}
-                ></ImageSlider>
+                {myvideos.savedResult && myvideos.savedResult.length !== 0 ? (
+                  <ImageSlider
+                    saveButton={saveButton}
+                    object={myvideos.savedResult}
+                  ></ImageSlider>
+                ) : (
+                  <BlankBox>
+                    <ToggleBtn></ToggleBtn>
+                    아직 자주본 모티브가 없어요
+                  </BlankBox>
+                )}
               </Wrapper>
             </Container>
 
@@ -145,10 +184,18 @@ function MyMotiiv({ showModal, isLoggined }) {
                 <Title>
                   최근 <HighLight>재생한</HighLight> 모티브
                 </Title>
-                <ImageSlider
-                  saveButton={saveButton}
-                  object={myvideos.recentViewSort}
-                ></ImageSlider>
+                {myvideos.recentViewSort &&
+                myvideos.recentViewSort.length !== 0 ? (
+                  <ImageSlider
+                    saveButton={saveButton}
+                    object={myvideos.recentViewSort}
+                  ></ImageSlider>
+                ) : (
+                  <BlankBox>
+                    <ToggleBtn></ToggleBtn>
+                    아직 자주본 모티브가 없어요
+                  </BlankBox>
+                )}
               </Wrapper>
             </Container>
           </>
