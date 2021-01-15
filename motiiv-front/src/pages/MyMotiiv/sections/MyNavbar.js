@@ -7,6 +7,7 @@ import categoryselected from '../../../assets/global/category_selected.svg';
 import categoryunselected from '../../../assets/global/category_unselected.svg';
 import mymotiivselected from '../../../assets/global/mymotiiv_selected.svg';
 import mymotiivunselected from '../../../assets/global/mymotiiv_unselected.svg';
+import Tag from '../../../components/common/Tag/Tag';
 
 const NavContainer = styled.div`
   width: 100%;
@@ -46,23 +47,27 @@ const TagElem = styled(NavLink)`
   cursor: pointer;
 `;
 
-function MyNavBar({ tag, isLoggined }) {
+function MyNavBar({ location, isLoggined }) {
   return (
-    <NavContainer tag={tag} isLoggined={isLoggined}>
+    <NavContainer location={location} isLoggined={isLoggined}>
       <TagWrapper>
-        <TagElem exact to="/" src={tag === '/' ? mainselected : mainunselected}>
+        <TagElem exact to="/"
+          isActiveNav={location === '/'}
+          src={location === '/' ? mainselected : mainunselected}>
           {/* <TagImg></TagImg> */}
         </TagElem>
         <TagElem
           to="/category/0"
-          src={tag === '/category/0' ? categoryselected : categoryunselected}
+          isActiveNav={location.includes('category')}
+          src={location === '/category/0'|| location === '/category/1' ? categoryselected : categoryunselected}
         >
           {/* <TagImg></TagImg> */}
         </TagElem>
         <TagElem
           exact
           to="/mymotiiv"
-          src={tag === '/mymotiiv' ? mymotiivselected : mymotiivunselected}
+          isActiveNav={location === '/mymotiiv'}
+          src={location === '/mymotiiv' ? mymotiivselected : mymotiivunselected}
         >
           {/* <TagImg></TagImg> */}
         </TagElem>

@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import SignInModal from '../../common/Login/SignInModal';
 import toggle from '../../../assets/global/toggle.gif';
+import toggle4 from '../../../assets/global/toggle4.gif';
 
 // const ModalContainer = styled.div`
 //   display: flex;

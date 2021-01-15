@@ -161,7 +161,7 @@ function App({ props }) {
         }
       />
       <Footer isShow={location.pathname !== '/setting'} />
-      <MyNavBar isLoggined={isLoggedIn} tag={location.pathname}></MyNavBar>
+      <MyNavBar isLoggined={isLoggedIn} location={location.pathname}></MyNavBar>
     </>
   );
 }
