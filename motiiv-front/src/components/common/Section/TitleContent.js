@@ -37,9 +37,10 @@ const Title = styled.div`
     background: var(--highlight);
   }
   font-size: 3rem;
-  font-weight: bold;
   margin-bottom: 1rem;
+  font-style: bold;
   color: var(--categorytext);
+
   ${props =>
     props.nonfix
       ? css`
