@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile } from '../../modules/user';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import camera from '../../assets/profile/ic_camera.png';
 import polygon from '../../assets/profile/ic_polygon.png';
 import backBtn from '../../assets/global/ic_setting_back.svg';
@@ -166,7 +166,7 @@ const PhotoInput = styled.input`
 
 const CameraIcon = styled.img``;
 
-const ProfileImage = styled.div`
+const ProfileImage = styled.img`
   width: 20rem;
   height: 20rem;
   z-index: 11;
@@ -185,11 +185,11 @@ const ProfileImage = styled.div`
 
   ${props =>
     props.src
-      ? `
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    `
+      ? css`
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+        `
       : `
     background-color: #4E4E4E;
     `};
@@ -371,11 +371,13 @@ const Button = styled.button`
 function Setting() {
   const inputRef = useRef();
   const dispatch = useDispatch();
-  const { userInfo, loading } = useSelector(({ user, loading }) => ({
-    userInfo: user.userInfo,
-    loading: loading['user/GET_PROFILE'],
-  }));
-
+  const { userInfo, loading, settingKeywords } = useSelector(
+    ({ user, loading }) => ({
+      userInfo: user.userInfo,
+      settingKeywords: user.settingKeywords,
+      loading: loading['user/GET_PROFILE'],
+    }),
+  );
   //바인딩
   const [nameInput, SetNameInput] = useState(userInfo && userInfo.username);
   const [profileImageInput, SetProfileImageInput] = useState(
@@ -386,31 +388,58 @@ function Setting() {
   );
   const [jobInput, SetJobInput] = useState(userInfo && userInfo.Job.name);
   const [keywordsInput, SetKeywordsInput] = useState(
-    userInfo ? userInfo.UserKeywords : [],
+    userInfo ? settingKeywords : [],
   );
-  const flag = useRef(0);
-  const Updateprofile = () => {
-    const user = {
-      newName: nameInput,
-      imageFile: profileImageFileInput,
-      newJobName: jobInput,
-      newKeywordNames: keywordsInput,
-    };
-    dispatch(updateProfile({ user }));
+  const InputFlag = useRef(0);
+  const UpdateProfile = evt => {
+    evt.preventDefault();
+    const newProfileData = new FormData();
+    const name = evt.target.name.value
+      ? evt.target.name.value
+      : userInfo.username;
+    const file = evt.target.newProfileImageFile.files[0]
+      ? evt.target.newProfileImageFile.files[0]
+      : null;
+    const job = jobInput ? jobInput : userInfo.Job.name;
+    const keywords = keywordsInput.length ? keywordsInput : settingKeywords;
 
-    console.log(nameInput);
-    console.log(profileImageFileInput);
-    console.log(jobInput);
-    console.log(keywordsInput);
+    console.log('newName', name);
+    console.log('imageFile', file);
+    console.log('newJobName', job);
+    console.log('newKeywordNames', keywords);
+
+    newProfileData.append('newName', name);
+    newProfileData.append('imageFile', file);
+    newProfileData.append('newJobName', job);
+    for (var i in keywords) {
+      newProfileData.append('newKeywordNames', keywords[i]);
+    }
+    /*     for (var key of newProfileData.entries()) {
+      console.log(key[0] + ', ' + key[1]);
+    } */
+    dispatch(updateProfile(newProfileData));
   };
 
   const onChangeName = e => {
     SetNameInput(e.target.value);
-    flag.current = 1;
   };
 
-  const onChangeProfileImage = e => {
-    let reader = new FileReader();
+  const onChangeProfileImage = evt => {
+    console.log(evt.target.files[0]);
+    if (evt.target.files.length) {
+      var imgTarget = evt.target.files[0];
+      var fileReader = new FileReader();
+      fileReader.readAsDataURL(imgTarget);
+      fileReader.onload = function (e) {
+        SetProfileImageInput(e.target.result);
+        //setImgSrc(e.target.result);
+      };
+    } else {
+      SetProfileImageInput(userInfo.profileImageUrl);
+      //setImgSrc("/images/default.gif");
+    }
+
+    /*     let reader = new FileReader();
 
     if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0]); // 파일 읽어 버퍼 저장
@@ -423,11 +452,12 @@ function Setting() {
       if (profileImg) {
         SetProfileImageInput(profileImg.toString());
       }
-    };
+    }; */
   };
 
   const onChangeJob = job => {
     SetJobInput(job);
+    setShowJobModalState(false);
   };
 
   const onChangeKeywords = keywords => {
@@ -449,7 +479,7 @@ function Setting() {
   };
 
   return (
-    <>
+    <form onSubmit={UpdateProfile}>
       <TitleContainer>
         <BackBtn
           onClick={() => {
@@ -469,19 +499,18 @@ function Setting() {
               <ProfileImage
                 src={
                   profileImageInput
-                    ? profileImageFileInput
+                    ? profileImageInput
                     : userInfo.profileImageUrl
                 }
               >
-                <FirstLetter src={profileImageInput}>
-                  {nameInput && nameInput.substr(0, 1)}
-                </FirstLetter>
+                {/* <FirstLetter>{nameInput && nameInput.substr(0, 1)}</FirstLetter> */}
               </ProfileImage>
               <InputContainer for="upload">
                 <CameraIcon src={camera} />
                 <PhotoInput
                   type="file"
                   id="upload"
+                  name="newProfileImageFile"
                   onChange={onChangeProfileImage}
                   ref={inputRef}
                 />
@@ -494,6 +523,7 @@ function Setting() {
               <InfoWrapper>
                 <Text>이름</Text>
                 <NameInput
+                  name="name"
                   type="text"
                   value={nameInput ? nameInput : userInfo.username}
                   onChange={onChangeName}
@@ -502,8 +532,12 @@ function Setting() {
 
               <InfoWrapper>
                 <Text>직군</Text>
-                <ChooseJob>
+                <ChooseJob
+                  name="job"
+                  text={jobInput ? jobInput : userInfo.Job.name}
+                >
                   {jobInput ? jobInput : userInfo.Job.name}
+                  {/* {jobInput ? jobInput : userInfo.Job.name} */}
                   <PolygonBtn
                     src={polygon}
                     show={showJobModalState}
@@ -516,17 +550,16 @@ function Setting() {
 
               <InfoWrapper>
                 <Text>관심 키워드</Text>
-                <ChooseInterst>
-                  {(keywordsInput.length
-                    ? keywordsInput
-                    : userInfo.UserKeywords
-                  ).map((tag, i) => (
-                    <InterestComponent
-                      key={'interest-' + i}
-                      text={tag.name}
-                      disabled
-                    />
-                  ))}
+                <ChooseInterst name="keywords">
+                  {(keywordsInput.length ? keywordsInput : settingKeywords).map(
+                    (tag, i) => (
+                      <InterestComponent
+                        key={'interest-' + i}
+                        text={tag}
+                        disabled
+                      />
+                    ),
+                  )}
                   <PolygonBtn
                     src={polygon}
                     show={showInterestModalState}
@@ -545,7 +578,7 @@ function Setting() {
 
             <ButtonContainer>
               <Button bgColor="#F3F3F3">취소</Button>
-              <Button bgColor="#2CFF2C" onClick={Updateprofile}>
+              <Button type="submit" bgColor="#2CFF2C">
                 저장
               </Button>
             </ButtonContainer>
@@ -554,7 +587,7 @@ function Setting() {
       ) : (
         <Loading></Loading>
       )}
-    </>
+    </form>
   );
 }
 export default React.memo(Setting);

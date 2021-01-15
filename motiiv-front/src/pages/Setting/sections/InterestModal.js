@@ -135,7 +135,10 @@ function InterestModal({ show, keywordsfunc }) {
 
       <BottomContianer>
         <InterestComponent type="cancel" text={'취소'}></InterestComponent>
-        <InterestComponent type={okBtnState} text={'확인'}></InterestComponent>
+        <InterestComponent
+          type={chosenInterestState.length === 3 ? 'ok-disabled' : 'ok'}
+          text={'확인'}
+        ></InterestComponent>
       </BottomContianer>
     </ModalWrap>
   );

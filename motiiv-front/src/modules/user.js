@@ -105,6 +105,7 @@ const initState = {
   jobName: '',
 
   keywordNames: [],
+  settingKeywords: [],
 };
 
 /* ============== 액션을 store에 저장하는 리듀서를 handleActions로 처리 ============== */
@@ -114,6 +115,18 @@ const user = handleActions(
     [GET_PROFILE_SUCCESS]: (state, { payload: userInfo }) => ({
       ...state,
       userInfo,
+      settingKeywords:
+        userInfo.UserKeywords.length === 1
+          ? [userInfo.UserKeywords[0].name]
+          : userInfo.UserKeywords.length === 2
+          ? [userInfo.UserKeywords[0].name, userInfo.UserKeywords[1].name]
+          : userInfo.UserKeywords.length === 3
+          ? [
+              userInfo.UserKeywords[0].name,
+              userInfo.UserKeywords[1].name,
+              userInfo.UserKeywords[2].name,
+            ]
+          : [],
     }),
     [GET_PROFILE_FAILURE]: (state, { payload: error }) => ({
       ...state,
@@ -144,14 +157,14 @@ const user = handleActions(
       ...state,
       userInfo: payload.userToken
         ? {
-          id: payload.id,
-          username: payload.username,
-          snsId: payload.snsId,
-          socialType: payload.socialType,
-          Job: payload.Job,
-          UserKeywords: payload.UserKeywords,
-          profileImageUrl: payload.profileImageUrl,
-        }
+            id: payload.id,
+            username: payload.username,
+            snsId: payload.snsId,
+            socialType: payload.socialType,
+            Job: payload.Job,
+            UserKeywords: payload.UserKeywords,
+            profileImageUrl: payload.profileImageUrl,
+          }
         : null,
       userToken: payload.userToken,
       isLoggedIn: payload.isSignedUp ? true : false,

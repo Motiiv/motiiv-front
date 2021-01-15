@@ -11,15 +11,13 @@ const getUserProfile = async () => {
   }
 };
 
-const updateUserProfile = async ({ user }) => {
-  const payload = {
-    newName: user.newName,
-    imageFile: user.imageFile,
-    newJobName: user.newJobName,
-    newKeywordNames: user.newKeywordNames,
-  };
+const updateUserProfile = async payload => {
   try {
-    const { data } = await client.put(`/users`, payload);
+    const { data } = await client.put(`/users`, payload, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
     console.log('[SUCCESS] updateUserProfile', data);
     return data;
   } catch (e) {
