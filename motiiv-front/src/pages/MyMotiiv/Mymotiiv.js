@@ -24,7 +24,7 @@ const HighLight = styled.span`
 `;
 const Container = styled.div`
   width: 100%;
-  height: 42rem;
+  /* height: 42rem; */
   display: flex;
   justify-content: center;
   padding-top : 5rem;
@@ -36,12 +36,12 @@ const Container = styled.div`
     padding : 2rem;
   }
   @media ${props => props.theme.tablet} {
-    height: 37.2rem;
+    /* height: 37.2rem; */
     padding-top : 5rem;
     padding-bottom : 3.5rem;
   }
   @media ${props => props.theme.desktop} {
-    height: 42rem;
+    /* height: 42rem; */
     padding-top : 5rem;
     padding-bottom : 3.4rem;
   }
