@@ -367,8 +367,34 @@ const Button = styled.button`
     margin: 0 0.75rem;
   }
 `;
+const SubmitButton = styled.button`
+  width: 30rem;
+  height: 6rem;
+  margin: 0 2.5rem;
+  border-radius: 3rem;
+  border: none;
+  outline: none;
+  background-color: ${props => props.bgColor};
+  cursor: pointer;
 
-function Setting() {
+  text-align: center;
+  color: ${props => props.theme.darkGray};
+  font-weight: 700;
+  font-family: 'Spoqa-Han-Sans';
+  font-size: 1.6rem;
+
+  @media ${props => props.theme.maxdesktop} {
+    width: 20rem;
+    height: 5rem;
+    margin: 0 1.5rem;
+  }
+  @media ${props => props.theme.mobile} {
+    width: 14.2rem;
+    height: 3.2rem;
+    margin: 0 0.75rem;
+  }
+`;
+function Setting({ props }) {
   const inputRef = useRef();
   const dispatch = useDispatch();
   const { userInfo, loading, settingKeywords } = useSelector(
@@ -390,10 +416,10 @@ function Setting() {
   const [keywordsInput, SetKeywordsInput] = useState(
     userInfo ? settingKeywords : [],
   );
-  const InputFlag = useRef(0);
   const UpdateProfile = evt => {
     evt.preventDefault();
     const newProfileData = new FormData();
+    console.log(evt.target.name.value);
     const name = evt.target.name.value
       ? evt.target.name.value
       : userInfo.username;
@@ -402,18 +428,18 @@ function Setting() {
       : null;
     const job = jobInput ? jobInput : userInfo.Job.name;
     const keywords = keywordsInput.length ? keywordsInput : settingKeywords;
-
-    console.log('newName', name);
+    /*     console.log('newName', nameInput);
     console.log('imageFile', file);
     console.log('newJobName', job);
-    console.log('newKeywordNames', keywords);
+    console.log('newKeywordNames', keywords); */
 
     newProfileData.append('newName', name);
     newProfileData.append('imageFile', file);
     newProfileData.append('newJobName', job);
-    for (var i in keywords) {
+    newProfileData.append('newKeywordNames', JSON.stringify(keywords));
+    /*     for (var i in keywords) {
       newProfileData.append('newKeywordNames', keywords[i]);
-    }
+    } */
     /*     for (var key of newProfileData.entries()) {
       console.log(key[0] + ', ' + key[1]);
     } */
@@ -432,11 +458,9 @@ function Setting() {
       fileReader.readAsDataURL(imgTarget);
       fileReader.onload = function (e) {
         SetProfileImageInput(e.target.result);
-        //setImgSrc(e.target.result);
       };
     } else {
       SetProfileImageInput(userInfo.profileImageUrl);
-      //setImgSrc("/images/default.gif");
     }
 
     /*     let reader = new FileReader();
@@ -525,7 +549,8 @@ function Setting() {
                 <NameInput
                   name="name"
                   type="text"
-                  value={nameInput ? nameInput : userInfo.username}
+                  placeholder={userInfo.username}
+                  value={nameInput}
                   onChange={onChangeName}
                 ></NameInput>
               </InfoWrapper>
@@ -537,7 +562,6 @@ function Setting() {
                   text={jobInput ? jobInput : userInfo.Job.name}
                 >
                   {jobInput ? jobInput : userInfo.Job.name}
-                  {/* {jobInput ? jobInput : userInfo.Job.name} */}
                   <PolygonBtn
                     src={polygon}
                     show={showJobModalState}
@@ -568,6 +592,7 @@ function Setting() {
                   <InterestModal
                     show={showInterestModalState}
                     keywordsfunc={onChangeKeywords}
+                    onClickInterstBtn={onClickInterstBtn}
                   />
                 </ChooseInterst>
               </InfoWrapper>
@@ -577,7 +602,13 @@ function Setting() {
             </InfoContainer>
 
             <ButtonContainer>
-              <Button bgColor="#F3F3F3">취소</Button>
+              <Button
+                type="button"
+                bgColor="#F3F3F3"
+                onClick={() => props.history.push('/main')}
+              >
+                취소
+              </Button>
               <Button type="submit" bgColor="#2CFF2C">
                 저장
               </Button>
