@@ -44,7 +44,7 @@ function Footer({ history, isShow }) {
         <Text>
           <b>Copyright</b> motiiv All right reserved
         </Text>
-        <GoPrivacy>개인정보처리방침</GoPrivacy>
+        <GoPrivacy href="/privacy">개인정보처리방침</GoPrivacy>
       </FooterWrapper>
     )
   );
