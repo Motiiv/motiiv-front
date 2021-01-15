@@ -110,7 +110,7 @@ const ProfileImage = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-52%, -45%);
   }
 `;
 
@@ -230,6 +230,7 @@ function ProfileModal({ hideModal, showModal, history }) {
 
   const onHandleLogout = () => {
     localStorage.removeItem('userToken');
+    history.push('/');
     window.location.reload();
     hideModal();
   };
