@@ -253,6 +253,9 @@ const VideoDescription = styled.div`
   font-size: 1.8rem;
   margin-bottom: 3rem;
   line-height: 2.5rem;
+  word-wrap: normal;
+  word-break: normal;
+
   @media ${props => props.theme.mobile} {
     width: 100%;
     border-bottom: 1px #c4c4c4 solid;
@@ -475,7 +478,14 @@ function DetailComponent({
                   ref={descRef}
                   //toggleExist={toggleExist}
                 >
-                  {videoInfo.description}
+                  {videoInfo.description.split('\n').map(line => {
+                    return (
+                      <span>
+                        {line}
+                        <br />
+                      </span>
+                    );
+                  })}
                 </VideoDescription>
                 {/*             <MoreToggleButton
               onClick={onHandleToggleButton}

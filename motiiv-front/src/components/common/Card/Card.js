@@ -87,7 +87,7 @@ const GImage = styled.img`
   height: 100%;
   transition: 0.5s;
   border-radius: ${props =>
-  props.size === 'large' ? '1rem 1rem 0 0' : '1rem'};
+    props.size === 'large' ? '1rem 1rem 0 0' : '1rem'};
   content: url(${props => props.thumbnail});
     /* &:hover {
     content: url(${props => props.gif}); */
@@ -110,7 +110,7 @@ const GImage = styled.img`
   }
 `;
 const TimeContainer = styled.div`
-  letter-spacing: 0;
+  letter-spacing: 0 !important;
   position: absolute;
   right: 1.5rem;
   bottom: 1.4rem;
@@ -122,7 +122,7 @@ const TimeContainer = styled.div`
   border-radius: 1rem;
   display: flex;
   color: white;
-  letter-spacing : 0.15rem;
+  letter-spacing: 0.15rem;
   justify-content: center;
   align-items: center;
   font-family: 'Campton';
