@@ -15,7 +15,7 @@ const Component = styled.button`
   }
 
   ${props =>
-    props.type === 'selected'
+    props.type2 === 'selected'
       ? `
           width: 8.4rem;
           height: 3.2rem;
@@ -25,8 +25,8 @@ const Component = styled.button`
           font-weight: 700;
           cursor:pointer;
       `
-      : props.type === "unselected" ?
-        `
+      : props.type2 === 'unselected'
+      ? `
           width: 8.4rem;
           height: 3.2rem;
           background-color : #6C6C6C;
@@ -35,8 +35,8 @@ const Component = styled.button`
           font-weight: 100;
           cursor:pointer;
       `
-        : props.type === "cancel" ?
-          `
+      : props.type2 === 'cancel'
+      ? `
           width: 6.2rem;
           height: 2.8rem;
           background-color : white;
@@ -46,8 +46,8 @@ const Component = styled.button`
           font-weight: 400;
           cursor:pointer;
       `
-          : props.type === 'ok'
-            ? `
+      : props.type2 === 'ok'
+      ? `
           width: 6.2rem;
           height: 2.8rem;
           background-color : white;
@@ -57,8 +57,8 @@ const Component = styled.button`
           font-weight: 700;
           cursor:pointer;
       `
-            : props.type === 'ok-disabled'
-              ? `
+      : props.type2 === 'ok-disabled'
+      ? `
           width: 6.2rem;
           height: 2.8rem;
           background-color : #A7A7A7;
@@ -68,7 +68,7 @@ const Component = styled.button`
           font-weight: 700;
           cursor:pointer;
       `
-              : `
+      : `
           width: 8.4rem;
           height: 3.2rem;
           background-color : #2CFF2C;
@@ -79,28 +79,37 @@ const Component = styled.button`
       `};
 `;
 
-
-function InterestComponent({ type, text, onClickInterestBtn, idx, count }) {
-
+function InterestComponent({
+  type,
+  text,
+  onClickInterestBtn,
+  idx,
+  count,
+  disabled,
+  onClickInterstBtn,
+}) {
   const [btnState, setBtnState] = useState(type);
 
   const selectBtn = () => {
-    onClickInterestBtn(idx);
-    if (count >= 3) {
-      if (btnState === "selected") {
-        setBtnState("unselected");
+    if (type === 'selected' || type === 'unselected') {
+      onClickInterestBtn(idx);
+      if (count >= 3) {
+        if (btnState === 'selected') {
+          setBtnState('unselected');
+        }
+      } else {
+        if (btnState === 'selected') {
+          setBtnState('unselected');
+        } else if (btnState === 'unselected') {
+          setBtnState('selected');
+        }
       }
-    } else {
-      if (btnState === "selected") {
-        setBtnState("unselected");
-      } else if (btnState === "unselected") {
-        setBtnState("selected");
-      }
+    } else if (type === 'ok' || type === 'ok-disabled') {
+      onClickInterstBtn();
     }
-  }
-
+  };
   return (
-    <Component type={btnState} onClick={selectBtn}>
+    <Component type="button" type2={btnState} onClick={selectBtn}>
       {text}
     </Component>
   );

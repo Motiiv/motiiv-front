@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile } from '../../modules/user';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import camera from '../../assets/profile/ic_camera.png';
 import polygon from '../../assets/profile/ic_polygon.png';
 import backBtn from '../../assets/global/ic_setting_back.svg';
@@ -166,7 +166,7 @@ const PhotoInput = styled.input`
 
 const CameraIcon = styled.img``;
 
-const ProfileImage = styled.div`
+const ProfileImage = styled.img`
   width: 20rem;
   height: 20rem;
   z-index: 11;
@@ -185,11 +185,11 @@ const ProfileImage = styled.div`
 
   ${props =>
     props.src
-      ? `
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    `
+      ? css`
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+        `
       : `
     background-color: #4E4E4E;
     `};
@@ -216,22 +216,22 @@ const InfoText = styled.div`
   @media ${props => props.theme.maxdesktop} {
     font-size: 1.4rem;
     ${props =>
-    props.bottom === 'true'
-      ? `
+      props.bottom === 'true'
+        ? `
         margin-left : 12.5rem;
         margin-top: -2rem;
         `
-      : ``};
+        : ``};
   }
   @media ${props => props.theme.mobile} {
     font-size: 1.2rem;
     ${props =>
-    props.bottom === 'true'
-      ? `
+      props.bottom === 'true'
+        ? `
         margin-left : 9.5rem;
         margin-top: -5.5rem;
         `
-      : ``};
+        : ``};
   }
 `;
 
@@ -367,44 +367,103 @@ const Button = styled.button`
     margin: 0 0.75rem;
   }
 `;
+const SubmitButton = styled.button`
+  width: 30rem;
+  height: 6rem;
+  margin: 0 2.5rem;
+  border-radius: 3rem;
+  border: none;
+  outline: none;
+  background-color: ${props => props.bgColor};
+  cursor: pointer;
 
-function Setting() {
+  text-align: center;
+  color: ${props => props.theme.darkGray};
+  font-weight: 700;
+  font-family: 'Spoqa-Han-Sans';
+  font-size: 1.6rem;
 
+  @media ${props => props.theme.maxdesktop} {
+    width: 20rem;
+    height: 5rem;
+    margin: 0 1.5rem;
+  }
+  @media ${props => props.theme.mobile} {
+    width: 14.2rem;
+    height: 3.2rem;
+    margin: 0 0.75rem;
+  }
+`;
+function Setting({ props }) {
   const inputRef = useRef();
   const dispatch = useDispatch();
-  const { userInfo, loading } = useSelector(({ user, loading }) => ({
-    userInfo: user.userInfo,
-    loading: loading['user/GET_PROFILE'],
-  }));
-
+  const { userInfo, loading, settingKeywords } = useSelector(
+    ({ user, loading }) => ({
+      userInfo: user.userInfo,
+      settingKeywords: user.settingKeywords,
+      loading: loading['user/GET_PROFILE'],
+    }),
+  );
   //바인딩
   const [nameInput, SetNameInput] = useState(userInfo && userInfo.username);
-  const [profileImageInput, SetProfileImageInput] = useState(userInfo && userInfo.profileImageUrl);
-  const [profileImageFileInput, SetProfileImageFileInput] = useState(userInfo && userInfo.profileImageUrl);
+  const [profileImageInput, SetProfileImageInput] = useState(
+    userInfo && userInfo.profileImageUrl,
+  );
+  const [profileImageFileInput, SetProfileImageFileInput] = useState(
+    userInfo && userInfo.profileImageUrl,
+  );
   const [jobInput, SetJobInput] = useState(userInfo && userInfo.Job.name);
-  const [keywordsInput, SetKeywordsInput] = useState(userInfo && userInfo.UserKeywords);
+  const [keywordsInput, SetKeywordsInput] = useState(
+    userInfo ? settingKeywords : [],
+  );
+  const UpdateProfile = evt => {
+    evt.preventDefault();
+    const newProfileData = new FormData();
+    console.log(evt.target.name.value);
+    const name = evt.target.name.value
+      ? evt.target.name.value
+      : userInfo.username;
+    const file = evt.target.newProfileImageFile.files[0]
+      ? evt.target.newProfileImageFile.files[0]
+      : null;
+    const job = jobInput ? jobInput : userInfo.Job.name;
+    const keywords = keywordsInput.length ? keywordsInput : settingKeywords;
+    /*     console.log('newName', nameInput);
+    console.log('imageFile', file);
+    console.log('newJobName', job);
+    console.log('newKeywordNames', keywords); */
 
-  const Updateprofile = () => {
-    const user = {
-      newName: nameInput,
-      imageFile: profileImageFileInput,
-      newJobName: jobInput,
-      newKeywordNames: keywordsInput
-    };
-    dispatch(updateProfile({ user }));
-
-    console.log(nameInput);
-    console.log(profileImageFileInput);
-    console.log(jobInput);
-    console.log(keywordsInput);
+    newProfileData.append('newName', name);
+    newProfileData.append('imageFile', file);
+    newProfileData.append('newJobName', job);
+    newProfileData.append('newKeywordNames', JSON.stringify(keywords));
+    /*     for (var i in keywords) {
+      newProfileData.append('newKeywordNames', keywords[i]);
+    } */
+    /*     for (var key of newProfileData.entries()) {
+      console.log(key[0] + ', ' + key[1]);
+    } */
+    dispatch(updateProfile(newProfileData));
   };
 
   const onChangeName = e => {
     SetNameInput(e.target.value);
   };
 
-  const onChangeProfileImage = e => {
-    let reader = new FileReader();
+  const onChangeProfileImage = evt => {
+    console.log(evt.target.files[0]);
+    if (evt.target.files.length) {
+      var imgTarget = evt.target.files[0];
+      var fileReader = new FileReader();
+      fileReader.readAsDataURL(imgTarget);
+      fileReader.onload = function (e) {
+        SetProfileImageInput(e.target.result);
+      };
+    } else {
+      SetProfileImageInput(userInfo.profileImageUrl);
+    }
+
+    /*     let reader = new FileReader();
 
     if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0]); // 파일 읽어 버퍼 저장
@@ -417,15 +476,17 @@ function Setting() {
       if (profileImg) {
         SetProfileImageInput(profileImg.toString());
       }
-    };
+    }; */
   };
 
   const onChangeJob = job => {
     SetJobInput(job);
+    setShowJobModalState(false);
   };
 
   const onChangeKeywords = keywords => {
     SetKeywordsInput(keywords);
+    console.log(keywordsInput);
   };
 
   //폴리건 버튼 모달 체크용
@@ -442,94 +503,122 @@ function Setting() {
   };
 
   return (
-    <>
+    <form onSubmit={UpdateProfile}>
       <TitleContainer>
-        <BackBtn />
+        <BackBtn
+          onClick={() => {
+            window.history.back();
+            window.history.back();
+          }}
+        />
         <Title>
           <Border />
           계정 관리
         </Title>
       </TitleContainer>
+      {!loading ? (
+        <>
+          <Container>
+            <ProfileImageContainer>
+              <ProfileImage
+                src={
+                  profileImageInput
+                    ? profileImageInput
+                    : userInfo.profileImageUrl
+                }
+              >
+                {/* <FirstLetter>{nameInput && nameInput.substr(0, 1)}</FirstLetter> */}
+              </ProfileImage>
+              <InputContainer for="upload">
+                <CameraIcon src={camera} />
+                <PhotoInput
+                  type="file"
+                  id="upload"
+                  name="newProfileImageFile"
+                  onChange={onChangeProfileImage}
+                  ref={inputRef}
+                />
+              </InputContainer>
+            </ProfileImageContainer>
 
-      <Container>
-        <ProfileImageContainer>
-          <ProfileImage src={profileImageInput}>
-            <FirstLetter src={profileImageInput}>
-              {nameInput && nameInput.substr(0, 1)}
-            </FirstLetter>
-          </ProfileImage>
-          <InputContainer for="upload">
-            <CameraIcon src={camera} />
-            <PhotoInput
-              type="file"
-              id="upload"
-              onChange={onChangeProfileImage}
-              ref={inputRef}
-            />
-          </InputContainer>
-        </ProfileImageContainer>
+            <InfoText>300X300 이상의 이미지 사용을 권장합니다</InfoText>
 
-        <InfoText>300X300 이상의 이미지 사용을 권장합니다</InfoText>
+            <InfoContainer>
+              <InfoWrapper>
+                <Text>이름</Text>
+                <NameInput
+                  name="name"
+                  type="text"
+                  placeholder={userInfo.username}
+                  value={nameInput}
+                  onChange={onChangeName}
+                ></NameInput>
+              </InfoWrapper>
 
-        <InfoContainer>
-          <InfoWrapper>
-            <Text>이름</Text>
-            <NameInput
-              type="text"
-              value={nameInput}
-              onChange={onChangeName}
-            ></NameInput>
-          </InfoWrapper>
-
-          <InfoWrapper>
-            <Text>직군</Text>
-            <ChooseJob>
-              {jobInput}
-              <PolygonBtn
-                src={polygon}
-                show={showJobModalState}
-                onClick={onClickJobBtn}
-                style={{ marginLeft: '1rem' }}
-              />
-              <JobModal show={showJobModalState} jobfunc={onChangeJob} />
-            </ChooseJob>
-          </InfoWrapper>
-
-          <InfoWrapper>
-            <Text>관심 키워드</Text>
-            <ChooseInterst>
-              {keywordsInput &&
-                keywordsInput.map((tag, i) => (
-                  <InterestComponent
-                    key={'interest-' + i}
-                    text={tag}
-                    disabled
+              <InfoWrapper>
+                <Text>직군</Text>
+                <ChooseJob
+                  name="job"
+                  text={jobInput ? jobInput : userInfo.Job.name}
+                >
+                  {jobInput ? jobInput : userInfo.Job.name}
+                  <PolygonBtn
+                    src={polygon}
+                    show={showJobModalState}
+                    onClick={onClickJobBtn}
+                    style={{ marginLeft: '1rem' }}
                   />
-                ))}
-              <PolygonBtn
-                src={polygon}
-                show={showInterestModalState}
-                onClick={onClickInterstBtn}
-              />
-              <InterestModal
-                show={showInterestModalState}
-                keywordsfunc={onChangeKeywords}
-              />
-            </ChooseInterst>
-          </InfoWrapper>
-          <InfoText bottom="true">
-            최대 3개의 관심사 선택이 가능합니다.
-          </InfoText>
-        </InfoContainer>
+                  <JobModal show={showJobModalState} jobfunc={onChangeJob} />
+                </ChooseJob>
+              </InfoWrapper>
 
-        <ButtonContainer>
-          <Button bgColor="#F3F3F3">취소</Button>
-          <Button bgColor="#2CFF2C" onClick={Updateprofile}>
-            저장
-          </Button>
-        </ButtonContainer>
-      </Container>
-    </>
+              <InfoWrapper>
+                <Text>관심 키워드</Text>
+                <ChooseInterst name="keywords">
+                  {(keywordsInput.length ? keywordsInput : settingKeywords).map(
+                    (tag, i) => (
+                      <InterestComponent
+                        key={'interest-' + i}
+                        text={tag}
+                        disabled
+                      />
+                    ),
+                  )}
+                  <PolygonBtn
+                    src={polygon}
+                    show={showInterestModalState}
+                    onClick={onClickInterstBtn}
+                  />
+                  <InterestModal
+                    show={showInterestModalState}
+                    keywordsfunc={onChangeKeywords}
+                    onClickInterstBtn={onClickInterstBtn}
+                  />
+                </ChooseInterst>
+              </InfoWrapper>
+              <InfoText bottom="true">
+                최대 3개의 관심사 선택이 가능합니다.
+              </InfoText>
+            </InfoContainer>
+
+            <ButtonContainer>
+              <Button
+                type="button"
+                bgColor="#F3F3F3"
+                onClick={() => props.history.push('/main')}
+              >
+                취소
+              </Button>
+              <Button type="submit" bgColor="#2CFF2C">
+                저장
+              </Button>
+            </ButtonContainer>
+          </Container>
+        </>
+      ) : (
+        <Loading></Loading>
+      )}
+    </form>
   );
 }
 export default React.memo(Setting);

@@ -214,7 +214,7 @@ function SwiperContent({
           <HeaderTitleText>{titleText}</HeaderTitleText>
           <HeaderSubText>{subText}</HeaderSubText>
         </HeaderInfo>
-        <VideoText>{`${obj.description}`}</VideoText>
+        <VideoText>{`${obj.title}`}</VideoText>
         <TagBox>
           {obj.VideoTags.map((tag, idx) => (
             <Tag

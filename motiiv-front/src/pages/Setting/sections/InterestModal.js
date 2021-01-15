@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
 import InterestComponent from './InterstComponent';
@@ -69,22 +69,35 @@ const BottomContianer = styled.div`
   }
 `;
 
-function InterestModal({ show, keywordsfunc }) {
-
-  const interest = ['자기계발', '성장', '목표', '도전', '인물', '스타트업', '변화', '위로', '조언', '개발', '디자인', '기획']
+function InterestModal({ show, keywordsfunc, onClickInterstBtn }) {
+  const interest = [
+    '자기계발',
+    '성장',
+    '목표',
+    '도전',
+    '인물',
+    '스타트업',
+    '변화',
+    '위로',
+    '조언',
+    '개발',
+    '디자인',
+    '기획',
+  ];
 
   const [selectedBtnCountState, setSelectedBtnCountState] = useState(0);
   const [okBtnState, setOkBtnState] = useState('ok-disabled');
-  const [chosenInterestState, setChosenInterestState] = useState('');
+  const [chosenInterestState, setChosenInterestState] = useState([]);
 
   //selectedBtnCountState가 3이 되는 순간 기존 버튼 삭제 말고는 다른 버튼은 눌리지 않아야 함.
 
-  const onClickInterestBtn = (i) => {
-
+  const onClickInterestBtn = i => {
     //이미 배열에 해당 태그가 포함되어 있다면 삭제
     if (chosenInterestState.includes(interest[i])) {
       const clicked = interest[i];
-      setChosenInterestState(chosenInterestState.filter(interest => interest !== clicked));
+      setChosenInterestState(
+        chosenInterestState.filter(interest => interest !== clicked),
+      );
       setSelectedBtnCountState(selectedBtnCountState - 1);
     } else {
       //배열에 없다면 선택된게 2개 이하일 때만 배열에 삽입
@@ -103,24 +116,30 @@ function InterestModal({ show, keywordsfunc }) {
     } else {
       setOkBtnState('ok-disabled');
     }
-  }
+  };
 
   return (
     <ModalWrap show={show}>
       <InterestGrid>
-        {interest.map((tag, i) => <InterestComponent
-          key={i}
-          idx={i}
-          type={'unselected'}
-          text={tag}
-          onClickInterestBtn={onClickInterestBtn}
-          count={selectedBtnCountState}
-        />)}
+        {interest.map((tag, i) => (
+          <InterestComponent
+            key={i}
+            idx={i}
+            type="unselected"
+            text={tag}
+            onClickInterestBtn={onClickInterestBtn}
+            count={selectedBtnCountState}
+          />
+        ))}
       </InterestGrid>
 
       <BottomContianer>
-        <InterestComponent type="cancel" text={"취소"}></InterestComponent>
-        <InterestComponent type={okBtnState} text={"확인"}></InterestComponent>
+        <InterestComponent type="cancel" text={'취소'}></InterestComponent>
+        <InterestComponent
+          type={chosenInterestState.length === 3 ? 'ok-disabled' : 'ok'}
+          text={'확인'}
+          onClickInterstBtn={onClickInterstBtn}
+        ></InterestComponent>
       </BottomContianer>
     </ModalWrap>
   );
