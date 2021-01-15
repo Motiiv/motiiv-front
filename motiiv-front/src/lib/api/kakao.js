@@ -41,10 +41,11 @@ function KaKao({ props }) {
             //로그인 시도
             Login(user);
 
+            const profileImageUrl = response.kakao_account.profile.profile_image_url;
             //로그인 정보 없을 시 회원가입을 위해 정보 넘겨주기
             const signin = {
               username: response.kakao_account.profile.nickname,
-              profileImageUrl: response.kakao_account.profile.profile_image_url,
+              profileImageUrl: profileImageUrl ? profileImageUrl : null,
               snsId: response.id,
               socialType: 'kakao',
             };

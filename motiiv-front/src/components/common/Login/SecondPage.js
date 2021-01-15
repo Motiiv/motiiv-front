@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { signUpJob } from '../../../modules/user';
-import img from '../../../assets/profile/sampleImage.png';
+import img_planner from '../../../assets/login/planner.png';
+import img_designer from '../../../assets/login/designer.png';
+import img_developer from '../../../assets/login/developer.png';
+import img_youknow from '../../../assets/login/youknow.png';
 
 const Container = styled.div`
   display: ${props => props.page === 2 ? 'flex' : 'none'};
@@ -171,10 +174,10 @@ function SecondPage({ page }) {
       <Title>어떤 일을 하고 계세요?</Title>
       <SubTitle>일하고 있는 분야에 맞는 동기부여 영상을 추천드려요!</SubTitle>
       <ImageContainer>
-        <ImageBtn img={img} onClick={onClickPlannerBtn} click={selectedState.planner}><Text click={selectedState.planner}>기획자</Text></ImageBtn>
-        <ImageBtn img={img} onClick={onClickDesignerBtn} click={selectedState.designer}><Text click={selectedState.designer}>디자이너</Text></ImageBtn>
-        <ImageBtn img={img} onClick={onClickDeveloperBtn} click={selectedState.developer}><Text click={selectedState.developer}>개발자</Text></ImageBtn>
-        <ImageBtn img={img} onClick={onClickYouknowBtn} click={selectedState.youknow}><Text click={selectedState.youknow}>유노윤호</Text></ImageBtn>
+        <ImageBtn img={img_planner} onClick={onClickPlannerBtn} click={selectedState.planner}><Text click={selectedState.planner}>기획자</Text></ImageBtn>
+        <ImageBtn img={img_designer} onClick={onClickDesignerBtn} click={selectedState.designer}><Text click={selectedState.designer}>디자이너</Text></ImageBtn>
+        <ImageBtn img={img_developer} onClick={onClickDeveloperBtn} click={selectedState.developer}><Text click={selectedState.developer}>개발자</Text></ImageBtn>
+        <ImageBtn img={img_youknow} onClick={onClickYouknowBtn} click={selectedState.youknow}><Text click={selectedState.youknow}>유노윤호</Text></ImageBtn>
       </ImageContainer>
     </Container>
   );

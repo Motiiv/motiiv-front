@@ -245,6 +245,7 @@ function CategoryComponent({
       id: id,
     });
   };
+
   /* 비-로그인 시 모달을 띄우기 위한 state */
   const [blackModal, setBlackModal] = useState({
     active: false,
@@ -331,17 +332,18 @@ function CategoryComponent({
               </SortButtonWrapper>
             </TitleAndSort>
             <GridContainer hashTag={hashTag}>
-              {videos.map((video, idx) => (
-                <Card
-                  key={`Card-${idx}`}
-                  obj={video}
-                  category={true}
-                  showModal={showModal}
-                  BlackModalConfirm={BlackModalConfirm}
-                  isLoggined={isLoggined}
-                  showModal={showModal}
-                />
-              ))}
+              {videos &&
+                videos.map((video, idx) => (
+                  <Card
+                    key={`Card-${idx}`}
+                    obj={video}
+                    category={true}
+                    showModal={showModal}
+                    BlackModalConfirm={BlackModalConfirm}
+                    isLoggined={isLoggined}
+                    showModal={showModal}
+                  />
+                ))}
             </GridContainer>
           </>
         ) : (
