@@ -97,6 +97,7 @@ function MyMotiiv({ showModal, isLoggined }) {
     dispatch(getVideos());
   }, []);
 
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
@@ -109,7 +110,7 @@ function MyMotiiv({ showModal, isLoggined }) {
             <Container>
               <Wrapper>
                 <Title>
-                  내가 <HighLight>자주 본 </HighLight>모티브
+                  내가 <HighLight>자주 본</HighLight> 모티브
                 </Title>
                 <ImageSlider
                   saveButton={saveButton}
@@ -121,7 +122,7 @@ function MyMotiiv({ showModal, isLoggined }) {
             <Container>
               <Wrapper>
                 <Title>
-                  내가 <HighLight>저장한 </HighLight>모티브
+                  내가 <HighLight>저장 한</HighLight> 모티브
                 </Title>
                 <ImageSlider
                   saveButton={saveButton}
@@ -133,13 +134,12 @@ function MyMotiiv({ showModal, isLoggined }) {
             <Container>
               <Wrapper>
                 <Title>
-                  최근 <HighLight>재생한 </HighLight>모티브
+                  최근 <HighLight>재생한</HighLight> 모티브
                 </Title>
                 <ImageSlider
                   saveButton={saveButton}
                   object={myvideos.recentViewSort}
                 ></ImageSlider>
-                l
               </Wrapper>
             </Container>
           </>

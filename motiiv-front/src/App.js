@@ -42,6 +42,7 @@ function App({ props }) {
     }
   };
 
+  setColorType(whiteColors);
   useEffect(() => {
     setColorType(whiteColors);
     const token = localStorage.getItem('userToken')
@@ -138,7 +139,11 @@ function App({ props }) {
           exact
           path="/detail/:id"
           render={props => (
-            <Detail props={props} showModal={showModal} isLoggined={isLoggedIn} />
+            <Detail
+              props={props}
+              showModal={showModal}
+              isLoggined={isLoggedIn}
+            />
           )}
         ></Route>
         {/* Upload */}
