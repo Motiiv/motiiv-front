@@ -76,7 +76,7 @@ const SliderSection = styled.div`
     }
     & .swiper-slide {
       flex: ${props => (props.defaultSpace ? '1' : '1')}!important;
-      max-width : ${props => (props.defaultSpace ? '300px' : 'none')}!important;
+      max-width: ${props => (props.defaultSpace ? '300px' : '300px')}!important;
     }
   }
 
@@ -91,7 +91,7 @@ const SliderSection = styled.div`
     }
     & .swiper-slide {
       flex: ${props => (props.defaultSpace ? '1' : '1')}!important;
-      max-width : ${props => (props.defaultSpace ? '216px' : 'none')}!important;
+      max-width: ${props => (props.defaultSpace ? '216px' : 'none')}!important;
     }
   }
 
@@ -106,7 +106,7 @@ const SliderSection = styled.div`
     }
     & .swiper-slide {
       flex: ${props => (props.defaultSpace ? 'none' : '1')}!important;
-      max-width : none !important;
+      max-width: none !important;
     }
   }
 
@@ -121,11 +121,9 @@ const SliderSection = styled.div`
         : css`
             padding: 0 5.5rem;
           `}
-          & .swiper-slide {
-         max-width : none !important;
+    & .swiper-slide {
+      max-width: none !important;
     }
-
-          
   }
 `;
 
@@ -145,7 +143,7 @@ function ImageSlider({
   const space = type === 'top' ? 20 : 25;
   const largeHeight = size === 'large' ? '36rem' : 'auto';
   let defaultSpace = false;
-  if (object && (object.length < 4)) {
+  if (object && object.length < 4) {
     defaultSpace = true;
   }
   const defaultNum = defaultSpace === true ? 2 : 3;
@@ -183,6 +181,14 @@ function ImageSlider({
               spaceBetween: 16,
               slidesPerView: 1,
             },
+            110: {
+              spaceBetween: 10,
+              slidesPerView: 1,
+            },
+            100: {
+              spaceBetween: 10,
+              slidesPerView: 1,
+            },
             // 1024 : {
             //   spaceBetween : 20,
             //   slidesePerView: 3,
@@ -218,9 +224,9 @@ function ImageSlider({
                   obj={obj}
                   saveButton={saveButton}
                   nonfix={nonfix}
-                  BlackModalConfirm ={BlackModalConfirm}
-                  isLoggined = {isLoggined}
-                  defaultSpace = {defaultSpace}
+                  BlackModalConfirm={BlackModalConfirm}
+                  isLoggined={isLoggined}
+                  defaultSpace={defaultSpace}
                 ></Card>
               </SwiperSlide>
             ))}
