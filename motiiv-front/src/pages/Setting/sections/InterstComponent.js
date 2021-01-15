@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
+import { saveSettingKeywords } from '../../../modules/user';
+import { useDispatch } from 'react-redux';
 
 const Component = styled.button`
   border: none;
@@ -26,7 +28,7 @@ const Component = styled.button`
           cursor:pointer;
       `
       : props.type2 === 'unselected'
-        ? `
+      ? `
           width: 8.4rem;
           height: 3.2rem;
           background-color : #6C6C6C;
@@ -35,8 +37,8 @@ const Component = styled.button`
           font-weight: 100;
           cursor:pointer;
       `
-        : props.type2 === 'cancel'
-          ? `
+      : props.type2 === 'cancel'
+      ? `
           width: 6.2rem;
           height: 2.8rem;
           background-color : white;
@@ -46,8 +48,8 @@ const Component = styled.button`
           font-weight: 400;
           cursor:pointer;
       `
-          : props.type2 === 'ok'
-            ? `
+      : props.type2 === 'ok'
+      ? `
           width: 6.2rem;
           height: 2.8rem;
           background-color : white;
@@ -57,8 +59,8 @@ const Component = styled.button`
           font-weight: 700;
           cursor:pointer;
       `
-            : props.type2 === 'ok-disabled'
-              ? `
+      : props.type2 === 'ok-disabled'
+      ? `
           width: 6.2rem;
           height: 2.8rem;
           background-color : #A7A7A7;
@@ -68,7 +70,7 @@ const Component = styled.button`
           font-weight: 700;
           cursor:pointer;
       `
-              : `
+      : `
           width: 8.4rem;
           height: 3.2rem;
           background-color : #2CFF2C;
@@ -87,11 +89,15 @@ function InterestComponent({
   count,
   disabled,
   onClickInterstBtn,
+  array,
 }) {
   const [btnState, setBtnState] = useState(type);
+  const dispatch = useDispatch();
 
   const selectBtn = () => {
     if (type === 'selected' || type === 'unselected') {
+      dispatch(saveSettingKeywords(text));
+      console.log(text);
       onClickInterestBtn(idx);
       if (count >= 3) {
         if (btnState === 'selected') {
@@ -108,8 +114,9 @@ function InterestComponent({
       onClickInterstBtn();
     }
   };
+
   return (
-    <Component type="button" type2={btnState} onClick={selectBtn}>
+    <Component type="button" type2={type} onClick={selectBtn}>
       {text}
     </Component>
   );

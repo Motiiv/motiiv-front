@@ -24,11 +24,9 @@ const [
   CREATE_USER_FAILURE,
 ] = createRequestActionTypes('user/CREATE_USER');
 //로그인
-const [
-  LOGIN,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE
-] = createRequestActionTypes('user/LOGIN');
+const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes(
+  'user/LOGIN',
+);
 //회원가입 정보 저장(카카오)
 const SIGNUP_KAKAO = createRequestActionTypes('user/SIGNUP_KAKAO');
 //회원가입 정보 초기화
@@ -39,6 +37,10 @@ const SIGNUP_JOB = createRequestActionTypes('user/SIGNUP_JOB');
 const SIGNUP_KEYWORDS = createRequestActionTypes('user/SIGNUP_KEYWORDS');
 //로그인 여부 변경
 const CHANGE_ISLOGGED = createRequestActionTypes('user/CHANGE_ISLOGED');
+// setting_keywords 저장
+const SAVE_SETTING_KEYWORDS = createRequestActionTypes(
+  'user/SAVE_SETTING_KEYWORDS',
+);
 
 /* ============== 액션 호출 함수 생성 ============== */
 //프로필 정보
@@ -59,12 +61,18 @@ export const signUpJob = createAction(SIGNUP_JOB);
 export const signUpKeywords = createAction(SIGNUP_KEYWORDS);
 // isLogined state 변경 (자동로그인)
 export const changeIsLogged = createAction(CHANGE_ISLOGGED);
+// setting_keywords IN / OUT
+export const saveSettingKeywords = createAction(SAVE_SETTING_KEYWORDS);
 
-/* ============== 해당하는 액션 호출시 Saga실행 ============== */
+/* ============== 해당하는 액션 호출시 Saga
+실행 ============== */
 //프로필 정보
 const getUserSaga = createRequestSaga(GET_PROFILE, userAPI.getUserProfile);
 //프로필 정보 수정
-const updateUserSaga = createRequestSaga(UPDATE_PROFILE, userAPI.updateUserProfile);
+const updateUserSaga = createRequestSaga(
+  UPDATE_PROFILE,
+  userAPI.updateUserProfile,
+);
 //회원가입
 const createUserSaga = createRequestSaga(CREATE_USER, userAPI.createUser);
 //로그인
@@ -156,9 +164,9 @@ const user = handleActions(
       isLoggedIn: false,
     }),
     //회원가입 정보 초기화
-    [RESET_SIGNUP]: (state) => ({
+    [RESET_SIGNUP]: state => ({
       ...state,
-      isSignedUp: null
+      isSignedUp: null,
     }),
     //로그인
     [LOGIN_SUCCESS]: (state, { payload: payload }) => ({
@@ -197,16 +205,29 @@ const user = handleActions(
     //회원가입 정보 저장(관심사)
     [SIGNUP_KEYWORDS]: (state, { payload: payload }) => ({
       ...state,
-      keywordNames: state.keywordNames.indexOf(payload) > -1
-        ? state.keywordNames.filter(keywordNames => keywordNames !== payload) //기존 배열에 있을 경우 삭제
-        : state.keywordNames.length < 3 //새로 받은 키워드가 기존 배열 안에 없을 경우
-          ? state.keywordNames.concat(payload)//기존 배열의 키워드 개수가 2개 이하일 때는 추가
-          : state.keywordNames//3개 이상일 경우 변화 없음
+      keywordNames:
+        state.keywordNames.indexOf(payload) > -1
+          ? state.keywordNames.filter(keywordNames => keywordNames !== payload) //기존 배열에 있을 경우 삭제
+          : state.keywordNames.length < 3 //새로 받은 키워드가 기존 배열 안에 없을 경우
+          ? state.keywordNames.concat(payload) //기존 배열의 키워드 개수가 2개 이하일 때는 추가
+          : state.keywordNames, //3개 이상일 경우 변화 없음
     }),
     // 자동로그인 토큰 가지고 정보 가져온 뒤 isloggedin 변환
     [CHANGE_ISLOGGED]: (state, { payload: payload }) => ({
       ...state,
       isLoggedIn: !state.isLoggedIn,
+    }),
+    // 세팅 키워드에 저장하기
+    [SAVE_SETTING_KEYWORDS]: (state, { payload: payload }) => ({
+      ...state,
+      settingKeywords:
+        state.settingKeywords.indexOf(payload) > -1
+          ? state.settingKeywords.filter(
+              settingKeywords => settingKeywords !== payload,
+            )
+          : state.settingKeywords.length < 3 //새로 받은 키워드가 기존 배열 안에 없을 경우
+          ? state.settingKeywords.concat(payload) //기존 배열의 키워드 개수가 2개 이하일 때는 추가
+          : state.settingKeywords, //3개 이상일 경우 변화 없음
     }),
   },
   initState,

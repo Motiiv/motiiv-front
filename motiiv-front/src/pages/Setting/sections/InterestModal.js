@@ -69,7 +69,7 @@ const BottomContianer = styled.div`
   }
 `;
 
-function InterestModal({ show, keywordsfunc, onClickInterstBtn }) {
+function InterestModal({ show, keywordsfunc, onClickInterstBtn, array }) {
   const interest = [
     '자기계발',
     '성장',
@@ -125,7 +125,7 @@ function InterestModal({ show, keywordsfunc, onClickInterstBtn }) {
           <InterestComponent
             key={i}
             idx={i}
-            type="unselected"
+            type={array.indexOf(tag) === -1 ? 'unselected' : 'selected'}
             text={tag}
             onClickInterestBtn={onClickInterestBtn}
             count={selectedBtnCountState}
@@ -136,7 +136,7 @@ function InterestModal({ show, keywordsfunc, onClickInterstBtn }) {
       <BottomContianer>
         <InterestComponent type="cancel" text={'취소'}></InterestComponent>
         <InterestComponent
-          type={chosenInterestState.length === 3 ? 'ok-disabled' : 'ok'}
+          type={array.length === 0 ? 'ok-disabled' : 'ok'}
           text={'확인'}
           onClickInterstBtn={onClickInterstBtn}
         ></InterestComponent>

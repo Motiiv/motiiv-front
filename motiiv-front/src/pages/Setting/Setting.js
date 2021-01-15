@@ -166,7 +166,7 @@ const PhotoInput = styled.input`
 
 const CameraIcon = styled.img``;
 
-const ProfileImage = styled.img`
+const ProfileImage = styled.div`
   width: 20rem;
   height: 20rem;
   z-index: 11;
@@ -436,7 +436,7 @@ function Setting({ props }) {
     newProfileData.append('newName', name);
     newProfileData.append('imageFile', file);
     newProfileData.append('newJobName', job);
-    newProfileData.append('newKeywordNames', JSON.stringify(keywords));
+    newProfileData.append('newKeywordNames', JSON.stringify(settingKeywords));
     /*     for (var i in keywords) {
       newProfileData.append('newKeywordNames', keywords[i]);
     } */
@@ -486,7 +486,7 @@ function Setting({ props }) {
 
   const onChangeKeywords = keywords => {
     SetKeywordsInput(keywords);
-    console.log(keywordsInput);
+    console.log(settingKeywords);
   };
 
   //indexof('관심사')
@@ -581,15 +581,13 @@ function Setting({ props }) {
               <InfoWrapper>
                 <Text>관심 키워드</Text>
                 <ChooseInterst name="keywords">
-                  {(keywordsInput.length ? keywordsInput : settingKeywords).map(
-                    (tag, i) => (
-                      <InterestComponent
-                        key={'interest-' + i}
-                        text={tag}
-                        disabled
-                      />
-                    ),
-                  )}
+                  {settingKeywords.map((tag, i) => (
+                    <InterestComponent
+                      key={'interest-' + i}
+                      text={tag}
+                      disabled
+                    />
+                  ))}
                   <PolygonBtn
                     src={polygon}
                     show={showInterestModalState}
@@ -599,6 +597,7 @@ function Setting({ props }) {
                     show={showInterestModalState}
                     keywordsfunc={onChangeKeywords}
                     onClickInterstBtn={onClickInterstBtn}
+                    array={settingKeywords}
                   />
                 </ChooseInterst>
               </InfoWrapper>
