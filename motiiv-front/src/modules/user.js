@@ -157,6 +157,7 @@ const user = handleActions(
       ...state,
       userInfo,
       isLoggedIn: true,
+      userToken: userInfo.userToken,
       settingKeywords:
         userInfo.UserKeywords.length === 1
           ? [userInfo.UserKeywords[0].name]
