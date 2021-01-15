@@ -156,6 +156,7 @@ function Main({ showModal, isLoggined }) {
     dispatch(getMainRecommend());
   }, []);
 
+  
   return (
     <YeongJinBackground>
       {blackModal.active && (

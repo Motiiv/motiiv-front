@@ -42,6 +42,7 @@ function App({ props }) {
     }
   };
 
+  setColorType(whiteColors);
   useEffect(() => {
     setColorType(whiteColors);
     const token = localStorage.getItem('userToken')
@@ -54,6 +55,7 @@ function App({ props }) {
           dispatch(getProfile());
           dispatch(changeIsLogged());
         } else {
+
           // 토큰은 있는데 유효한 토큰이 아닐 때 localstorage삭제
           localStorage.removeItem('userToken');
         }

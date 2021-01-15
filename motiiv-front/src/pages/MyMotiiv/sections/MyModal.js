@@ -4,10 +4,12 @@ import styled, { css } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import ModalCoverImage from '../../../assets/global/0109_mymotiiv_login_mockup.png';
 import ModalMobileImage from '../../../assets/global/0109_mobile_mymotiiv_mockup.png';
+import ModalTabletImage from '../../../assets/global/mymotiiv_T.jpg';
 import toggle from '../../../assets/global/toggle.gif';
 import SignInModal from '../../../components/common/Login/SignInModal';
 import MyNavBar from '../sections/MyNavbar';
 import { MdClose } from 'react-icons/md';
+
 const ModalContainer = styled.div`
   height: 100vh;
   display: flex;
@@ -27,9 +29,12 @@ const ModalOverlay = styled.div`
   background-image: url(${ModalCoverImage});
   @media ${props => props.theme.mobile} {
     background-image: url(${ModalMobileImage});
-
-    max-width: 76.8rem;
-    max-height: 64.3rem;
+  }
+  @media ${props=> props.theme.tablet} {
+    background-image: url(${ModalTabletImage});
+  }
+  @media ${props=> props.theme.laptop} {
+    background-image: url(${ModalCoverImage});
   }
 `;
 const ModalWrapper = styled.div`
@@ -78,7 +83,7 @@ const ToggleGif = styled.img`
     hegiht: 3rem;
   }
   @media ${props => props.theme.desktop} {
-    width: 9rem;
+    width: 8rem;
     height: 3.7rem;
   }
 `;
@@ -94,6 +99,7 @@ const Title = styled.div`
     font-size: 1.6rem;
   }
   @media ${props => props.theme.tablet} {
+    margin-top: 5rem;
     font-size: 2rem;
   }
   @media ${props => props.theme.desktop} {
@@ -113,6 +119,11 @@ const Subtitle = styled.div`
     font-size: 1.4rem;
   }
   @media ${props => props.theme.tablet} {
+    font-size: 1.6rem;
+    margin-top: 3rem;
+  }
+  @media ${props => props.theme.desktop} {
+    margin-top: 4.5rem;
     font-size: 1.6rem;
   }
 `;
