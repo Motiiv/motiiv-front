@@ -9,7 +9,7 @@ import img_developer from '../../../assets/login/developer.png';
 import img_youknow from '../../../assets/login/youknow.png';
 
 const Container = styled.div`
-  display: ${props => props.page === 2 ? 'flex' : 'none'};
+  display: ${props => (props.page === 2 ? 'flex' : 'none')};
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -65,12 +65,12 @@ const ImageContainer = styled.div`
   }
 `;
 const Text = styled.div`
-    width:12rem;
-    text-align:center;
-    font-size:1.8rem;
-    font-weight:400;
-    color:white;
-    ${props => props.click === true ? `font-weight:700` : ``};
+  width: 12rem;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: white;
+  ${props => (props.click === true ? `font-weight:700` : ``)};
   @media ${props => props.theme.maxlaptop} {
     font-size: 1.5rem;
     width: 10rem;
@@ -99,10 +99,12 @@ const ImageBtn = styled.div`
     transform: translate(-50%, -50%);
   }
 
-    ${props => props.click === true ?
-    `
+  ${props =>
+    props.click === true
+      ? `
       border : 1.5px solid #2CFF2C;
-    `: ``};
+    `
+      : ``};
 
   @media ${props => props.theme.maxlaptop} {
     width: 11rem;
@@ -113,15 +115,14 @@ const ImageBtn = styled.div`
     width: 10.5rem;
     height: 10.5rem;
   }
-`
+`;
 
 function SecondPage({ page }) {
-
   const dispatch = useDispatch();
 
-  const chooseJob = (job) => {
+  const chooseJob = job => {
     dispatch(signUpJob(job));
-  }
+  };
 
   const [selectedState, setSelectedStateState] = useState({
     planner: false,
@@ -135,49 +136,73 @@ function SecondPage({ page }) {
       planner: true,
       designer: false,
       developer: false,
-      youknow: false
-    })
-    chooseJob('기획');
-  }
+      youknow: false,
+    });
+    chooseJob('기획자');
+  };
 
   const onClickDesignerBtn = () => {
     setSelectedStateState({
       planner: false,
       designer: true,
       developer: false,
-      youknow: false
-    })
-    chooseJob('디자인');
-  }
+      youknow: false,
+    });
+    chooseJob('디자이너');
+  };
 
   const onClickDeveloperBtn = () => {
     setSelectedStateState({
       planner: false,
       designer: false,
       developer: true,
-      youknow: false
-    })
-    chooseJob('개발');
-  }
+      youknow: false,
+    });
+    chooseJob('개발자');
+  };
 
   const onClickYouknowBtn = () => {
     setSelectedStateState({
       planner: false,
       designer: false,
       developer: false,
-      youknow: true
-    })
+      youknow: true,
+    });
     chooseJob('유노윤호');
-  }
+  };
   return (
     <Container page={page}>
       <Title>어떤 일을 하고 계세요?</Title>
       <SubTitle>일하고 있는 분야에 맞는 동기부여 영상을 추천드려요!</SubTitle>
       <ImageContainer>
-        <ImageBtn img={img_planner} onClick={onClickPlannerBtn} click={selectedState.planner}><Text click={selectedState.planner}>기획자</Text></ImageBtn>
-        <ImageBtn img={img_designer} onClick={onClickDesignerBtn} click={selectedState.designer}><Text click={selectedState.designer}>디자이너</Text></ImageBtn>
-        <ImageBtn img={img_developer} onClick={onClickDeveloperBtn} click={selectedState.developer}><Text click={selectedState.developer}>개발자</Text></ImageBtn>
-        <ImageBtn img={img_youknow} onClick={onClickYouknowBtn} click={selectedState.youknow}><Text click={selectedState.youknow}>유노윤호</Text></ImageBtn>
+        <ImageBtn
+          img={img_planner}
+          onClick={onClickPlannerBtn}
+          click={selectedState.planner}
+        >
+          <Text click={selectedState.planner}>기획자</Text>
+        </ImageBtn>
+        <ImageBtn
+          img={img_designer}
+          onClick={onClickDesignerBtn}
+          click={selectedState.designer}
+        >
+          <Text click={selectedState.designer}>디자이너</Text>
+        </ImageBtn>
+        <ImageBtn
+          img={img_developer}
+          onClick={onClickDeveloperBtn}
+          click={selectedState.developer}
+        >
+          <Text click={selectedState.developer}>개발자</Text>
+        </ImageBtn>
+        <ImageBtn
+          img={img_youknow}
+          onClick={onClickYouknowBtn}
+          click={selectedState.youknow}
+        >
+          <Text click={selectedState.youknow}>유노윤호</Text>
+        </ImageBtn>
       </ImageContainer>
     </Container>
   );

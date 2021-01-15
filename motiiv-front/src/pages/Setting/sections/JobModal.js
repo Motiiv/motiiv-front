@@ -61,7 +61,7 @@ function JobModal({ show, jobfunc }) {
       developer: 'unselected',
       youknow: 'unselected',
     });
-    jobfunc('기획');
+    jobfunc('기획자');
   };
 
   const onClickDesignerBtn = () => {
@@ -71,7 +71,7 @@ function JobModal({ show, jobfunc }) {
       developer: 'unselected',
       youknow: 'unselected',
     });
-    jobfunc('디자인');
+    jobfunc('디자이너');
   };
 
   const onClickDeveloperBtn = () => {
@@ -81,7 +81,7 @@ function JobModal({ show, jobfunc }) {
       developer: 'selected',
       youknow: 'unselected',
     });
-    jobfunc('개발');
+    jobfunc('개발자');
   };
 
   const onClickYouknowBtn = () => {
