@@ -114,10 +114,8 @@ function Main({ showModal, isLoggined }) {
   }, [pathname]);
 
   useEffect(() => {
-    if (isLoggined === true) {
-      dispatch(getMainBanners());
-      dispatch(getMainRecommend());
-    }
+    dispatch(getMainBanners());
+    dispatch(getMainRecommend());
   }, [isLoggined]);
 
   return (
