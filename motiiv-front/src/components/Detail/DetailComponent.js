@@ -357,7 +357,10 @@ function DetailComponent({
       });
     }
   };
-
+  const HighLight = styled.span`
+    background: var(--highlight);
+    height: 100%;
+  `;
   /* 더보기 버튼 모달창 */
   /*   const onHandleToggleButton = () => {
     setToggle(!toggle);
@@ -483,7 +486,9 @@ function DetailComponent({
             </VideoInfoWrapper>
           </VideoWrapper>
           <RecommendWrapper>
-            <RecommendTitleText>추천 모티브</RecommendTitleText>
+            <RecommendTitleText>
+              <HighLight>추천</HighLight> 모티브
+            </RecommendTitleText>
             <RecommendCardBox>
               {recVideoList.map((video, idx) => (
                 <RecommendCard video={video} key={`RecVideo-${idx}`} />

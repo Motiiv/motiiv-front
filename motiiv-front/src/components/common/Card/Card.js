@@ -124,7 +124,7 @@ const TimeContainer = styled.div`
   letter-spacing : 0.15rem;
   justify-content: center;
   align-items: center;
-  font-family: 'Campton';
+  font-family: 'Campton'; 
   & + & {
     margin-left: 1.2rem;
   }

@@ -37,7 +37,7 @@ const ContentContainer = styled.div`
   & .swiper-slide-active {
     width: 48.43% !important;
     margin-top: 1.5rem !important;
-    @media ${props => props.theme.maxdesktop} {
+    @media ${props => props.theme.maxlaptop} {
       width: 65% !important;
       margin-right: 8rem !important;
     }
@@ -48,7 +48,7 @@ const ContentContainer = styled.div`
   & .swiper-slide-prev {
     width: 15.89% !important;
     overflow: hidden !important;
-    @media ${props => props.theme.maxdesktop} {
+    @media ${props => props.theme.maxlaptop} {
       width: 7% !important;
       margin-right: 8rem !important;
     }
@@ -57,7 +57,7 @@ const ContentContainer = styled.div`
     }
   }
   /*   & .swiper-slide {
-    @media ${props => props.theme.maxdesktop} {
+    @media ${props => props.theme.maxlaptop} {
       margin-right: 8rem !important;
     }
   } */
@@ -99,8 +99,8 @@ const LeftButton = styled.div`
   background-size: contain;
   position: absolute;
   left: calc(15.89% + 47px);
-  @media ${props => props.theme.maxdesktop} {
-    left: calc(15.89% - 47px);
+  @media ${props => props.theme.maxlaptop} {
+    left: calc(14.89% - 47px);
   }
   @media ${props => props.theme.tablet768} {
     display: none;
@@ -118,8 +118,8 @@ const RightButton = styled.div`
   height: 3.3rem;
   position: absolute;
   left: calc(64.32% + 174px);
-  @media ${props => props.theme.maxdesktop} {
-    left: calc(64.32% + 167px);
+  @media ${props => props.theme.maxlaptop} {
+    left: calc(65.32% + 167px);
   }
   @media ${props => props.theme.tablet768} {
     display: none;
