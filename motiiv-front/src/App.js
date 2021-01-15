@@ -23,7 +23,7 @@ import { useEffect } from 'react';
 import FloatBtn from './components/common/Button/FloatBtn';
 import { getProfile, changeIsLogged } from './modules/user';
 import { getWorkspaces } from './modules/mymotiiv';
-import { whiteColors } from './style/color';
+import { whiteColors, darkColors } from './style/color';
 import { authToken } from './lib/api/auth';
 
 function App({ props }) {
@@ -43,7 +43,9 @@ function App({ props }) {
   };
 
   useEffect(() => {
-    setColorType(whiteColors);
+    localStorage.getItem('isDark')
+      ? setColorType(darkColors)
+      : setColorType(whiteColors);
     const token = localStorage.getItem('userToken')
       ? JSON.parse(localStorage.getItem('userToken'))
       : null;

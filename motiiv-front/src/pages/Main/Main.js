@@ -16,7 +16,6 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme }) => theme.lightGray};
   @media ${props => props.theme.mobile} {
     /* height: 30rem; */
     margin-bottom: 1.6rem;
@@ -70,7 +69,7 @@ const YeongJinBackground = styled.div`
   width: 100%;
   height: 100%;
   @media ${props => props.theme.mobile} {
-    background-color: ${({ theme }) => theme.lightGray};
+    background-color: var(--margin);
   }
   @media ${props => props.theme.tablet} {
     background-color: white;
