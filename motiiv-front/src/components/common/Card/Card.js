@@ -97,6 +97,8 @@ const GImage = styled.img`
       display: none;
     }
   }
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
   @media ${props => props.theme.mobile} {
     border-radius: 1rem;
   }
