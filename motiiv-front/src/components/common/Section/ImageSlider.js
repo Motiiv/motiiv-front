@@ -182,11 +182,11 @@ function ImageSlider({
               slidesPerView: 1,
             },
             110: {
-              spaceBetween: 10,
+              spaceBetween: 30,
               slidesPerView: 1,
             },
             100: {
-              spaceBetween: 10,
+              spaceBetween: 30,
               slidesPerView: 1,
             },
             // 1024 : {

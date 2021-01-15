@@ -19,7 +19,7 @@ const CardWrap = styled.div`
   border-radius: ${props => (props.size === 'large' ? '1rem' : '1rem')};
   cursor: pointer;
   @media ${props => props.theme.mobile} {
-    min-width: 30rem;
+    min-width: 25rem;
     min-height: 24.2rem;
     box-shadow: none;
   }
