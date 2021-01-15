@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
 import InterestComponent from './InterstComponent';
@@ -69,7 +69,7 @@ const BottomContianer = styled.div`
   }
 `;
 
-function InterestModal({ show, keywordsfunc }) {
+function InterestModal({ show, keywordsfunc, onClickInterstBtn }) {
   const interest = [
     '자기계발',
     '성장',
@@ -125,7 +125,7 @@ function InterestModal({ show, keywordsfunc }) {
           <InterestComponent
             key={i}
             idx={i}
-            type={'unselected'}
+            type="unselected"
             text={tag}
             onClickInterestBtn={onClickInterestBtn}
             count={selectedBtnCountState}
@@ -135,7 +135,11 @@ function InterestModal({ show, keywordsfunc }) {
 
       <BottomContianer>
         <InterestComponent type="cancel" text={'취소'}></InterestComponent>
-        <InterestComponent type={okBtnState} text={'확인'}></InterestComponent>
+        <InterestComponent
+          type={chosenInterestState.length === 3 ? 'ok-disabled' : 'ok'}
+          text={'확인'}
+          onClickInterstBtn={onClickInterstBtn}
+        ></InterestComponent>
       </BottomContianer>
     </ModalWrap>
   );

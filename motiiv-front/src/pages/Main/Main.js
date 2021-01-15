@@ -66,48 +66,6 @@ const Wrap = styled.div`
     margin-bottom: ${props => (props.text ? '5.1rem' : '3rem')};
   }
 `;
-const Title = styled.h2`
-  font-size: 3rem;
-  font-weight: bold;
-  color: black;
-  @media ${props => props.theme.mobile} {
-    font-size: 1.8rem;
-    margin-bottom: 0.6rem;
-  }
-  @media ${props => props.theme.tablet} {
-    font-size: 2rem;
-    margin-bottom: 0.6rem;
-  }
-  @media ${props => props.theme.desktop} {
-    font-size: 3rem;
-    margin-bottom: 0.6rem;
-  }
-`;
-const SubTitle = styled.div`
-  font-size: 1.6rem;
-  color: primary;
-  @media ${props => props.theme.mobile} {
-    font-size: 1.2rem;
-  }
-  @media ${props => props.theme.tablet} {
-    font-size: 1.4rem;
-  }
-  @media ${props => props.theme.desktop} {
-    font-size: 1.6rem;
-  }
-`;
-const HighLight = styled.span`
-  background: ${({ theme }) => theme.primary};
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    transparent 20%,
-    ${({ theme }) => theme.primary} 20%,
-    ${({ theme }) => theme.primary} 55%,
-    transparent 55%,
-    transparent 100%
-  );
-`;
 const YeongJinBackground = styled.div`
   width: 100%;
   height: 100%;
@@ -156,8 +114,6 @@ function Main({ showModal, isLoggined }) {
     dispatch(getMainRecommend());
   }, []);
 
-  
-
   return (
     <YeongJinBackground>
       {blackModal.active && (
@@ -196,7 +152,7 @@ function Main({ showModal, isLoggined }) {
           }}
         ></Loading>
       )}
-      {recommend.length ? (
+      {recommend &&
         recommend.map((rec, idx) =>
           idx === 3 ? (
             <>
@@ -222,64 +178,7 @@ function Main({ showModal, isLoggined }) {
               nonfix="true"
             ></Section>
           ),
-        )
-      ) : (
-        <Loading></Loading>
-      )}
-      {/*       {Object.keys(recommend).length ? (
-        <>
-          <Section
-            object={recommend.sectionOne.sectionOnes}
-            text={recommend.sectionOne.sectiononeName}
-            subText={recommend.sectionOne.sectiononeNameSub}
-            BlackModalConfirm={BlackModalConfirm}
-            isLoggined={isLoggined}
-            nonfix="true"
-          ></Section>
-          <Section
-            object={recommend.sectionTwo.sectionTwos}
-            text={recommend.sectionTwo.sectionTwoName}
-            subText={recommend.sectionTwo.sectionTwoNameSub}
-            BlackModalConfirm={BlackModalConfirm}
-            isLoggined={isLoggined}
-            nonfix="true"
-          ></Section>
-          <Section
-            object={recommend.sectionThree.sectionThrees}
-            text={recommend.sectionThree.sectionThreeName}
-            subText={recommend.sectionThree.sectionThreeNameSub}
-            BlackModalConfirm={BlackModalConfirm}
-            isLoggined={isLoggined}
-            nonfix="true"
-          ></Section>
-          <Section
-            object={recommend.sectionFour.sectionFours}
-            text={recommend.sectionFour.sectionFourName}
-            subText={recommend.sectionFour.sectionFourNameSub}
-            BlackModalConfirm={BlackModalConfirm}
-            isLoggined={isLoggined}
-            nonfix="true"
-          ></Section>
-          <Section
-            object={recommend.sectionFive.sectionFives}
-            text={recommend.sectionFive.sectionFiveName}
-            subText={recommend.sectionFive.sectionFiveNameSub}
-            BlackModalConfirm={BlackModalConfirm}
-            isLoggined={isLoggined}
-            nonfix="true"
-          ></Section>
-          <Section
-            object={recommend.sectionSix.sectionSixs}
-            text={recommend.sectionSix.sectionSixName}
-            subText={recommend.sectionSix.sectionSixNameSub}
-            BlackModalConfirm={BlackModalConfirm}
-            isLoggined={isLoggined}
-            nonfix="true"
-          ></Section>
-        </>
-      ) : (
-        <Loading></Loading>
-      )} */}
+        )}
     </YeongJinBackground>
   );
 }
