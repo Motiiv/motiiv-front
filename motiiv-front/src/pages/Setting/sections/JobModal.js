@@ -43,69 +43,70 @@ const JobButton = styled.button`
   font-family: 'Spoqa-Han-Sans';
   font-weight: 700;
   font-size: 1.6rem;
-  color: ${props => (props.type === 'selected' ? '#2CFF2C' : '#A7A7A7')};
+  color: ${props => (props.type === true ? '#2CFF2C' : '#A7A7A7')};
 `;
 
-function JobModal({ show, jobfunc }) {
+function JobModal({ show, jobfunc, job }) {
+
   const [jobState, setJobState] = useState({
-    planner: 'unselected',
-    designer: 'unselected',
-    developer: 'unselected',
-    youknow: 'unselected',
+    planner: false,
+    designer: false,
+    developer: false,
+    youknow: false,
   });
 
   const onClickPlanerBtn = () => {
     setJobState({
-      planner: 'selected',
-      designer: 'unselected',
-      developer: 'unselected',
-      youknow: 'unselected',
+      planner: true,
+      designer: false,
+      developer: false,
+      youknow: false,
     });
     jobfunc('기획자');
   };
 
   const onClickDesignerBtn = () => {
     setJobState({
-      planner: 'unselected',
-      designer: 'selected',
-      developer: 'unselected',
-      youknow: 'unselected',
+      planner: false,
+      designer: true,
+      developer: false,
+      youknow: false,
     });
     jobfunc('디자이너');
   };
 
   const onClickDeveloperBtn = () => {
     setJobState({
-      planner: 'unselected',
-      designer: 'unselected',
-      developer: 'selected',
-      youknow: 'unselected',
+      planner: false,
+      designer: false,
+      developer: true,
+      youknow: false,
     });
     jobfunc('개발자');
   };
 
   const onClickYouknowBtn = () => {
     setJobState({
-      planner: 'unselected',
-      designer: 'unselected',
-      developer: 'unselected',
-      youknow: 'selected',
+      planner: false,
+      designer: false,
+      developer: false,
+      youknow: true,
     });
     jobfunc('유노윤호');
   };
 
   return (
     <ModalWrap show={show}>
-      <JobButton type={jobState.planner} onClick={onClickPlanerBtn}>
+      <JobButton type={(job === '기획자') || jobState.planner} onClick={onClickPlanerBtn}>
         기획자
       </JobButton>
-      <JobButton type={jobState.designer} onClick={onClickDesignerBtn}>
+      <JobButton type={(job === '디자이너') || jobState.designer} onClick={onClickDesignerBtn}>
         디자이너
       </JobButton>
-      <JobButton type={jobState.developer} onClick={onClickDeveloperBtn}>
+      <JobButton type={(job === '개발자') || jobState.developer} onClick={onClickDeveloperBtn}>
         개발자
       </JobButton>
-      <JobButton type={jobState.youknow} onClick={onClickYouknowBtn}>
+      <JobButton type={(job === '유노윤호') || jobState.youknow} onClick={onClickYouknowBtn}>
         유노윤호
       </JobButton>
     </ModalWrap>
