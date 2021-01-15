@@ -135,7 +135,7 @@ function Main({ showModal, isLoggined }) {
             type="top"
             size="large"
             color="gray"
-            text="motiiv top 10"
+            text="motiiv |top 10|"
             BlackModalConfirm={BlackModalConfirm}
             isLoggined={isLoggined}
             subText="이 영상을 본 80%가 바로 일을 시작했어요!"

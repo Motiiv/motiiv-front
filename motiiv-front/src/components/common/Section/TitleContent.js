@@ -135,7 +135,7 @@ const TitleContent = ({ nonfix, text, subText }) => {
         </>
       ) : (
         <>
-          <TitleText nonfix={nonfix}>{text}</TitleText>
+          <TitleText nonfix={nonfix}  dangerouslySetInnerHTML={{ __html: `${highlightedText(text)}` }}></TitleText>
           <SubTitle>{subText}</SubTitle>
         </>
       )}

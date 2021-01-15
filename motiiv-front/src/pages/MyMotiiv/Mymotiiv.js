@@ -105,6 +105,7 @@ function MyMotiiv({ showModal, isLoggined }) {
   }, []);
 
   
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
@@ -125,7 +126,6 @@ function MyMotiiv({ showModal, isLoggined }) {
                 ></ImageSlider>
               </Wrapper>
             </Container>
-
             <Container>
               <Wrapper>
                 <Title>

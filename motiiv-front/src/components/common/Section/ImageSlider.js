@@ -138,6 +138,7 @@ function ImageSlider({
   nonfix,
   BlackModalConfirm,
   isLoggined,
+  myObject,
 }) {
   const swiperRef = useRef();
   const num = type === 'top' ? 3 : 4;
