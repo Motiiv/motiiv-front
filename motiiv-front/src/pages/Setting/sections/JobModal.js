@@ -47,10 +47,11 @@ const JobButton = styled.button`
 `;
 
 function JobModal({ show, jobfunc, job }) {
+
   const [jobState, setJobState] = useState({
     planner: false,
     designer: false,
-    developer: true,
+    developer: false,
     youknow: false,
   });
 
@@ -96,16 +97,16 @@ function JobModal({ show, jobfunc, job }) {
 
   return (
     <ModalWrap show={show}>
-      <JobButton now={job && job.name === '기획자'} type={jobState.planner} onClick={onClickPlanerBtn}>
+      <JobButton type={(job === '기획자') || jobState.planner} onClick={onClickPlanerBtn}>
         기획자
       </JobButton>
-      <JobButton now={job && job.name === '디자이너'} type={jobState.designer} onClick={onClickDesignerBtn}>
+      <JobButton type={(job === '디자이너') || jobState.designer} onClick={onClickDesignerBtn}>
         디자이너
       </JobButton>
-      <JobButton now={job && job.name === '개발자'} type={jobState.developer} onClick={onClickDeveloperBtn}>
+      <JobButton type={(job === '개발자') || jobState.developer} onClick={onClickDeveloperBtn}>
         개발자
       </JobButton>
-      <JobButton now={job && job.name === '유노윤호'} type={jobState.youknow} onClick={onClickYouknowBtn}>
+      <JobButton type={(job === '유노윤호') || jobState.youknow} onClick={onClickYouknowBtn}>
         유노윤호
       </JobButton>
     </ModalWrap>

@@ -80,12 +80,11 @@ const Component = styled.button`
 `;
 
 
-function InterestComponent({ type, text, onClickInterestBtn, idx, count }) {
+function InterestComponent({ type, text, count }) {
 
   const [btnState, setBtnState] = useState(type);
 
   const selectBtn = () => {
-    onClickInterestBtn(idx);
     if (count >= 3) {
       if (btnState === "selected") {
         setBtnState("unselected");

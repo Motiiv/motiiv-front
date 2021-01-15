@@ -512,7 +512,7 @@ function Setting() {
                     onClick={onClickJobBtn}
                     style={{ marginLeft: '1rem' }}
                   />
-                  <JobModal show={showJobModalState} jobfunc={onChangeJob} />
+                  <JobModal show={showJobModalState} jobfunc={onChangeJob} job={jobInput ? jobInput : userInfo.Job.name} />
                 </ChooseJob>
               </InfoWrapper>
 
@@ -526,7 +526,6 @@ function Setting() {
                     <InterestComponent
                       key={'interest-' + i}
                       text={tag.name}
-                      disabled
                     />
                   ))}
                   <PolygonBtn
