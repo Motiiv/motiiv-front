@@ -157,6 +157,19 @@ const user = handleActions(
       ...state,
       userInfo,
       isLoggedIn: true,
+      userToken: userInfo.userToken,
+      settingKeywords:
+        userInfo.UserKeywords.length === 1
+          ? [userInfo.UserKeywords[0].name]
+          : userInfo.UserKeywords.length === 2
+          ? [userInfo.UserKeywords[0].name, userInfo.UserKeywords[1].name]
+          : userInfo.UserKeywords.length === 3
+          ? [
+              userInfo.UserKeywords[0].name,
+              userInfo.UserKeywords[1].name,
+              userInfo.UserKeywords[2].name,
+            ]
+          : [],
     }),
     [CREATE_USER_FAILURE]: (state, { payload: error }) => ({
       ...state,
