@@ -18,7 +18,7 @@ const NavContainer = styled.div`
   justify-content: center;
   z-index: 99999;
   position: ${props =>
-    props.tag === '/mymotiiv' && props.isLoggined === false
+    props.location === '/mymotiiv' && props.isLoggined === false
       ? 'absolute'
       : 'sticky'};
   bottom: 0;
