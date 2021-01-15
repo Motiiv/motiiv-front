@@ -33,9 +33,10 @@ const Wrap = styled.div`
 `;
 const Title = styled.div`
   font-size: 3rem;
-  font-weight: bold;
   margin-bottom: 1rem;
+  font-style : bold;
   color: var(--categorytext);
+  
   ${props =>
     props.nonfix
       ? css`
@@ -89,6 +90,9 @@ const SubTitle = styled.div`
     font-size: 1.6rem;
   }
 `;
+const HighLight = styled.span`
+  background: var(--highlight);
+`;
 
 const TitleText = styled.div`
   margin-bottom: 1rem;
@@ -108,11 +112,21 @@ const TitleText = styled.div`
 `;
 
 const TitleContent = ({ nonfix, text, subText }) => {
+  const convert = (text) => {
+    const re1 = /(?=(?:[^\|]*\|[^|]*\|)*[^\|]*$)\|/gm;
+    const subst1 = "<b>";
+    const re2 = /\|/gm;
+    const subst2 = "</b>";
+    const result = text.replace(re1, subst1).replace(re2, subst2);
+    console.log(text);
+    console.log(result);
+    return result;
+  };
   return (
     <Wrap text={text} nonfix={nonfix}>
       {text && subText && nonfix ? (
         <>
-          <Title nonfix={nonfix}>{text}</Title>
+          <Title nonfix={nonfix} dangerouslySetInnerHTML={{__html: convert(text)}}></Title>
           {/* <Title>{text}</Title> */}
           <SubTitle>{subText}</SubTitle>
         </>

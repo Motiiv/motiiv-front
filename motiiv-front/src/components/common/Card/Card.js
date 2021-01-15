@@ -121,6 +121,7 @@ const TimeContainer = styled.div`
   border-radius: 1rem;
   display: flex;
   color: white;
+  letter-spacing : 0.15rem;
   justify-content: center;
   align-items: center;
   font-family: 'Campton';
