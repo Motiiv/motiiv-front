@@ -154,7 +154,7 @@ function App({ props }) {
         ></Route>
       </Switch>
       <SigninModal hideModal={hideModal} isShow={showLoginModalState} />
-      <FloatBtn workspaces={workspaces} isShow={onFloatBtn} />
+      <FloatBtn workspaces={workspaces} isShow={onFloatBtn && isLoggedIn} />
       <BottomBanner
         isShow={
           location.pathname !== '/setting' &&
