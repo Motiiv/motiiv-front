@@ -24,19 +24,26 @@ const HighLight = styled.span`
 `;
 const Container = styled.div`
   width: 100%;
-  height: 42rem;
+  /* height: 42rem; */
   display: flex;
   justify-content: center;
-  align-items: center;
+  padding-top : 5rem;
+  padding-bottom : 3.4rem;
   @media ${props => props.theme.mobile} {
     height: 33rem;
     margin-bottom: 1.6rem;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    padding : 2rem;
   }
   @media ${props => props.theme.tablet} {
-    height: 37.2rem;
+    /* height: 37.2rem; */
+    padding-top : 5rem;
+    padding-bottom : 3.5rem;
   }
   @media ${props => props.theme.desktop} {
-    height: 42rem;
+    /* height: 42rem; */
+    padding-top : 5rem;
+    padding-bottom : 3.4rem;
   }
 `;
 //Section도 페이지별로 쓰이니까 maxwidth 1280px
@@ -112,7 +119,7 @@ function MyMotiiv({ showModal, isLoggined }) {
             <Container>
               <Wrapper>
                 <Title>
-                  내가 <HighLight>자주 본</HighLight> 모티브
+                  내가 <HighLight>자주 본</HighLight> 모티브 
                 </Title>
                 <ImageSlider
                   saveButton={saveButton}
