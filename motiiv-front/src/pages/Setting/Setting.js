@@ -216,22 +216,22 @@ const InfoText = styled.div`
   @media ${props => props.theme.maxdesktop} {
     font-size: 1.4rem;
     ${props =>
-    props.bottom === 'true'
-      ? `
+      props.bottom === 'true'
+        ? `
         margin-left : 12.5rem;
         margin-top: -2rem;
         `
-      : ``};
+        : ``};
   }
   @media ${props => props.theme.mobile} {
     font-size: 1.2rem;
     ${props =>
-    props.bottom === 'true'
-      ? `
+      props.bottom === 'true'
+        ? `
         margin-left : 9.5rem;
         margin-top: -5.5rem;
         `
-      : ``};
+        : ``};
   }
 `;
 
@@ -570,7 +570,11 @@ function Setting({ props }) {
                     onClick={onClickJobBtn}
                     style={{ marginLeft: '1rem' }}
                   />
-                  <JobModal show={showJobModalState} jobfunc={onChangeJob} job={jobInput ? jobInput : userInfo.Job.name} />
+                  <JobModal
+                    show={showJobModalState}
+                    jobfunc={onChangeJob}
+                    job={jobInput ? jobInput : userInfo.Job.name}
+                  />
                 </ChooseJob>
               </InfoWrapper>
 
@@ -607,7 +611,7 @@ function Setting({ props }) {
               <Button
                 type="button"
                 bgColor="#F3F3F3"
-                onClick={() => props.history.push('/main')}
+                onClick={() => props.history.push('/')}
               >
                 취소
               </Button>
@@ -618,8 +622,8 @@ function Setting({ props }) {
           </Container>
         </>
       ) : (
-          <Loading></Loading>
-        )}
+        <Loading></Loading>
+      )}
     </form>
   );
 }

@@ -50,11 +50,7 @@ function MyNavBar({ tag, isLoggined }) {
   return (
     <NavContainer tag={tag} isLoggined={isLoggined}>
       <TagWrapper>
-        <TagElem
-          exact
-          to="/main"
-          src={tag === '/main' ? mainselected : mainunselected}
-        >
+        <TagElem exact to="/" src={tag === '/' ? mainselected : mainunselected}>
           {/* <TagImg></TagImg> */}
         </TagElem>
         <TagElem

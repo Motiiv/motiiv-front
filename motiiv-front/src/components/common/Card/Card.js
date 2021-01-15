@@ -110,6 +110,7 @@ const GImage = styled.img`
   }
 `;
 const TimeContainer = styled.div`
+  letter-spacing: 0;
   position: absolute;
   right: 1.5rem;
   bottom: 1.4rem;

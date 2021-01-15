@@ -42,7 +42,6 @@ function App({ props }) {
     }
   };
 
-  setColorType(whiteColors);
   useEffect(() => {
     setColorType(whiteColors);
     const token = localStorage.getItem('userToken')
@@ -89,7 +88,7 @@ function App({ props }) {
         {/* Main & Category & MyMotiiv */}
         <Route
           exact
-          path="/main"
+          path="/"
           render={props => (
             <Main props={props} showModal={showModal} isLoggined={isLoggedIn} />
           )}

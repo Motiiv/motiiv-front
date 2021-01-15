@@ -38,9 +38,9 @@ const Title = styled.div`
   }
   font-size: 3rem;
   margin-bottom: 1rem;
-  font-style : bold;
+  font-style: bold;
   color: var(--categorytext);
-  
+
   ${props =>
     props.nonfix
       ? css`
@@ -118,8 +118,6 @@ const TitleContent = ({ nonfix, text, subText }) => {
     const re2 = /\|/gm;
     const subst2 = '</span>';
     const result = text.replace(re1, subst1).replace(re2, subst2);
-    console.log('tt', text);
-    console.log('sss', result);
     return result;
   };
   return (
