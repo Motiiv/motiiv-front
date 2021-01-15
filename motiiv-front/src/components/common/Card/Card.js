@@ -123,7 +123,7 @@ const TimeContainer = styled.div`
   color: white;
   justify-content: center;
   align-items: center;
-  font-family: 'Campton';
+  font-family: 'Campton'; 
   & + & {
     margin-left: 1.2rem;
   }

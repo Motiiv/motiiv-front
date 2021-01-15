@@ -128,18 +128,17 @@ const VideoText = styled.div`
 const TagBox = styled.div`
   display: flex;
   width: 100%;
-  //margin-top: auto;
+  margin-left: 0;
+  margin-top: 0;
+  @media ${props => props.theme.mobile375} {
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+    margin-top: auto;
+  }
   @media ${props => props.theme.tablet768} {
     margin-bottom: 1rem;
     margin-left: 2rem;
-  }
-  @media ${props => props.theme.maxdesktop} {
-    margin-bottom: 1rem;
-  }
-  @media ${props => props.theme.maxdesktop} {
-    & div {
-      margin-top: 2rem;
-    }
+    margin-top: auto;
   }
 `;
 const TimeContainer = styled.div`
