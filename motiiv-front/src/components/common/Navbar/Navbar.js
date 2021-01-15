@@ -142,7 +142,7 @@ function Navbar({ showModal, isloggined, location }) {
     (async () => {
       try {
         setProfileModalState(prev => !prev);
-      } catch (e) { }
+      } catch (e) {}
     })();
   };
   const hideModal = () => {
@@ -179,11 +179,11 @@ function Navbar({ showModal, isloggined, location }) {
   return (
     <>
       <Header>
-        <NavLink exact to="/main">
+        <NavLink exact to="/">
           <Logo src={logo} />
         </NavLink>
         <TabContainer>
-          <TabElem exact to="/main" isActiveNav={location === '/main'}>
+          <TabElem exact to="/" isActiveNav={location === '/'}>
             main
           </TabElem>
           <Star src={star} />
@@ -213,8 +213,8 @@ function Navbar({ showModal, isloggined, location }) {
               </FirstLetter>
             </Profile>
           ) : (
-              <Loading></Loading>
-            )}
+            <Loading></Loading>
+          )}
           <ProfileModal hideModal={hideModal} showModal={profileModalState} />
         </LoginContainer>
       </Header>

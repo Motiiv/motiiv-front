@@ -89,7 +89,7 @@ function App({ props }) {
         {/* Main & Category & MyMotiiv */}
         <Route
           exact
-          path="/main"
+          path="/"
           render={props => (
             <Main props={props} showModal={showModal} isLoggined={isLoggedIn} />
           )}
