@@ -149,15 +149,6 @@ const mymotiiv = handleActions(
       ...state,
       error,
     }),
-    /*     // 플로팅 버튼 토글
-    [TOGGLE_SHOW_FLOAT_SUCCESS]: (state, { payload: isChecked }) => ({
-      ...state,
-      onDarkMode: isChecked,
-    }),
-    [TOGGLE_SHOW_FLOAT_FAILURE]: (state, { payload: error }) => ({
-      ...state,
-      error,
-    }), */
     // 워크 스페이스 생성
     [CREATE_WORKSPACE_SUCCESS]: (state, { payload: workspaces }) => ({
       ...state,

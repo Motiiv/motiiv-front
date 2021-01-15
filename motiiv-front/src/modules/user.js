@@ -24,15 +24,20 @@ const [
   CREATE_USER_FAILURE,
 ] = createRequestActionTypes('user/CREATE_USER');
 //로그인
-const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes(
-  'user/LOGIN',
-);
+const [
+  LOGIN,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE
+] = createRequestActionTypes('user/LOGIN');
 //회원가입 정보 저장(카카오)
 const SIGNUP_KAKAO = createRequestActionTypes('user/SIGNUP_KAKAO');
+//회원가입 정보 초기화
+const RESET_SIGNUP = createRequestActionTypes('user/RESET_SIGNUP');
 //회원가입 정보 저장(직업)
 const SIGNUP_JOB = createRequestActionTypes('user/SIGNUP_JOB');
 //회원가입 정보 저장(관심사)
 const SIGNUP_KEYWORDS = createRequestActionTypes('user/SIGNUP_KEYWORDS');
+//로그인 여부 변경
 const CHANGE_ISLOGGED = createRequestActionTypes('user/CHANGE_ISLOGED');
 
 /* ============== 액션 호출 함수 생성 ============== */
@@ -46,6 +51,8 @@ export const createUser = createAction(CREATE_USER, payload => payload);
 export const login = createAction(LOGIN, payload => payload);
 //회원가입 정보 저장(카카오)
 export const signUpKakao = createAction(SIGNUP_KAKAO);
+//회원가입 정보 초기화
+export const resetSignUpInfo = createAction(RESET_SIGNUP);
 //회원가입 정보 저장(직업)
 export const signUpJob = createAction(SIGNUP_JOB);
 //회원가입 정보 저장(관심사)
@@ -57,15 +64,11 @@ export const changeIsLogged = createAction(CHANGE_ISLOGGED);
 //프로필 정보
 const getUserSaga = createRequestSaga(GET_PROFILE, userAPI.getUserProfile);
 //프로필 정보 수정
-const updateUserSaga = createRequestSaga(
-  UPDATE_PROFILE,
-  userAPI.updateUserProfile,
-);
+const updateUserSaga = createRequestSaga(UPDATE_PROFILE, userAPI.updateUserProfile);
 //회원가입
 const createUserSaga = createRequestSaga(CREATE_USER, userAPI.createUser);
 //로그인
 const loginSaga = createRequestSaga(LOGIN, userAPI.login);
-// isLog
 
 /* ============== 요청된 것들 중 가장 마지막 요청만 처리 (여러번 클릭시 모두 처리되면 매우 비효율적!) ============== */
 export function* userSaga() {
@@ -152,6 +155,11 @@ const user = handleActions(
       error,
       isLoggedIn: false,
     }),
+    //회원가입 정보 초기화
+    [RESET_SIGNUP]: (state) => ({
+      ...state,
+      isSignedUp: null
+    }),
     //로그인
     [LOGIN_SUCCESS]: (state, { payload: payload }) => ({
       ...state,
@@ -189,7 +197,11 @@ const user = handleActions(
     //회원가입 정보 저장(관심사)
     [SIGNUP_KEYWORDS]: (state, { payload: payload }) => ({
       ...state,
-      keywordNames: state.keywordNames.concat(payload),
+      keywordNames: state.keywordNames.indexOf(payload) > -1
+        ? state.keywordNames.filter(keywordNames => keywordNames !== payload) //기존 배열에 있을 경우 삭제
+        : state.keywordNames.length < 3 //새로 받은 키워드가 기존 배열 안에 없을 경우
+          ? state.keywordNames.concat(payload)//기존 배열의 키워드 개수가 2개 이하일 때는 추가
+          : state.keywordNames//3개 이상일 경우 변화 없음
     }),
     // 자동로그인 토큰 가지고 정보 가져온 뒤 isloggedin 변환
     [CHANGE_ISLOGGED]: (state, { payload: payload }) => ({

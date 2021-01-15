@@ -128,7 +128,7 @@ const VideoText = styled.div`
 const TagBox = styled.div`
   display: flex;
   width: 100%;
-  margin-top: auto;
+  //margin-top: auto;
   @media ${props => props.theme.tablet768} {
     margin-bottom: 1rem;
     margin-left: 2rem;
@@ -138,7 +138,7 @@ const TagBox = styled.div`
   }
   @media ${props => props.theme.maxdesktop} {
     & div {
-      margin-top: 0rem;
+      margin-top: 2rem;
     }
   }
 `;

@@ -93,6 +93,7 @@ function LastPage({ page }) {
         {interest.map((tag, i) => (
           <LoginInterestComponent
             key={'interest-' + i}
+            idx={i}
             type={keywordNames.indexOf(tag) === -1 ? false : true}
             text={tag}
           />

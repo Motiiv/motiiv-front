@@ -57,6 +57,10 @@ const Text = styled.h1`
     font-size: 2rem;
     line-height: 3rem;
   }
+  @media ${props => props.theme.labtop} {
+    font-size: 2.3rem;
+    line-height: 4rem;
+  }
 `;
 const ImgBanner = styled.div`
   width: calc(25rem * calc(16 / 9));

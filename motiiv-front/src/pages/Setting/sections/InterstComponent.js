@@ -26,7 +26,7 @@ const Component = styled.button`
           cursor:pointer;
       `
       : props.type2 === 'unselected'
-      ? `
+        ? `
           width: 8.4rem;
           height: 3.2rem;
           background-color : #6C6C6C;
@@ -35,8 +35,8 @@ const Component = styled.button`
           font-weight: 100;
           cursor:pointer;
       `
-      : props.type2 === 'cancel'
-      ? `
+        : props.type2 === 'cancel'
+          ? `
           width: 6.2rem;
           height: 2.8rem;
           background-color : white;
@@ -46,8 +46,8 @@ const Component = styled.button`
           font-weight: 400;
           cursor:pointer;
       `
-      : props.type2 === 'ok'
-      ? `
+          : props.type2 === 'ok'
+            ? `
           width: 6.2rem;
           height: 2.8rem;
           background-color : white;
@@ -57,8 +57,8 @@ const Component = styled.button`
           font-weight: 700;
           cursor:pointer;
       `
-      : props.type2 === 'ok-disabled'
-      ? `
+            : props.type2 === 'ok-disabled'
+              ? `
           width: 6.2rem;
           height: 2.8rem;
           background-color : #A7A7A7;
@@ -68,7 +68,7 @@ const Component = styled.button`
           font-weight: 700;
           cursor:pointer;
       `
-      : `
+              : `
           width: 8.4rem;
           height: 3.2rem;
           background-color : #2CFF2C;

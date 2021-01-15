@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { createUser, signUpKeywords } from '../../../modules/user';
+import { createUser, signUpKeywords, resetSignUpInfo } from '../../../modules/user';
 import styled from 'styled-components';
 import FirstPage from './FirstPage';
 import SecondPage from './SecondPage';
@@ -191,6 +191,7 @@ function SigninModal({ hideModal, isShow }) {
     if (!myRef?.current?.contains(e.target)) {
       hideModal();
       pageReset();
+      dispatch(resetSignUpInfo());
     }
   };
   useEffect(() => {

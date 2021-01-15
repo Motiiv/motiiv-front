@@ -32,6 +32,10 @@ const Wrap = styled.div`
   }
 `;
 const Title = styled.div`
+  & span {
+    background: ${({ theme }) => theme.primary};
+    background: var(--highlight);
+  }
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 1rem;
@@ -89,7 +93,6 @@ const SubTitle = styled.div`
     font-size: 1.6rem;
   }
 `;
-
 const TitleText = styled.div`
   margin-bottom: 1rem;
   font-size: 3rem;
@@ -108,11 +111,24 @@ const TitleText = styled.div`
 `;
 
 const TitleContent = ({ nonfix, text, subText }) => {
+  const highlightedText = text => {
+    const re1 = /(?=(?:[^\|]*\|[^|]*\|)*[^\|]*$)\|/gm;
+    const subst1 = '<span>';
+    const re2 = /\|/gm;
+    const subst2 = '</span>';
+    const result = text.replace(re1, subst1).replace(re2, subst2);
+    console.log('tt', text);
+    console.log('sss', result);
+    return result;
+  };
   return (
     <Wrap text={text} nonfix={nonfix}>
       {text && subText && nonfix ? (
         <>
-          <Title nonfix={nonfix}>{text}</Title>
+          <Title
+            dangerouslySetInnerHTML={{ __html: `${highlightedText(text)}` }}
+            nonfix={nonfix}
+          ></Title>
           {/* <Title>{text}</Title> */}
           <SubTitle>{subText}</SubTitle>
         </>

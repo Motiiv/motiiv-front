@@ -84,7 +84,7 @@ const InfoBox = styled.div`
   top: 3rem;
   right: 0;
   position: absolute;
-  z-index: 3;
+  z-index: 5;
   background: rgba(78, 78, 78, 0.6);
   box-sizing: border-box;
   border-radius: 1rem;
