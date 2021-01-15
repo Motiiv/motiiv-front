@@ -1,7 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
-
+const GImage = styled.img`
+  padding-bottom: 56.25%;
+  transition: all 0.7s;
+  border-radius: 0.7rem;
+  background-size: cover;
+  background-image: url(${props => props.thumbnail});
+  & :hover {
+    background-image: url(${props => props.gif});
+  }
+`;
 const VideoWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -9,15 +18,14 @@ const VideoWrapper = styled.div`
   & {
     letter-spacing: -1px;
   }
-  /*   & + & {
-    margin-top: 2rem;
-  } */
   @media ${props => props.theme.mobile} {
     margin-bottom: 3rem;
   }
-`;
-const VideoContent = styled.img`
-  border-radius: 0.7rem;
+  &:hover {
+    ${GImage} {
+      background-image: url(${props => props.gif});
+    }
+  }
 `;
 const VideoTitleText = styled.div`
   font-size: 2rem;
@@ -45,8 +53,15 @@ const VideoSubText = styled.div`
 `;
 function RecommendCard({ video, history }) {
   return (
-    <VideoWrapper onClick={() => history.push(`/detail/${video.id}`)}>
-      <VideoContent src={video.thumbnailImageUrl} style={{ width: '100%' }} />
+    <VideoWrapper
+      gif={video.videoGif}
+      onClick={() => history.push(`/detail/${video.id}`)}
+    >
+      <GImage
+        thumbnail={video.thumbnailImageUrl}
+        gif={video.videoGif}
+        style={{ width: '100%' }}
+      />
       <VideoTitleText>{video.title}</VideoTitleText>
       <VideoSubText>{video.channelName}</VideoSubText>
     </VideoWrapper>
