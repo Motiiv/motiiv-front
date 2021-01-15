@@ -218,7 +218,7 @@ function BlackModal({ blackModal, setBlackModal, showModal }) {
           ...blackModal,
           active: false,
         });
-        console.log('I pressed');
+        // console.log('I pressed');
       }
     },
     [setBlackModal, blackModal],

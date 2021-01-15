@@ -97,7 +97,6 @@ function InterestComponent({
   const selectBtn = () => {
     if (type === 'selected' || type === 'unselected') {
       dispatch(saveSettingKeywords(text));
-      console.log(text);
       onClickInterestBtn(idx);
       if (count >= 3) {
         if (btnState === 'selected') {
