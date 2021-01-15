@@ -386,9 +386,9 @@ function Setting() {
   );
   const [jobInput, SetJobInput] = useState(userInfo && userInfo.Job.name);
   const [keywordsInput, SetKeywordsInput] = useState(
-    userInfo && userInfo.UserKeywords,
+    userInfo ? userInfo.UserKeywords : [],
   );
-
+  const flag = useRef(0);
   const Updateprofile = () => {
     const user = {
       newName: nameInput,
@@ -406,6 +406,7 @@ function Setting() {
 
   const onChangeName = e => {
     SetNameInput(e.target.value);
+    flag.current = 1;
   };
 
   const onChangeProfileImage = e => {
@@ -431,6 +432,7 @@ function Setting() {
 
   const onChangeKeywords = keywords => {
     SetKeywordsInput(keywords);
+    console.log(keywordsInput);
   };
 
   //폴리건 버튼 모달 체크용
@@ -449,7 +451,12 @@ function Setting() {
   return (
     <>
       <TitleContainer>
-        <BackBtn />
+        <BackBtn
+          onClick={() => {
+            window.history.back();
+            window.history.back();
+          }}
+        />
         <Title>
           <Border />
           계정 관리
@@ -459,7 +466,13 @@ function Setting() {
         <>
           <Container>
             <ProfileImageContainer>
-              <ProfileImage src={profileImageInput}>
+              <ProfileImage
+                src={
+                  profileImageInput
+                    ? profileImageFileInput
+                    : userInfo.profileImageUrl
+                }
+              >
                 <FirstLetter src={profileImageInput}>
                   {nameInput && nameInput.substr(0, 1)}
                 </FirstLetter>
@@ -482,7 +495,7 @@ function Setting() {
                 <Text>이름</Text>
                 <NameInput
                   type="text"
-                  value={nameInput}
+                  value={nameInput ? nameInput : userInfo.username}
                   onChange={onChangeName}
                 ></NameInput>
               </InfoWrapper>
@@ -490,7 +503,7 @@ function Setting() {
               <InfoWrapper>
                 <Text>직군</Text>
                 <ChooseJob>
-                  {jobInput}
+                  {jobInput ? jobInput : userInfo.Job.name}
                   <PolygonBtn
                     src={polygon}
                     show={showJobModalState}
@@ -504,14 +517,16 @@ function Setting() {
               <InfoWrapper>
                 <Text>관심 키워드</Text>
                 <ChooseInterst>
-                  {/*                   {keywordsInput &&
-                    keywordsInput.map((tag, i) => (
-                      <InterestComponent
-                        key={'interest-' + i}
-                        text={tag}
-                        disabled
-                      />
-                    ))} */}
+                  {(keywordsInput.length
+                    ? keywordsInput
+                    : userInfo.UserKeywords
+                  ).map((tag, i) => (
+                    <InterestComponent
+                      key={'interest-' + i}
+                      text={tag.name}
+                      disabled
+                    />
+                  ))}
                   <PolygonBtn
                     src={polygon}
                     show={showInterestModalState}

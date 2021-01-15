@@ -93,7 +93,7 @@ const initState = {
     userToken: '',
   },
   userToken: '',
-  isLogged: false,
+  isLoggedIn: false,
 
   signUpKakao: {
     username: '',
@@ -132,36 +132,36 @@ const user = handleActions(
     [CREATE_USER_SUCCESS]: (state, { payload: userInfo }) => ({
       ...state,
       userInfo,
-      isLogged: true,
+      isLoggedIn: true,
     }),
     [CREATE_USER_FAILURE]: (state, { payload: error }) => ({
       ...state,
       error,
-      isLogged: false,
+      isLoggedIn: false,
     }),
     //로그인
     [LOGIN_SUCCESS]: (state, { payload: payload }) => ({
       ...state,
       userInfo: payload.userToken
         ? {
-            id: payload.id,
-            username: payload.username,
-            snsId: payload.snsId,
-            socialType: payload.socialType,
-            Job: payload.Job,
-            UserKeywords: payload.UserKeywords,
-            profileImageUrl: payload.profileImageUrl,
-          }
+          id: payload.id,
+          username: payload.username,
+          snsId: payload.snsId,
+          socialType: payload.socialType,
+          Job: payload.Job,
+          UserKeywords: payload.UserKeywords,
+          profileImageUrl: payload.profileImageUrl,
+        }
         : null,
       userToken: payload.userToken,
-      isLogged: payload.isSignedUp ? true : false,
+      isLoggedIn: payload.isSignedUp ? true : false,
       isSignedUp: payload.isSignedUp,
       profileImageUrl: payload.profileImageUrl,
     }),
     [LOGIN_FAILURE]: (state, { payload: data }) => ({
       ...state,
       data,
-      isLogged: false,
+      isLoggedIn: false,
     }),
     //회원가입 정보 저장(카카오)
     [SIGNUP_KAKAO]: (state, { payload: signUpKakao }) => ({
@@ -178,10 +178,10 @@ const user = handleActions(
       ...state,
       keywordNames: state.keywordNames.concat(payload),
     }),
-    // 자동로그인 토큰 가지고 정보 가져온 뒤 islogged 변환
+    // 자동로그인 토큰 가지고 정보 가져온 뒤 isloggedin 변환
     [CHANGE_ISLOGGED]: (state, { payload: payload }) => ({
       ...state,
-      isLogged: !state.isLogged,
+      isLoggedIn: !state.isLoggedIn,
     }),
   },
   initState,
