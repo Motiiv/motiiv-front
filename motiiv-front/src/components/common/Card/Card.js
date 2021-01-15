@@ -85,12 +85,16 @@ const VideoWrap = styled.div`
 const GImage = styled.img`
   width: 100%;
   height: 100%;
-  transition: 0.5s;
+  transition: all 0.7s;
   border-radius: ${props =>
-  props.size === 'large' ? '1rem 1rem 0 0' : '1rem'};
-  content: url(${props => props.thumbnail});
-    /* &:hover {
-    content: url(${props => props.gif}); */
+    props.size === 'large' ? '1rem 1rem 0 0' : '1rem'};
+  background-size: cover;
+  background-image: url(${props => props.thumbnail});
+  &:hover {
+    background-image: url(${props => props.gif});
+    & + div {
+      display: none;
+    }
   }
   @media ${props => props.theme.mobile} {
     border-radius: 1rem;
@@ -110,11 +114,12 @@ const GImage = styled.img`
   }
 `;
 const TimeContainer = styled.div`
-  letter-spacing: 0;
+  letter-spacing: 0 !important;
   position: absolute;
   right: 1.5rem;
   bottom: 1.4rem;
   z-index: 1;
+  transition: 0.8s;
   font-size: 1.2rem;
   padding: 0.3rem 0.5rem;
   padding-top: 0.4rem;
@@ -122,7 +127,7 @@ const TimeContainer = styled.div`
   border-radius: 1rem;
   display: flex;
   color: white;
-  letter-spacing : 0.15rem;
+  letter-spacing: 0.15rem;
   justify-content: center;
   align-items: center;
   font-family: 'Campton';

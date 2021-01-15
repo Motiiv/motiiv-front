@@ -77,6 +77,10 @@ const YeongJinBackground = styled.div`
   }
   background-color: ${({ theme }) => theme.lightGray};
 `;
+const HighLight = styled.span`
+  background: ${({ theme }) => theme.primary};
+  background: var(--highlight);
+`;
 function Main({ showModal, isLoggined }) {
   const dispatch = useDispatch();
   const [blackModal, setBlackModal] = useState({
@@ -156,7 +160,7 @@ function Main({ showModal, isLoggined }) {
         recommend.map((rec, idx) =>
           idx === 3 ? (
             <>
-              <AdBanner adBanners ={banners.adBanners}/>
+              <AdBanner adBanners={banners.adBanners} />
               <Section
                 key={`MainSection-${idx}`}
                 object={rec}
