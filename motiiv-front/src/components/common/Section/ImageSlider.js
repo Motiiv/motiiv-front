@@ -149,7 +149,6 @@ function ImageSlider({
     defaultSpace = true;
   }
   const defaultNum = defaultSpace === true ? 2 : 3;
-  console.log("마이모티브?",object);
   return (
     <>
       <SliderSection size={size} defaultSpace={defaultSpace}>
