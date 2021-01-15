@@ -98,11 +98,9 @@ function FirstPage({ page, hideModal, pageUp }) {
       </LoginBtn>
       <Kakao hideModal={hideModal} />
       <LinkText>
-        <Link exact to="/main" style={{ color: '#A7A7A7' }}>
-          개인정보처리방침
-        </Link>
-        을 확인하였으며 이에 동의합니다.
-      </LinkText>
+        <Link exact to="/privacy" onClick={hideModal} style={{ color: '#A7A7A7' }}>개인정보처리방침</Link>
+            을 확인하였으며 이에 동의합니다.
+          </LinkText>
     </Container>
   );
 }
