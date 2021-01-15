@@ -100,6 +100,10 @@ const TitleText = styled.div`
   margin-top: 2rem;
   font-weight: bold; // 여기 props처리
   color: var(--keywordtag);
+  & span {
+    background: ${({ theme }) => theme.primary};
+    background: var(--highlight);
+  }
   @media ${props => props.theme.mobile} {
     font-size: 1.8rem;
   }
@@ -118,6 +122,7 @@ const TitleContent = ({ nonfix, text, subText }) => {
     const re2 = /\|/gm;
     const subst2 = '</span>';
     const result = text.replace(re1, subst1).replace(re2, subst2);
+    console.log(result);
     return result;
   };
   return (
@@ -133,7 +138,10 @@ const TitleContent = ({ nonfix, text, subText }) => {
         </>
       ) : (
         <>
-          <TitleText nonfix={nonfix}  dangerouslySetInnerHTML={{ __html: `${highlightedText(text)}` }}></TitleText>
+          <TitleText 
+            nonfix={nonfix}  
+            dangerouslySetInnerHTML={{ __html: `${highlightedText(text)}` }}
+            ></TitleText>
           <SubTitle>{subText}</SubTitle>
         </>
       )}
