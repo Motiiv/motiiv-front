@@ -115,7 +115,7 @@ function Main({ showModal, isLoggined }) {
   useEffect(() => {
     dispatch(getMainBanners());
     dispatch(getMainRecommend());
-  }, []);
+  }, [isLoggined]);
 
   return (
     <YeongJinBackground>
