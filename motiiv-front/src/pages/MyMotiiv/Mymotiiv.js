@@ -97,6 +97,7 @@ function MyMotiiv({ showModal, isLoggined }) {
     dispatch(getVideos());
   }, []);
 
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);

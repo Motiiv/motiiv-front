@@ -41,6 +41,8 @@ function App({ props }) {
       document.documentElement.style.setProperty(`--${key}`, `${value}`);
     }
   };
+
+  setColorType(whiteColors);
   useEffect(() => {
     const token = localStorage.getItem('userToken')
       ? JSON.parse(localStorage.getItem('userToken'))
