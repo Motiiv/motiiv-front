@@ -14,6 +14,7 @@ import { ThemeProvider } from 'styled-components';
 import theme from './style/theme';
 import { CookiesProvider } from 'react-cookie';
 
+console.log = console.warn = console.error = () => {};
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   rootReducer,

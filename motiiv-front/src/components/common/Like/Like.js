@@ -21,7 +21,7 @@ const LikeText = styled.div`
   ${props =>
     props.like
       ? css`
-          color: black;
+          color: var(--tag);
         `
       : css`
           color: ${({ theme }) => theme.gray};

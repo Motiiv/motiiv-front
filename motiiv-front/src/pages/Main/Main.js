@@ -16,7 +16,6 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme }) => theme.lightGray};
   @media ${props => props.theme.mobile} {
     /* height: 30rem; */
     margin-bottom: 1.6rem;
@@ -70,12 +69,16 @@ const YeongJinBackground = styled.div`
   width: 100%;
   height: 100%;
   @media ${props => props.theme.mobile} {
-    background-color: ${({ theme }) => theme.lightGray};
+    background-color: var(--margin);
   }
   @media ${props => props.theme.tablet} {
     background-color: white;
   }
   background-color: ${({ theme }) => theme.lightGray};
+`;
+const HighLight = styled.span`
+  background: ${({ theme }) => theme.primary};
+  background: var(--highlight);
 `;
 function Main({ showModal, isLoggined }) {
   const dispatch = useDispatch();
@@ -112,7 +115,7 @@ function Main({ showModal, isLoggined }) {
   useEffect(() => {
     dispatch(getMainBanners());
     dispatch(getMainRecommend());
-  }, []);
+  }, [isLoggined]);
 
   return (
     <YeongJinBackground>
@@ -156,7 +159,7 @@ function Main({ showModal, isLoggined }) {
         recommend.map((rec, idx) =>
           idx === 3 ? (
             <>
-              <AdBanner adBanners ={banners.adBanners}/>
+              <AdBanner adBanners={banners.adBanners} />
               <Section
                 key={`MainSection-${idx}`}
                 object={rec}

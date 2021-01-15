@@ -110,7 +110,7 @@ const ProfileImage = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-52%, -45%);
   }
 `;
 
@@ -197,7 +197,7 @@ const ToggleText = styled.div`
 `;
 
 function ProfileModal({ hideModal, showModal, history }) {
-  const [isToggled, setIsToggled] = useState(false); //추후 isToggled 여부로 다크모드 설정
+  const [isToggled, setIsToggled] = useState(localStorage.getItem('isDark')); //추후 isToggled 여부로 다크모드 설정
   const [langState, setLangState] = useState('kor');
   const myRef = useRef();
   const { userInfo, loading } = useSelector(({ user, loading }) => ({
@@ -225,11 +225,16 @@ function ProfileModal({ hideModal, showModal, history }) {
   const onToggle = e => {
     const isToggledNow = e.target.checked;
     setIsToggled(isToggledNow);
+    isToggledNow
+      ? localStorage.setItem('isDark', isToggledNow)
+      : localStorage.removeItem('isDark');
     isToggledNow ? setColorType(darkColors) : setColorType(whiteColors);
   };
 
   const onHandleLogout = () => {
     localStorage.removeItem('userToken');
+    localStorage.getItem('isDark') && localStorage.removeItem('isDark');
+    history.push('/');
     window.location.reload();
     hideModal();
   };

@@ -102,7 +102,7 @@ const ImageBtn = styled.div`
   ${props =>
     props.click === true
       ? `
-      border : 1.5px solid #2CFF2C;
+      border : 3px solid #2CFF2C;
     `
       : ``};
 
@@ -136,30 +136,30 @@ function SecondPage({ page }) {
       planner: true,
       designer: false,
       developer: false,
-      youknow: false
-    })
+      youknow: false,
+    });
     chooseJob('기획자');
-  }
+  };
 
   const onClickDesignerBtn = () => {
     setSelectedStateState({
       planner: false,
       designer: true,
       developer: false,
-      youknow: false
-    })
+      youknow: false,
+    });
     chooseJob('디자이너');
-  }
+  };
 
   const onClickDeveloperBtn = () => {
     setSelectedStateState({
       planner: false,
       designer: false,
       developer: true,
-      youknow: false
-    })
+      youknow: false,
+    });
     chooseJob('개발자');
-  }
+  };
 
   const onClickYouknowBtn = () => {
     setSelectedStateState({

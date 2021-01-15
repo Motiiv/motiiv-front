@@ -122,7 +122,6 @@ const TitleContent = ({ nonfix, text, subText }) => {
     const re2 = /\|/gm;
     const subst2 = '</span>';
     const result = text.replace(re1, subst1).replace(re2, subst2);
-    console.log(result);
     return result;
   };
   return (
@@ -138,10 +137,10 @@ const TitleContent = ({ nonfix, text, subText }) => {
         </>
       ) : (
         <>
-          <TitleText 
-            nonfix={nonfix}  
+          <TitleText
+            nonfix={nonfix}
             dangerouslySetInnerHTML={{ __html: `${highlightedText(text)}` }}
-            ></TitleText>
+          ></TitleText>
           <SubTitle>{subText}</SubTitle>
         </>
       )}

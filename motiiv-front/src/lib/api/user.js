@@ -30,6 +30,7 @@ const createUser = async user => {
   try {
     console.log(user);
     const { data } = await client.post(`/users/signup`, user);
+    localStorage.setItem('userToken', JSON.stringify(data.data.userToken));
     console.log('[SUCCESS] createUser', data);
     return data;
   } catch (e) {
