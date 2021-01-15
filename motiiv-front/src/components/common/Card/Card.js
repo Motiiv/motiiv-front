@@ -110,6 +110,7 @@ const GImage = styled.img`
   }
 `;
 const TimeContainer = styled.div`
+  letter-spacing: 0;
   position: absolute;
   right: 1.5rem;
   bottom: 1.4rem;
@@ -123,7 +124,7 @@ const TimeContainer = styled.div`
   color: white;
   justify-content: center;
   align-items: center;
-  font-family: 'Campton'; 
+  font-family: 'Campton';
   & + & {
     margin-left: 1.2rem;
   }
