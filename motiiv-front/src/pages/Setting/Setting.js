@@ -216,22 +216,22 @@ const InfoText = styled.div`
   @media ${props => props.theme.maxdesktop} {
     font-size: 1.4rem;
     ${props =>
-    props.bottom === 'true'
-      ? `
+      props.bottom === 'true'
+        ? `
         margin-left : 12.5rem;
         margin-top: -2rem;
         `
-      : ``};
+        : ``};
   }
   @media ${props => props.theme.mobile} {
     font-size: 1.2rem;
     ${props =>
-    props.bottom === 'true'
-      ? `
+      props.bottom === 'true'
+        ? `
         margin-left : 9.5rem;
         margin-top: -5.5rem;
         `
-      : ``};
+        : ``};
   }
 `;
 
@@ -369,7 +369,6 @@ const Button = styled.button`
 `;
 
 function Setting() {
-
   const inputRef = useRef();
   const dispatch = useDispatch();
   const { userInfo, loading } = useSelector(({ user, loading }) => ({
@@ -379,17 +378,23 @@ function Setting() {
 
   //바인딩
   const [nameInput, SetNameInput] = useState(userInfo && userInfo.username);
-  const [profileImageInput, SetProfileImageInput] = useState(userInfo && userInfo.profileImageUrl);
-  const [profileImageFileInput, SetProfileImageFileInput] = useState(userInfo && userInfo.profileImageUrl);
+  const [profileImageInput, SetProfileImageInput] = useState(
+    userInfo && userInfo.profileImageUrl,
+  );
+  const [profileImageFileInput, SetProfileImageFileInput] = useState(
+    userInfo && userInfo.profileImageUrl,
+  );
   const [jobInput, SetJobInput] = useState(userInfo && userInfo.Job.name);
-  const [keywordsInput, SetKeywordsInput] = useState(userInfo && userInfo.UserKeywords);
+  const [keywordsInput, SetKeywordsInput] = useState(
+    userInfo && userInfo.UserKeywords,
+  );
 
   const Updateprofile = () => {
     const user = {
       newName: nameInput,
       imageFile: profileImageFileInput,
       newJobName: jobInput,
-      newKeywordNames: keywordsInput
+      newKeywordNames: keywordsInput,
     };
     dispatch(updateProfile({ user }));
 
@@ -450,85 +455,90 @@ function Setting() {
           계정 관리
         </Title>
       </TitleContainer>
+      {!loading ? (
+        <>
+          <Container>
+            <ProfileImageContainer>
+              <ProfileImage src={profileImageInput}>
+                <FirstLetter src={profileImageInput}>
+                  {nameInput && nameInput.substr(0, 1)}
+                </FirstLetter>
+              </ProfileImage>
+              <InputContainer for="upload">
+                <CameraIcon src={camera} />
+                <PhotoInput
+                  type="file"
+                  id="upload"
+                  onChange={onChangeProfileImage}
+                  ref={inputRef}
+                />
+              </InputContainer>
+            </ProfileImageContainer>
 
-      <Container>
-        <ProfileImageContainer>
-          <ProfileImage src={profileImageInput}>
-            <FirstLetter src={profileImageInput}>
-              {nameInput && nameInput.substr(0, 1)}
-            </FirstLetter>
-          </ProfileImage>
-          <InputContainer for="upload">
-            <CameraIcon src={camera} />
-            <PhotoInput
-              type="file"
-              id="upload"
-              onChange={onChangeProfileImage}
-              ref={inputRef}
-            />
-          </InputContainer>
-        </ProfileImageContainer>
+            <InfoText>300X300 이상의 이미지 사용을 권장합니다</InfoText>
 
-        <InfoText>300X300 이상의 이미지 사용을 권장합니다</InfoText>
+            <InfoContainer>
+              <InfoWrapper>
+                <Text>이름</Text>
+                <NameInput
+                  type="text"
+                  value={nameInput}
+                  onChange={onChangeName}
+                ></NameInput>
+              </InfoWrapper>
 
-        <InfoContainer>
-          <InfoWrapper>
-            <Text>이름</Text>
-            <NameInput
-              type="text"
-              value={nameInput}
-              onChange={onChangeName}
-            ></NameInput>
-          </InfoWrapper>
-
-          <InfoWrapper>
-            <Text>직군</Text>
-            <ChooseJob>
-              {jobInput}
-              <PolygonBtn
-                src={polygon}
-                show={showJobModalState}
-                onClick={onClickJobBtn}
-                style={{ marginLeft: '1rem' }}
-              />
-              <JobModal show={showJobModalState} jobfunc={onChangeJob} />
-            </ChooseJob>
-          </InfoWrapper>
-
-          <InfoWrapper>
-            <Text>관심 키워드</Text>
-            <ChooseInterst>
-              {keywordsInput &&
-                keywordsInput.map((tag, i) => (
-                  <InterestComponent
-                    key={'interest-' + i}
-                    text={tag}
-                    disabled
+              <InfoWrapper>
+                <Text>직군</Text>
+                <ChooseJob>
+                  {jobInput}
+                  <PolygonBtn
+                    src={polygon}
+                    show={showJobModalState}
+                    onClick={onClickJobBtn}
+                    style={{ marginLeft: '1rem' }}
                   />
-                ))}
-              <PolygonBtn
-                src={polygon}
-                show={showInterestModalState}
-                onClick={onClickInterstBtn}
-              />
-              <InterestModal
-                show={showInterestModalState}
-                keywordsfunc={onChangeKeywords}
-              />
-            </ChooseInterst>
-          </InfoWrapper>
-          <InfoText bottom="true">
-            최대 3개의 관심사 선택이 가능합니다.
-          </InfoText>
-        </InfoContainer>
+                  <JobModal show={showJobModalState} jobfunc={onChangeJob} />
+                </ChooseJob>
+              </InfoWrapper>
 
-        <ButtonContainer>
-          <Button bgColor="#F3F3F3">취소</Button>
-          <Button bgColor="#2CFF2C" onClick={Updateprofile}>
-            저장
-          </Button>
-        </ButtonContainer>
-      </Container>
+              <InfoWrapper>
+                <Text>관심 키워드</Text>
+                <ChooseInterst>
+                  {/*                   {keywordsInput &&
+                    keywordsInput.map((tag, i) => (
+                      <InterestComponent
+                        key={'interest-' + i}
+                        text={tag}
+                        disabled
+                      />
+                    ))} */}
+                  <PolygonBtn
+                    src={polygon}
+                    show={showInterestModalState}
+                    onClick={onClickInterstBtn}
+                  />
+                  <InterestModal
+                    show={showInterestModalState}
+                    keywordsfunc={onChangeKeywords}
+                  />
+                </ChooseInterst>
+              </InfoWrapper>
+              <InfoText bottom="true">
+                최대 3개의 관심사 선택이 가능합니다.
+              </InfoText>
+            </InfoContainer>
+
+            <ButtonContainer>
+              <Button bgColor="#F3F3F3">취소</Button>
+              <Button bgColor="#2CFF2C" onClick={Updateprofile}>
+                저장
+              </Button>
+            </ButtonContainer>
+          </Container>
+        </>
+      ) : (
+        <Loading></Loading>
+      )}
     </>
   );
 }

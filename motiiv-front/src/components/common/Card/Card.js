@@ -25,7 +25,7 @@ const CardWrap = styled.div`
   }
   @media ${props => props.theme.tablet} {
     min-width: ${props => (props.size === 'large' ? '21.9rem' : '21.6rem')};
-    max-width : ${props => (props.defaultSpace === true ? '21.6rem' : 'none')};
+    max-width: ${props => (props.defaultSpace === true ? '21.6rem' : 'none')};
     min-height: 23.2rem;
     box-shadow: ${props =>
       props.size === 'large' ? '2px 2px  7px rgba(0, 0, 0, 0.15)' : 'none'};
@@ -161,6 +161,7 @@ const Views = styled.div`
   line-height: 0;
   //overflow: hidden;
   display: flex;
+  width: max-content;
   align-items: center;
   @media ${props => props.theme.mobile} {
     font-size: 1.3rem;
@@ -185,11 +186,12 @@ const Channel = styled.div`
   color: var(--cardsub);
 
   text-overflow: ellipsis;
+  overflow: hidden;
   word-break: keep-all;
   word-wrap: break-word;
   width: fit-content;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   @media ${props => props.theme.mobile} {
     font-size: 1.3rem;
@@ -324,13 +326,25 @@ const TagContainer = styled.div`
     margin-left: ${props => (props.size === 'large' ? '2rem' : '1px')};
   }
 `;
-function Card({ obj, size, text, history, category, nonfix,showModal,isLoggined ,BlackModalConfirm, saveButton, defaultSpace}) {
+function Card({
+  obj,
+  size,
+  text,
+  history,
+  category,
+  nonfix,
+  showModal,
+  isLoggined,
+  BlackModalConfirm,
+  saveButton,
+  defaultSpace,
+}) {
   const borderValue = size === 'large' ? '1rem 1rem 0 0' : '1rem';
- 
+
   return (
     <>
-      <CardWrap size={size} defaultSpace = {defaultSpace}>
-      <CardSave
+      <CardWrap size={size} defaultSpace={defaultSpace}>
+        <CardSave
           id={obj.id}
           BlackModalConfirm={BlackModalConfirm}
           isLoggined={isLoggined}
