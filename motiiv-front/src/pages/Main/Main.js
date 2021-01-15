@@ -12,21 +12,21 @@ import { useLocation } from 'react-router-dom';
 
 const Container = styled.div`
   width: 100%;
-  height: 51rem;
+  /* height: 51rem; */
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.lightGray};
   @media ${props => props.theme.mobile} {
-    height: 30rem;
+    /* height: 30rem; */
     margin-bottom: 1.6rem;
   }
   @media ${props => props.theme.tablet} {
-    height: 37.2rem;
+    /* height: 37.2rem; */
     margin-bottom: 0;
   }
   @media ${props => props.theme.desktop} {
-    height: 51rem;
+    /* height: 51rem; */
     margin-bottom: 0;
   }
 `;
