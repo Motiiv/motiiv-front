@@ -159,7 +159,6 @@ function MyMotiiv({ showModal, isLoggined }) {
                 )}
               </Wrapper>
             </Container>
-
             <Container>
               <Wrapper>
                 <Title>
