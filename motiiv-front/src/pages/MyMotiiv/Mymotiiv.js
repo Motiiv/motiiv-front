@@ -92,12 +92,14 @@ function MyMotiiv({ showModal, isLoggined }) {
     myvideos: mymotiiv.myvideos,
     loading: loading['mymotiiv/GET_MYVIDEOS'],
   }));
+  /*   const { isLoggined } = useSelector(({ user, loading }) => ({
+    isLoggined: user.isLoggedIn,
+  })); */
 
   useEffect(() => {
-    dispatch(getVideos());
-  }, []);
+    if (isLoggined === true) dispatch(getVideos());
+  }, [isLoggined]);
 
-  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
