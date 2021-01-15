@@ -23,7 +23,6 @@ const ModalOverlay = styled.div`
   border: none;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 10;
-  display: ${props => (!props.showLogin ? 'block' : 'none')};
 `;
 
 const ModalWrapper = styled.div`

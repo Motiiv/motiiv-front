@@ -478,14 +478,15 @@ function DetailComponent({
                   ref={descRef}
                   //toggleExist={toggleExist}
                 >
-                  {videoInfo.description.split('\n').map(line => {
-                    return (
-                      <span>
-                        {line}
-                        <br />
-                      </span>
-                    );
-                  })}
+                  {videoInfo.description &&
+                    videoInfo.description.split('\n').map(line => {
+                      return (
+                        <span>
+                          {line}
+                          <br />
+                        </span>
+                      );
+                    })}
                 </VideoDescription>
                 {/*             <MoreToggleButton
               onClick={onHandleToggleButton}
