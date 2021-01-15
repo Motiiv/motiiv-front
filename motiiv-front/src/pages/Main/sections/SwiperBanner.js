@@ -100,7 +100,7 @@ const LeftButton = styled.div`
   position: absolute;
   left: calc(15.89% + 47px);
   @media ${props => props.theme.maxlaptop} {
-    left: calc(15.89% - 47px);
+    left: calc(14.89% - 47px);
   }
   @media ${props => props.theme.tablet768} {
     display: none;
@@ -119,7 +119,7 @@ const RightButton = styled.div`
   position: absolute;
   left: calc(64.32% + 174px);
   @media ${props => props.theme.maxlaptop} {
-    left: calc(64.32% + 167px);
+    left: calc(65.32% + 167px);
   }
   @media ${props => props.theme.tablet768} {
     display: none;
