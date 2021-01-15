@@ -428,6 +428,8 @@ function Setting() {
     SetKeywordsInput(keywords);
   };
 
+  //indexof('관심사')
+
   //폴리건 버튼 모달 체크용
   const [showJobModalState, setShowJobModalState] = useState(false);
   const [showInterestModalState, setInterestJobModalState] = useState(false);
@@ -490,6 +492,7 @@ function Setting() {
                 show={showJobModalState}
                 onClick={onClickJobBtn}
                 style={{ marginLeft: '1rem' }}
+                job={userInfo.Job}
               />
               <JobModal show={showJobModalState} jobfunc={onChangeJob} />
             </ChooseJob>

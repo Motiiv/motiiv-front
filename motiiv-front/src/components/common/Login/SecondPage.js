@@ -137,7 +137,7 @@ function SecondPage({ page }) {
       developer: false,
       youknow: false
     })
-    chooseJob('기획');
+    chooseJob('기획자');
   }
 
   const onClickDesignerBtn = () => {
@@ -147,7 +147,7 @@ function SecondPage({ page }) {
       developer: false,
       youknow: false
     })
-    chooseJob('디자인');
+    chooseJob('디자이너');
   }
 
   const onClickDeveloperBtn = () => {
@@ -157,7 +157,7 @@ function SecondPage({ page }) {
       developer: true,
       youknow: false
     })
-    chooseJob('개발');
+    chooseJob('개발자');
   }
 
   const onClickYouknowBtn = () => {
