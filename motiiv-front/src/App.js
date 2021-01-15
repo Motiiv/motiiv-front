@@ -55,7 +55,6 @@ function App({ props }) {
           dispatch(getProfile());
           dispatch(changeIsLogged());
         } else {
-
           // 토큰은 있는데 유효한 토큰이 아닐 때 localstorage삭제
           localStorage.removeItem('userToken');
         }
@@ -140,7 +139,11 @@ function App({ props }) {
           exact
           path="/detail/:id"
           render={props => (
-            <Detail props={props} showModal={showModal} isLoggined={isLoggedIn} />
+            <Detail
+              props={props}
+              showModal={showModal}
+              isLoggined={isLoggedIn}
+            />
           )}
         ></Route>
         {/* Upload */}
