@@ -87,11 +87,11 @@ const GImage = styled.img`
   height: 100%;
   transition: 0.5s;
   border-radius: ${props =>
-    props.size === 'large' ? '1rem 1rem 0 0' : '1rem'};
+  props.size === 'large' ? '1rem 1rem 0 0' : '1rem'};
   content: url(${props => props.thumbnail});
-  /*   &:hover {
-    content: url(${props => props.gif});
-  } */
+    /* &:hover {
+    content: url(${props => props.gif}); */
+  }
   @media ${props => props.theme.mobile} {
     border-radius: 1rem;
   }
@@ -110,6 +110,7 @@ const GImage = styled.img`
   }
 `;
 const TimeContainer = styled.div`
+  letter-spacing: 0;
   position: absolute;
   right: 1.5rem;
   bottom: 1.4rem;
@@ -124,7 +125,7 @@ const TimeContainer = styled.div`
   letter-spacing : 0.15rem;
   justify-content: center;
   align-items: center;
-  font-family: 'Campton'; 
+  font-family: 'Campton';
   & + & {
     margin-left: 1.2rem;
   }

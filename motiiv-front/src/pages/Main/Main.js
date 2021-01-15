@@ -156,7 +156,7 @@ function Main({ showModal, isLoggined }) {
         recommend.map((rec, idx) =>
           idx === 3 ? (
             <>
-              <AdBanner />
+              <AdBanner adBanners ={banners.adBanners}/>
               <Section
                 key={`MainSection-${idx}`}
                 object={rec}

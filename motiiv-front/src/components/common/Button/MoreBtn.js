@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import styled from 'styled-components';
 
 const RoundBtn = styled.button`
@@ -23,15 +23,12 @@ const RoundBtn = styled.button`
   }
 `;
 
-function MoreBtn({ color, linkUrl, type, text }) {
-  const goPage = () => {
-    type === 'blank' ? window.open(linkUrl) : Router.push(linkUrl);
-  };
+function MoreBtn({ color, linkUrl, type, text,history, adId }) {
 
   return (
-    <RoundBtn color={color} onClick={goPage}>
+    <RoundBtn color={color}  onClick={() => history.push(`/detail/${adId}`)}>
       {text} &nbsp; &#xE001;
     </RoundBtn>
   );
 }
-export default React.memo(MoreBtn);
+export default withRouter(React.memo(MoreBtn));
