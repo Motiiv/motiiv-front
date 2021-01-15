@@ -233,6 +233,7 @@ function ProfileModal({ hideModal, showModal, history }) {
 
   const onHandleLogout = () => {
     localStorage.removeItem('userToken');
+    localStorage.getItem('isDark') && localStorage.removeItem('isDark');
     history.push('/');
     window.location.reload();
     hideModal();

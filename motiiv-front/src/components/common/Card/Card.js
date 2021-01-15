@@ -50,8 +50,9 @@ const VideoWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #c4c4c4;
+  background: transparent;
   position: relative;
+  background-image: url(${props => props.thumbnail});
   border-radius: ${props =>
     props.size === 'large' ? '1rem 1rem 0 0' : '1rem'};
   &:hover {
@@ -91,7 +92,7 @@ const GImage = styled.img`
   background-size: cover;
   background-image: url(${props => props.thumbnail});
   &:hover {
-    background-image: url(${props => props.gif});
+    background: url(${props => props.gif});
     & + div {
       display: none;
     }
@@ -362,6 +363,7 @@ function Card({
           saveButton={saveButton}
         ></CardSave>
         <VideoWrap
+          thumbnail={obj.thumbnailImageUrl}
           size={size}
           onClick={() => history.push(`/detail/${obj.id}`)}
         >

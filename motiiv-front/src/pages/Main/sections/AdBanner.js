@@ -78,10 +78,10 @@ const ImgBanner = styled.div`
     display: none;
   }
 `;
-function AdBanner({adBanners}) {
+function AdBanner({ adBanners }) {
   return (
     <BannerWrapper>
-      <Container src={adBanners.thumbnailImageUrl}>
+      <Container src={adBanners && adBanners.thumbnailImageUrl}>
         <Wrapper>
           <Text>
             이영상을 본
@@ -92,11 +92,13 @@ function AdBanner({adBanners}) {
             했어요!
             {/* {adBanners.title} */}
           </Text>
-          <MoreBtn text="바로 영상보러가기" linkUrl="detail" adId={adBanners.id}></MoreBtn>
+          <MoreBtn
+            text="바로 영상보러가기"
+            linkUrl="detail"
+            adId={adBanners && adBanners.id}
+          ></MoreBtn>
         </Wrapper>
-        <ImgBanner
-          src={adBanners.thumbnailImageUrl}
-        ></ImgBanner>
+        <ImgBanner src={adBanners && adBanners.thumbnailImageUrl}></ImgBanner>
       </Container>
     </BannerWrapper>
   );

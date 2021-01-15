@@ -7,9 +7,6 @@ const GImage = styled.img`
   border-radius: 0.7rem;
   background-size: cover;
   background-image: url(${props => props.thumbnail});
-  & :hover {
-    background-image: url(${props => props.gif});
-  }
 `;
 const VideoWrapper = styled.div`
   display: flex;
