@@ -1,6 +1,6 @@
 # 💡Motiiv WEB💡
 
-![logo_motion](https://user-images.githubusercontent.com/55133871/103452365-e5cafb80-4d11-11eb-8ff7-967f170daf4b.gif)
+![motiiv](https://user-images.githubusercontent.com/55133871/104766238-95da4300-57ad-11eb-86a9-260e895e4816.gif)
 
 #### 일을 시작하는 순간, Motiiv
 
