@@ -96,12 +96,13 @@ const BlankBox = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  opacity: 0.25;
+  color: #a7a7a7;
   font-size: 2rem;
   padding: 4rem;
   & label {
     cursor: auto;
     margin-bottom: 2rem;
+    background-color: #a7a7a7;
   }
   & input {
     cursor: auto;
@@ -154,7 +155,7 @@ function MyMotiiv({ showModal, isLoggined }) {
                 ) : (
                   <BlankBox>
                     <ToggleBtn></ToggleBtn>
-                    아직 자주본 모티브가 없어요
+                    아직 자주 본 모티브가 없어요
                   </BlankBox>
                 )}
               </Wrapper>
@@ -162,7 +163,7 @@ function MyMotiiv({ showModal, isLoggined }) {
             <Container>
               <Wrapper>
                 <Title>
-                  내가 <HighLight>저장 한</HighLight> 모티브
+                  내가 <HighLight>저장한</HighLight> 모티브
                 </Title>
                 {myvideos.savedResult && myvideos.savedResult.length !== 0 ? (
                   <ImageSlider
@@ -172,7 +173,7 @@ function MyMotiiv({ showModal, isLoggined }) {
                 ) : (
                   <BlankBox>
                     <ToggleBtn></ToggleBtn>
-                    아직 자주본 모티브가 없어요
+                    아직 저장한 모티브가 없어요
                   </BlankBox>
                 )}
               </Wrapper>
@@ -192,7 +193,7 @@ function MyMotiiv({ showModal, isLoggined }) {
                 ) : (
                   <BlankBox>
                     <ToggleBtn></ToggleBtn>
-                    아직 자주본 모티브가 없어요
+                    아직 재생한 모티브가 없어요
                   </BlankBox>
                 )}
               </Wrapper>

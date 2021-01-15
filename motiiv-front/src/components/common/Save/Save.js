@@ -17,7 +17,7 @@ const SaveText = styled.div`
   ${props =>
     props.save
       ? css`
-          color: black;
+          color: var(--tag) !important;
         `
       : css`
           color: ${({ theme }) => theme.gray};

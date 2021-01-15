@@ -115,7 +115,7 @@ const TitleAndButtonBox = styled.div`
 `;
 const TitleText = styled.div`
   font-size: 2.3rem;
-  width: 75%;
+  width: 67%;
 `;
 const ButtonBox = styled.div`
   display: flex;
@@ -225,6 +225,7 @@ const LeftBox = styled.div`
   display: flex;
 `;
 const ShareButton = styled.div`
+  white-space: nowrap;
   font-size: 1.5rem;
   width: 8rem;
   height: 2.8rem;
