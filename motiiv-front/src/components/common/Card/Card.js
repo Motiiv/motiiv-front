@@ -87,11 +87,11 @@ const GImage = styled.img`
   height: 100%;
   transition: 0.5s;
   border-radius: ${props =>
-    props.size === 'large' ? '1rem 1rem 0 0' : '1rem'};
+  props.size === 'large' ? '1rem 1rem 0 0' : '1rem'};
   content: url(${props => props.thumbnail});
-  /*   &:hover {
-    content: url(${props => props.gif});
-  } */
+    /* &:hover {
+    content: url(${props => props.gif}); */
+  }
   @media ${props => props.theme.mobile} {
     border-radius: 1rem;
   }
@@ -122,6 +122,7 @@ const TimeContainer = styled.div`
   border-radius: 1rem;
   display: flex;
   color: white;
+  letter-spacing : 0.15rem;
   justify-content: center;
   align-items: center;
   font-family: 'Campton';

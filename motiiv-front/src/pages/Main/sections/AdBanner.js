@@ -78,10 +78,10 @@ const ImgBanner = styled.div`
     display: none;
   }
 `;
-function AdBanner() {
+function AdBanner({adBanners}) {
   return (
     <BannerWrapper>
-      <Container src={'https://i.ytimg.com/vi/WpVLudOlauA/maxresdefault.jpg'}>
+      <Container src={adBanners.thumbnailImageUrl}>
         <Wrapper>
           <Text>
             이영상을 본
@@ -90,11 +90,12 @@ function AdBanner() {
               <br /> 워크스페이스로 바로 이동
             </b>
             했어요!
+            {/* {adBanners.title} */}
           </Text>
-          <MoreBtn text="바로 영상보러가기" linkUrl="detail"></MoreBtn>
+          <MoreBtn text="바로 영상보러가기" linkUrl="detail" adId={adBanners.id}></MoreBtn>
         </Wrapper>
         <ImgBanner
-          src={'https://i.ytimg.com/vi/WpVLudOlauA/maxresdefault.jpg'}
+          src={adBanners.thumbnailImageUrl}
         ></ImgBanner>
       </Container>
     </BannerWrapper>
