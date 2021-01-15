@@ -146,7 +146,7 @@ function MyMotiiv({ showModal, isLoggined }) {
                 <Title>
                   내가 <HighLight>자주 본</HighLight> 모티브
                 </Title>
-                {myvideos.mostViewSort.length !== 0 ? (
+                {myvideos.mostViewSort && myvideos.mostViewSort.length !== 0 ? (
                   <ImageSlider
                     saveButton={saveButton}
                     object={myvideos.mostViewSort}
@@ -165,7 +165,7 @@ function MyMotiiv({ showModal, isLoggined }) {
                 <Title>
                   내가 <HighLight>저장 한</HighLight> 모티브
                 </Title>
-                {myvideos.savedResult.length !== 0 ? (
+                {myvideos.savedResult && myvideos.savedResult.length !== 0 ? (
                   <ImageSlider
                     saveButton={saveButton}
                     object={myvideos.savedResult}
@@ -184,7 +184,8 @@ function MyMotiiv({ showModal, isLoggined }) {
                 <Title>
                   최근 <HighLight>재생한</HighLight> 모티브
                 </Title>
-                {myvideos.recentViewSort.length !== 0 ? (
+                {myvideos.recentViewSort &&
+                myvideos.recentViewSort.length !== 0 ? (
                   <ImageSlider
                     saveButton={saveButton}
                     object={myvideos.recentViewSort}
