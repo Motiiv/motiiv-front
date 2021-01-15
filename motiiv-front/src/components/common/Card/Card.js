@@ -19,7 +19,7 @@ const CardWrap = styled.div`
   border-radius: ${props => (props.size === 'large' ? '1rem' : '1rem')};
   cursor: pointer;
   @media ${props => props.theme.mobile} {
-    min-width: 25rem;
+    min-width: 26rem;
     min-height: 24.2rem;
     box-shadow: none;
   }
@@ -53,6 +53,8 @@ const VideoWrap = styled.div`
   background: transparent;
   position: relative;
   background-image: url(${props => props.thumbnail});
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
   border-radius: ${props =>
     props.size === 'large' ? '1rem 1rem 0 0' : '1rem'};
   &:hover {
@@ -89,7 +91,6 @@ const GImage = styled.img`
   transition: all 0.7s;
   border-radius: ${props =>
     props.size === 'large' ? '1rem 1rem 0 0' : '1rem'};
-  background-size: cover;
   background-image: url(${props => props.thumbnail});
   &:hover {
     background: url(${props => props.gif});
