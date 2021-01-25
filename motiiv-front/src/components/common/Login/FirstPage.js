@@ -92,9 +92,9 @@ function FirstPage({ page, hideModal, pageUp }) {
       <SubTitle>
         로그인을 하고 나의 하루가 달라지는 동기부여 서비스를 경험해보세요.
       </SubTitle>
-      <LoginBtn style={{ marginBottom: '1.6rem' }}>
+      {/* <LoginBtn style={{ marginBottom: '1.6rem' }}>
         <img src={btnNaver} />
-      </LoginBtn>
+      </LoginBtn> */}
       <Kakao hideModal={hideModal} />
       <LinkText>
         <Link
