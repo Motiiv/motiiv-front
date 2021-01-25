@@ -174,6 +174,7 @@ const Views = styled.div`
   display: flex;
   width: max-content;
   align-items: center;
+  white-space: nowrap;
   @media ${props => props.theme.mobile} {
     font-size: 1.3rem;
   }

@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-CVZYCC879D"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-CVZYCC879D');
+    </script>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -17,7 +30,9 @@
       charset="utf-8"
     ></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <script>Kakao.init("9ab0ce03798edcd03d3bad310f50140d");</script>
+    <script>
+      Kakao.init('9ab0ce03798edcd03d3bad310f50140d');
+    </script>
     <title>Motiiv</title>
   </head>
   <body>
