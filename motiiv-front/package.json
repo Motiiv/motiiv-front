@@ -15,6 +15,7 @@
     "react-kakao-login": "^2.0.3",
     "react-scripts": "4.0.1",
     "react-spring": "^9.0.0-rc.3",
+    "serve": "^11.3.2",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4"
   },
